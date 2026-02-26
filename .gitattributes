@@ -1,0 +1,5 @@
+# Forzar CRLF en Windows para scripts batch y VBScript
+# Sin esto, cmd.exe puede fallar al procesar goto en archivos con LF
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.vbs   text eol=crlf
