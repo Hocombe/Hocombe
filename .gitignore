@@ -1,0 +1,14 @@
+# Claude Code local config
+.claude/settings.local.json
+.claude/mind.mv2
+.claude/mind.mv2.lock
+.claude/launch.json
+.claude/plugins/
+.claude/projects/
+
+# Temporary files
+NUL
+~$*
+*.lock
+__pycache__/
+*.pyc
