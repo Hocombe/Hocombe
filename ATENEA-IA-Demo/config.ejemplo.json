@@ -1,0 +1,24 @@
+{
+  "puerto": 5050,
+  "proveedor_activo": "claude",
+  "proveedores": {
+    "claude": {
+      "api_key": "",
+      "modelo": "claude-sonnet-4-6",
+      "url": "https://api.anthropic.com/v1/messages"
+    },
+    "groq": {
+      "api_key": "",
+      "modelo": "llama-3.1-8b-instant",
+      "url": "https://api.groq.com/openai/v1/chat/completions"
+    },
+    "gemini": {
+      "api_key": "",
+      "modelo": "gemini-2.0-flash",
+      "url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
+    }
+  },
+  "timeout_llm": 8,
+  "max_tokens": 1024,
+  "temperatura": 0.3
+}
