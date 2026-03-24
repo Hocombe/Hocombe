@@ -1,0 +1,665 @@
+{
+  "secciones": [
+    {
+      "id": "tramitacion",
+      "titulo": "Tramitación",
+      "subsecciones": [
+        {
+          "id": "aceptacion_escritos",
+          "titulo": "Aceptación de Escritos",
+          "contenido": "Para aceptar escritos en ATENEA se accede a la bandeja de escritos pendientes, donde aparecen los escritos recibidos vía LexNET, presentación electrónica o registro presencial. El sistema permite la aceptación individual o masiva, vinculando automáticamente el escrito al procedimiento correspondiente mediante el NIG o número de procedimiento.",
+          "pasos": [
+            "Acceder al menú Tramitación > Aceptación de Escritos",
+            "Se muestran todos los escritos pendientes de aceptación en la bandeja",
+            "Seleccionar el escrito y verificar que el procedimiento asociado es correcto",
+            "Si el escrito no tiene procedimiento asignado, buscarlo manualmente por NIG o número de rollo",
+            "Pulsar 'Aceptar' para vincular el escrito al procedimiento",
+            "El escrito queda registrado en el histórico de actuaciones del procedimiento"
+          ],
+          "captura": null,
+          "palabras_clave": ["escritos", "aceptar", "bandeja", "LexNET", "presentación electrónica", "registro"]
+        },
+        {
+          "id": "tramitacion_guiada",
+          "titulo": "Tramitación Guiada por Fases",
+          "contenido": "ATENEA incorpora un sistema de tramitación guiada que organiza el procedimiento en fases procesales secuenciales. Cada fase contiene los trámites disponibles según el tipo de procedimiento y la fase actual. El sistema sugiere el siguiente trámite a realizar basándose en el estado procesal y la normativa aplicable.",
+          "pasos": [
+            "Abrir el procedimiento desde la consulta o desde la bandeja de tareas",
+            "Acceder a la pestaña 'Tramitación' del expediente",
+            "El sistema muestra la fase procesal actual y los trámites disponibles",
+            "Seleccionar el trámite a realizar de la lista de trámites posibles",
+            "Completar los datos requeridos por el trámite (fechas, intervinientes, etc.)",
+            "Confirmar la ejecución del trámite, que puede generar documentos automáticamente"
+          ],
+          "captura": null,
+          "palabras_clave": ["tramitación guiada", "fases", "trámites", "procedimiento", "fase procesal"]
+        },
+        {
+          "id": "compositor_documentos",
+          "titulo": "Compositor de Documentos (Word Integrado)",
+          "contenido": "El compositor de documentos de ATENEA permite generar resoluciones y escritos judiciales mediante plantillas predefinidas integradas con Microsoft Word. Las plantillas incorporan marcas de datos que se rellenan automáticamente con la información del procedimiento (partes, fechas, números de identificación). El documento generado queda vinculado al expediente electrónico.",
+          "pasos": [
+            "Desde el trámite correspondiente, pulsar 'Generar documento' o 'Compositor'",
+            "Seleccionar la plantilla adecuada del catálogo de plantillas disponibles",
+            "El sistema abre Word con la plantilla y las marcas de datos ya sustituidas",
+            "Completar o modificar el contenido del documento según sea necesario",
+            "Guardar el documento, que queda vinculado automáticamente al expediente",
+            "El documento pasa a estado pendiente de firma"
+          ],
+          "captura": null,
+          "palabras_clave": ["compositor", "documentos", "Word", "plantillas", "resoluciones", "marcas"]
+        },
+        {
+          "id": "marcas_datos",
+          "titulo": "Marcas de Datos",
+          "contenido": "Las marcas de datos son campos variables insertados en las plantillas de documentos que se sustituyen automáticamente por los datos reales del procedimiento. Incluyen datos de partes procesales, fechas, números de identificación, órgano judicial, etc. Se gestionan desde el editor de plantillas y pueden personalizarse por tipo de procedimiento.",
+          "pasos": [
+            "Acceder a la plantilla desde Configuración > Plantillas de documentos",
+            "Insertar marcas de datos usando el panel de marcas disponibles",
+            "Las marcas siguen el formato @@NOMBRE_MARCA@@ dentro del documento",
+            "Al generar el documento, ATENEA sustituye cada marca por el valor real del procedimiento",
+            "Verificar que las marcas se han sustituido correctamente en el documento generado"
+          ],
+          "captura": null,
+          "palabras_clave": ["marcas", "datos", "plantillas", "variables", "campos", "sustitución"]
+        },
+        {
+          "id": "firma",
+          "titulo": "Firma de Documentos (Local y Portafirmas)",
+          "contenido": "ATENEA permite la firma electrónica de documentos judiciales mediante dos modalidades: firma local (con certificado digital instalado en el equipo) y portafirmas (plataforma centralizada para firma remota). Los documentos pueden requerir firma del LAJ, del Juez/Magistrado o de ambos. El portafirmas permite firmar documentos de forma masiva y desde cualquier ubicación.",
+          "pasos": [
+            "El documento generado aparece en la bandeja de 'Pendientes de firma'",
+            "Para firma local: seleccionar el documento y pulsar 'Firmar', seleccionar certificado",
+            "Para portafirmas: el documento se envía automáticamente al portafirmas del firmante",
+            "El firmante accede al portafirmas, revisa el documento y lo firma",
+            "Una vez firmado, el documento cambia de estado a 'Firmado' (verde)",
+            "Si requiere firma de varios firmantes, el documento circula entre ellos según el orden configurado"
+          ],
+          "captura": null,
+          "palabras_clave": ["firma", "electrónica", "portafirmas", "certificado", "LAJ", "juez", "firma local"]
+        }
+      ]
+    },
+    {
+      "id": "comunicacion",
+      "titulo": "Comunicación",
+      "subsecciones": [
+        {
+          "id": "itineraciones",
+          "titulo": "Itineraciones (Envío a Otros Órganos)",
+          "contenido": "La itineración es el mecanismo de ATENEA para enviar expedientes o documentos entre órganos judiciales. Se utiliza para remisiones por competencia, exhortos, inhibiciones y cualquier comunicación interorgánica. El sistema genera automáticamente el oficio de remisión y registra la salida en el libro correspondiente.",
+          "pasos": [
+            "Acceder al procedimiento y seleccionar Tramitación > Itineración",
+            "Seleccionar el tipo de itineración (inhibición, exhorto, auxilio judicial, etc.)",
+            "Buscar y seleccionar el órgano judicial de destino",
+            "Adjuntar los documentos necesarios al envío",
+            "Confirmar la itineración; el sistema genera el oficio de remisión",
+            "El expediente queda en estado de 'Remitido' hasta recibir acuse de recibo"
+          ],
+          "captura": null,
+          "palabras_clave": ["itineración", "envío", "órgano", "remisión", "exhorto", "inhibición"]
+        },
+        {
+          "id": "notificaciones",
+          "titulo": "Notificaciones (LexNET, AA.PP., Procuradores)",
+          "contenido": "El módulo de notificaciones de ATENEA gestiona el envío de comunicaciones a las partes procesales. Las notificaciones se envían preferentemente por vía electrónica a través de LexNET (a procuradores y abogados), mediante la Dirección Electrónica Habilitada para Administraciones Públicas, o por correo certificado/edictos cuando no es posible la vía electrónica.",
+          "pasos": [
+            "Desde el trámite que genera la notificación, pulsar 'Notificar'",
+            "Seleccionar los destinatarios de la notificación",
+            "Elegir la vía de notificación: LexNET, Sede Electrónica, correo postal o edictos",
+            "Adjuntar la resolución o documento a notificar",
+            "Confirmar el envío; el sistema registra la notificación como 'Enviada'",
+            "Cuando el destinatario acusa recibo, el estado cambia a 'Notificada'"
+          ],
+          "captura": null,
+          "palabras_clave": ["notificaciones", "LexNET", "comunicaciones", "procuradores", "AA.PP.", "electrónica"]
+        },
+        {
+          "id": "actos_comunicacion",
+          "titulo": "Actos de Comunicación",
+          "contenido": "Los actos de comunicación en ATENEA engloban todas las diligencias de notificación, citación, emplazamiento y requerimiento. El sistema registra cada acto con su fecha, resultado (positivo o negativo), medio utilizado y persona que lo practica. Permite la gestión de intentos fallidos y la programación de segundos intentos.",
+          "pasos": [
+            "Acceder a Tramitación > Actos de Comunicación del procedimiento",
+            "Crear un nuevo acto de comunicación seleccionando el tipo (notificación, citación, emplazamiento, requerimiento)",
+            "Indicar el destinatario y la dirección o medio de comunicación",
+            "Registrar el resultado del acto: positivo (entregado) o negativo (ausente, desconocido, rehusado)",
+            "En caso de resultado negativo, programar segundo intento o solicitar averiguación domiciliaria"
+          ],
+          "captura": null,
+          "palabras_clave": ["actos comunicación", "citación", "emplazamiento", "requerimiento", "notificación", "diligencia"]
+        },
+        {
+          "id": "comunicacion_electronica",
+          "titulo": "Comunicación Electrónica con Administraciones",
+          "contenido": "ATENEA integra la comunicación electrónica con otras Administraciones Públicas mediante servicios web específicos. Permite la consulta y comunicación con organismos como la Agencia Tributaria, Seguridad Social, Registro Civil, DGT, Catastro y otros registros públicos. Las comunicaciones quedan registradas en el expediente electrónico.",
+          "pasos": [
+            "Acceder a Comunicación > Comunicaciones Electrónicas",
+            "Seleccionar el organismo o administración de destino",
+            "Rellenar los datos de la solicitud según el tipo de consulta",
+            "Enviar la solicitud electrónica",
+            "La respuesta se recibe automáticamente y se vincula al expediente"
+          ],
+          "captura": null,
+          "palabras_clave": ["comunicación electrónica", "administraciones", "Agencia Tributaria", "Seguridad Social", "servicios web"]
+        }
+      ]
+    },
+    {
+      "id": "consultas",
+      "titulo": "Consultas",
+      "subsecciones": [
+        {
+          "id": "consulta_multiple",
+          "titulo": "Consulta Múltiple",
+          "contenido": "La consulta múltiple permite buscar procedimientos por diversos criterios combinados: NIG, número de procedimiento, nombre de las partes, DNI/NIF, tipo de procedimiento, fecha de incoación, estado procesal, etc. Los resultados se presentan en formato tabular con posibilidad de exportación.",
+          "pasos": [
+            "Acceder a Consultas > Consulta Múltiple",
+            "Rellenar uno o varios campos de búsqueda (NIG, partes, tipo procedimiento, etc.)",
+            "Pulsar 'Buscar' para obtener los resultados",
+            "Hacer doble clic en un resultado para acceder al detalle del procedimiento",
+            "Opcionalmente, exportar los resultados a Excel o CSV"
+          ],
+          "captura": null,
+          "palabras_clave": ["consulta", "múltiple", "búsqueda", "NIG", "procedimiento", "partes"]
+        },
+        {
+          "id": "consulta_escritos",
+          "titulo": "Consulta por Escritos",
+          "contenido": "Permite localizar escritos recibidos o enviados filtrando por fecha, tipo de escrito, procedimiento asociado, remitente o estado del escrito. Útil para rastrear escritos pendientes de aceptar, escritos devueltos o escritos asociados a un procedimiento concreto.",
+          "pasos": [
+            "Acceder a Consultas > Consulta por Escritos",
+            "Filtrar por rango de fechas, tipo de escrito o estado",
+            "Opcionalmente filtrar por procedimiento o remitente",
+            "Revisar los resultados y acceder al detalle del escrito seleccionado"
+          ],
+          "captura": null,
+          "palabras_clave": ["consulta", "escritos", "recibidos", "enviados", "búsqueda", "filtro"]
+        },
+        {
+          "id": "consulta_profesional",
+          "titulo": "Consulta por Profesional",
+          "contenido": "Permite localizar todos los procedimientos en los que interviene un profesional determinado (abogado, procurador, graduado social, perito). La búsqueda se realiza por nombre, número de colegiado o NIF del profesional.",
+          "pasos": [
+            "Acceder a Consultas > Consulta por Profesional",
+            "Introducir el nombre, número de colegiado o NIF del profesional",
+            "Seleccionar el tipo de profesional si se desea filtrar",
+            "El sistema muestra todos los procedimientos vinculados a ese profesional"
+          ],
+          "captura": null,
+          "palabras_clave": ["consulta", "profesional", "abogado", "procurador", "colegiado"]
+        },
+        {
+          "id": "agenda_plazos",
+          "titulo": "Agenda de Plazos",
+          "contenido": "La agenda de plazos muestra todos los plazos procesales activos del órgano judicial, con indicación de la fecha de vencimiento, el tipo de plazo y el procedimiento asociado. Permite controlar los plazos que están próximos a vencer o ya vencidos, facilitando la gestión temporal del trabajo judicial.",
+          "pasos": [
+            "Acceder a Consultas > Agenda de Plazos",
+            "Filtrar por rango de fechas de vencimiento",
+            "Los plazos vencidos se muestran en rojo, los próximos a vencer en amarillo",
+            "Hacer clic en un plazo para acceder directamente al procedimiento",
+            "Exportar la agenda para planificación del trabajo"
+          ],
+          "captura": null,
+          "palabras_clave": ["agenda", "plazos", "vencimiento", "procesal", "control", "fechas"]
+        },
+        {
+          "id": "agenda_presos",
+          "titulo": "Agenda de Presos",
+          "contenido": "La agenda de presos (jurisdicción penal) permite consultar y controlar las situaciones personales de los investigados/encausados con medidas cautelares de prisión provisional. Muestra las fechas de ingreso, tipo de prisión, plazos máximos y vencimientos, permitiendo el control de la situación personal conforme al art. 504 LECrim.",
+          "pasos": [
+            "Acceder a Consultas > Agenda de Presos",
+            "Se muestran todos los internos con prisión provisional activa",
+            "Verificar las fechas de vencimiento de la prisión provisional",
+            "Controlar los plazos máximos según el art. 504 LECrim",
+            "Generar alertas para revisiones de situación personal"
+          ],
+          "captura": null,
+          "palabras_clave": ["agenda", "presos", "prisión provisional", "penal", "situación personal", "504 LECrim"]
+        },
+        {
+          "id": "consulta_documental",
+          "titulo": "Consulta Documental",
+          "contenido": "Permite acceder a todos los documentos asociados a un procedimiento: resoluciones, escritos de parte, oficios, informes periciales y demás documentación. Los documentos se visualizan con su estado (borrador, firmado, notificado) y pueden descargarse o imprimirse.",
+          "pasos": [
+            "Acceder a la pestaña 'Documentos' del procedimiento",
+            "Filtrar por tipo de documento, fecha o estado",
+            "Seleccionar el documento para previsualizarlo",
+            "Descargar o imprimir el documento si es necesario"
+          ],
+          "captura": null,
+          "palabras_clave": ["consulta", "documental", "documentos", "resoluciones", "escritos", "expediente"]
+        }
+      ]
+    },
+    {
+      "id": "libros_informes",
+      "titulo": "Libros e Informes",
+      "subsecciones": [
+        {
+          "id": "estadisticas_pendientes_reparto",
+          "titulo": "Estadísticas Pendientes de Reparto",
+          "contenido": "Muestra los asuntos que están pendientes de ser repartidos entre los órganos judiciales del partido judicial. Permite al Decanato o al SCRR (Servicio Común de Registro y Reparto) controlar el flujo de entrada de asuntos y los tiempos de reparto.",
+          "pasos": [
+            "Acceder a Libros e Informes > Estadísticas Pendientes de Reparto",
+            "Seleccionar el rango de fechas a consultar",
+            "Filtrar por tipo de procedimiento o jurisdicción",
+            "El sistema muestra el volumen de asuntos pendientes desglosado por tipo",
+            "Exportar los datos para elaboración de informes"
+          ],
+          "captura": null,
+          "palabras_clave": ["estadísticas", "pendientes", "reparto", "SCRR", "Decanato", "asuntos"]
+        },
+        {
+          "id": "estadistica_reparto",
+          "titulo": "Estadística de Reparto",
+          "contenido": "Informe estadístico que muestra la distribución de asuntos repartidos a cada órgano judicial, con desglose por tipo de procedimiento, fecha y criterio de reparto. Permite verificar la equidad del reparto y detectar desequilibrios de carga entre órganos.",
+          "pasos": [
+            "Acceder a Libros e Informes > Estadística de Reparto",
+            "Seleccionar el periodo a analizar",
+            "Visualizar la distribución por órgano judicial y tipo de procedimiento",
+            "Comparar las cargas entre órganos para detectar desequilibrios",
+            "Generar informe en PDF o Excel para remisión al CGPJ"
+          ],
+          "captura": null,
+          "palabras_clave": ["estadística", "reparto", "distribución", "órgano", "carga", "CGPJ"]
+        },
+        {
+          "id": "estadistica_cargas",
+          "titulo": "Estadística de Cargas",
+          "contenido": "Refleja la carga de trabajo de cada órgano judicial considerando los asuntos ingresados, resueltos y pendientes. Incorpora módulos de dedicación del CGPJ para ponderar la complejidad de cada tipo de procedimiento. Es la base para la elaboración de estadísticas trimestrales.",
+          "pasos": [
+            "Acceder a Libros e Informes > Estadística de Cargas",
+            "Seleccionar el órgano judicial y periodo",
+            "El sistema calcula automáticamente ingresos, resoluciones y pendencia",
+            "Aplicar los módulos de dedicación del CGPJ para la ponderación",
+            "Exportar para la estadística trimestral del CGPJ"
+          ],
+          "captura": null,
+          "palabras_clave": ["estadística", "cargas", "trabajo", "módulos", "CGPJ", "pendencia", "ingresos"]
+        },
+        {
+          "id": "libros_registro",
+          "titulo": "Libros de Registro",
+          "contenido": "ATENEA mantiene los libros de registro electrónicos del órgano judicial: libro de entrada, libro de resoluciones, libro de sentencias, libro de ejecutorias, etc. Cada asiento se genera automáticamente al realizar el trámite correspondiente. Los libros pueden consultarse y exportarse para archivo.",
+          "pasos": [
+            "Acceder a Libros e Informes > Libros de Registro",
+            "Seleccionar el tipo de libro (entrada, sentencias, ejecutorias, etc.)",
+            "Filtrar por rango de fechas",
+            "Consultar los asientos del libro con su numeración correlativa",
+            "Exportar el libro en formato PDF para diligenciado"
+          ],
+          "captura": null,
+          "palabras_clave": ["libros", "registro", "sentencias", "ejecutorias", "asientos", "entrada"]
+        }
+      ]
+    },
+    {
+      "id": "utilidades",
+      "titulo": "Utilidades",
+      "subsecciones": [
+        {
+          "id": "devolucion_escritos",
+          "titulo": "Devolución de Escritos al SCRR",
+          "contenido": "Permite devolver al Servicio Común de Registro y Reparto (SCRR) aquellos escritos que han sido repartidos erróneamente al órgano judicial. La devolución incluye la indicación del motivo y queda registrada en el sistema para trazabilidad.",
+          "pasos": [
+            "Localizar el escrito en la bandeja de escritos pendientes de aceptar",
+            "Seleccionar el escrito y pulsar 'Devolver al SCRR'",
+            "Indicar el motivo de la devolución (error de reparto, competencia incorrecta, duplicado, etc.)",
+            "Confirmar la devolución; el escrito vuelve a la bandeja del SCRR",
+            "El SCRR recibe el escrito con la indicación del motivo para su re-reparto"
+          ],
+          "captura": null,
+          "palabras_clave": ["devolución", "SCRR", "escritos", "reparto", "error", "competencia"]
+        },
+        {
+          "id": "anulacion",
+          "titulo": "Anulación de Trámites",
+          "contenido": "La funcionalidad de anulación permite deshacer trámites registrados erróneamente en ATENEA. La anulación debe estar justificada y queda registrada en el histórico del procedimiento. No todos los trámites son anulables; las resoluciones firmadas requieren un procedimiento especial de corrección.",
+          "pasos": [
+            "Acceder al histórico de actuaciones del procedimiento",
+            "Localizar el trámite a anular",
+            "Pulsar 'Anular' e indicar el motivo de la anulación",
+            "El sistema valida que el trámite sea anulable (no esté consolidado)",
+            "Confirmar la anulación; el trámite queda marcado como anulado pero visible en el histórico"
+          ],
+          "captura": null,
+          "palabras_clave": ["anulación", "deshacer", "trámite", "error", "corrección"]
+        },
+        {
+          "id": "gestion_acontecimientos",
+          "titulo": "Gestión de Acontecimientos",
+          "contenido": "Los acontecimientos en ATENEA son eventos programados asociados a procedimientos: vistas, comparecencias, reconocimientos, lanzamientos, subastas, etc. El módulo permite crear, modificar y cancelar acontecimientos, vinculándolos al calendario del órgano judicial y generando las citaciones correspondientes.",
+          "pasos": [
+            "Acceder a Utilidades > Gestión de Acontecimientos o desde el procedimiento",
+            "Crear un nuevo acontecimiento seleccionando el tipo",
+            "Indicar fecha, hora, sala y duración estimada",
+            "Vincular los intervinientes que deben ser citados",
+            "El sistema genera automáticamente las citaciones y reserva la sala",
+            "Consultar el calendario de acontecimientos del órgano"
+          ],
+          "captura": null,
+          "palabras_clave": ["acontecimientos", "vistas", "señalamientos", "calendario", "citaciones", "sala"]
+        },
+        {
+          "id": "gestion_apuntes",
+          "titulo": "Gestión de Apuntes",
+          "contenido": "Permite añadir notas o apuntes internos a un procedimiento que no forman parte del expediente judicial electrónico pero sirven como recordatorios para el personal del órgano. Los apuntes son visibles solo para los usuarios del órgano judicial.",
+          "pasos": [
+            "Acceder al procedimiento y seleccionar la pestaña 'Apuntes'",
+            "Pulsar 'Nuevo apunte' e introducir el texto del recordatorio",
+            "Opcionalmente, establecer una fecha de alerta para el apunte",
+            "El apunte queda visible en la ficha del procedimiento para todos los usuarios del órgano"
+          ],
+          "captura": null,
+          "palabras_clave": ["apuntes", "notas", "recordatorios", "internos", "procedimiento"]
+        }
+      ]
+    },
+    {
+      "id": "configuracion",
+      "titulo": "Configuración",
+      "subsecciones": [
+        {
+          "id": "parametros_sistema",
+          "titulo": "Parámetros del Sistema",
+          "contenido": "Los parámetros del sistema de ATENEA permiten configurar el comportamiento de la aplicación para cada órgano judicial: datos del órgano (nombre, dirección, código), jurisdicción, tipos de procedimiento habilitados, plantillas por defecto, y opciones de firma y comunicación.",
+          "pasos": [
+            "Acceder a Configuración > Parámetros del Sistema (requiere perfil de administrador)",
+            "Revisar y actualizar los datos identificativos del órgano judicial",
+            "Configurar las opciones de firma (local o portafirmas, orden de firmantes)",
+            "Establecer las plantillas por defecto para cada tipo de resolución",
+            "Configurar los parámetros de comunicación (LexNET, notificaciones electrónicas)"
+          ],
+          "captura": null,
+          "palabras_clave": ["parámetros", "configuración", "sistema", "órgano", "administrador"]
+        },
+        {
+          "id": "mantenimiento_jueces_laj",
+          "titulo": "Mantenimiento de Jueces y LAJ",
+          "contenido": "Módulo de administración que permite gestionar los titulares y sustitutos del órgano judicial: Jueces/Magistrados y Letrados de la Administración de Justicia (LAJ). La configuración afecta a la firma de documentos, al portafirmas y a la composición de las resoluciones.",
+          "pasos": [
+            "Acceder a Configuración > Mantenimiento de Jueces/LAJ",
+            "Dar de alta o modificar los datos del titular (nombre, cargo, certificado de firma)",
+            "Configurar sustitutos y sus periodos de actuación",
+            "Vincular el certificado de firma electrónica de cada titular",
+            "Las resoluciones generadas incorporarán automáticamente el nombre del firmante configurado"
+          ],
+          "captura": null,
+          "palabras_clave": ["jueces", "LAJ", "mantenimiento", "titulares", "sustitutos", "firma"]
+        },
+        {
+          "id": "configuracion_firma",
+          "titulo": "Configuración de Firma",
+          "contenido": "Permite configurar los parámetros de firma electrónica del órgano: tipo de firma preferente (local o portafirmas), orden de firmantes (LAJ primero o Juez primero), certificados autorizados y configuración del portafirmas externo. También gestiona la firma de documentos que requieren solo firma de LAJ vs. firma judicial.",
+          "pasos": [
+            "Acceder a Configuración > Configuración de Firma",
+            "Seleccionar el modo de firma preferente: local o portafirmas",
+            "Configurar el orden de firma para documentos con múltiples firmantes",
+            "Registrar los certificados de firma autorizados",
+            "Configurar la URL y credenciales del portafirmas si se usa firma remota"
+          ],
+          "captura": null,
+          "palabras_clave": ["configuración", "firma", "portafirmas", "certificado", "orden", "firmantes"]
+        },
+        {
+          "id": "configuracion_plantillas",
+          "titulo": "Configuración de Plantillas",
+          "contenido": "Permite gestionar las plantillas de documentos disponibles en el compositor: crear nuevas plantillas, modificar las existentes, insertar marcas de datos y asignar plantillas a tipos de procedimiento o trámites específicos. Las plantillas se almacenan centralizadamente y pueden compartirse entre órganos del mismo partido judicial.",
+          "pasos": [
+            "Acceder a Configuración > Plantillas de Documentos",
+            "Seleccionar la plantilla a modificar o crear una nueva",
+            "Editar el contenido de la plantilla en el editor integrado",
+            "Insertar marcas de datos desde el catálogo de marcas disponibles",
+            "Asignar la plantilla a los trámites donde estará disponible",
+            "Guardar y verificar la generación correcta del documento"
+          ],
+          "captura": null,
+          "palabras_clave": ["plantillas", "documentos", "configuración", "marcas", "editor", "compositor"]
+        }
+      ]
+    },
+    {
+      "id": "tareas_pendientes",
+      "titulo": "Tareas Pendientes",
+      "subsecciones": [
+        {
+          "id": "pendientes_firma",
+          "titulo": "Bandeja de Documentos Pendientes de Firma",
+          "contenido": "Muestra todos los documentos generados que están pendientes de firma electrónica. Los documentos se organizan por prioridad y antigüedad. Permite la firma individual o masiva. Los documentos pendientes de firma del Juez aparecen separados de los pendientes de firma del LAJ.",
+          "pasos": [
+            "Acceder a Tareas Pendientes > Pendientes de Firma",
+            "Filtrar por tipo de documento, procedimiento o firmante pendiente",
+            "Seleccionar uno o varios documentos para firmar",
+            "Pulsar 'Firmar' para firma individual o 'Firma masiva' para firmar todos los seleccionados",
+            "El sistema solicita el PIN del certificado digital para completar la firma",
+            "Los documentos firmados pasan automáticamente al siguiente estado (pendientes de notificación o completados)"
+          ],
+          "captura": null,
+          "palabras_clave": ["pendientes", "firma", "bandeja", "documentos", "firma masiva", "certificado"]
+        },
+        {
+          "id": "pendientes_revision",
+          "titulo": "Pendientes de Revisión",
+          "contenido": "Bandeja que muestra los documentos que requieren revisión antes de su firma o envío. Incluye documentos devueltos por el firmante para corrección, escritos recibidos pendientes de despacho, y cualquier tarea que requiera atención del usuario. El sistema marca con colores la prioridad de cada tarea.",
+          "pasos": [
+            "Acceder a Tareas Pendientes > Pendientes de Revisión",
+            "Revisar las tareas ordenadas por prioridad (rojo = urgente, amarillo = normal)",
+            "Abrir cada tarea para revisar el contenido",
+            "Realizar las correcciones necesarias en el documento",
+            "Reenviar a firma o completar la tarea según corresponda"
+          ],
+          "captura": null,
+          "palabras_clave": ["pendientes", "revisión", "corrección", "devueltos", "prioridad"]
+        },
+        {
+          "id": "pendientes_envio",
+          "titulo": "Pendientes de Envío",
+          "contenido": "Muestra las notificaciones y comunicaciones que están firmadas pero pendientes de envío a sus destinatarios. Incluye las notificaciones vía LexNET, comunicaciones a Administraciones Públicas y cualquier documento que deba remitirse externamente tras su firma.",
+          "pasos": [
+            "Acceder a Tareas Pendientes > Pendientes de Envío",
+            "Revisar las comunicaciones pendientes con sus destinatarios",
+            "Seleccionar las comunicaciones a enviar",
+            "Verificar los datos del destinatario y la vía de envío",
+            "Pulsar 'Enviar' para remitir las comunicaciones seleccionadas",
+            "El sistema registra la fecha y hora de envío y actualiza el estado del acto de comunicación"
+          ],
+          "captura": null,
+          "palabras_clave": ["pendientes", "envío", "notificaciones", "LexNET", "comunicaciones", "remitir"]
+        },
+        {
+          "id": "pendientes_aceptacion",
+          "titulo": "Pendientes de Aceptación",
+          "contenido": "Bandeja que muestra los escritos recibidos por LexNET u otros canales que están pendientes de ser aceptados y vinculados a un procedimiento. El sistema intenta la vinculación automática por NIG, pero los escritos sin NIG válido requieren vinculación manual.",
+          "pasos": [
+            "Acceder a Tareas Pendientes > Pendientes de Aceptación",
+            "Revisar los escritos pendientes con sus datos de entrada",
+            "Para escritos con procedimiento identificado: aceptar directamente",
+            "Para escritos sin procedimiento: buscar y vincular manualmente el procedimiento",
+            "Aceptar el escrito, que queda incorporado al expediente electrónico"
+          ],
+          "captura": null,
+          "palabras_clave": ["pendientes", "aceptación", "escritos", "LexNET", "vincular", "NIG"]
+        }
+      ]
+    },
+    {
+      "id": "operaciones_especiales",
+      "titulo": "Operaciones Especiales",
+      "subsecciones": [
+        {
+          "id": "transformacion_procedimiento",
+          "titulo": "Transformación de Procedimiento",
+          "contenido": "Permite cambiar el tipo de procedimiento cuando durante la tramitación se determina que la naturaleza del asunto requiere un cauce procesal distinto. Por ejemplo, transformar un Juicio Verbal en un Juicio Ordinario, o un procedimiento Monitorio en un Juicio Verbal tras la oposición del deudor (art. 818 LEC).",
+          "pasos": [
+            "Acceder al procedimiento y seleccionar Operaciones Especiales > Transformación",
+            "Seleccionar el nuevo tipo de procedimiento",
+            "El sistema valida que la transformación sea posible según las reglas procesales",
+            "Confirmar la transformación; el sistema renumera el procedimiento si es necesario",
+            "Las actuaciones anteriores se conservan y el procedimiento continúa en la nueva fase"
+          ],
+          "captura": null,
+          "palabras_clave": ["transformación", "procedimiento", "cambio tipo", "verbal", "ordinario", "monitorio"]
+        },
+        {
+          "id": "acumulacion",
+          "titulo": "Acumulación de Procedimientos",
+          "contenido": "La acumulación permite reunir varios procedimientos en uno solo cuando existe conexión entre ellos (arts. 74-98 LEC para civil, art. 17 LECrim para penal). ATENEA gestiona la acumulación vinculando los expedientes acumulados al procedimiento principal y unificando las actuaciones posteriores.",
+          "pasos": [
+            "Acceder al procedimiento principal y seleccionar Operaciones Especiales > Acumulación",
+            "Buscar e identificar los procedimientos a acumular por NIG o número",
+            "Verificar que concurren los requisitos legales de acumulación",
+            "Confirmar la acumulación; los procedimientos acumulados se vinculan al principal",
+            "Las partes de los procedimientos acumulados se incorporan al procedimiento principal"
+          ],
+          "captura": null,
+          "palabras_clave": ["acumulación", "procedimientos", "conexión", "principal", "acumulado"]
+        },
+        {
+          "id": "desglose",
+          "titulo": "Desglose de Procedimientos",
+          "contenido": "Operación inversa a la acumulación: permite separar un procedimiento en varios cuando se detecta que engloba pretensiones que deben tramitarse por separado. El desglose genera nuevos procedimientos con los datos correspondientes.",
+          "pasos": [
+            "Acceder al procedimiento y seleccionar Operaciones Especiales > Desglose",
+            "Identificar las pretensiones o partes que se desglosarán en nuevos procedimientos",
+            "Configurar los datos del nuevo procedimiento desglosado",
+            "Confirmar el desglose; el sistema genera los nuevos procedimientos",
+            "Cada procedimiento resultante continúa su tramitación de forma independiente"
+          ],
+          "captura": null,
+          "palabras_clave": ["desglose", "separación", "procedimiento", "pretensiones", "nuevo"]
+        },
+        {
+          "id": "inhibicion",
+          "titulo": "Inhibición",
+          "contenido": "La inhibición es la declaración del órgano judicial de que carece de competencia para conocer del asunto, remitiéndolo al órgano que considera competente (arts. 48-49 LEC). En ATENEA, la inhibición genera automáticamente la resolución, la itineración al órgano competente y la baja del procedimiento en el órgano de origen.",
+          "pasos": [
+            "Acceder al procedimiento y seleccionar Operaciones Especiales > Inhibición",
+            "Dictar la resolución de inhibición indicando el órgano judicial competente",
+            "Firmar la resolución de inhibición",
+            "El sistema genera automáticamente la itineración al órgano de destino",
+            "Notificar la resolución a las partes",
+            "El procedimiento queda en estado 'Inhibido' una vez confirmada la remisión"
+          ],
+          "captura": null,
+          "palabras_clave": ["inhibición", "competencia", "remisión", "órgano competente", "declinatoria"]
+        },
+        {
+          "id": "archivo_desarchivo",
+          "titulo": "Archivo y Desarchivo",
+          "contenido": "El archivo del procedimiento se produce cuando finaliza la tramitación (sentencia firme ejecutada, sobreseimiento, desistimiento, etc.). El desarchivo permite reabrir un procedimiento archivado cuando concurre causa legal para ello. ATENEA mantiene el expediente accesible en modo consulta tras el archivo.",
+          "pasos": [
+            "Para archivar: acceder al procedimiento y seleccionar Operaciones Especiales > Archivo",
+            "Seleccionar la causa de archivo (sentencia firme, sobreseimiento, etc.)",
+            "Confirmar el archivo; el procedimiento pasa a estado 'Archivado'",
+            "Para desarchivar: localizar el procedimiento archivado en consulta",
+            "Seleccionar Operaciones Especiales > Desarchivo e indicar el motivo",
+            "El procedimiento se reactiva y permite nuevas actuaciones"
+          ],
+          "captura": null,
+          "palabras_clave": ["archivo", "desarchivo", "finalización", "reabrir", "sobreseimiento", "sentencia firme"]
+        },
+        {
+          "id": "requisitorias",
+          "titulo": "Requisitorias (Penal)",
+          "contenido": "Las requisitorias son llamamientos judiciales a personas cuyo paradero se desconoce para que comparezcan ante el órgano judicial (art. 512 LECrim). En ATENEA, el módulo de requisitorias permite su emisión, publicación en el BOE y registros de personas buscadas, y su cancelación cuando la persona es localizada.",
+          "pasos": [
+            "Acceder al procedimiento penal y seleccionar Operaciones Especiales > Requisitorias",
+            "Crear nueva requisitoria indicando los datos del buscado",
+            "Generar el documento de requisitoria con los datos de la causa",
+            "Enviar la requisitoria para publicación en el BOE y registros policiales",
+            "Cuando la persona es localizada, cancelar la requisitoria actualizando su estado"
+          ],
+          "captura": null,
+          "palabras_clave": ["requisitorias", "penal", "buscado", "paradero", "BOE", "512 LECrim"]
+        },
+        {
+          "id": "busca_captura",
+          "titulo": "Busca y Captura (Penal)",
+          "contenido": "La orden de busca y captura (art. 513 LECrim) se emite cuando un procesado en rebeldía no comparece tras ser requerido. En ATENEA se gestiona desde el módulo de operaciones especiales penales, generando la orden que se comunica a las Fuerzas y Cuerpos de Seguridad del Estado.",
+          "pasos": [
+            "Acceder al procedimiento penal y seleccionar Operaciones Especiales > Busca y Captura",
+            "Verificar que existe declaración de rebeldía previa",
+            "Generar la orden de busca y captura con los datos del encausado",
+            "Remitir la orden a las Fuerzas y Cuerpos de Seguridad",
+            "Registrar la orden en el Sistema de Registros Administrativos (SIRAJ)",
+            "Cancelar la orden cuando se produzca la detención o comparecencia"
+          ],
+          "captura": null,
+          "palabras_clave": ["busca", "captura", "penal", "rebeldía", "orden", "FCSE", "513 LECrim"]
+        }
+      ]
+    }
+  ],
+  "problemas_conocidos": [
+    {
+      "id": "firma_laj",
+      "problema": "Documentos firmados solo por LAJ no pasan a portafirmas",
+      "sintoma": "El documento queda en estado naranja (pendiente de firma) incluso después de que el LAJ lo haya firmado. No se completa el ciclo de firma y el documento no pasa al estado firmado (verde).",
+      "workaround": "Recuperar el documento desde Minerva si está disponible y reenviar al portafirmas. Alternativamente, utilizar la firma local con certificado digital en lugar del portafirmas para documentos que solo requieren firma de LAJ.",
+      "fuente": "CCOO Asturias, abril 2025"
+    },
+    {
+      "id": "documentos_desconfigurados_minerva",
+      "problema": "Documentos desconfigurados al migrar desde Minerva v6+",
+      "sintoma": "Las plantillas de documentos migradas desde Minerva versión 6 o superior presentan formato incorrecto: márgenes alterados, fuentes cambiadas, marcas de datos que no se sustituyen correctamente y saltos de página incorrectos.",
+      "workaround": "Regenerar las plantillas directamente en ATENEA usando el compositor de documentos nativo. No reutilizar plantillas de Minerva sin adaptarlas previamente al formato de ATENEA.",
+      "fuente": "Manual ATENEA CGPJ, 2024"
+    },
+    {
+      "id": "falta_pestana_documentos_emitidos",
+      "problema": "Falta la pestaña 'Documentos Emitidos' en algunos procedimientos",
+      "sintoma": "Al acceder a un procedimiento, no aparece la pestaña 'Documentos Emitidos' que debería mostrar todas las resoluciones y comunicaciones generadas. Solo se ven las pestañas básicas del procedimiento.",
+      "workaround": "Acceder a los documentos emitidos desde la consulta documental general del procedimiento (pestaña 'Documentos'). Verificar que el perfil de usuario tiene los permisos adecuados. En algunos casos, cerrar sesión y volver a entrar resuelve el problema.",
+      "fuente": "CCOO Asturias, abril 2025"
+    },
+    {
+      "id": "escritos_fiscalia",
+      "problema": "Escritos no envían parte de incoación a Fiscalía automáticamente",
+      "sintoma": "Al incoar procedimientos penales, ATENEA no genera automáticamente el parte de incoación a Fiscalía como hacía Minerva. El funcionario debe generar y enviar el parte manualmente.",
+      "workaround": "Generar manualmente el parte de incoación usando la plantilla correspondiente desde el compositor de documentos y enviarlo a Fiscalía mediante la funcionalidad de comunicaciones electrónicas o LexNET.",
+      "fuente": "Juzgados de Instrucción, reportes internos 2025"
+    },
+    {
+      "id": "desplegables_faltan_opciones",
+      "problema": "Desplegables con menos opciones que en Minerva",
+      "sintoma": "Algunos desplegables de ATENEA (tipos de procedimiento, tipos de resolución, motivos de archivo) tienen menos opciones que los que existían en Minerva, impidiendo registrar correctamente ciertos trámites.",
+      "workaround": "Utilizar la opción genérica más cercana disponible en el desplegable. Comunicar la incidencia al CAU (Centro de Atención al Usuario) para que se añadan las opciones faltantes en futuras actualizaciones.",
+      "fuente": "CCOO Asturias, abril 2025"
+    },
+    {
+      "id": "consulta_apuntes_no_aparece",
+      "problema": "Consulta de apuntes no aparece al inicio de sesión",
+      "sintoma": "La funcionalidad de consulta de apuntes (notas internas del procedimiento) no se carga correctamente al iniciar sesión en ATENEA. Los apuntes aparecen vacíos o la pestaña no responde hasta que se refresca manualmente.",
+      "workaround": "Cerrar la pestaña de apuntes y volver a abrirla después de unos segundos. Si persiste, cerrar completamente ATENEA y volver a iniciar sesión. Los apuntes están almacenados y no se pierden.",
+      "fuente": "Usuarios ATENEA, foros judiciales 2025"
+    },
+    {
+      "id": "teclas_funcion_sn",
+      "problema": "Teclas de función y atajos S/N no funcionan",
+      "sintoma": "Los atajos de teclado heredados de Minerva (teclas de función F1-F12, confirmaciones con S/N) no funcionan en ATENEA. Los usuarios acostumbrados a Minerva pierden productividad al no poder usar los atajos habituales.",
+      "workaround": "ATENEA utiliza una interfaz web diferente a Minerva que no soporta los mismos atajos de teclado. Adaptarse a la interfaz de ATENEA usando el ratón y los botones de la aplicación. Se prevé que futuras versiones incorporen atajos de teclado propios.",
+      "fuente": "CCOO Asturias, abril 2025"
+    },
+    {
+      "id": "tareas_pendientes_datos_excesivos",
+      "problema": "Bandeja de tareas pendientes muestra datos excesivos o se bloquea",
+      "sintoma": "La bandeja de tareas pendientes carga un volumen excesivo de datos al abrirla, provocando que la aplicación se ralentice o se bloquee. Especialmente problemático en órganos con gran volumen de asuntos.",
+      "workaround": "Utilizar los filtros disponibles (tipo de tarea, fecha, procedimiento) antes de cargar la bandeja para reducir el volumen de datos. Evitar abrir la bandeja sin filtros en órganos con más de 500 tareas pendientes.",
+      "fuente": "Usuarios ATENEA, reportes CAU 2025"
+    },
+    {
+      "id": "videos_efidelius",
+      "problema": "Vídeos de eFidelius no se reproducen desde ATENEA",
+      "sintoma": "Los vídeos de grabación de vistas y declaraciones realizados con el sistema eFidelius no se reproducen correctamente desde la interfaz de ATENEA. Aparece un error de codec o la ventana del reproductor se queda en negro.",
+      "workaround": "Descargar el vídeo y reproducirlo con un reproductor local compatible (VLC Media Player). Verificar que el navegador tiene habilitados los plugins necesarios. En algunos casos, actualizar el navegador a la última versión resuelve el problema.",
+      "fuente": "Juzgados con eFidelius, 2025"
+    },
+    {
+      "id": "auxilio_judicial_nacional",
+      "problema": "Auxilio Judicial Nacional no se registra correctamente",
+      "sintoma": "Al intentar registrar un Auxilio Judicial Nacional en ATENEA, el sistema no permite seleccionar correctamente el órgano de destino o no genera la itineración correspondiente. El registro queda incompleto o con datos erróneos.",
+      "workaround": "Registrar el auxilio judicial manualmente creando una itineración directa al órgano de destino. Incluir toda la documentación como adjuntos. Verificar que el órgano de destino está dado de alta correctamente en el directorio de ATENEA.",
+      "fuente": "Usuarios ATENEA, foros judiciales 2025"
+    }
+  ]
+}

@@ -1,0 +1,2900 @@
+{
+  "juzgado": "Juzgado de Primera Instancia e Instruccion n\u00ba 1 de Demostracion",
+  "localidad": "Villa de la Justicia",
+  "fecha_generacion": "2026-03-24",
+  "total_procedimientos": 159,
+  "procedimientos": [
+    {
+      "tipo": "JVB",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000001",
+      "fase_actual": "Admision",
+      "estado": "En tramite de admision",
+      "fecha_incoacion": "2026-01-10",
+      "partes": {
+        "demandante": {"nombre": "Elena Martinez Ruiz", "procurador": "Carlos Vega Lopez", "abogado": "Ana Beltran Soler"},
+        "demandado": {"nombre": "Inmobiliaria Horizonte S.L.", "procurador": "Marta Diaz Cano", "abogado": "Luis Ramos Gil"}
+      },
+      "cuantia": 3200.00,
+      "materia": "Reclamacion de cantidad",
+      "plazos": [
+        {"tipo": "Plazo subsanacion demanda", "fecha": "2026-04-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda turnada y registrada el 2026-03-18"
+    },
+    {
+      "tipo": "JVB",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000002",
+      "fase_actual": "Contestacion",
+      "estado": "Pendiente de contestacion",
+      "fecha_incoacion": "2025-12-05",
+      "partes": {
+        "demandante": {"nombre": "Sofia Navarro Prieto", "procurador": "Pedro Molina Guerrero", "abogado": "Lucia Ortega Santos"},
+        "demandado": {"nombre": "Transportes Velasco S.L.", "procurador": "Javier Delgado Castro", "abogado": "Carmen Serrano Blanco"}
+      },
+      "cuantia": 4875.50,
+      "materia": "Incumplimiento contractual",
+      "plazos": [
+        {"tipo": "Plazo contestacion demanda", "fecha": "2026-04-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Admision a tramite y traslado de demanda al demandado el 2026-03-05"
+    },
+    {
+      "tipo": "JVB",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000003",
+      "fase_actual": "Vista",
+      "estado": "Pendiente senalamiento",
+      "fecha_incoacion": "2025-11-20",
+      "partes": {
+        "demandante": {"nombre": "Miguel Torres Hernandez", "procurador": "Rafael Iglesias Jimenez", "abogado": "Isabel Fuentes Caballero"},
+        "demandado": {"nombre": "Construcciones Albamar S.A.", "procurador": "Diego Reyes Pascual", "abogado": "Teresa Campos Ferrer"}
+      },
+      "cuantia": 5100.00,
+      "materia": "Danos y perjuicios",
+      "plazos": [
+        {"tipo": "Senalamiento vista", "fecha": "2026-05-12", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Contestacion a la demanda presentada el 2026-03-10"
+    },
+    {
+      "tipo": "JVB",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000004",
+      "fase_actual": "Sentencia",
+      "estado": "Pendiente de resolucion",
+      "fecha_incoacion": "2025-09-15",
+      "partes": {
+        "demandante": {"nombre": "Andres Lozano Pardo", "procurador": "Pilar Aguilar Bravo", "abogado": "Fernando Calvo Gallego"},
+        "demandado": {"nombre": "Rosa Rojas Montero", "procurador": "Oscar Crespo Herrero", "abogado": "Beatriz Cortes Vargas"}
+      },
+      "cuantia": 2750.00,
+      "materia": "Reclamacion de honorarios profesionales",
+      "plazos": [
+        {"tipo": "Plazo para dictar sentencia", "fecha": "2026-04-08", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Vista oral celebrada el 2026-03-20 con resultado de quedar visto para sentencia"
+    },
+    {
+      "tipo": "JVB",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000005",
+      "fase_actual": "Firmeza",
+      "estado": "Sentencia firme",
+      "fecha_incoacion": "2025-07-22",
+      "partes": {
+        "demandante": {"nombre": "Hector Medina Sanz", "procurador": "Nuria Gallego Reyes", "abogado": "Gonzalo Prieto Vargas"},
+        "demandado": {"nombre": "Servicios Integrales Cenit S.L.", "procurador": "Cristina Pardo Lozano", "abogado": "Adrian Bravo Calvo"}
+      },
+      "cuantia": 1890.00,
+      "materia": "Vicios ocultos en compraventa",
+      "plazos": [
+        {"tipo": "Plazo recurso apelacion", "fecha": "2026-03-15", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Sentencia dictada el 2026-02-28 estimando parcialmente la demanda. Firme por transcurso del plazo de recurso"
+    },
+    {
+      "tipo": "JVB",
+      "numero": "6/2026",
+      "nig": "99001-42-1-2026-0000006",
+      "fase_actual": "Ejecucion",
+      "estado": "En ejecucion",
+      "fecha_incoacion": "2025-06-10",
+      "partes": {
+        "demandante": {"nombre": "Paula Herrero Cortes", "procurador": "Victor Fuentes Campos", "abogado": "Raquel Reyes Pascual"},
+        "demandado": {"nombre": "Distribuciones El Pilar S.A.", "procurador": "Tomas Caballero Ferrer", "abogado": "Alicia Aguilar Bravo"}
+      },
+      "cuantia": 4230.50,
+      "materia": "Impago de facturas",
+      "plazos": [
+        {"tipo": "Plazo cumplimiento voluntario", "fecha": "2026-04-30", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto despachando ejecucion por importe de 4.230,50 euros el 2026-03-22"
+    },
+    {
+      "tipo": "JVB",
+      "numero": "7/2026",
+      "nig": "99001-42-1-2026-0000007",
+      "fase_actual": "Archivo",
+      "estado": "Archivado",
+      "fecha_incoacion": "2025-03-18",
+      "partes": {
+        "demandante": {"nombre": "Marcos Montero Crespo", "procurador": "Veronica Rojas Lozano", "abogado": "Sergio Pardo Gallego"},
+        "demandado": {"nombre": "Laura Calvo Bravo", "procurador": "Daniel Aguilar Herrero", "abogado": "Patricia Cortes Fuentes"}
+      },
+      "cuantia": 1500.00,
+      "materia": "Reclamacion de deuda",
+      "plazos": [
+        {"tipo": "Archivo definitivo", "fecha": "2025-12-15", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Decreto de archivo definitivo por satisfaccion extraprocesal el 2025-12-15"
+    },
+    {
+      "tipo": "JVB",
+      "numero": "8/2026",
+      "nig": "99001-42-1-2026-0000008",
+      "fase_actual": "Recurso",
+      "estado": "Pendiente de recurso",
+      "fecha_incoacion": "2025-08-25",
+      "partes": {
+        "demandante": {"nombre": "Alberto Campos Ferrer", "procurador": "Gloria Reyes Pascual", "abogado": "Ruben Caballero Aguilar"},
+        "demandado": {"nombre": "Grupo Terramar S.L.", "procurador": "Ines Bravo Calvo", "abogado": "Ramon Gallego Rojas"}
+      },
+      "cuantia": 5500.00,
+      "materia": "Responsabilidad extracontractual",
+      "plazos": [
+        {"tipo": "Plazo formalizacion recurso apelacion", "fecha": "2026-04-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Sentencia notificada a las partes el 2026-03-18. Anunciado recurso de apelacion por la parte demandada"
+    },
+    {
+      "tipo": "ORD",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000009",
+      "fase_actual": "Admision",
+      "estado": "En tramite de admision",
+      "fecha_incoacion": "2026-02-10",
+      "partes": {
+        "demandante": {"nombre": "Silvia Montero Crespo", "procurador": "Emilio Rojas Pardo", "abogado": "Clara Lozano Gallego"},
+        "demandado": {"nombre": "Asesoria Fiscal Olimpo S.L.", "procurador": "Julio Calvo Bravo", "abogado": "Eva Aguilar Herrero"}
+      },
+      "cuantia": 28500.00,
+      "materia": "Defectos constructivos",
+      "plazos": [
+        {"tipo": "Plazo subsanacion demanda", "fecha": "2026-04-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda registrada pendiente de reparto el 2026-03-20"
+    },
+    {
+      "tipo": "ORD",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000010",
+      "fase_actual": "Contestacion",
+      "estado": "Plazo de contestacion abierto",
+      "fecha_incoacion": "2025-12-18",
+      "partes": {
+        "demandante": {"nombre": "Santiago Fuentes Campos", "procurador": "Marina Reyes Pascual", "abogado": "Enrique Caballero Ferrer"},
+        "demandado": {"nombre": "Clinica Dental Sonrisa S.L.", "procurador": "Lorena Aguilar Bravo", "abogado": "Manuel Calvo Gallego"}
+      },
+      "cuantia": 45000.00,
+      "materia": "Responsabilidad civil profesional",
+      "plazos": [
+        {"tipo": "Plazo contestacion demanda", "fecha": "2026-05-05", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Admision a tramite de demanda de juicio ordinario y emplazamiento al demandado el 2026-03-08"
+    },
+    {
+      "tipo": "ORD",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000011",
+      "fase_actual": "Audiencia previa",
+      "estado": "Pendiente de audiencia previa",
+      "fecha_incoacion": "2025-10-05",
+      "partes": {
+        "demandante": {"nombre": "Sara Herrero Cortes", "procurador": "Ignacio Fuentes Campos", "abogado": "Rocio Reyes Caballero"},
+        "demandado": {"nombre": "Talleres Mecanicos Norte S.L.", "procurador": "Alejandro Ferrer Pascual", "abogado": "Noelia Aguilar Calvo"}
+      },
+      "cuantia": 67200.00,
+      "materia": "Incumplimiento de contrato de obra",
+      "plazos": [
+        {"tipo": "Senalamiento audiencia previa", "fecha": "2026-05-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Contestacion a la demanda presentada. Convocatoria de audiencia previa el 2026-03-15"
+    },
+    {
+      "tipo": "ORD",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000012",
+      "fase_actual": "Juicio",
+      "estado": "Pendiente senalamiento juicio",
+      "fecha_incoacion": "2025-08-12",
+      "partes": {
+        "demandante": {"nombre": "Federico Bravo Gallego", "procurador": "Amparo Rojas Montero", "abogado": "David Crespo Pardo"},
+        "demandado": {"nombre": "Supermercados Estrella S.A.", "procurador": "Elena Lozano Calvo", "abogado": "Carlos Aguilar Herrero"}
+      },
+      "cuantia": 125000.00,
+      "materia": "Nulidad de clausula abusiva",
+      "plazos": [
+        {"tipo": "Senalamiento juicio", "fecha": "2026-06-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Audiencia previa celebrada el 2026-03-12. Fijados hechos controvertidos y admitida prueba"
+    },
+    {
+      "tipo": "ORD",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000013",
+      "fase_actual": "Sentencia",
+      "estado": "Visto para sentencia",
+      "fecha_incoacion": "2025-06-20",
+      "partes": {
+        "demandante": {"nombre": "Ana Cortes Fuentes", "procurador": "Luis Campos Ferrer", "abogado": "Marta Reyes Pascual"},
+        "demandado": {"nombre": "Reformas y Decoracion Azul S.L.", "procurador": "Pedro Caballero Aguilar", "abogado": "Sofia Bravo Calvo"}
+      },
+      "cuantia": 89000.00,
+      "materia": "Reclamacion de cantidad",
+      "plazos": [
+        {"tipo": "Plazo para dictar sentencia", "fecha": "2026-04-25", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Juicio celebrado el 2026-03-18 con practica de prueba testifical y pericial. Visto para sentencia"
+    },
+    {
+      "tipo": "ORD",
+      "numero": "6/2026",
+      "nig": "99001-42-1-2026-0000014",
+      "fase_actual": "Recurso",
+      "estado": "Recurso de apelacion interpuesto",
+      "fecha_incoacion": "2025-04-15",
+      "partes": {
+        "demandante": {"nombre": "Javier Gallego Rojas", "procurador": "Lucia Montero Crespo", "abogado": "Miguel Pardo Lozano"},
+        "demandado": {"nombre": "Tecnologia Avanzada Iberica S.L.", "procurador": "Carmen Calvo Bravo", "abogado": "Rafael Aguilar Herrero"}
+      },
+      "cuantia": 175000.00,
+      "materia": "Incumplimiento contractual",
+      "plazos": [
+        {"tipo": "Plazo emplazamiento ante la Audiencia", "fecha": "2026-04-30", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Recurso de apelacion interpuesto por la parte actora contra sentencia desestimatoria el 2026-03-20"
+    },
+    {
+      "tipo": "OR5",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000015",
+      "fase_actual": "Admision",
+      "estado": "Admision a tramite",
+      "fecha_incoacion": "2026-02-20",
+      "partes": {
+        "demandante": {"nombre": "Hosteleria Costa Brava S.L.", "procurador": "Diego Fuentes Campos", "abogado": "Teresa Reyes Pascual"},
+        "demandado": {"nombre": "Seguros Meridian S.A.", "procurador": "Andres Caballero Ferrer", "abogado": "Pilar Aguilar Calvo"}
+      },
+      "cuantia": 750000.00,
+      "materia": "Defectos constructivos",
+      "plazos": [
+        {"tipo": "Plazo subsanacion", "fecha": "2026-04-12", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda de juicio ordinario con cuantia superior a 500.000 euros registrada el 2026-03-15"
+    },
+    {
+      "tipo": "OR5",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000016",
+      "fase_actual": "Contestacion",
+      "estado": "Plazo de contestacion",
+      "fecha_incoacion": "2025-11-10",
+      "partes": {
+        "demandante": {"nombre": "Alimentacion Selecta Sur S.L.", "procurador": "Fernando Bravo Gallego", "abogado": "Rosa Rojas Montero"},
+        "demandado": {"nombre": "Gestion Patrimonial Luna S.L.", "procurador": "Oscar Crespo Pardo", "abogado": "Beatriz Lozano Calvo"}
+      },
+      "cuantia": 1200000.00,
+      "materia": "Incumplimiento contractual de gran cuantia",
+      "plazos": [
+        {"tipo": "Plazo contestacion demanda", "fecha": "2026-05-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Emplazamiento al demandado para contestar en plazo de 20 dias el 2026-03-01"
+    },
+    {
+      "tipo": "OR5",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000017",
+      "fase_actual": "Audiencia previa",
+      "estado": "Senalada audiencia previa",
+      "fecha_incoacion": "2025-09-05",
+      "partes": {
+        "demandante": {"nombre": "Energias Renovables Sol Verde S.A.", "procurador": "Hector Aguilar Bravo", "abogado": "Nuria Calvo Gallego"},
+        "demandado": {"nombre": "Textiles La Mancha S.L.", "procurador": "Gonzalo Herrero Cortes", "abogado": "Cristina Fuentes Campos"}
+      },
+      "cuantia": 980000.00,
+      "materia": "Responsabilidad civil profesional",
+      "plazos": [
+        {"tipo": "Senalamiento audiencia previa", "fecha": "2026-05-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Presentada contestacion y reconvencion. Senalada audiencia previa el 2026-03-18"
+    },
+    {
+      "tipo": "OR5",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000018",
+      "fase_actual": "Juicio",
+      "estado": "Pendiente de juicio",
+      "fecha_incoacion": "2025-06-15",
+      "partes": {
+        "demandante": {"nombre": "Farmaceutica Delta S.A.", "procurador": "Adrian Reyes Pascual", "abogado": "Paula Caballero Ferrer"},
+        "demandado": {"nombre": "Editorial Cumbre S.L.", "procurador": "Victor Aguilar Calvo", "abogado": "Raquel Bravo Gallego"}
+      },
+      "cuantia": 650000.00,
+      "materia": "Nulidad de contrato",
+      "plazos": [
+        {"tipo": "Senalamiento juicio oral", "fecha": "2026-06-22", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Audiencia previa celebrada con proposicion y admision de prueba el 2026-03-10"
+    },
+    {
+      "tipo": "OR5",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000019",
+      "fase_actual": "Sentencia",
+      "estado": "Pendiente de sentencia",
+      "fecha_incoacion": "2025-04-10",
+      "partes": {
+        "demandante": {"nombre": "Tomas Rojas Montero", "procurador": "Alicia Crespo Pardo", "abogado": "Marcos Lozano Calvo"},
+        "demandado": {"nombre": "Consultoria Nexus S.L.", "procurador": "Veronica Aguilar Herrero", "abogado": "Sergio Cortes Fuentes"}
+      },
+      "cuantia": 1500000.00,
+      "materia": "Reclamacion societaria",
+      "plazos": [
+        {"tipo": "Plazo dictar sentencia", "fecha": "2026-04-18", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Juicio celebrado el 2026-03-22. Practicada prueba pericial de arquitecto. Visto para sentencia"
+    },
+    {
+      "tipo": "JVD",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000020",
+      "fase_actual": "Admision",
+      "estado": "Pendiente admision",
+      "fecha_incoacion": "2026-02-28",
+      "partes": {
+        "demandante": {"nombre": "Laura Campos Ferrer", "procurador": "Daniel Reyes Pascual", "abogado": "Patricia Caballero Aguilar"},
+        "demandado": {"nombre": "Alberto Bravo Calvo", "procurador": "Gloria Gallego Rojas", "abogado": "Ruben Montero Crespo"}
+      },
+      "cuantia": 7200.00,
+      "materia": "Desahucio por falta de pago",
+      "plazos": [
+        {"tipo": "Plazo subsanacion demanda", "fecha": "2026-04-08", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda de desahucio por falta de pago de la renta registrada el 2026-03-19"
+    },
+    {
+      "tipo": "JVD",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000021",
+      "fase_actual": "Requerimiento",
+      "estado": "Requerimiento de pago efectuado",
+      "fecha_incoacion": "2025-12-20",
+      "partes": {
+        "demandante": {"nombre": "Ines Pardo Lozano", "procurador": "Ramon Calvo Aguilar", "abogado": "Silvia Herrero Cortes"},
+        "demandado": {"nombre": "Emilio Fuentes Campos", "procurador": "Clara Reyes Ferrer", "abogado": "Julio Pascual Caballero"}
+      },
+      "cuantia": 5400.00,
+      "materia": "Desahucio por expiracion del plazo",
+      "plazos": [
+        {"tipo": "Plazo enervacion del desahucio", "fecha": "2026-04-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Decreto admitiendo demanda y requiriendo de pago al demandado con apercibimiento de lanzamiento el 2026-03-05"
+    },
+    {
+      "tipo": "JVD",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000022",
+      "fase_actual": "Vista",
+      "estado": "Senalada vista",
+      "fecha_incoacion": "2025-10-15",
+      "partes": {
+        "demandante": {"nombre": "Eva Aguilar Bravo", "procurador": "Santiago Calvo Gallego", "abogado": "Marina Herrero Rojas"},
+        "demandado": {"nombre": "Enrique Montero Crespo", "procurador": "Lorena Pardo Lozano", "abogado": "Manuel Cortes Fuentes"}
+      },
+      "cuantia": 9600.00,
+      "materia": "Desahucio por falta de pago",
+      "plazos": [
+        {"tipo": "Senalamiento vista desahucio", "fecha": "2026-05-06", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Transcurrido plazo de enervacion sin pago. Senalada vista el 2026-03-15"
+    },
+    {
+      "tipo": "JVD",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000023",
+      "fase_actual": "Lanzamiento",
+      "estado": "Pendiente lanzamiento",
+      "fecha_incoacion": "2025-07-10",
+      "partes": {
+        "demandante": {"nombre": "Sara Reyes Pascual", "procurador": "Ignacio Caballero Ferrer", "abogado": "Rocio Aguilar Calvo"},
+        "demandado": {"nombre": "Alejandro Bravo Gallego", "procurador": "Noelia Rojas Montero", "abogado": "Federico Crespo Pardo"}
+      },
+      "cuantia": 11200.00,
+      "materia": "Desahucio por precario",
+      "plazos": [
+        {"tipo": "Fecha lanzamiento", "fecha": "2026-05-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Sentencia estimatoria firme. Senalado lanzamiento con intervencion de comision judicial el 2026-03-22"
+    },
+    {
+      "tipo": "JVD",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000024",
+      "fase_actual": "Archivo",
+      "estado": "Archivado",
+      "fecha_incoacion": "2025-04-05",
+      "partes": {
+        "demandante": {"nombre": "Amparo Lozano Calvo", "procurador": "David Aguilar Herrero", "abogado": "Elena Cortes Fuentes"},
+        "demandado": {"nombre": "Carlos Campos Ferrer", "procurador": "Ana Reyes Pascual", "abogado": "Luis Caballero Aguilar"}
+      },
+      "cuantia": 3800.00,
+      "materia": "Desahucio por falta de pago",
+      "plazos": [
+        {"tipo": "Archivo definitivo", "fecha": "2025-11-20", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Lanzamiento practicado y posesion entregada al arrendador. Archivo definitivo el 2025-11-20"
+    },
+    {
+      "tipo": "JVU",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000025",
+      "fase_actual": "Admision",
+      "estado": "Admitido a tramite",
+      "fecha_incoacion": "2026-01-22",
+      "partes": {
+        "demandante": {"nombre": "Marta Bravo Gallego", "procurador": "Pedro Rojas Montero", "abogado": "Sofia Crespo Pardo"},
+        "demandado": {"nombre": "Javier Lozano Calvo", "procurador": "Lucia Aguilar Herrero", "abogado": "Miguel Cortes Fuentes"}
+      },
+      "cuantia": 2100.00,
+      "materia": "Tutela sumaria de la posesion",
+      "plazos": [
+        {"tipo": "Plazo contestacion", "fecha": "2026-04-14", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda de tutela sumaria de la posesion admitida a tramite el 2026-03-17"
+    },
+    {
+      "tipo": "JVU",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000026",
+      "fase_actual": "Vista",
+      "estado": "Pendiente de vista",
+      "fecha_incoacion": "2025-11-08",
+      "partes": {
+        "demandante": {"nombre": "Carmen Campos Ferrer", "procurador": "Rafael Reyes Pascual", "abogado": "Isabel Caballero Aguilar"},
+        "demandado": {"nombre": "Autoescuela Progreso S.L.", "procurador": "Diego Bravo Calvo", "abogado": "Teresa Gallego Rojas"}
+      },
+      "cuantia": 3450.00,
+      "materia": "Reclamacion de cantidad inferior a 6.000 euros",
+      "plazos": [
+        {"tipo": "Senalamiento vista", "fecha": "2026-04-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Contestacion presentada. Senalada vista oral el 2026-03-12"
+    },
+    {
+      "tipo": "JVU",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000027",
+      "fase_actual": "Sentencia",
+      "estado": "Visto para sentencia",
+      "fecha_incoacion": "2025-09-18",
+      "partes": {
+        "demandante": {"nombre": "Andres Montero Crespo", "procurador": "Pilar Pardo Lozano", "abogado": "Fernando Calvo Aguilar"},
+        "demandado": {"nombre": "Rosa Herrero Cortes", "procurador": "Oscar Fuentes Campos", "abogado": "Beatriz Reyes Ferrer"}
+      },
+      "cuantia": 4800.00,
+      "materia": "Alimentos provisionales",
+      "plazos": [
+        {"tipo": "Plazo dictar sentencia", "fecha": "2026-04-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Vista celebrada con practica de prueba documental y testifical el 2026-03-20"
+    },
+    {
+      "tipo": "JVU",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000028",
+      "fase_actual": "Firmeza",
+      "estado": "Sentencia firme",
+      "fecha_incoacion": "2025-07-05",
+      "partes": {
+        "demandante": {"nombre": "Hector Pascual Caballero", "procurador": "Nuria Aguilar Calvo", "abogado": "Gonzalo Bravo Gallego"},
+        "demandado": {"nombre": "Carpinteria Artesanal Olmo S.L.", "procurador": "Cristina Rojas Montero", "abogado": "Adrian Crespo Pardo"}
+      },
+      "cuantia": 1950.00,
+      "materia": "Rectificacion de hechos inexactos",
+      "plazos": [
+        {"tipo": "Notificacion sentencia", "fecha": "2026-03-05", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Sentencia firme por no interposicion de recurso dentro de plazo el 2026-03-05"
+    },
+    {
+      "tipo": "JVU",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000029",
+      "fase_actual": "Archivo",
+      "estado": "Archivado",
+      "fecha_incoacion": "2025-05-12",
+      "partes": {
+        "demandante": {"nombre": "Paula Lozano Calvo", "procurador": "Victor Aguilar Herrero", "abogado": "Raquel Cortes Fuentes"},
+        "demandado": {"nombre": "Tomas Campos Ferrer", "procurador": "Alicia Reyes Pascual", "abogado": "Marcos Caballero Aguilar"}
+      },
+      "cuantia": 2800.00,
+      "materia": "Reclamacion de cantidad inferior a 6.000 euros",
+      "plazos": [
+        {"tipo": "Archivo definitivo", "fecha": "2026-01-30", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Cumplimiento voluntario de sentencia. Archivo de actuaciones el 2026-01-30"
+    },
+    {
+      "tipo": "MON",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000030",
+      "fase_actual": "Requerimiento",
+      "estado": "Requerimiento de pago emitido",
+      "fecha_incoacion": "2026-02-05",
+      "partes": {
+        "demandante": {"nombre": "Veronica Bravo Gallego", "procurador": "Sergio Rojas Montero", "abogado": "Laura Crespo Pardo"},
+        "demandado": {"nombre": "Daniel Lozano Calvo", "procurador": "Patricia Aguilar Herrero", "abogado": "Alberto Cortes Fuentes"}
+      },
+      "cuantia": 3450.00,
+      "materia": "Reclamacion de cantidad por impago de factura",
+      "plazos": [
+        {"tipo": "Plazo oposicion/pago monitorio", "fecha": "2026-04-18", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Decreto admitiendo peticion inicial y requiriendo de pago al deudor por importe de 3.450 euros el 2026-03-18"
+    },
+    {
+      "tipo": "MON",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000031",
+      "fase_actual": "Oposicion (transformacion a JVB)",
+      "estado": "Transformado en juicio verbal",
+      "fecha_incoacion": "2025-12-10",
+      "partes": {
+        "demandante": {"nombre": "Gloria Campos Ferrer", "procurador": "Ruben Reyes Pascual", "abogado": "Ines Caballero Aguilar"},
+        "demandado": {"nombre": "Agropecuaria Valtierras S.L.", "procurador": "Ramon Bravo Calvo", "abogado": "Silvia Gallego Rojas"}
+      },
+      "cuantia": 5800.00,
+      "materia": "Reclamacion de cuotas de comunidad de propietarios",
+      "plazos": [
+        {"tipo": "Plazo contestacion JVB", "fecha": "2026-04-25", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Escrito de oposicion presentado en plazo. Auto transformando el monitorio en juicio verbal el 2026-03-15"
+    },
+    {
+      "tipo": "MON",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000032",
+      "fase_actual": "Sin oposicion (ejecucion)",
+      "estado": "En ejecucion por incomparecencia",
+      "fecha_incoacion": "2025-11-22",
+      "partes": {
+        "demandante": {"nombre": "Logistica Express Iberia S.L.", "procurador": "Emilio Montero Crespo", "abogado": "Clara Pardo Lozano"},
+        "demandado": {"nombre": "Julio Calvo Aguilar", "procurador": "Eva Herrero Cortes", "abogado": "Santiago Fuentes Campos"}
+      },
+      "cuantia": 12500.00,
+      "materia": "Reclamacion de deuda por servicios prestados",
+      "plazos": [
+        {"tipo": "Plazo cumplimiento voluntario", "fecha": "2026-04-30", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Transcurrido plazo sin oposicion ni pago. Auto despachando ejecucion el 2026-03-20"
+    },
+    {
+      "tipo": "MON",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000033",
+      "fase_actual": "Archivo",
+      "estado": "Archivado por pago",
+      "fecha_incoacion": "2025-09-30",
+      "partes": {
+        "demandante": {"nombre": "Marina Reyes Ferrer", "procurador": "Enrique Pascual Caballero", "abogado": "Lorena Aguilar Calvo"},
+        "demandado": {"nombre": "Manuel Bravo Gallego", "procurador": "Sara Rojas Montero", "abogado": "Ignacio Crespo Pardo"}
+      },
+      "cuantia": 2200.00,
+      "materia": "Reclamacion de renta de alquiler",
+      "plazos": [
+        {"tipo": "Archivo", "fecha": "2026-02-28", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Acreditado pago integro de la cantidad reclamada. Archivo de actuaciones el 2026-02-28"
+    },
+    {
+      "tipo": "MON",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000034",
+      "fase_actual": "Pago",
+      "estado": "Pago realizado en plazo",
+      "fecha_incoacion": "2025-12-28",
+      "partes": {
+        "demandante": {"nombre": "Rocio Lozano Calvo", "procurador": "Alejandro Aguilar Herrero", "abogado": "Noelia Cortes Fuentes"},
+        "demandado": {"nombre": "Federico Campos Ferrer", "procurador": "Amparo Reyes Pascual", "abogado": "David Caballero Aguilar"}
+      },
+      "cuantia": 1875.00,
+      "materia": "Reclamacion de cantidad por impago de factura",
+      "plazos": [
+        {"tipo": "Verificacion pago", "fecha": "2026-03-22", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "El deudor ha consignado la cantidad reclamada de 1.875 euros en la cuenta del juzgado el 2026-03-22"
+    },
+    {
+      "tipo": "MON",
+      "numero": "6/2026",
+      "nig": "99001-42-1-2026-0000035",
+      "fase_actual": "Oposicion parcial",
+      "estado": "Oposicion parcial formulada",
+      "fecha_incoacion": "2026-01-15",
+      "partes": {
+        "demandante": {"nombre": "Elena Bravo Calvo", "procurador": "Carlos Gallego Rojas", "abogado": "Ana Montero Crespo"},
+        "demandado": {"nombre": "Luis Pardo Lozano", "procurador": "Marta Calvo Aguilar", "abogado": "Pedro Herrero Cortes"}
+      },
+      "cuantia": 3500.00,
+      "materia": "Reclamacion de cuotas de comunidad de propietarios",
+      "plazos": [
+        {"tipo": "Plazo resolucion oposicion parcial", "fecha": "2026-04-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "El requerido se opone parcialmente reconociendo 2.100 euros de los 3.500 reclamados el 2026-03-12"
+    },
+    {
+      "tipo": "MON",
+      "numero": "7/2026",
+      "nig": "99001-42-1-2026-0000036",
+      "fase_actual": "Desistimiento",
+      "estado": "Desistido",
+      "fecha_incoacion": "2025-11-05",
+      "partes": {
+        "demandante": {"nombre": "Sofia Fuentes Campos", "procurador": "Javier Reyes Ferrer", "abogado": "Lucia Pascual Caballero"},
+        "demandado": {"nombre": "Miguel Aguilar Calvo", "procurador": "Carmen Bravo Gallego", "abogado": "Rafael Rojas Montero"}
+      },
+      "cuantia": 4100.00,
+      "materia": "Reclamacion de deuda por servicios prestados",
+      "plazos": [
+        {"tipo": "Archivo por desistimiento", "fecha": "2026-03-08", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Escrito de desistimiento del acreedor presentado el 2026-03-08. Decreto de archivo"
+    },
+    {
+      "tipo": "VRB",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000037",
+      "fase_actual": "Admision",
+      "estado": "Admitido",
+      "fecha_incoacion": "2026-02-12",
+      "partes": {
+        "demandante": {"nombre": "Isabel Crespo Pardo", "procurador": "Diego Lozano Calvo", "abogado": "Teresa Aguilar Herrero"},
+        "demandado": {"nombre": "Andres Cortes Fuentes", "procurador": "Pilar Campos Ferrer", "abogado": "Fernando Reyes Pascual"}
+      },
+      "cuantia": 4200.00,
+      "materia": "Indemnizacion por siniestro de trafico",
+      "plazos": [
+        {"tipo": "Traslado de demanda", "fecha": "2026-04-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda de juicio verbal admitida a tramite el 2026-03-19"
+    },
+    {
+      "tipo": "VRB",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000038",
+      "fase_actual": "Vista",
+      "estado": "Senalada vista oral",
+      "fecha_incoacion": "2025-11-25",
+      "partes": {
+        "demandante": {"nombre": "Rosa Caballero Aguilar", "procurador": "Oscar Bravo Calvo", "abogado": "Beatriz Gallego Rojas"},
+        "demandado": {"nombre": "Hector Montero Crespo", "procurador": "Nuria Pardo Lozano", "abogado": "Gonzalo Calvo Aguilar"}
+      },
+      "cuantia": 3100.00,
+      "materia": "Reclamacion de seguro",
+      "plazos": [
+        {"tipo": "Senalamiento vista", "fecha": "2026-05-08", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Contestacion presentada en plazo. Senalada vista oral el 2026-03-14"
+    },
+    {
+      "tipo": "VRB",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000039",
+      "fase_actual": "Sentencia",
+      "estado": "Pendiente de sentencia",
+      "fecha_incoacion": "2025-09-10",
+      "partes": {
+        "demandante": {"nombre": "Cristina Herrero Cortes", "procurador": "Adrian Fuentes Campos", "abogado": "Paula Reyes Ferrer"},
+        "demandado": {"nombre": "Victor Pascual Caballero", "procurador": "Raquel Aguilar Calvo", "abogado": "Tomas Bravo Gallego"}
+      },
+      "cuantia": 5500.00,
+      "materia": "Responsabilidad civil por caida en via publica",
+      "plazos": [
+        {"tipo": "Plazo dictar sentencia", "fecha": "2026-04-12", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Vista oral celebrada el 2026-03-21 con practica de prueba. Queda visto para sentencia"
+    },
+    {
+      "tipo": "VRB",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000040",
+      "fase_actual": "Firmeza",
+      "estado": "Sentencia firme",
+      "fecha_incoacion": "2025-06-28",
+      "partes": {
+        "demandante": {"nombre": "Alicia Rojas Montero", "procurador": "Marcos Crespo Pardo", "abogado": "Veronica Lozano Calvo"},
+        "demandado": {"nombre": "Sergio Aguilar Herrero", "procurador": "Laura Cortes Fuentes", "abogado": "Daniel Campos Ferrer"}
+      },
+      "cuantia": 2750.00,
+      "materia": "Impugnacion de acuerdos de comunidad de propietarios",
+      "plazos": [
+        {"tipo": "Firmeza", "fecha": "2026-03-10", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Sentencia estimatoria notificada. Firme por consentimiento de ambas partes el 2026-03-10"
+    },
+    {
+      "tipo": "VRB",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000041",
+      "fase_actual": "Archivo",
+      "estado": "Archivado",
+      "fecha_incoacion": "2025-04-20",
+      "partes": {
+        "demandante": {"nombre": "Patricia Reyes Pascual", "procurador": "Alberto Caballero Aguilar", "abogado": "Gloria Bravo Calvo"},
+        "demandado": {"nombre": "Ruben Gallego Rojas", "procurador": "Ines Montero Crespo", "abogado": "Ramon Pardo Lozano"}
+      },
+      "cuantia": 1600.00,
+      "materia": "Reclamacion de cantidad",
+      "plazos": [
+        {"tipo": "Archivo definitivo", "fecha": "2026-01-22", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Archivo definitivo tras cumplimiento integro de la sentencia el 2026-01-22"
+    },
+    {
+      "tipo": "DCT",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000042",
+      "fase_actual": "Admision",
+      "estado": "Admitida demanda de divorcio",
+      "fecha_incoacion": "2026-01-20",
+      "partes": {
+        "demandante": {"nombre": "Silvia Calvo Aguilar", "procurador": "Emilio Herrero Cortes", "abogado": "Clara Fuentes Campos"},
+        "demandado": {"nombre": "Julio Reyes Ferrer", "procurador": "Eva Pascual Caballero", "abogado": "Santiago Aguilar Calvo"}
+      },
+      "cuantia": null,
+      "materia": "Divorcio contencioso",
+      "plazos": [
+        {"tipo": "Plazo contestacion", "fecha": "2026-05-02", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda de divorcio contencioso admitida a tramite y emplazamiento al demandado el 2026-03-18"
+    },
+    {
+      "tipo": "DCT",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000043",
+      "fase_actual": "Medidas provisionales",
+      "estado": "Medidas provisionales adoptadas",
+      "fecha_incoacion": "2025-11-15",
+      "partes": {
+        "demandante": {"nombre": "Marina Bravo Gallego", "procurador": "Enrique Rojas Montero", "abogado": "Lorena Crespo Pardo"},
+        "demandado": {"nombre": "Manuel Lozano Calvo", "procurador": "Sara Aguilar Herrero", "abogado": "Ignacio Cortes Fuentes"}
+      },
+      "cuantia": null,
+      "materia": "Divorcio contencioso",
+      "plazos": [
+        {"tipo": "Senalamiento vista medidas provisionales", "fecha": "2026-04-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto de medidas provisionales: atribucion uso vivienda, guarda materna, pension alimenticia 400 euros/mes el 2026-03-10"
+    },
+    {
+      "tipo": "DCT",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000044",
+      "fase_actual": "Prueba",
+      "estado": "Periodo de prueba abierto",
+      "fecha_incoacion": "2025-09-22",
+      "partes": {
+        "demandante": {"nombre": "Rocio Campos Ferrer", "procurador": "Alejandro Reyes Pascual", "abogado": "Noelia Caballero Aguilar"},
+        "demandado": {"nombre": "Federico Bravo Calvo", "procurador": "Amparo Gallego Rojas", "abogado": "David Montero Crespo"}
+      },
+      "cuantia": null,
+      "materia": "Divorcio contencioso",
+      "plazos": [
+        {"tipo": "Plazo practica de prueba", "fecha": "2026-05-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Admitida prueba pericial psicosocial sobre regimen de custodia el 2026-03-15"
+    },
+    {
+      "tipo": "DCT",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000045",
+      "fase_actual": "Vista",
+      "estado": "Senalada vista principal",
+      "fecha_incoacion": "2025-07-18",
+      "partes": {
+        "demandante": {"nombre": "Elena Pardo Lozano", "procurador": "Carlos Calvo Aguilar", "abogado": "Ana Herrero Cortes"},
+        "demandado": {"nombre": "Luis Fuentes Campos", "procurador": "Marta Reyes Ferrer", "abogado": "Pedro Pascual Caballero"}
+      },
+      "cuantia": null,
+      "materia": "Divorcio contencioso",
+      "plazos": [
+        {"tipo": "Senalamiento vista", "fecha": "2026-06-05", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Informe pericial psicosocial emitido. Senalada vista el 2026-03-22"
+    },
+    {
+      "tipo": "DCT",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000046",
+      "fase_actual": "Sentencia",
+      "estado": "Visto para sentencia",
+      "fecha_incoacion": "2025-05-10",
+      "partes": {
+        "demandante": {"nombre": "Sofia Aguilar Calvo", "procurador": "Javier Bravo Gallego", "abogado": "Lucia Rojas Montero"},
+        "demandado": {"nombre": "Miguel Crespo Pardo", "procurador": "Carmen Lozano Calvo", "abogado": "Rafael Aguilar Herrero"}
+      },
+      "cuantia": null,
+      "materia": "Divorcio contencioso",
+      "plazos": [
+        {"tipo": "Plazo dictar sentencia", "fecha": "2026-04-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Vista celebrada con declaracion de partes y prueba pericial. Visto para sentencia el 2026-03-20"
+    },
+    {
+      "tipo": "DMA",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000047",
+      "fase_actual": "Admision",
+      "estado": "Admitida demanda",
+      "fecha_incoacion": "2026-02-15",
+      "partes": {
+        "demandante": {"nombre": "Isabel Cortes Fuentes", "procurador": "Diego Campos Ferrer", "abogado": "Teresa Reyes Pascual"},
+        "demandado": {"nombre": "Andres Caballero Aguilar", "procurador": "Pilar Bravo Calvo", "abogado": "Fernando Gallego Rojas"}
+      },
+      "cuantia": null,
+      "materia": "Divorcio de mutuo acuerdo",
+      "plazos": [
+        {"tipo": "Traslado al Ministerio Fiscal", "fecha": "2026-04-05", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda de divorcio de mutuo acuerdo con convenio regulador admitida el 2026-03-20"
+    },
+    {
+      "tipo": "DMA",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000048",
+      "fase_actual": "Traslado fiscal",
+      "estado": "Pendiente informe fiscal",
+      "fecha_incoacion": "2025-12-22",
+      "partes": {
+        "demandante": {"nombre": "Rosa Montero Crespo", "procurador": "Oscar Pardo Lozano", "abogado": "Beatriz Calvo Aguilar"},
+        "demandado": {"nombre": "Hector Herrero Cortes", "procurador": "Nuria Fuentes Campos", "abogado": "Gonzalo Reyes Ferrer"}
+      },
+      "cuantia": null,
+      "materia": "Divorcio de mutuo acuerdo",
+      "plazos": [
+        {"tipo": "Plazo informe Ministerio Fiscal", "fecha": "2026-04-18", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Traslado al Ministerio Fiscal del convenio regulador por existir hijos menores el 2026-03-10"
+    },
+    {
+      "tipo": "DMA",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000049",
+      "fase_actual": "Ratificacion",
+      "estado": "Pendiente de ratificacion",
+      "fecha_incoacion": "2025-10-28",
+      "partes": {
+        "demandante": {"nombre": "Cristina Pascual Caballero", "procurador": "Adrian Aguilar Calvo", "abogado": "Paula Bravo Gallego"},
+        "demandado": {"nombre": "Victor Rojas Montero", "procurador": "Raquel Crespo Pardo", "abogado": "Tomas Lozano Calvo"}
+      },
+      "cuantia": null,
+      "materia": "Divorcio de mutuo acuerdo",
+      "plazos": [
+        {"tipo": "Senalamiento ratificacion", "fecha": "2026-04-22", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Informe favorable del Ministerio Fiscal. Citacion para ratificacion del convenio el 2026-03-18"
+    },
+    {
+      "tipo": "DMA",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000050",
+      "fase_actual": "Sentencia",
+      "estado": "Pendiente sentencia",
+      "fecha_incoacion": "2025-08-15",
+      "partes": {
+        "demandante": {"nombre": "Alicia Aguilar Herrero", "procurador": "Marcos Cortes Fuentes", "abogado": "Veronica Campos Ferrer"},
+        "demandado": {"nombre": "Sergio Reyes Pascual", "procurador": "Laura Caballero Aguilar", "abogado": "Daniel Bravo Calvo"}
+      },
+      "cuantia": null,
+      "materia": "Divorcio de mutuo acuerdo",
+      "plazos": [
+        {"tipo": "Plazo dictar sentencia", "fecha": "2026-04-08", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Ratificacion del convenio por ambas partes efectuada el 2026-03-22"
+    },
+    {
+      "tipo": "DMA",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000051",
+      "fase_actual": "Firmeza",
+      "estado": "Sentencia firme",
+      "fecha_incoacion": "2025-06-05",
+      "partes": {
+        "demandante": {"nombre": "Patricia Gallego Rojas", "procurador": "Alberto Montero Crespo", "abogado": "Gloria Pardo Lozano"},
+        "demandado": {"nombre": "Ruben Calvo Aguilar", "procurador": "Ines Herrero Cortes", "abogado": "Ramon Fuentes Campos"}
+      },
+      "cuantia": null,
+      "materia": "Divorcio de mutuo acuerdo",
+      "plazos": [
+        {"tipo": "Inscripcion registral", "fecha": "2026-03-15", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Sentencia de divorcio firme. Librado mandamiento al Registro Civil el 2026-03-15"
+    },
+    {
+      "tipo": "MMC",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000052",
+      "fase_actual": "Admision",
+      "estado": "Admitida a tramite",
+      "fecha_incoacion": "2026-01-28",
+      "partes": {
+        "demandante": {"nombre": "Silvia Reyes Ferrer", "procurador": "Emilio Pascual Caballero", "abogado": "Clara Aguilar Calvo"},
+        "demandado": {"nombre": "Julio Bravo Gallego", "procurador": "Eva Rojas Montero", "abogado": "Santiago Crespo Pardo"}
+      },
+      "cuantia": null,
+      "materia": "Modificacion de medidas - Pension alimenticia",
+      "plazos": [
+        {"tipo": "Plazo contestacion", "fecha": "2026-04-22", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda de modificacion de medidas definitivas admitida el 2026-03-15"
+    },
+    {
+      "tipo": "MMC",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000053",
+      "fase_actual": "Traslado",
+      "estado": "En traslado a la parte demandada",
+      "fecha_incoacion": "2025-11-30",
+      "partes": {
+        "demandante": {"nombre": "Marina Lozano Calvo", "procurador": "Enrique Aguilar Herrero", "abogado": "Lorena Cortes Fuentes"},
+        "demandado": {"nombre": "Manuel Campos Ferrer", "procurador": "Sara Reyes Pascual", "abogado": "Ignacio Caballero Bravo"}
+      },
+      "cuantia": null,
+      "materia": "Modificacion de medidas - Regimen de visitas",
+      "plazos": [
+        {"tipo": "Plazo contestacion demanda", "fecha": "2026-04-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Emplazamiento al demandado para contestar la demanda de modificacion de medidas el 2026-03-08"
+    },
+    {
+      "tipo": "MMC",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000054",
+      "fase_actual": "Prueba",
+      "estado": "Periodo de prueba",
+      "fecha_incoacion": "2025-09-12",
+      "partes": {
+        "demandante": {"nombre": "Rocio Bravo Calvo", "procurador": "Alejandro Gallego Rojas", "abogado": "Noelia Montero Crespo"},
+        "demandado": {"nombre": "Federico Pardo Lozano", "procurador": "Amparo Calvo Aguilar", "abogado": "David Herrero Cortes"}
+      },
+      "cuantia": null,
+      "materia": "Modificacion de medidas - Guarda y custodia",
+      "plazos": [
+        {"tipo": "Plazo practica prueba pericial", "fecha": "2026-05-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Admitida prueba pericial economica para valorar cambio sustancial de circunstancias el 2026-03-18"
+    },
+    {
+      "tipo": "MMC",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000055",
+      "fase_actual": "Vista",
+      "estado": "Senalada vista",
+      "fecha_incoacion": "2025-07-25",
+      "partes": {
+        "demandante": {"nombre": "Elena Fuentes Campos", "procurador": "Carlos Reyes Ferrer", "abogado": "Ana Pascual Caballero"},
+        "demandado": {"nombre": "Luis Aguilar Calvo", "procurador": "Marta Bravo Gallego", "abogado": "Pedro Rojas Montero"}
+      },
+      "cuantia": null,
+      "materia": "Modificacion de medidas - Pension alimenticia",
+      "plazos": [
+        {"tipo": "Senalamiento vista", "fecha": "2026-05-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Informe pericial aportado. Senalada vista para practica de prueba el 2026-03-22"
+    },
+    {
+      "tipo": "MMC",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000056",
+      "fase_actual": "Resolucion",
+      "estado": "Pendiente resolucion",
+      "fecha_incoacion": "2025-05-15",
+      "partes": {
+        "demandante": {"nombre": "Sofia Crespo Pardo", "procurador": "Javier Lozano Calvo", "abogado": "Lucia Aguilar Herrero"},
+        "demandado": {"nombre": "Miguel Cortes Fuentes", "procurador": "Carmen Campos Ferrer", "abogado": "Rafael Reyes Pascual"}
+      },
+      "cuantia": null,
+      "materia": "Modificacion de medidas - Regimen de visitas",
+      "plazos": [
+        {"tipo": "Plazo dictar resolucion", "fecha": "2026-04-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Vista celebrada. Pendiente de sentencia sobre modificacion de pension alimenticia el 2026-03-20"
+    },
+    {
+      "tipo": "F02",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000057",
+      "fase_actual": "Admision",
+      "estado": "Admitido expediente",
+      "fecha_incoacion": "2026-02-08",
+      "partes": {
+        "solicitante": {"nombre": "Isabel Caballero Aguilar", "procurador": "Diego Bravo Calvo", "abogado": "Teresa Gallego Rojas"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva por existir menor de edad"}
+      },
+      "cuantia": null,
+      "materia": "Autorizacion judicial venta bienes de menor",
+      "plazos": [
+        {"tipo": "Traslado al Ministerio Fiscal", "fecha": "2026-04-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Solicitud de autorizacion judicial para actos de administracion de bienes de menor admitida el 2026-03-17"
+    },
+    {
+      "tipo": "F02",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000058",
+      "fase_actual": "Traslado fiscal",
+      "estado": "Informe del Ministerio Fiscal",
+      "fecha_incoacion": "2025-12-15",
+      "partes": {
+        "solicitante": {"nombre": "Andres Montero Crespo", "procurador": "Pilar Pardo Lozano", "abogado": "Fernando Calvo Aguilar"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva por existir menor de edad"}
+      },
+      "cuantia": null,
+      "materia": "Discrepancia en ejercicio de patria potestad",
+      "plazos": [
+        {"tipo": "Plazo informe fiscal", "fecha": "2026-04-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Traslado al Ministerio Fiscal para informe sobre la solicitud el 2026-03-10"
+    },
+    {
+      "tipo": "F02",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000059",
+      "fase_actual": "Comparecencia",
+      "estado": "Senalada comparecencia",
+      "fecha_incoacion": "2025-10-20",
+      "partes": {
+        "solicitante": {"nombre": "Rosa Herrero Cortes", "procurador": "Oscar Fuentes Campos", "abogado": "Beatriz Reyes Ferrer"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva por existir menor de edad"}
+      },
+      "cuantia": null,
+      "materia": "Tutela de menor",
+      "plazos": [
+        {"tipo": "Senalamiento comparecencia", "fecha": "2026-04-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Informe fiscal favorable. Senalada comparecencia de las partes el 2026-03-18"
+    },
+    {
+      "tipo": "F02",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000060",
+      "fase_actual": "Resolucion",
+      "estado": "Pendiente de auto",
+      "fecha_incoacion": "2025-08-05",
+      "partes": {
+        "solicitante": {"nombre": "Hector Pascual Caballero", "procurador": "Nuria Aguilar Calvo", "abogado": "Gonzalo Bravo Gallego"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva por existir menor de edad"}
+      },
+      "cuantia": null,
+      "materia": "Acogimiento familiar",
+      "plazos": [
+        {"tipo": "Plazo dictar resolucion", "fecha": "2026-04-12", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Comparecencia celebrada. Pendiente de auto resolviendo la solicitud el 2026-03-22"
+    },
+    {
+      "tipo": "F02",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000061",
+      "fase_actual": "Firmeza",
+      "estado": "Auto firme",
+      "fecha_incoacion": "2025-06-12",
+      "partes": {
+        "solicitante": {"nombre": "Cristina Rojas Montero", "procurador": "Adrian Crespo Pardo", "abogado": "Paula Lozano Calvo"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva por existir menor de edad"}
+      },
+      "cuantia": null,
+      "materia": "Autorizacion judicial venta bienes de menor",
+      "plazos": [
+        {"tipo": "Firmeza del auto", "fecha": "2026-03-08", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Auto autorizando la venta del inmueble del menor. Firme por no recurso el 2026-03-08"
+    },
+    {
+      "tipo": "ITR",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000062",
+      "fase_actual": "Admision",
+      "estado": "Admitido expediente",
+      "fecha_incoacion": "2026-03-18",
+      "partes": {
+        "afectado": {"nombre": "Alicia Aguilar Herrero"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"},
+        "centro_hospitalario": "Hospital General Ficticio de Villa de la Justicia"
+      },
+      "cuantia": null,
+      "materia": "Internamiento no voluntario por razon de trastorno psiquico",
+      "plazos": [
+        {"tipo": "Plazo examen judicial", "fecha": "2026-04-05", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Comunicacion de internamiento urgente por el centro hospitalario recibida el 2026-03-20"
+    },
+    {
+      "tipo": "ITR",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000063",
+      "fase_actual": "Reconocimiento forense",
+      "estado": "Pendiente examen forense",
+      "fecha_incoacion": "2026-03-15",
+      "partes": {
+        "afectado": {"nombre": "Marcos Cortes Fuentes"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"},
+        "centro_hospitalario": "Centro Psiquiatrico San Rafael (ficticio)"
+      },
+      "cuantia": null,
+      "materia": "Internamiento no voluntario por razon de trastorno psiquico",
+      "plazos": [
+        {"tipo": "Plazo reconocimiento forense", "fecha": "2026-03-25", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Designado medico forense para reconocimiento del paciente el 2026-03-21"
+    },
+    {
+      "tipo": "ITR",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000064",
+      "fase_actual": "Comparecencia",
+      "estado": "Senalada comparecencia judicial",
+      "fecha_incoacion": "2026-03-10",
+      "partes": {
+        "afectado": {"nombre": "Veronica Campos Ferrer"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"},
+        "centro_hospitalario": "Hospital Universitario Ejemplo"
+      },
+      "cuantia": null,
+      "materia": "Internamiento no voluntario por razon de trastorno psiquico",
+      "plazos": [
+        {"tipo": "Senalamiento comparecencia", "fecha": "2026-03-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Informe forense emitido favorable al internamiento. Senalada comparecencia el 2026-03-23"
+    },
+    {
+      "tipo": "ITR",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000065",
+      "fase_actual": "Auto",
+      "estado": "Auto de internamiento dictado",
+      "fecha_incoacion": "2026-02-25",
+      "partes": {
+        "afectado": {"nombre": "Sergio Reyes Pascual"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"},
+        "centro_hospitalario": "Hospital General Ficticio de Villa de la Justicia"
+      },
+      "cuantia": null,
+      "materia": "Internamiento no voluntario por razon de trastorno psiquico",
+      "plazos": [
+        {"tipo": "Plazo revision internamiento", "fecha": "2026-09-24", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto autorizando internamiento no voluntario con revision semestral el 2026-03-24"
+    },
+    {
+      "tipo": "ITR",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000066",
+      "fase_actual": "Revision",
+      "estado": "Pendiente revision periodica",
+      "fecha_incoacion": "2025-09-20",
+      "partes": {
+        "afectado": {"nombre": "Laura Caballero Aguilar"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"},
+        "centro_hospitalario": "Centro Psiquiatrico San Rafael (ficticio)"
+      },
+      "cuantia": null,
+      "materia": "Internamiento no voluntario por razon de trastorno psiquico",
+      "plazos": [
+        {"tipo": "Revision semestral internamiento", "fecha": "2026-06-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Internamiento vigente. Solicitado informe de evolucion al centro para revision semestral el 2026-03-15"
+    },
+    {
+      "tipo": "X58",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000067",
+      "fase_actual": "Admision",
+      "estado": "Admitido expediente",
+      "fecha_incoacion": "2026-02-18",
+      "partes": {
+        "solicitante": {"nombre": "Daniel Bravo Calvo", "procurador": "Patricia Gallego Rojas", "abogado": "Alberto Montero Crespo"},
+        "interesados": [{"nombre": "Gloria Pardo Lozano"}]
+      },
+      "cuantia": null,
+      "materia": "Declaracion de ausencia legal",
+      "plazos": [
+        {"tipo": "Traslado interesados", "fecha": "2026-04-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Expediente de jurisdiccion voluntaria admitido a tramite el 2026-03-18"
+    },
+    {
+      "tipo": "X58",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000068",
+      "fase_actual": "Traslado",
+      "estado": "Traslado a interesados",
+      "fecha_incoacion": "2025-12-08",
+      "partes": {
+        "solicitante": {"nombre": "Ruben Calvo Aguilar", "procurador": "Ines Herrero Cortes", "abogado": "Ramon Fuentes Campos"},
+        "interesados": [{"nombre": "Silvia Reyes Ferrer"}]
+      },
+      "cuantia": null,
+      "materia": "Expediente de dominio",
+      "plazos": [
+        {"tipo": "Plazo alegaciones", "fecha": "2026-04-25", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Dado traslado a los interesados para que formulen alegaciones el 2026-03-10"
+    },
+    {
+      "tipo": "X58",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000069",
+      "fase_actual": "Comparecencia",
+      "estado": "Senalada comparecencia",
+      "fecha_incoacion": "2025-10-12",
+      "partes": {
+        "solicitante": {"nombre": "Emilio Pascual Caballero", "procurador": "Clara Aguilar Calvo", "abogado": "Julio Bravo Gallego"},
+        "interesados": [{"nombre": "Eva Rojas Montero"}]
+      },
+      "cuantia": null,
+      "materia": "Consignacion judicial",
+      "plazos": [
+        {"tipo": "Senalamiento comparecencia", "fecha": "2026-05-05", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Senalada comparecencia para oir a los interesados el 2026-03-20"
+    },
+    {
+      "tipo": "X58",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000070",
+      "fase_actual": "Auto",
+      "estado": "Pendiente de resolucion",
+      "fecha_incoacion": "2025-08-22",
+      "partes": {
+        "solicitante": {"nombre": "Santiago Crespo Pardo", "procurador": "Marina Lozano Calvo", "abogado": "Enrique Aguilar Herrero"},
+        "interesados": [{"nombre": "Lorena Cortes Fuentes"}]
+      },
+      "cuantia": null,
+      "materia": "Deslinde de fincas",
+      "plazos": [
+        {"tipo": "Plazo dictar auto", "fecha": "2026-04-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Comparecencia celebrada. Pendiente auto resolutorio el 2026-03-22"
+    },
+    {
+      "tipo": "X58",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000071",
+      "fase_actual": "Firmeza",
+      "estado": "Auto firme",
+      "fecha_incoacion": "2025-06-18",
+      "partes": {
+        "solicitante": {"nombre": "Manuel Campos Ferrer", "procurador": "Sara Reyes Pascual", "abogado": "Ignacio Caballero Bravo"},
+        "interesados": [{"nombre": "Rocio Bravo Gallego"}]
+      },
+      "cuantia": null,
+      "materia": "Habilitacion para comparecer en juicio",
+      "plazos": [
+        {"tipo": "Firmeza", "fecha": "2026-03-12", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Auto firme declarando la ausencia legal del interesado el 2026-03-12"
+    },
+    {
+      "tipo": "X53",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000072",
+      "fase_actual": "Solicitud",
+      "estado": "Solicitud presentada",
+      "fecha_incoacion": "2026-03-10",
+      "partes": {
+        "solicitante": {"nombre": "Alejandro Montero Crespo", "abogado": "Noelia Pardo Lozano"},
+        "requerido": {"nombre": "Federico Calvo Aguilar", "abogado": "Amparo Herrero Cortes"}
+      },
+      "cuantia": 15000.00,
+      "materia": "Conciliacion previa a demanda civil",
+      "plazos": [
+        {"tipo": "Admision y citacion", "fecha": "2026-04-05", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Solicitud de acto de conciliacion registrada el 2026-03-19"
+    },
+    {
+      "tipo": "X53",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000073",
+      "fase_actual": "Citacion",
+      "estado": "Citacion cursada",
+      "fecha_incoacion": "2026-02-22",
+      "partes": {
+        "solicitante": {"nombre": "David Fuentes Campos", "abogado": "Elena Reyes Ferrer"},
+        "requerido": {"nombre": "Carlos Pascual Caballero", "abogado": "Ana Aguilar Calvo"}
+      },
+      "cuantia": 8500.00,
+      "materia": "Conciliacion por reclamacion de cantidad",
+      "plazos": [
+        {"tipo": "Senalamiento acto de conciliacion", "fecha": "2026-04-18", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Admitida solicitud y citadas las partes para acto de conciliacion el 2026-03-12"
+    },
+    {
+      "tipo": "X53",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000074",
+      "fase_actual": "Acto de conciliacion",
+      "estado": "Celebrado acto de conciliacion",
+      "fecha_incoacion": "2026-01-15",
+      "partes": {
+        "solicitante": {"nombre": "Luis Bravo Calvo", "abogado": "Marta Gallego Rojas"},
+        "requerido": {"nombre": "Pedro Rojas Montero", "abogado": "Sofia Crespo Pardo"}
+      },
+      "cuantia": 22000.00,
+      "materia": "Conciliacion por incumplimiento contractual",
+      "plazos": [
+        {"tipo": "Expedicion testimonio", "fecha": "2026-04-05", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Acto de conciliacion celebrado ante el Letrado de la Administracion de Justicia el 2026-03-22"
+    },
+    {
+      "tipo": "X53",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000075",
+      "fase_actual": "Avenencia",
+      "estado": "Conciliacion con avenencia",
+      "fecha_incoacion": "2025-11-28",
+      "partes": {
+        "solicitante": {"nombre": "Javier Lozano Calvo", "abogado": "Lucia Aguilar Herrero"},
+        "requerido": {"nombre": "Miguel Cortes Fuentes", "abogado": "Carmen Campos Ferrer"}
+      },
+      "cuantia": 6300.00,
+      "materia": "Conciliacion por reclamacion de cantidad",
+      "plazos": [
+        {"tipo": "Archivo con avenencia", "fecha": "2026-03-15", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Las partes alcanzan acuerdo. Testimonio de avenencia expedido el 2026-03-15"
+    },
+    {
+      "tipo": "X53",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000076",
+      "fase_actual": "Sin avenencia",
+      "estado": "Conciliacion sin avenencia",
+      "fecha_incoacion": "2025-10-30",
+      "partes": {
+        "solicitante": {"nombre": "Rafael Reyes Pascual", "abogado": "Isabel Caballero Aguilar"},
+        "requerido": {"nombre": "Diego Bravo Gallego", "abogado": "Teresa Montero Crespo"}
+      },
+      "cuantia": 18500.00,
+      "materia": "Conciliacion previa a demanda civil",
+      "plazos": [
+        {"tipo": "Archivo sin avenencia", "fecha": "2026-03-20", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Las partes no alcanzan acuerdo. Certificacion de intentada conciliacion sin efecto el 2026-03-20"
+    },
+    {
+      "tipo": "DUD",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000077",
+      "fase_actual": "Incoacion",
+      "estado": "Incoadas diligencias urgentes",
+      "fecha_incoacion": "2026-03-12",
+      "partes": {
+        "denunciante": {"nombre": "Andres Pardo Lozano", "abogado": "Pilar Calvo Aguilar"},
+        "investigado": {"nombre": "Fernando Herrero Cortes", "abogado": "Rosa Fuentes Campos"}
+      },
+      "delito": "Lesiones del art. 147 CP",
+      "materia": "Diligencias urgentes por lesiones del art. 147 CP",
+      "plazos": [
+        {"tipo": "Plazo instruccion", "fecha": "2026-04-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Incoadas diligencias urgentes por atestado policial por presunto delito de lesiones el 2026-03-19"
+    },
+    {
+      "tipo": "DUD",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000078",
+      "fase_actual": "Declaracion investigado",
+      "estado": "Citado para declaracion",
+      "fecha_incoacion": "2026-02-28",
+      "partes": {
+        "denunciante": {"nombre": "Oscar Reyes Ferrer", "abogado": "Beatriz Pascual Caballero"},
+        "investigado": {"nombre": "Hector Aguilar Calvo", "abogado": "Nuria Bravo Gallego"}
+      },
+      "delito": "Conduccion bajo influencia de alcohol art. 379 CP",
+      "materia": "Diligencias urgentes por conduccion bajo influencia de alcohol art. 379 CP",
+      "plazos": [
+        {"tipo": "Senalamiento declaracion investigado", "fecha": "2026-03-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Citado el investigado para prestar declaracion asistido de letrado el 2026-03-22"
+    },
+    {
+      "tipo": "DUD",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000079",
+      "fase_actual": "Transformacion DPA",
+      "estado": "Transformado en Diligencias Previas",
+      "fecha_incoacion": "2025-12-18",
+      "partes": {
+        "denunciante": {"nombre": "Gonzalo Rojas Montero", "abogado": "Cristina Crespo Pardo"},
+        "investigado": {"nombre": "Adrian Lozano Calvo", "abogado": "Paula Aguilar Herrero"}
+      },
+      "delito": "Amenazas del art. 169 CP",
+      "materia": "Diligencias urgentes por amenazas del art. 169 CP",
+      "plazos": [
+        {"tipo": "Plazo instruccion DPA", "fecha": "2026-06-18", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto de transformacion en Diligencias Previas por complejidad de la instruccion el 2026-03-15"
+    },
+    {
+      "tipo": "DUD",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000080",
+      "fase_actual": "Juicio rapido",
+      "estado": "Preparado para juicio rapido",
+      "fecha_incoacion": "2026-03-15",
+      "partes": {
+        "denunciante": {"nombre": "Victor Cortes Fuentes", "abogado": "Raquel Campos Ferrer"},
+        "investigado": {"nombre": "Tomas Reyes Pascual", "abogado": "Alicia Caballero Aguilar"}
+      },
+      "delito": "Conduccion sin permiso art. 384 CP",
+      "materia": "Diligencias urgentes por conduccion sin permiso art. 384 CP",
+      "plazos": [
+        {"tipo": "Senalamiento juicio rapido", "fecha": "2026-04-02", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto de preparacion de juicio oral por conformidad del investigado a los hechos el 2026-03-22"
+    },
+    {
+      "tipo": "DUD",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000081",
+      "fase_actual": "Conformidad",
+      "estado": "Sentencia de conformidad",
+      "fecha_incoacion": "2026-01-20",
+      "partes": {
+        "denunciante": {"nombre": "Marcos Bravo Calvo", "abogado": "Veronica Gallego Rojas"},
+        "investigado": {"nombre": "Sergio Montero Crespo", "abogado": "Laura Pardo Lozano"}
+      },
+      "delito": "Hurto del art. 234 CP",
+      "materia": "Diligencias urgentes por hurto del art. 234 CP",
+      "plazos": [
+        {"tipo": "Firmeza sentencia conformidad", "fecha": "2026-03-20", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Sentencia de conformidad: condena a multa de 6 meses con cuota diaria de 10 euros el 2026-03-20"
+    },
+    {
+      "tipo": "DUD",
+      "numero": "6/2026",
+      "nig": "99001-42-1-2026-0000082",
+      "fase_actual": "Sobreseimiento",
+      "estado": "Sobreseido",
+      "fecha_incoacion": "2025-10-05",
+      "partes": {
+        "denunciante": {"nombre": "Daniel Calvo Aguilar", "abogado": "Patricia Herrero Cortes"},
+        "investigado": {"nombre": "Alberto Fuentes Campos", "abogado": "Gloria Reyes Ferrer"}
+      },
+      "delito": "Danos del art. 263 CP",
+      "materia": "Diligencias urgentes por danos del art. 263 CP",
+      "plazos": [
+        {"tipo": "Archivo por sobreseimiento", "fecha": "2026-02-25", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Auto de sobreseimiento provisional por falta de autor conocido el 2026-02-25"
+    },
+    {
+      "tipo": "DPA",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000083",
+      "fase_actual": "Incoacion",
+      "estado": "Incoadas diligencias previas",
+      "fecha_incoacion": "2026-02-10",
+      "partes": {
+        "denunciante": {"nombre": "Ruben Pascual Caballero", "abogado": "Ines Aguilar Calvo"},
+        "investigado": {"nombre": "Ramon Bravo Gallego", "abogado": "Silvia Rojas Montero"}
+      },
+      "delito": "Estafa del art. 248 CP",
+      "materia": "Diligencias previas por estafa del art. 248 CP",
+      "plazos": [
+        {"tipo": "Plazo instruccion", "fecha": "2026-06-18", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Incoadas diligencias previas por denuncia por presunto delito de estafa el 2026-03-10"
+    },
+    {
+      "tipo": "DPA",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000084",
+      "fase_actual": "Instruccion",
+      "estado": "En fase de instruccion",
+      "fecha_incoacion": "2025-11-15",
+      "partes": {
+        "denunciante": {"nombre": "Emilio Crespo Pardo", "abogado": "Clara Lozano Calvo"},
+        "investigado": {"nombre": "Julio Aguilar Herrero", "abogado": "Eva Cortes Fuentes"}
+      },
+      "delito": "Apropiacion indebida del art. 253 CP",
+      "materia": "Diligencias previas por apropiacion indebida del art. 253 CP",
+      "plazos": [
+        {"tipo": "Practica de diligencias", "fecha": "2026-05-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Acordada declaracion testifical y reclamacion de documentacion bancaria el 2026-03-18"
+    },
+    {
+      "tipo": "DPA",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000085",
+      "fase_actual": "Auto PA",
+      "estado": "Auto de transformacion en Procedimiento Abreviado",
+      "fecha_incoacion": "2025-09-08",
+      "partes": {
+        "denunciante": {"nombre": "Santiago Campos Ferrer", "abogado": "Marina Reyes Pascual"},
+        "investigado": {"nombre": "Enrique Caballero Bravo", "abogado": "Lorena Gallego Rojas"}
+      },
+      "delito": "Falsedad documental del art. 390 CP",
+      "materia": "Diligencias previas por falsedad documental del art. 390 CP",
+      "plazos": [
+        {"tipo": "Plazo calificacion fiscal", "fecha": "2026-04-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto de transformacion en Procedimiento Abreviado. Traslado al Ministerio Fiscal para calificacion el 2026-03-22"
+    },
+    {
+      "tipo": "DPA",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000086",
+      "fase_actual": "Apertura juicio oral",
+      "estado": "Auto de apertura de juicio oral",
+      "fecha_incoacion": "2025-07-12",
+      "partes": {
+        "denunciante": {"nombre": "Manuel Montero Crespo", "abogado": "Sara Pardo Lozano"},
+        "investigado": {"nombre": "Ignacio Calvo Aguilar", "abogado": "Rocio Herrero Cortes"}
+      },
+      "delito": "Robo con fuerza del art. 238 CP",
+      "materia": "Diligencias previas por robo con fuerza del art. 238 CP",
+      "plazos": [
+        {"tipo": "Plazo escrito defensa", "fecha": "2026-05-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Escrito de acusacion del Ministerio Fiscal. Auto de apertura de juicio oral el 2026-03-20"
+    },
+    {
+      "tipo": "DPA",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000087",
+      "fase_actual": "Sobreseimiento",
+      "estado": "Sobreseido provisionalmente",
+      "fecha_incoacion": "2025-06-20",
+      "partes": {
+        "denunciante": {"nombre": "Alejandro Fuentes Campos", "abogado": "Noelia Reyes Ferrer"},
+        "investigado": {"nombre": "Federico Pascual Caballero", "abogado": "Amparo Aguilar Calvo"}
+      },
+      "delito": "Lesiones graves del art. 149 CP",
+      "materia": "Diligencias previas por lesiones graves del art. 149 CP",
+      "plazos": [
+        {"tipo": "Archivo por sobreseimiento", "fecha": "2026-02-15", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Auto de sobreseimiento provisional por insuficiencia de indicios el 2026-02-15"
+    },
+    {
+      "tipo": "DPA",
+      "numero": "6/2026",
+      "nig": "99001-42-1-2026-0000088",
+      "fase_actual": "Inhibicion",
+      "estado": "Inhibido a otro juzgado",
+      "fecha_incoacion": "2025-08-28",
+      "partes": {
+        "denunciante": {"nombre": "David Bravo Gallego", "abogado": "Elena Rojas Montero"},
+        "investigado": {"nombre": "Carlos Crespo Pardo", "abogado": "Ana Lozano Calvo"}
+      },
+      "delito": "Alzamiento de bienes del art. 257 CP",
+      "materia": "Diligencias previas por alzamiento de bienes del art. 257 CP",
+      "plazos": [
+        {"tipo": "Remision actuaciones", "fecha": "2026-03-05", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Auto de inhibicion a favor del Juzgado de Instruccion n. 3 de Ejemplo por competencia territorial el 2026-03-05"
+    },
+    {
+      "tipo": "DPA",
+      "numero": "7/2026",
+      "nig": "99001-42-1-2026-0000089",
+      "fase_actual": "Archivo",
+      "estado": "Archivado definitivamente",
+      "fecha_incoacion": "2025-04-10",
+      "partes": {
+        "denunciante": {"nombre": "Luis Aguilar Herrero", "abogado": "Marta Cortes Fuentes"},
+        "investigado": {"nombre": "Pedro Campos Ferrer", "abogado": "Sofia Reyes Pascual"}
+      },
+      "delito": "Delito contra la seguridad vial",
+      "materia": "Diligencias previas por delito contra la seguridad vial",
+      "plazos": [
+        {"tipo": "Archivo definitivo", "fecha": "2025-12-20", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Auto de sobreseimiento libre por inexistencia de delito. Archivo definitivo el 2025-12-20"
+    },
+    {
+      "tipo": "LEV",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000090",
+      "fase_actual": "Incoacion",
+      "estado": "Incoado juicio por delito leve",
+      "fecha_incoacion": "2026-03-05",
+      "partes": {
+        "denunciante": {"nombre": "Javier Caballero Bravo", "abogado": "Lucia Gallego Rojas"},
+        "investigado": {"nombre": "Miguel Montero Crespo", "abogado": "Carmen Pardo Lozano"}
+      },
+      "delito": "Hurto leve art. 234.2 CP",
+      "materia": "Juicio por delito leve de hurto leve",
+      "plazos": [
+        {"tipo": "Senalamiento juicio", "fecha": "2026-04-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Incoado juicio por delito leve de hurto de cuantia inferior a 400 euros el 2026-03-18"
+    },
+    {
+      "tipo": "LEV",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000091",
+      "fase_actual": "Senalamiento",
+      "estado": "Senalado juicio oral",
+      "fecha_incoacion": "2026-02-15",
+      "partes": {
+        "denunciante": {"nombre": "Rafael Calvo Aguilar", "abogado": "Isabel Herrero Cortes"},
+        "investigado": {"nombre": "Diego Fuentes Campos", "abogado": "Teresa Reyes Ferrer"}
+      },
+      "delito": "Lesiones leves art. 147.2 CP",
+      "materia": "Juicio por delito leve de lesiones leves",
+      "plazos": [
+        {"tipo": "Senalamiento juicio oral", "fecha": "2026-04-22", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Senalado juicio oral y citadas las partes el 2026-03-20"
+    },
+    {
+      "tipo": "LEV",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000092",
+      "fase_actual": "Juicio",
+      "estado": "Juicio celebrado",
+      "fecha_incoacion": "2025-12-28",
+      "partes": {
+        "denunciante": {"nombre": "Andres Pascual Caballero", "abogado": "Pilar Aguilar Calvo"},
+        "investigado": {"nombre": "Fernando Bravo Gallego", "abogado": "Rosa Rojas Montero"}
+      },
+      "delito": "Amenazas leves art. 171.7 CP",
+      "materia": "Juicio por delito leve de amenazas leves",
+      "plazos": [
+        {"tipo": "Plazo dictar sentencia", "fecha": "2026-04-08", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Juicio oral celebrado con asistencia de denunciante y denunciado el 2026-03-22"
+    },
+    {
+      "tipo": "LEV",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000093",
+      "fase_actual": "Sentencia",
+      "estado": "Sentencia dictada",
+      "fecha_incoacion": "2025-10-18",
+      "partes": {
+        "denunciante": {"nombre": "Oscar Crespo Pardo", "abogado": "Beatriz Lozano Calvo"},
+        "investigado": {"nombre": "Hector Aguilar Herrero", "abogado": "Nuria Cortes Fuentes"}
+      },
+      "delito": "Danos leves",
+      "materia": "Juicio por delito leve de danos leves",
+      "plazos": [
+        {"tipo": "Plazo recurso apelacion", "fecha": "2026-04-12", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Sentencia condenatoria: multa de 1 mes con cuota diaria de 6 euros el 2026-03-24"
+    },
+    {
+      "tipo": "LEV",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000094",
+      "fase_actual": "Firmeza",
+      "estado": "Sentencia firme",
+      "fecha_incoacion": "2025-08-10",
+      "partes": {
+        "denunciante": {"nombre": "Gonzalo Campos Ferrer", "abogado": "Cristina Reyes Pascual"},
+        "investigado": {"nombre": "Adrian Caballero Aguilar", "abogado": "Paula Bravo Calvo"}
+      },
+      "delito": "Estafa leve art. 249.1 CP",
+      "materia": "Juicio por delito leve de estafa leve",
+      "plazos": [
+        {"tipo": "Ejecucion sentencia", "fecha": "2026-03-15", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Sentencia firme por no interposicion de recurso el 2026-03-15"
+    },
+    {
+      "tipo": "LEI",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000095",
+      "fase_actual": "Incoacion",
+      "estado": "Incoado",
+      "fecha_incoacion": "2026-02-20",
+      "partes": {
+        "denunciante": {"nombre": "Victor Gallego Rojas", "abogado": "Raquel Montero Crespo"},
+        "investigado": {"nombre": "Tomas Pardo Lozano", "abogado": "Alicia Calvo Aguilar"}
+      },
+      "delito": "Injurias leves art. 173.4 CP",
+      "materia": "Juicio por delito leve de injurias leves",
+      "plazos": [
+        {"tipo": "Senalamiento juicio", "fecha": "2026-04-18", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Incoado juicio por delito leve de injurias a partir de denuncia el 2026-03-15"
+    },
+    {
+      "tipo": "LEI",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000096",
+      "fase_actual": "Senalamiento",
+      "estado": "Senalado",
+      "fecha_incoacion": "2026-01-10",
+      "partes": {
+        "denunciante": {"nombre": "Marcos Herrero Cortes", "abogado": "Veronica Fuentes Campos"},
+        "investigado": {"nombre": "Sergio Reyes Ferrer", "abogado": "Laura Pascual Caballero"}
+      },
+      "delito": "Vejaciones leves",
+      "materia": "Juicio por delito leve de vejaciones leves",
+      "plazos": [
+        {"tipo": "Senalamiento juicio oral", "fecha": "2026-04-25", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Senalado juicio oral. Citadas las partes el 2026-03-20"
+    },
+    {
+      "tipo": "LEI",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000097",
+      "fase_actual": "Juicio",
+      "estado": "Juicio celebrado",
+      "fecha_incoacion": "2025-11-05",
+      "partes": {
+        "denunciante": {"nombre": "Daniel Aguilar Calvo", "abogado": "Patricia Bravo Gallego"},
+        "investigado": {"nombre": "Alberto Rojas Montero", "abogado": "Gloria Crespo Pardo"}
+      },
+      "delito": "Coacciones leves art. 172.3 CP",
+      "materia": "Juicio por delito leve de coacciones leves",
+      "plazos": [
+        {"tipo": "Plazo sentencia", "fecha": "2026-04-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Juicio oral celebrado. El denunciado reconoce parcialmente los hechos el 2026-03-22"
+    },
+    {
+      "tipo": "LEI",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000098",
+      "fase_actual": "Sentencia",
+      "estado": "Sentencia dictada",
+      "fecha_incoacion": "2025-09-15",
+      "partes": {
+        "denunciante": {"nombre": "Ruben Lozano Calvo", "abogado": "Ines Aguilar Herrero"},
+        "investigado": {"nombre": "Ramon Cortes Fuentes", "abogado": "Silvia Campos Ferrer"}
+      },
+      "delito": "Ocupacion no violenta de inmueble art. 245.2 CP",
+      "materia": "Juicio por delito leve de ocupacion no violenta de inmueble",
+      "plazos": [
+        {"tipo": "Plazo recurso", "fecha": "2026-04-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Sentencia absolutoria por falta de tipicidad el 2026-03-24"
+    },
+    {
+      "tipo": "LEI",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000099",
+      "fase_actual": "Firmeza",
+      "estado": "Firme",
+      "fecha_incoacion": "2025-07-20",
+      "partes": {
+        "denunciante": {"nombre": "Emilio Reyes Pascual", "abogado": "Clara Caballero Aguilar"},
+        "investigado": {"nombre": "Julio Bravo Calvo", "abogado": "Eva Gallego Rojas"}
+      },
+      "delito": "Injurias leves art. 173.4 CP",
+      "materia": "Juicio por delito leve de injurias leves",
+      "plazos": [
+        {"tipo": "Archivo", "fecha": "2026-03-10", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Sentencia firme. Archivo de actuaciones el 2026-03-10"
+    },
+    {
+      "tipo": "POP",
+      "numero": "1/2025",
+      "nig": "99001-42-1-2025-0000100",
+      "fase_actual": "Instruccion",
+      "estado": "En instruccion",
+      "fecha_incoacion": "2025-06-10",
+      "partes": {
+        "denunciante": {"nombre": "Santiago Montero Crespo", "abogado": "Marina Pardo Lozano"},
+        "investigado": {"nombre": "Enrique Calvo Aguilar", "abogado": "Lorena Herrero Cortes"}
+      },
+      "delito": "Robo con violencia art. 242 CP",
+      "materia": "Procedimiento ordinario por robo con violencia",
+      "plazos": [
+        {"tipo": "Plazo instruccion", "fecha": "2026-08-18", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Instruccion en curso. Acordada declaracion de testigos protegidos y prueba pericial de ADN el 2026-03-18"
+    },
+    {
+      "tipo": "POP",
+      "numero": "2/2025",
+      "nig": "99001-42-1-2025-0000101",
+      "fase_actual": "Calificacion",
+      "estado": "Pendiente calificacion",
+      "fecha_incoacion": "2025-04-15",
+      "partes": {
+        "denunciante": {"nombre": "Manuel Fuentes Campos", "abogado": "Sara Reyes Ferrer"},
+        "investigado": {"nombre": "Ignacio Pascual Caballero", "abogado": "Rocio Aguilar Calvo"}
+      },
+      "delito": "Trafico de drogas art. 368 CP",
+      "materia": "Procedimiento ordinario por trafico de drogas",
+      "plazos": [
+        {"tipo": "Plazo calificacion provisional", "fecha": "2026-05-05", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Concluso el sumario. Traslado a las partes para calificacion provisional el 2026-03-20"
+    },
+    {
+      "tipo": "POP",
+      "numero": "3/2025",
+      "nig": "99001-42-1-2025-0000102",
+      "fase_actual": "Juicio oral",
+      "estado": "Senalado juicio oral",
+      "fecha_incoacion": "2025-03-08",
+      "partes": {
+        "denunciante": {"nombre": "Alejandro Bravo Gallego", "abogado": "Noelia Rojas Montero"},
+        "investigado": {"nombre": "Federico Crespo Pardo", "abogado": "Amparo Lozano Calvo"}
+      },
+      "delito": "Homicidio imprudente art. 142 CP",
+      "materia": "Procedimiento ordinario por homicidio imprudente",
+      "plazos": [
+        {"tipo": "Senalamiento juicio oral", "fecha": "2026-06-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Calificaciones provisionales presentadas. Senalado juicio oral ante la Audiencia Provincial el 2026-03-22"
+    },
+    {
+      "tipo": "POP",
+      "numero": "4/2025",
+      "nig": "99001-42-1-2025-0000103",
+      "fase_actual": "Sentencia",
+      "estado": "Sentencia dictada",
+      "fecha_incoacion": "2025-01-20",
+      "partes": {
+        "denunciante": {"nombre": "David Aguilar Herrero", "abogado": "Elena Cortes Fuentes"},
+        "investigado": {"nombre": "Carlos Campos Ferrer", "abogado": "Ana Reyes Pascual"}
+      },
+      "delito": "Agresion sexual art. 178 CP",
+      "materia": "Procedimiento ordinario por agresion sexual",
+      "plazos": [
+        {"tipo": "Plazo recurso casacion", "fecha": "2026-04-30", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Sentencia condenatoria por delito de robo con violencia: 3 anos y 6 meses de prision el 2026-03-24"
+    },
+    {
+      "tipo": "POP",
+      "numero": "5/2025",
+      "nig": "99001-42-1-2025-0000104",
+      "fase_actual": "Recurso",
+      "estado": "Recurso de casacion interpuesto",
+      "fecha_incoacion": "2025-02-12",
+      "partes": {
+        "denunciante": {"nombre": "Luis Caballero Bravo", "abogado": "Marta Gallego Rojas"},
+        "investigado": {"nombre": "Pedro Montero Crespo", "abogado": "Sofia Pardo Lozano"}
+      },
+      "delito": "Detencion ilegal art. 163 CP",
+      "materia": "Procedimiento ordinario por detencion ilegal",
+      "plazos": [
+        {"tipo": "Emplazamiento ante TS", "fecha": "2026-05-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Recurso de casacion preparado por la defensa el 2026-03-22"
+    },
+    {
+      "tipo": "SU",
+      "numero": "1/2025",
+      "nig": "99001-42-1-2025-0000105",
+      "fase_actual": "Procesamiento",
+      "estado": "Procesamiento dictado",
+      "fecha_incoacion": "2025-05-18",
+      "partes": {
+        "denunciante": {"nombre": "Javier Calvo Aguilar", "abogado": "Lucia Herrero Cortes"},
+        "investigado": {"nombre": "Miguel Fuentes Campos", "abogado": "Carmen Reyes Ferrer"}
+      },
+      "delito": "Asesinato art. 139 CP",
+      "materia": "Sumario por asesinato",
+      "plazos": [
+        {"tipo": "Plazo recurso contra auto procesamiento", "fecha": "2026-04-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto de procesamiento dictado contra el investigado por delito de asesinato el 2026-03-18"
+    },
+    {
+      "tipo": "SU",
+      "numero": "2/2025",
+      "nig": "99001-42-1-2025-0000106",
+      "fase_actual": "Conclusion sumario",
+      "estado": "Sumario concluso",
+      "fecha_incoacion": "2025-03-22",
+      "partes": {
+        "denunciante": {"nombre": "Rafael Pascual Caballero", "abogado": "Isabel Aguilar Calvo"},
+        "investigado": {"nombre": "Diego Bravo Gallego", "abogado": "Teresa Rojas Montero"}
+      },
+      "delito": "Homicidio art. 138 CP",
+      "materia": "Sumario por homicidio",
+      "plazos": [
+        {"tipo": "Traslado para calificacion", "fecha": "2026-05-01", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto declarando concluso el sumario y remision a la Audiencia Provincial el 2026-03-22"
+    },
+    {
+      "tipo": "SU",
+      "numero": "3/2025",
+      "nig": "99001-42-1-2025-0000107",
+      "fase_actual": "Apertura juicio oral",
+      "estado": "Abierto juicio oral",
+      "fecha_incoacion": "2025-02-10",
+      "partes": {
+        "denunciante": {"nombre": "Andres Crespo Pardo", "abogado": "Pilar Lozano Calvo"},
+        "investigado": {"nombre": "Fernando Aguilar Herrero", "abogado": "Rosa Cortes Fuentes"}
+      },
+      "delito": "Robo con homicidio",
+      "materia": "Sumario por robo con homicidio",
+      "plazos": [
+        {"tipo": "Plazo escrito defensa", "fecha": "2026-05-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto de apertura de juicio oral por la Audiencia Provincial. La acusacion solicita 18 anos de prision el 2026-03-20"
+    },
+    {
+      "tipo": "SU",
+      "numero": "4/2025",
+      "nig": "99001-42-1-2025-0000108",
+      "fase_actual": "Juicio",
+      "estado": "Juicio oral en curso",
+      "fecha_incoacion": "2025-01-15",
+      "partes": {
+        "denunciante": {"nombre": "Oscar Campos Ferrer", "abogado": "Beatriz Reyes Pascual"},
+        "investigado": {"nombre": "Hector Caballero Aguilar", "abogado": "Nuria Bravo Calvo"}
+      },
+      "delito": "Asesinato art. 139 CP",
+      "materia": "Sumario por asesinato",
+      "plazos": [
+        {"tipo": "Senalamiento sesiones juicio oral", "fecha": "2026-06-02", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Senaladas tres sesiones de juicio oral ante el Tribunal del Jurado el 2026-03-24"
+    },
+    {
+      "tipo": "SU",
+      "numero": "5/2025",
+      "nig": "99001-42-1-2025-0000109",
+      "fase_actual": "Sentencia",
+      "estado": "Sentencia dictada",
+      "fecha_incoacion": "2025-04-05",
+      "partes": {
+        "denunciante": {"nombre": "Gonzalo Gallego Rojas", "abogado": "Cristina Montero Crespo"},
+        "investigado": {"nombre": "Adrian Pardo Lozano", "abogado": "Paula Calvo Aguilar"}
+      },
+      "delito": "Detencion ilegal con desaparicion art. 166 CP",
+      "materia": "Sumario por detencion ilegal con desaparicion",
+      "plazos": [
+        {"tipo": "Plazo recurso apelacion ante TSJ", "fecha": "2026-05-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Sentencia del Tribunal del Jurado: veredicto de culpabilidad. Condena a 15 anos de prision el 2026-03-22"
+    },
+    {
+      "tipo": "JRD",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000110",
+      "fase_actual": "Instruccion guardia",
+      "estado": "Instruccion en servicio de guardia",
+      "fecha_incoacion": "2026-03-22",
+      "partes": {
+        "denunciante": {"nombre": "Victor Herrero Cortes", "abogado": "Raquel Fuentes Campos"},
+        "investigado": {"nombre": "Tomas Reyes Ferrer", "abogado": "Alicia Pascual Caballero"}
+      },
+      "delito": "Conduccion etilica art. 379.2 CP",
+      "materia": "Juicio rapido por conduccion etilica",
+      "plazos": [
+        {"tipo": "Plazo instruccion guardia", "fecha": "2026-03-25", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Detenido puesto a disposicion judicial. Instruccion en servicio de guardia el 2026-03-24"
+    },
+    {
+      "tipo": "JRD",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000111",
+      "fase_actual": "Conformidad",
+      "estado": "Conformidad del investigado",
+      "fecha_incoacion": "2026-03-20",
+      "partes": {
+        "denunciante": {"nombre": "Marcos Aguilar Calvo", "abogado": "Veronica Bravo Gallego"},
+        "investigado": {"nombre": "Sergio Rojas Montero", "abogado": "Laura Crespo Pardo"}
+      },
+      "delito": "Conduccion sin permiso art. 384 CP",
+      "materia": "Juicio rapido por conduccion sin permiso",
+      "plazos": [
+        {"tipo": "Plazo sentencia conformidad", "fecha": "2026-03-26", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "El investigado muestra conformidad con la pena solicitada por el Ministerio Fiscal el 2026-03-24"
+    },
+    {
+      "tipo": "JRD",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000112",
+      "fase_actual": "Senalamiento",
+      "estado": "Senalado juicio rapido",
+      "fecha_incoacion": "2026-03-10",
+      "partes": {
+        "denunciante": {"nombre": "Daniel Lozano Calvo", "abogado": "Patricia Aguilar Herrero"},
+        "investigado": {"nombre": "Alberto Cortes Fuentes", "abogado": "Gloria Campos Ferrer"}
+      },
+      "delito": "Resistencia a la autoridad art. 556 CP",
+      "materia": "Juicio rapido por resistencia a la autoridad",
+      "plazos": [
+        {"tipo": "Senalamiento juicio oral rapido", "fecha": "2026-04-05", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto de apertura de juicio oral. Senalado juicio rapido el 2026-03-22"
+    },
+    {
+      "tipo": "JRD",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000113",
+      "fase_actual": "Juicio",
+      "estado": "Juicio oral celebrado",
+      "fecha_incoacion": "2026-02-25",
+      "partes": {
+        "denunciante": {"nombre": "Ruben Reyes Pascual", "abogado": "Ines Caballero Aguilar"},
+        "investigado": {"nombre": "Ramon Bravo Calvo", "abogado": "Silvia Gallego Rojas"}
+      },
+      "delito": "Quebrantamiento de condena art. 468 CP",
+      "materia": "Juicio rapido por quebrantamiento de condena",
+      "plazos": [
+        {"tipo": "Plazo sentencia", "fecha": "2026-04-02", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Juicio oral celebrado con practica de prueba y declaracion del investigado el 2026-03-24"
+    },
+    {
+      "tipo": "JRD",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000114",
+      "fase_actual": "Sentencia",
+      "estado": "Sentencia dictada",
+      "fecha_incoacion": "2026-01-18",
+      "partes": {
+        "denunciante": {"nombre": "Emilio Montero Crespo", "abogado": "Clara Pardo Lozano"},
+        "investigado": {"nombre": "Julio Calvo Aguilar", "abogado": "Eva Herrero Cortes"}
+      },
+      "delito": "Hurto art. 234 CP",
+      "materia": "Juicio rapido por hurto",
+      "plazos": [
+        {"tipo": "Plazo recurso", "fecha": "2026-04-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Sentencia condenatoria: trabajos en beneficio de la comunidad 30 jornadas y privacion permiso conducir 1 ano el 2026-03-24"
+    },
+    {
+      "tipo": "ETJ",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000115",
+      "fase_actual": "Despacho",
+      "estado": "Ejecucion despachada",
+      "fecha_incoacion": "2026-02-08",
+      "partes": {
+        "ejecutante": {"nombre": "Construcciones Albamar S.A.", "procurador": "Santiago Fuentes Campos", "abogado": "Marina Reyes Ferrer"},
+        "ejecutado": {"nombre": "Enrique Pascual Caballero", "procurador": "Lorena Aguilar Calvo", "abogado": "Manuel Bravo Gallego"}
+      },
+      "cuantia": 45320.00,
+      "materia": "Ejecucion de titulos judiciales",
+      "titulo_ejecutivo": "Sentencia firme de juicio ordinario",
+      "plazos": [
+        {"tipo": "Plazo cumplimiento voluntario", "fecha": "2026-04-22", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto despachando ejecucion de sentencia firme por importe de 45.320 euros el 2026-03-18"
+    },
+    {
+      "tipo": "ETJ",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000116",
+      "fase_actual": "Requerimiento",
+      "estado": "Requerimiento de pago cursado",
+      "fecha_incoacion": "2025-12-15",
+      "partes": {
+        "ejecutante": {"nombre": "Sara Rojas Montero", "procurador": "Ignacio Crespo Pardo", "abogado": "Rocio Lozano Calvo"},
+        "ejecutado": {"nombre": "Alejandro Aguilar Herrero", "procurador": "Noelia Cortes Fuentes", "abogado": "Federico Campos Ferrer"}
+      },
+      "cuantia": 28750.00,
+      "materia": "Ejecucion de titulos judiciales",
+      "titulo_ejecutivo": "Sentencia firme de juicio verbal",
+      "plazos": [
+        {"tipo": "Plazo pago requerido", "fecha": "2026-04-30", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Requerimiento de pago al ejecutado con apercibimiento de embargo el 2026-03-22"
+    },
+    {
+      "tipo": "ETJ",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000117",
+      "fase_actual": "Embargo",
+      "estado": "Bienes embargados",
+      "fecha_incoacion": "2025-10-08",
+      "partes": {
+        "ejecutante": {"nombre": "Servicios Integrales Cenit S.L.", "procurador": "Amparo Reyes Pascual", "abogado": "David Caballero Aguilar"},
+        "ejecutado": {"nombre": "Distribuciones El Pilar S.A.", "procurador": "Elena Bravo Calvo", "abogado": "Carlos Gallego Rojas"}
+      },
+      "cuantia": 89500.00,
+      "materia": "Ejecucion de titulos judiciales",
+      "titulo_ejecutivo": "Auto aprobatorio de transaccion judicial",
+      "plazos": [
+        {"tipo": "Plazo subasta", "fecha": "2026-06-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Diligencia de embargo sobre cuenta bancaria e inmueble del ejecutado el 2026-03-20"
+    },
+    {
+      "tipo": "ETJ",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000118",
+      "fase_actual": "Subasta",
+      "estado": "Subasta senalada",
+      "fecha_incoacion": "2025-08-12",
+      "partes": {
+        "ejecutante": {"nombre": "Ana Montero Crespo", "procurador": "Luis Pardo Lozano", "abogado": "Marta Calvo Aguilar"},
+        "ejecutado": {"nombre": "Pedro Herrero Cortes", "procurador": "Sofia Fuentes Campos", "abogado": "Javier Reyes Ferrer"}
+      },
+      "cuantia": 152000.00,
+      "materia": "Ejecucion de titulos judiciales",
+      "titulo_ejecutivo": "Sentencia firme de juicio ordinario",
+      "plazos": [
+        {"tipo": "Fecha subasta electronica", "fecha": "2026-07-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Subasta electronica del inmueble embargado senalada en el Portal de Subastas el 2026-03-24"
+    },
+    {
+      "tipo": "ETJ",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000119",
+      "fase_actual": "Archivo",
+      "estado": "Archivado por satisfaccion",
+      "fecha_incoacion": "2025-05-20",
+      "partes": {
+        "ejecutante": {"nombre": "Lucia Pascual Caballero", "procurador": "Miguel Aguilar Calvo", "abogado": "Carmen Bravo Gallego"},
+        "ejecutado": {"nombre": "Grupo Terramar S.L.", "procurador": "Rafael Rojas Montero", "abogado": "Isabel Crespo Pardo"}
+      },
+      "cuantia": 18400.00,
+      "materia": "Ejecucion de titulos judiciales",
+      "titulo_ejecutivo": "Sentencia firme de juicio verbal",
+      "plazos": [
+        {"tipo": "Archivo", "fecha": "2026-02-28", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Decreto de archivo por pago integro de la deuda y costas el 2026-02-28"
+    },
+    {
+      "tipo": "ENJ",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000120",
+      "fase_actual": "Despacho",
+      "estado": "Ejecucion despachada",
+      "fecha_incoacion": "2026-01-28",
+      "partes": {
+        "ejecutante": {"nombre": "Banco Ficticio Nacional S.A.", "procurador": "Diego Lozano Calvo", "abogado": "Teresa Aguilar Herrero"},
+        "ejecutado": {"nombre": "Andres Cortes Fuentes", "procurador": "Pilar Campos Ferrer", "abogado": "Fernando Reyes Pascual"}
+      },
+      "cuantia": 125000.00,
+      "materia": "Ejecucion de titulos no judiciales",
+      "titulo_ejecutivo": "Escritura publica de prestamo",
+      "plazos": [
+        {"tipo": "Plazo cumplimiento voluntario", "fecha": "2026-04-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto despachando ejecucion de escritura publica de prestamo hipotecario por 125.000 euros el 2026-03-15"
+    },
+    {
+      "tipo": "ENJ",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000121",
+      "fase_actual": "Oposicion",
+      "estado": "Oposicion del ejecutado",
+      "fecha_incoacion": "2025-11-20",
+      "partes": {
+        "ejecutante": {"nombre": "Caja de Ahorros del Ejemplo S.A.", "procurador": "Rosa Caballero Aguilar", "abogado": "Oscar Bravo Calvo"},
+        "ejecutado": {"nombre": "Hector Gallego Rojas", "procurador": "Beatriz Montero Crespo", "abogado": "Nuria Pardo Lozano"}
+      },
+      "cuantia": 87000.00,
+      "materia": "Ejecucion de titulos no judiciales",
+      "titulo_ejecutivo": "Poliza de credito intervenida",
+      "plazos": [
+        {"tipo": "Plazo resolucion oposicion", "fecha": "2026-05-05", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Escrito de oposicion del ejecutado alegando pluspeticion y pago parcial el 2026-03-20"
+    },
+    {
+      "tipo": "ENJ",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000122",
+      "fase_actual": "Requerimiento",
+      "estado": "Requerimiento cursado",
+      "fecha_incoacion": "2025-09-25",
+      "partes": {
+        "ejecutante": {"nombre": "Financiera Atlantica S.A.", "procurador": "Gonzalo Calvo Aguilar", "abogado": "Cristina Herrero Cortes"},
+        "ejecutado": {"nombre": "Adrian Fuentes Campos", "procurador": "Paula Reyes Ferrer", "abogado": "Victor Pascual Caballero"}
+      },
+      "cuantia": 56000.00,
+      "materia": "Ejecucion de titulos no judiciales",
+      "titulo_ejecutivo": "Titulo cambiario - Pagare",
+      "plazos": [
+        {"tipo": "Plazo pago", "fecha": "2026-04-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Desestimada oposicion. Requerimiento de pago al ejecutado el 2026-03-22"
+    },
+    {
+      "tipo": "ENJ",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000123",
+      "fase_actual": "Embargo",
+      "estado": "Embargo practicado",
+      "fecha_incoacion": "2025-07-15",
+      "partes": {
+        "ejecutante": {"nombre": "Banco Modelo Peninsular S.A.", "procurador": "Raquel Aguilar Calvo", "abogado": "Tomas Bravo Gallego"},
+        "ejecutado": {"nombre": "Alicia Rojas Montero", "procurador": "Marcos Crespo Pardo", "abogado": "Veronica Lozano Calvo"}
+      },
+      "cuantia": 42000.00,
+      "materia": "Ejecucion de titulos no judiciales",
+      "titulo_ejecutivo": "Acta notarial",
+      "plazos": [
+        {"tipo": "Plazo subasta", "fecha": "2026-06-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Embargo de nomina y cuentas bancarias del ejecutado el 2026-03-24"
+    },
+    {
+      "tipo": "ENJ",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000124",
+      "fase_actual": "Archivo",
+      "estado": "Archivado",
+      "fecha_incoacion": "2025-04-08",
+      "partes": {
+        "ejecutante": {"nombre": "Entidad Bancaria Demostracion S.A.", "procurador": "Sergio Aguilar Herrero", "abogado": "Laura Cortes Fuentes"},
+        "ejecutado": {"nombre": "Daniel Campos Ferrer", "procurador": "Patricia Reyes Pascual", "abogado": "Alberto Caballero Aguilar"}
+      },
+      "cuantia": 34000.00,
+      "materia": "Ejecucion de titulos no judiciales",
+      "titulo_ejecutivo": "Poliza de credito intervenida",
+      "plazos": [
+        {"tipo": "Archivo definitivo", "fecha": "2026-01-15", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Decreto de archivo por declaracion de insolvencia provisional del ejecutado el 2026-01-15"
+    },
+    {
+      "tipo": "EJH",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000125",
+      "fase_actual": "Despacho",
+      "estado": "Ejecucion hipotecaria despachada",
+      "fecha_incoacion": "2026-01-15",
+      "partes": {
+        "ejecutante": {"nombre": "Banco Ficticio Nacional S.A.", "procurador": "Gloria Bravo Calvo", "abogado": "Ruben Gallego Rojas"},
+        "ejecutado": {"nombre": "Ines Montero Crespo", "procurador": "Ramon Pardo Lozano", "abogado": "Silvia Calvo Aguilar"}
+      },
+      "cuantia": 198450.00,
+      "materia": "Ejecucion hipotecaria",
+      "inmueble": "Vivienda en C/ Ficticia 15, 2.B, Villa de la Justicia",
+      "plazos": [
+        {"tipo": "Plazo requerimiento de pago", "fecha": "2026-04-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto despachando ejecucion hipotecaria por impago de prestamo. Deuda reclamada: 198.450 euros el 2026-03-12"
+    },
+    {
+      "tipo": "EJH",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000126",
+      "fase_actual": "Requerimiento",
+      "estado": "Requerimiento de pago al deudor",
+      "fecha_incoacion": "2025-11-10",
+      "partes": {
+        "ejecutante": {"nombre": "Caja de Ahorros del Ejemplo S.A.", "procurador": "Emilio Herrero Cortes", "abogado": "Clara Fuentes Campos"},
+        "ejecutado": {"nombre": "Julio Reyes Ferrer", "procurador": "Eva Pascual Caballero", "abogado": "Santiago Aguilar Calvo"}
+      },
+      "cuantia": 245000.00,
+      "materia": "Ejecucion hipotecaria",
+      "inmueble": "Local comercial en Avda. del Ejemplo 42, Villa de la Justicia",
+      "plazos": [
+        {"tipo": "Plazo oposicion", "fecha": "2026-05-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Requerimiento de pago al deudor hipotecario en el domicilio senalado en la escritura el 2026-03-20"
+    },
+    {
+      "tipo": "EJH",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000127",
+      "fase_actual": "Subasta",
+      "estado": "Subasta senalada",
+      "fecha_incoacion": "2025-08-20",
+      "partes": {
+        "ejecutante": {"nombre": "Banco Modelo Peninsular S.A.", "procurador": "Marina Bravo Gallego", "abogado": "Enrique Rojas Montero"},
+        "ejecutado": {"nombre": "Lorena Crespo Pardo", "procurador": "Manuel Lozano Calvo", "abogado": "Sara Aguilar Herrero"}
+      },
+      "cuantia": 310000.00,
+      "materia": "Ejecucion hipotecaria",
+      "inmueble": "Vivienda unifamiliar en C/ Inventada 8, Villa de la Justicia",
+      "plazos": [
+        {"tipo": "Fecha subasta", "fecha": "2026-07-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Subasta del inmueble hipotecado senalada en el Portal de Subastas BOE el 2026-03-22"
+    },
+    {
+      "tipo": "EJH",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000128",
+      "fase_actual": "Adjudicacion",
+      "estado": "Inmueble adjudicado",
+      "fecha_incoacion": "2025-06-15",
+      "partes": {
+        "ejecutante": {"nombre": "Financiera Atlantica S.A.", "procurador": "Ignacio Cortes Fuentes", "abogado": "Rocio Campos Ferrer"},
+        "ejecutado": {"nombre": "Alejandro Reyes Pascual", "procurador": "Noelia Caballero Bravo", "abogado": "Federico Gallego Rojas"}
+      },
+      "cuantia": 165000.00,
+      "materia": "Ejecucion hipotecaria",
+      "inmueble": "Piso en Plaza de la Demostracion 3, 4.A, Villa de la Justicia",
+      "plazos": [
+        {"tipo": "Plazo testimonio adjudicacion", "fecha": "2026-04-30", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Decreto de adjudicacion del inmueble al mejor postor por 165.000 euros el 2026-03-24"
+    },
+    {
+      "tipo": "EJH",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000129",
+      "fase_actual": "Posesion",
+      "estado": "Posesion entregada",
+      "fecha_incoacion": "2025-04-22",
+      "partes": {
+        "ejecutante": {"nombre": "Entidad Bancaria Demostracion S.A.", "procurador": "Amparo Bravo Calvo", "abogado": "David Montero Crespo"},
+        "ejecutado": {"nombre": "Elena Pardo Lozano", "procurador": "Carlos Calvo Aguilar", "abogado": "Ana Herrero Cortes"}
+      },
+      "cuantia": 142000.00,
+      "materia": "Ejecucion hipotecaria",
+      "inmueble": "Nave industrial en Pol. Ind. Modelo, parcela 12, Villa de la Justicia",
+      "plazos": [
+        {"tipo": "Lanzamiento ocupantes", "fecha": "2026-05-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto acordando la entrega de posesion del inmueble al adjudicatario el 2026-03-22"
+    },
+    {
+      "tipo": "POJ",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000130",
+      "fase_actual": "Admision",
+      "estado": "Admitida demanda",
+      "fecha_incoacion": "2026-02-05",
+      "partes": {
+        "demandante": {"nombre": "Luis Fuentes Campos", "procurador": "Marta Reyes Ferrer", "abogado": "Pedro Pascual Caballero"},
+        "demandado": {"nombre": "Sofia Aguilar Calvo", "procurador": "Javier Bravo Gallego", "abogado": "Lucia Rojas Montero"}
+      },
+      "cuantia": null,
+      "materia": "Tutela posesoria - Recuperacion de la posesion",
+      "plazos": [
+        {"tipo": "Plazo contestacion", "fecha": "2026-04-18", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda de recuperacion posesoria de bien inmueble admitida a tramite el 2026-03-18"
+    },
+    {
+      "tipo": "POJ",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000131",
+      "fase_actual": "Requerimiento",
+      "estado": "Requerimiento de desalojo",
+      "fecha_incoacion": "2025-12-12",
+      "partes": {
+        "demandante": {"nombre": "Miguel Crespo Pardo", "procurador": "Carmen Lozano Calvo", "abogado": "Rafael Aguilar Herrero"},
+        "demandado": {"nombre": "Diego Cortes Fuentes", "procurador": "Isabel Campos Ferrer", "abogado": "Teresa Reyes Pascual"}
+      },
+      "cuantia": null,
+      "materia": "Tutela posesoria - Recuperacion de la posesion",
+      "plazos": [
+        {"tipo": "Plazo desalojo voluntario", "fecha": "2026-04-30", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Requerimiento al demandado para desalojo voluntario en plazo de 10 dias el 2026-03-20"
+    },
+    {
+      "tipo": "POJ",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000132",
+      "fase_actual": "Lanzamiento",
+      "estado": "Lanzamiento senalado",
+      "fecha_incoacion": "2025-09-28",
+      "partes": {
+        "demandante": {"nombre": "Andres Caballero Bravo", "procurador": "Pilar Gallego Rojas", "abogado": "Fernando Montero Crespo"},
+        "demandado": {"nombre": "Rosa Pardo Lozano", "procurador": "Oscar Calvo Aguilar", "abogado": "Beatriz Herrero Cortes"}
+      },
+      "cuantia": null,
+      "materia": "Tutela posesoria - Recuperacion de la posesion",
+      "plazos": [
+        {"tipo": "Fecha lanzamiento", "fecha": "2026-05-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Senalado lanzamiento con auxilio de fuerza publica el 2026-03-22"
+    },
+    {
+      "tipo": "POJ",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000133",
+      "fase_actual": "Recurso",
+      "estado": "Recurso interpuesto",
+      "fecha_incoacion": "2025-07-08",
+      "partes": {
+        "demandante": {"nombre": "Hector Fuentes Campos", "procurador": "Nuria Reyes Ferrer", "abogado": "Gonzalo Pascual Caballero"},
+        "demandado": {"nombre": "Cristina Aguilar Calvo", "procurador": "Adrian Bravo Gallego", "abogado": "Paula Rojas Montero"}
+      },
+      "cuantia": null,
+      "materia": "Tutela posesoria - Recuperacion de la posesion",
+      "plazos": [
+        {"tipo": "Plazo resolucion recurso", "fecha": "2026-05-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Recurso de apelacion interpuesto por el demandado contra sentencia estimatoria el 2026-03-24"
+    },
+    {
+      "tipo": "POJ",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000134",
+      "fase_actual": "Archivo",
+      "estado": "Archivado",
+      "fecha_incoacion": "2025-05-12",
+      "partes": {
+        "demandante": {"nombre": "Victor Crespo Pardo", "procurador": "Raquel Lozano Calvo", "abogado": "Tomas Aguilar Herrero"},
+        "demandado": {"nombre": "Alicia Cortes Fuentes", "procurador": "Marcos Campos Ferrer", "abogado": "Veronica Reyes Pascual"}
+      },
+      "cuantia": null,
+      "materia": "Tutela posesoria - Recuperacion de la posesion",
+      "plazos": [
+        {"tipo": "Archivo", "fecha": "2026-02-10", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Lanzamiento practicado. Posesion recuperada por el demandante. Archivo el 2026-02-10"
+    },
+    {
+      "tipo": "POH",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000135",
+      "fase_actual": "Admision",
+      "estado": "Admitido",
+      "fecha_incoacion": "2026-01-22",
+      "partes": {
+        "demandante": {"nombre": "Sergio Caballero Aguilar", "procurador": "Laura Bravo Calvo", "abogado": "Daniel Gallego Rojas"},
+        "demandado": {"nombre": "Patricia Montero Crespo", "procurador": "Alberto Pardo Lozano", "abogado": "Gloria Calvo Aguilar"}
+      },
+      "cuantia": 85000.00,
+      "materia": "Proteccion posesoria de bienes hereditarios",
+      "plazos": [
+        {"tipo": "Plazo contestacion", "fecha": "2026-04-20", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda de proteccion posesoria sobre bienes hereditarios admitida el 2026-03-15"
+    },
+    {
+      "tipo": "POH",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000136",
+      "fase_actual": "Requerimiento",
+      "estado": "Requerimiento emitido",
+      "fecha_incoacion": "2025-11-08",
+      "partes": {
+        "demandante": {"nombre": "Ruben Herrero Cortes", "procurador": "Ines Fuentes Campos", "abogado": "Ramon Reyes Ferrer"},
+        "demandado": {"nombre": "Silvia Pascual Caballero", "procurador": "Emilio Aguilar Calvo", "abogado": "Clara Bravo Gallego"}
+      },
+      "cuantia": 120000.00,
+      "materia": "Proteccion posesoria de bienes hereditarios",
+      "plazos": [
+        {"tipo": "Plazo cumplimiento", "fecha": "2026-05-02", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Requerimiento al demandado para que restituya los bienes muebles del causante el 2026-03-20"
+    },
+    {
+      "tipo": "POH",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000137",
+      "fase_actual": "Lanzamiento",
+      "estado": "Lanzamiento acordado",
+      "fecha_incoacion": "2025-09-15",
+      "partes": {
+        "demandante": {"nombre": "Julio Rojas Montero", "procurador": "Eva Crespo Pardo", "abogado": "Santiago Lozano Calvo"},
+        "demandado": {"nombre": "Marina Aguilar Herrero", "procurador": "Enrique Cortes Fuentes", "abogado": "Lorena Campos Ferrer"}
+      },
+      "cuantia": 65000.00,
+      "materia": "Proteccion posesoria de bienes hereditarios",
+      "plazos": [
+        {"tipo": "Fecha lanzamiento", "fecha": "2026-05-18", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Sentencia estimatoria. Acordado lanzamiento del inmueble hereditario ocupado indebidamente el 2026-03-22"
+    },
+    {
+      "tipo": "POH",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000138",
+      "fase_actual": "Recurso",
+      "estado": "Recurso de apelacion",
+      "fecha_incoacion": "2025-07-20",
+      "partes": {
+        "demandante": {"nombre": "Manuel Reyes Pascual", "procurador": "Sara Caballero Bravo", "abogado": "Ignacio Gallego Rojas"},
+        "demandado": {"nombre": "Rocio Montero Crespo", "procurador": "Alejandro Pardo Lozano", "abogado": "Noelia Calvo Aguilar"}
+      },
+      "cuantia": 95000.00,
+      "materia": "Proteccion posesoria de bienes hereditarios",
+      "plazos": [
+        {"tipo": "Emplazamiento Audiencia", "fecha": "2026-05-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Recurso de apelacion interpuesto contra sentencia el 2026-03-24"
+    },
+    {
+      "tipo": "POH",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000139",
+      "fase_actual": "Archivo",
+      "estado": "Archivado",
+      "fecha_incoacion": "2025-05-08",
+      "partes": {
+        "demandante": {"nombre": "Federico Herrero Cortes", "procurador": "Amparo Fuentes Campos", "abogado": "David Reyes Ferrer"},
+        "demandado": {"nombre": "Elena Pascual Caballero", "procurador": "Carlos Aguilar Calvo", "abogado": "Ana Bravo Gallego"}
+      },
+      "cuantia": 45000.00,
+      "materia": "Proteccion posesoria de bienes hereditarios",
+      "plazos": [
+        {"tipo": "Archivo definitivo", "fecha": "2026-01-28", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Ejecutada sentencia. Bienes restituidos al heredero. Archivo el 2026-01-28"
+    },
+    {
+      "tipo": "POI",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000140",
+      "fase_actual": "Admision",
+      "estado": "Admitido a tramite",
+      "fecha_incoacion": "2026-02-10",
+      "partes": {
+        "demandante": {"nombre": "Luis Rojas Montero", "procurador": "Marta Crespo Pardo", "abogado": "Pedro Lozano Calvo"},
+        "demandado": {"nombre": "Sofia Aguilar Herrero", "procurador": "Javier Cortes Fuentes", "abogado": "Lucia Campos Ferrer"}
+      },
+      "cuantia": null,
+      "materia": "Interdicto de recobrar la posesion",
+      "plazos": [
+        {"tipo": "Plazo contestacion", "fecha": "2026-04-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Demanda interdictal de recobrar la posesion admitida el 2026-03-17"
+    },
+    {
+      "tipo": "POI",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000141",
+      "fase_actual": "Requerimiento",
+      "estado": "Requerimiento de restitucion",
+      "fecha_incoacion": "2025-12-05",
+      "partes": {
+        "demandante": {"nombre": "Miguel Reyes Pascual", "procurador": "Carmen Caballero Aguilar", "abogado": "Rafael Bravo Calvo"},
+        "demandado": {"nombre": "Isabel Gallego Rojas", "procurador": "Diego Montero Crespo", "abogado": "Teresa Pardo Lozano"}
+      },
+      "cuantia": null,
+      "materia": "Interdicto de retener la posesion",
+      "plazos": [
+        {"tipo": "Plazo restitucion", "fecha": "2026-04-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Requerimiento al demandado para restitucion inmediata de la posesion el 2026-03-20"
+    },
+    {
+      "tipo": "POI",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000142",
+      "fase_actual": "Lanzamiento",
+      "estado": "Lanzamiento senalado",
+      "fecha_incoacion": "2025-09-22",
+      "partes": {
+        "demandante": {"nombre": "Andres Calvo Aguilar", "procurador": "Pilar Herrero Cortes", "abogado": "Fernando Fuentes Campos"},
+        "demandado": {"nombre": "Rosa Reyes Ferrer", "procurador": "Oscar Pascual Caballero", "abogado": "Beatriz Aguilar Calvo"}
+      },
+      "cuantia": null,
+      "materia": "Tutela sumaria de la posesion",
+      "plazos": [
+        {"tipo": "Fecha lanzamiento", "fecha": "2026-05-12", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Estimada demanda. Senalado lanzamiento con comision judicial el 2026-03-22"
+    },
+    {
+      "tipo": "POI",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000143",
+      "fase_actual": "Recurso",
+      "estado": "Recurso interpuesto",
+      "fecha_incoacion": "2025-07-12",
+      "partes": {
+        "demandante": {"nombre": "Hector Bravo Gallego", "procurador": "Nuria Rojas Montero", "abogado": "Gonzalo Crespo Pardo"},
+        "demandado": {"nombre": "Cristina Lozano Calvo", "procurador": "Adrian Aguilar Herrero", "abogado": "Paula Cortes Fuentes"}
+      },
+      "cuantia": null,
+      "materia": "Interdicto de recobrar la posesion",
+      "plazos": [
+        {"tipo": "Plazo formalizacion recurso", "fecha": "2026-05-05", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Recurso de apelacion interpuesto por el demandado el 2026-03-24"
+    },
+    {
+      "tipo": "POI",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000144",
+      "fase_actual": "Archivo",
+      "estado": "Archivado",
+      "fecha_incoacion": "2025-05-18",
+      "partes": {
+        "demandante": {"nombre": "Victor Campos Ferrer", "procurador": "Raquel Reyes Pascual", "abogado": "Tomas Caballero Aguilar"},
+        "demandado": {"nombre": "Alicia Bravo Calvo", "procurador": "Marcos Gallego Rojas", "abogado": "Veronica Montero Crespo"}
+      },
+      "cuantia": null,
+      "materia": "Interdicto de retener la posesion",
+      "plazos": [
+        {"tipo": "Archivo", "fecha": "2026-02-05", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Posesion restituida al demandante. Archivo de actuaciones el 2026-02-05"
+    },
+    {
+      "tipo": "EJ",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000145",
+      "fase_actual": "Liquidacion condena",
+      "estado": "Liquidacion de condena aprobada",
+      "fecha_incoacion": "2025-10-10",
+      "partes": {
+        "penado": {"nombre": "Sergio Pardo Lozano", "abogado": "Laura Calvo Aguilar"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"}
+      },
+      "delito": "Robo con fuerza art. 238 CP",
+      "condena": "3 anos de prision",
+      "materia": "Ejecutoria penal",
+      "plazos": [
+        {"tipo": "Notificacion liquidacion", "fecha": "2026-04-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto aprobando liquidacion de condena: 3 anos de prision. Fecha licenciamiento definitivo: 2029-03-18 el 2026-03-18"
+    },
+    {
+      "tipo": "EJ",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000146",
+      "fase_actual": "Cumplimiento",
+      "estado": "En cumplimiento de condena",
+      "fecha_incoacion": "2025-08-20",
+      "partes": {
+        "penado": {"nombre": "Daniel Herrero Cortes", "abogado": "Patricia Fuentes Campos"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"}
+      },
+      "delito": "Trafico de drogas art. 368 CP",
+      "condena": "4 anos de prision y multa de 12 meses",
+      "materia": "Ejecutoria penal",
+      "plazos": [
+        {"tipo": "Revision cumplimiento", "fecha": "2026-09-18", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Penado ingresado en Centro Penitenciario Ficticio para cumplimiento de condena el 2026-03-20"
+    },
+    {
+      "tipo": "EJ",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000147",
+      "fase_actual": "Beneficios penitenciarios",
+      "estado": "Informe sobre beneficios",
+      "fecha_incoacion": "2025-06-15",
+      "partes": {
+        "penado": {"nombre": "Alberto Reyes Ferrer", "abogado": "Gloria Pascual Caballero"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"}
+      },
+      "delito": "Lesiones graves art. 149 CP",
+      "condena": "2 anos y 6 meses de prision",
+      "materia": "Ejecutoria penal",
+      "plazos": [
+        {"tipo": "Resolucion sobre beneficios", "fecha": "2026-05-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Recibida propuesta de clasificacion en tercer grado del Centro Penitenciario. Pendiente resolucion el 2026-03-22"
+    },
+    {
+      "tipo": "EJ",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000148",
+      "fase_actual": "Libertad condicional",
+      "estado": "Libertad condicional concedida",
+      "fecha_incoacion": "2025-03-10",
+      "partes": {
+        "penado": {"nombre": "Ruben Aguilar Calvo", "abogado": "Ines Bravo Gallego"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"}
+      },
+      "delito": "Estafa continuada art. 248 y 74 CP",
+      "condena": "18 meses de prision",
+      "materia": "Ejecutoria penal",
+      "plazos": [
+        {"tipo": "Revision libertad condicional", "fecha": "2026-09-24", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Auto concediendo libertad condicional con obligacion de comparecencia quincenal el 2026-03-24"
+    },
+    {
+      "tipo": "EJ",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000149",
+      "fase_actual": "Licenciamiento",
+      "estado": "Licenciamiento definitivo",
+      "fecha_incoacion": "2025-01-08",
+      "partes": {
+        "penado": {"nombre": "Ramon Rojas Montero", "abogado": "Silvia Crespo Pardo"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"}
+      },
+      "delito": "Robo con fuerza art. 238 CP",
+      "condena": "3 anos de prision",
+      "materia": "Ejecutoria penal",
+      "plazos": [
+        {"tipo": "Archivo ejecutoria", "fecha": "2026-03-15", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Licenciamiento definitivo del penado por cumplimiento integro de la condena. Archivo el 2026-03-15"
+    },
+    {
+      "tipo": "EFM",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000150",
+      "fase_actual": "Liquidacion",
+      "estado": "Liquidacion de multa",
+      "fecha_incoacion": "2026-01-12",
+      "partes": {
+        "penado": {"nombre": "Emilio Lozano Calvo", "abogado": "Clara Aguilar Herrero"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"}
+      },
+      "delito": "Conduccion etilica art. 379.2 CP",
+      "multa": "6 meses, cuota 10 euros/dia = 1.800 euros",
+      "materia": "Ejecutoria de pena de multa",
+      "plazos": [
+        {"tipo": "Requerimiento de pago", "fecha": "2026-04-08", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Liquidacion de multa: 6 meses con cuota diaria de 12 euros = 2.160 euros el 2026-03-18"
+    },
+    {
+      "tipo": "EFM",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000151",
+      "fase_actual": "Requerimiento multa",
+      "estado": "Requerimiento de pago de multa",
+      "fecha_incoacion": "2025-11-25",
+      "partes": {
+        "penado": {"nombre": "Julio Cortes Fuentes", "abogado": "Eva Campos Ferrer"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"}
+      },
+      "delito": "Lesiones leves art. 147.2 CP",
+      "multa": "3 meses, cuota 12 euros/dia = 1.080 euros",
+      "materia": "Ejecutoria de pena de multa",
+      "plazos": [
+        {"tipo": "Plazo pago multa", "fecha": "2026-05-02", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Requerimiento de pago de multa con apercibimiento de responsabilidad personal subsidiaria el 2026-03-20"
+    },
+    {
+      "tipo": "EFM",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000152",
+      "fase_actual": "Pago",
+      "estado": "Multa abonada",
+      "fecha_incoacion": "2025-09-30",
+      "partes": {
+        "penado": {"nombre": "Santiago Reyes Pascual", "abogado": "Marina Caballero Aguilar"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"}
+      },
+      "delito": "Hurto art. 234 CP",
+      "multa": "8 meses, cuota 8 euros/dia = 1.920 euros",
+      "materia": "Ejecutoria de pena de multa",
+      "plazos": [
+        {"tipo": "Archivo por pago", "fecha": "2026-03-22", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Multa abonada integramente por el penado mediante ingreso en cuenta del juzgado el 2026-03-22"
+    },
+    {
+      "tipo": "EFM",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000153",
+      "fase_actual": "Impago (arresto sustitutorio)",
+      "estado": "Arresto sustitutorio acordado",
+      "fecha_incoacion": "2025-07-28",
+      "partes": {
+        "penado": {"nombre": "Enrique Bravo Calvo", "abogado": "Lorena Gallego Rojas"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"}
+      },
+      "delito": "Danos art. 263 CP",
+      "multa": "4 meses, cuota 15 euros/dia = 1.800 euros",
+      "materia": "Ejecutoria de pena de multa",
+      "plazos": [
+        {"tipo": "Cumplimiento arresto", "fecha": "2026-06-15", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Impago de multa. Auto acordando responsabilidad personal subsidiaria: 90 dias de arresto el 2026-03-24"
+    },
+    {
+      "tipo": "EFM",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000154",
+      "fase_actual": "Archivo",
+      "estado": "Archivado",
+      "fecha_incoacion": "2025-05-15",
+      "partes": {
+        "penado": {"nombre": "Manuel Montero Crespo", "abogado": "Sara Pardo Lozano"},
+        "ministerio_fiscal": {"intervencion": "Preceptiva"}
+      },
+      "delito": "Conduccion etilica art. 379.2 CP",
+      "multa": "6 meses, cuota 10 euros/dia = 1.800 euros",
+      "materia": "Ejecutoria de pena de multa",
+      "plazos": [
+        {"tipo": "Archivo", "fecha": "2026-02-20", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Cumplida responsabilidad personal subsidiaria. Archivo de ejecutoria el 2026-02-20"
+    },
+    {
+      "tipo": "COG",
+      "numero": "1/2026",
+      "nig": "99001-42-1-2026-0000155",
+      "fase_actual": "Tasacion",
+      "estado": "Tasacion de costas practicada",
+      "fecha_incoacion": "2025-12-20",
+      "partes": {
+        "demandante": {"nombre": "Ignacio Calvo Aguilar", "procurador": "Rocio Herrero Cortes", "abogado": "Alejandro Fuentes Campos"},
+        "demandado": {"nombre": "Noelia Reyes Ferrer", "procurador": "Federico Pascual Caballero", "abogado": "Amparo Aguilar Calvo"}
+      },
+      "cuantia": 4850.00,
+      "materia": "Tasacion de costas procesales",
+      "plazos": [
+        {"tipo": "Traslado tasacion", "fecha": "2026-04-12", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Tasacion de costas practicada por el LAJ por importe de 4.850 euros el 2026-03-18"
+    },
+    {
+      "tipo": "COG",
+      "numero": "2/2026",
+      "nig": "99001-42-1-2026-0000156",
+      "fase_actual": "Traslado partes",
+      "estado": "Traslado a las partes",
+      "fecha_incoacion": "2025-10-15",
+      "partes": {
+        "demandante": {"nombre": "David Bravo Gallego", "procurador": "Elena Rojas Montero", "abogado": "Carlos Crespo Pardo"},
+        "demandado": {"nombre": "Ana Lozano Calvo", "procurador": "Luis Aguilar Herrero", "abogado": "Marta Cortes Fuentes"}
+      },
+      "cuantia": 6200.00,
+      "materia": "Tasacion de costas procesales",
+      "plazos": [
+        {"tipo": "Plazo impugnacion", "fecha": "2026-04-28", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Dado traslado de la tasacion de costas a la parte condenada para posible impugnacion el 2026-03-20"
+    },
+    {
+      "tipo": "COG",
+      "numero": "3/2026",
+      "nig": "99001-42-1-2026-0000157",
+      "fase_actual": "Impugnacion",
+      "estado": "Impugnacion de costas",
+      "fecha_incoacion": "2025-08-08",
+      "partes": {
+        "demandante": {"nombre": "Pedro Campos Ferrer", "procurador": "Sofia Reyes Pascual", "abogado": "Javier Caballero Aguilar"},
+        "demandado": {"nombre": "Lucia Bravo Calvo", "procurador": "Miguel Gallego Rojas", "abogado": "Carmen Montero Crespo"}
+      },
+      "cuantia": 8300.00,
+      "materia": "Tasacion de costas procesales",
+      "plazos": [
+        {"tipo": "Resolucion impugnacion", "fecha": "2026-05-10", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Escrito de impugnacion de tasacion de costas por excesivas. Solicitado informe del Colegio de Abogados el 2026-03-22"
+    },
+    {
+      "tipo": "COG",
+      "numero": "4/2026",
+      "nig": "99001-42-1-2026-0000158",
+      "fase_actual": "Aprobacion",
+      "estado": "Costas aprobadas",
+      "fecha_incoacion": "2025-06-25",
+      "partes": {
+        "demandante": {"nombre": "Rafael Pardo Lozano", "procurador": "Isabel Calvo Aguilar", "abogado": "Diego Herrero Cortes"},
+        "demandado": {"nombre": "Teresa Fuentes Campos", "procurador": "Andres Reyes Ferrer", "abogado": "Pilar Pascual Caballero"}
+      },
+      "cuantia": 3920.00,
+      "materia": "Tasacion de costas procesales",
+      "plazos": [
+        {"tipo": "Plazo pago", "fecha": "2026-04-30", "estado": "pendiente"}
+      ],
+      "ultimo_tramite": "Decreto aprobando tasacion de costas por importe de 3.920 euros (reducida tras informe colegial) el 2026-03-24"
+    },
+    {
+      "tipo": "COG",
+      "numero": "5/2026",
+      "nig": "99001-42-1-2026-0000159",
+      "fase_actual": "Pago",
+      "estado": "Costas abonadas",
+      "fecha_incoacion": "2025-04-18",
+      "partes": {
+        "demandante": {"nombre": "Fernando Aguilar Calvo", "procurador": "Rosa Bravo Gallego", "abogado": "Oscar Rojas Montero"},
+        "demandado": {"nombre": "Beatriz Crespo Pardo", "procurador": "Hector Lozano Calvo", "abogado": "Nuria Aguilar Herrero"}
+      },
+      "cuantia": 2750.00,
+      "materia": "Tasacion de costas procesales",
+      "plazos": [
+        {"tipo": "Archivo", "fecha": "2026-03-15", "estado": "cumplido"}
+      ],
+      "ultimo_tramite": "Costas abonadas por la parte condenada. Entregadas al beneficiario el 2026-03-15"
+    }
+  ]
+}

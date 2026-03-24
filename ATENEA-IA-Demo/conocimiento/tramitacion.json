@@ -1,0 +1,1920 @@
+{
+  "civil": {
+    "JVB": {
+      "nombre": "Juicio Verbal",
+      "base_legal": "Arts. 437-447 LEC",
+      "cuantia_maxima": 6000,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Admision",
+          "descripcion": "Examen de la demanda y admision a tramite",
+          "tramites": [
+            {"nombre": "Decreto de admision a tramite", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Requerimiento de subsanacion de defectos", "responsable": "LAJ", "plazo_dias": 10},
+            {"nombre": "Traslado de la demanda al demandado", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Emplazamiento al demandado para contestacion", "responsable": "LAJ", "plazo_dias": 10}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Contestacion",
+          "descripcion": "Plazo de contestacion a la demanda y reconvencion",
+          "tramites": [
+            {"nombre": "Contestacion a la demanda", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Reconvencion en su caso", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Traslado de la reconvencion al actor", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Senalamiento de vista",
+          "descripcion": "Fijacion de fecha para la celebracion de la vista",
+          "tramites": [
+            {"nombre": "Diligencia de ordenacion senalando vista", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Citacion a las partes para vista", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Citacion a testigos y peritos", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Vista",
+          "descripcion": "Celebracion de la vista oral con practica de prueba",
+          "tramites": [
+            {"nombre": "Celebracion de la vista", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Fijacion de hechos controvertidos", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Proposicion y admision de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Conclusiones orales", "responsable": "partes", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Sentencia",
+          "descripcion": "Dictado de sentencia por el Juez",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 10},
+            {"nombre": "Notificacion de la sentencia a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 6
+        },
+        {
+          "id": 6,
+          "nombre": "Firmeza y ejecucion",
+          "descripcion": "Declaracion de firmeza o interposicion de recursos",
+          "tramites": [
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Recurso de apelacion en su caso", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Archivo provisional o definitivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "ORD": {
+      "nombre": "Juicio Ordinario",
+      "base_legal": "Arts. 399-436 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Admision",
+          "descripcion": "Examen de la demanda y admision a tramite",
+          "tramites": [
+            {"nombre": "Decreto de admision a tramite", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Requerimiento de subsanacion", "responsable": "LAJ", "plazo_dias": 10},
+            {"nombre": "Traslado de la demanda al demandado", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Emplazamiento al demandado", "responsable": "LAJ", "plazo_dias": 20}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Contestacion",
+          "descripcion": "Contestacion a la demanda por el demandado",
+          "tramites": [
+            {"nombre": "Contestacion a la demanda", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Reconvencion", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Traslado de la reconvencion al demandante", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Contestacion a la reconvencion", "responsable": "partes", "plazo_dias": 20}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Audiencia previa",
+          "descripcion": "Audiencia previa al juicio para depurar el proceso",
+          "tramites": [
+            {"nombre": "Convocatoria de audiencia previa", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion de audiencia previa", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Intento de acuerdo entre partes", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Examen de cuestiones procesales", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Fijacion de hechos controvertidos", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Proposicion y admision de prueba", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Juicio oral",
+          "descripcion": "Celebracion del acto del juicio con practica de prueba",
+          "tramites": [
+            {"nombre": "Senalamiento de juicio", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Citacion a las partes, testigos y peritos", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion del juicio", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de pruebas", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Conclusiones e informes", "responsable": "partes", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Sentencia",
+          "descripcion": "Dictado de sentencia",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 20},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Aclaracion de sentencia en su caso", "responsable": "Juez", "plazo_dias": 5}
+          ],
+          "siguiente_fase": 6
+        },
+        {
+          "id": 6,
+          "nombre": "Recursos y firmeza",
+          "descripcion": "Interposicion de recursos o declaracion de firmeza",
+          "tramites": [
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Traslado del recurso a la contraparte", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Oposicion al recurso", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Remision de autos al tribunal de apelacion", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "OR5": {
+      "nombre": "Ordinario Especial",
+      "base_legal": "Arts. 249 y 399 ss. LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Admision",
+          "descripcion": "Admision de la demanda con especialidades procedimentales",
+          "tramites": [
+            {"nombre": "Decreto de admision a tramite", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Requerimiento de subsanacion", "responsable": "LAJ", "plazo_dias": 10},
+            {"nombre": "Emplazamiento al demandado", "responsable": "LAJ", "plazo_dias": 20}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Contestacion",
+          "descripcion": "Contestacion a la demanda",
+          "tramites": [
+            {"nombre": "Contestacion a la demanda", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Reconvencion", "responsable": "partes", "plazo_dias": 20}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Audiencia previa",
+          "descripcion": "Audiencia previa al juicio",
+          "tramites": [
+            {"nombre": "Convocatoria de audiencia previa", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion de audiencia previa", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Proposicion y admision de prueba", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Juicio oral",
+          "descripcion": "Celebracion del juicio con practica de prueba",
+          "tramites": [
+            {"nombre": "Senalamiento de juicio", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Conclusiones", "responsable": "partes", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Sentencia",
+          "descripcion": "Dictado de sentencia",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 20},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 6
+        },
+        {
+          "id": 6,
+          "nombre": "Firmeza",
+          "descripcion": "Declaracion de firmeza o recurso",
+          "tramites": [
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "JVD": {
+      "nombre": "Juicio Verbal de Desahucio",
+      "base_legal": "Arts. 249.1.6, 440, 441 y 442 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Admision",
+          "descripcion": "Admision de la demanda de desahucio con requerimiento de pago",
+          "tramites": [
+            {"nombre": "Decreto de admision a tramite", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Requerimiento de pago al demandado", "responsable": "LAJ", "plazo_dias": 10},
+            {"nombre": "Traslado de la demanda", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion a servicios sociales", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Enervacion o contestacion",
+          "descripcion": "Plazo para pago enervador o contestacion",
+          "tramites": [
+            {"nombre": "Pago o consignacion enervadora", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Contestacion a la demanda", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Oposicion a la demanda", "responsable": "partes", "plazo_dias": 10}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Vista",
+          "descripcion": "Celebracion de la vista en caso de oposicion",
+          "tramites": [
+            {"nombre": "Senalamiento de vista", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion de la vista", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Sentencia",
+          "descripcion": "Dictado de sentencia estimatoria o desestimatoria",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 10},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Lanzamiento",
+          "descripcion": "Senalamiento y practica del lanzamiento",
+          "tramites": [
+            {"nombre": "Decreto senalando lanzamiento", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion a servicios sociales del lanzamiento", "responsable": "LAJ", "plazo_dias": 15},
+            {"nombre": "Practica del lanzamiento", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Diligencia de lanzamiento", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 6
+        },
+        {
+          "id": 6,
+          "nombre": "Archivo",
+          "descripcion": "Archivo del procedimiento",
+          "tramites": [
+            {"nombre": "Decreto de archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "JVU": {
+      "nombre": "Juicio Verbal Urgente",
+      "base_legal": "Arts. 250.1 LEC (tutela sumaria)",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Admision preferente",
+          "descripcion": "Admision con tramitacion preferente y urgente",
+          "tramites": [
+            {"nombre": "Decreto de admision preferente", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Emplazamiento urgente al demandado", "responsable": "LAJ", "plazo_dias": 5}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Contestacion",
+          "descripcion": "Plazo reducido de contestacion",
+          "tramites": [
+            {"nombre": "Contestacion a la demanda", "responsable": "partes", "plazo_dias": 5}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Vista",
+          "descripcion": "Celebracion de vista con caracter urgente",
+          "tramites": [
+            {"nombre": "Senalamiento preferente de vista", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion de la vista", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Sentencia",
+          "descripcion": "Sentencia con caracter urgente",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 5},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Firmeza",
+          "descripcion": "Firmeza o recurso",
+          "tramites": [
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 20}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "MON": {
+      "nombre": "Proceso Monitorio",
+      "base_legal": "Arts. 812-818 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Admision",
+          "descripcion": "Examen de la peticion inicial y documentos",
+          "tramites": [
+            {"nombre": "Decreto de admision de la peticion monitoria", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Inadmision por falta de documentos", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Requerimiento de subsanacion", "responsable": "LAJ", "plazo_dias": 10}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Requerimiento de pago",
+          "descripcion": "Requerimiento al deudor para que pague u oponga",
+          "tramites": [
+            {"nombre": "Decreto requiriendo de pago al deudor", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Notificacion personal al deudor", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Averiguacion de domicilio", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Respuesta del deudor",
+          "descripcion": "Pago, oposicion o incomparecencia del deudor",
+          "tramites": [
+            {"nombre": "Pago por el deudor", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Escrito de oposicion", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Incomparecencia del deudor", "responsable": "partes", "plazo_dias": 20}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Resolucion",
+          "descripcion": "Despacho de ejecucion o transformacion en verbal/ordinario",
+          "tramites": [
+            {"nombre": "Auto despachando ejecucion por incomparecencia", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto dando por terminado el proceso por pago", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Transformacion en juicio verbal u ordinario por oposicion", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "VRB": {
+      "nombre": "Verbal Arrendaticio",
+      "base_legal": "Arts. 249.1.6 y 250.1 LEC, LAU",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Admision",
+          "descripcion": "Admision de la demanda arrendaticia",
+          "tramites": [
+            {"nombre": "Decreto de admision a tramite", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Traslado de la demanda", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Emplazamiento al demandado", "responsable": "LAJ", "plazo_dias": 10}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Contestacion",
+          "descripcion": "Contestacion a la demanda arrendaticia",
+          "tramites": [
+            {"nombre": "Contestacion a la demanda", "responsable": "partes", "plazo_dias": 10}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Vista",
+          "descripcion": "Celebracion de la vista oral",
+          "tramites": [
+            {"nombre": "Senalamiento de vista", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion de la vista", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Sentencia",
+          "descripcion": "Dictado de sentencia",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 10},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Firmeza y ejecucion",
+          "descripcion": "Firmeza y en su caso ejecucion de la sentencia",
+          "tramites": [
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "DCT": {
+      "nombre": "Divorcio Contencioso",
+      "base_legal": "Arts. 770 y ss. LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Admision",
+          "descripcion": "Admision de la demanda de divorcio contencioso",
+          "tramites": [
+            {"nombre": "Decreto de admision a tramite", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Emplazamiento al demandado", "responsable": "LAJ", "plazo_dias": 20},
+            {"nombre": "Requerimiento para designar abogado y procurador", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Contestacion",
+          "descripcion": "Contestacion y en su caso reconvencion",
+          "tramites": [
+            {"nombre": "Contestacion a la demanda", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Reconvencion", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Traslado de la reconvencion", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Medidas provisionales",
+          "descripcion": "Adopcion de medidas provisionales si se solicitan",
+          "tramites": [
+            {"nombre": "Auto de medidas provisionales", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Comparecencia de medidas provisionales", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informe del equipo psicosocial", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Audiencia a menores en su caso", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Vista",
+          "descripcion": "Celebracion de la vista principal",
+          "tramites": [
+            {"nombre": "Senalamiento de vista", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Citacion a las partes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion de la vista", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informe del Ministerio Fiscal", "responsable": "Ministerio Fiscal", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Sentencia",
+          "descripcion": "Sentencia de divorcio con medidas definitivas",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 10},
+            {"nombre": "Notificacion a las partes y al Ministerio Fiscal", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion al Registro Civil", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 6
+        },
+        {
+          "id": 6,
+          "nombre": "Firmeza",
+          "descripcion": "Firmeza y comunicacion a registros",
+          "tramites": [
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Libramiento de testimonio al Registro Civil", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion al Registro de la Propiedad en su caso", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "DMA": {
+      "nombre": "Divorcio de Mutuo Acuerdo",
+      "base_legal": "Art. 777 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Admision",
+          "descripcion": "Admision de la demanda conjunta con convenio regulador",
+          "tramites": [
+            {"nombre": "Decreto de admision a tramite", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comprobacion del convenio regulador", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Requerimiento de subsanacion del convenio", "responsable": "LAJ", "plazo_dias": 10}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Ratificacion",
+          "descripcion": "Ratificacion del convenio por ambos conyuges",
+          "tramites": [
+            {"nombre": "Senalamiento para ratificacion", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Ratificacion del convenio por los conyuges", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informe del Ministerio Fiscal (si hay menores)", "responsable": "Ministerio Fiscal", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Sentencia",
+          "descripcion": "Sentencia aprobando el convenio regulador",
+          "tramites": [
+            {"nombre": "Sentencia aprobando el convenio", "responsable": "Juez", "plazo_dias": 5},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion al Registro Civil", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Firmeza",
+          "descripcion": "Firmeza y libramiento de testimonios",
+          "tramites": [
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Testimonio al Registro Civil", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "MMC": {
+      "nombre": "Modificacion de Medidas Contenciosa",
+      "base_legal": "Art. 775 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Admision",
+          "descripcion": "Admision de la demanda de modificacion de medidas",
+          "tramites": [
+            {"nombre": "Decreto de admision a tramite", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Emplazamiento al demandado", "responsable": "LAJ", "plazo_dias": 20},
+            {"nombre": "Traslado al Ministerio Fiscal si hay menores", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Contestacion",
+          "descripcion": "Contestacion a la demanda de modificacion",
+          "tramites": [
+            {"nombre": "Contestacion a la demanda", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Reconvencion", "responsable": "partes", "plazo_dias": 20}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Vista",
+          "descripcion": "Celebracion de la vista",
+          "tramites": [
+            {"nombre": "Senalamiento de vista", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Informe del equipo psicosocial", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Celebracion de la vista", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informe del Ministerio Fiscal", "responsable": "Ministerio Fiscal", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Sentencia",
+          "descripcion": "Sentencia modificando o manteniendo medidas",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 10},
+            {"nombre": "Notificacion a las partes y al Ministerio Fiscal", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Firmeza",
+          "descripcion": "Firmeza o recurso",
+          "tramites": [
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "F02": {
+      "nombre": "Procedimiento de Familia Generico",
+      "base_legal": "Arts. 748-781 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Admision",
+          "descripcion": "Admision de la demanda de familia",
+          "tramites": [
+            {"nombre": "Decreto de admision a tramite", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Emplazamiento al demandado", "responsable": "LAJ", "plazo_dias": 20},
+            {"nombre": "Traslado al Ministerio Fiscal", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Contestacion",
+          "descripcion": "Contestacion a la demanda",
+          "tramites": [
+            {"nombre": "Contestacion a la demanda", "responsable": "partes", "plazo_dias": 20}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Medidas provisionales",
+          "descripcion": "Adopcion de medidas provisionales en su caso",
+          "tramites": [
+            {"nombre": "Solicitud de medidas provisionales", "responsable": "partes", "plazo_dias": null},
+            {"nombre": "Comparecencia de medidas", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto de medidas provisionales", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Vista",
+          "descripcion": "Vista oral con practica de prueba",
+          "tramites": [
+            {"nombre": "Senalamiento de vista", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion de la vista", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Sentencia",
+          "descripcion": "Dictado de sentencia",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 10},
+            {"nombre": "Notificacion a las partes y Ministerio Fiscal", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 6
+        },
+        {
+          "id": 6,
+          "nombre": "Firmeza",
+          "descripcion": "Firmeza y archivo",
+          "tramites": [
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 20},
+            {"nombre": "Archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "ITR": {
+      "nombre": "Internamiento no Voluntario",
+      "base_legal": "Art. 763 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Solicitud o comunicacion",
+          "descripcion": "Recepcion de solicitud o comunicacion de internamiento urgente",
+          "tramites": [
+            {"nombre": "Recepcion de solicitud de internamiento", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion de internamiento urgente por el centro", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Traslado al Ministerio Fiscal", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Examen judicial",
+          "descripcion": "Examen personal del afectado por el Juez",
+          "tramites": [
+            {"nombre": "Examen personal del afectado", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Audiencia al Ministerio Fiscal", "responsable": "Ministerio Fiscal", "plazo_dias": null},
+            {"nombre": "Informe del facultativo del centro", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Dictamen de facultativo designado por el Juzgado", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Resolucion",
+          "descripcion": "Auto autorizando o denegando el internamiento",
+          "tramites": [
+            {"nombre": "Auto autorizando el internamiento", "responsable": "Juez", "plazo_dias": 72},
+            {"nombre": "Auto denegando el internamiento", "responsable": "Juez", "plazo_dias": 72},
+            {"nombre": "Notificacion al afectado y al Ministerio Fiscal", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Control periodico",
+          "descripcion": "Revision periodica del internamiento",
+          "tramites": [
+            {"nombre": "Solicitud de informes periodicos al centro", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Revision semestral del internamiento", "responsable": "Juez", "plazo_dias": 180},
+            {"nombre": "Auto de cese del internamiento", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto de continuacion del internamiento", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "X58": {
+      "nombre": "Jurisdiccion Voluntaria",
+      "base_legal": "Ley 15/2015 de Jurisdiccion Voluntaria",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Solicitud",
+          "descripcion": "Presentacion y admision de la solicitud",
+          "tramites": [
+            {"nombre": "Decreto de admision de la solicitud", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Requerimiento de subsanacion", "responsable": "LAJ", "plazo_dias": 10},
+            {"nombre": "Citacion a interesados", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Traslado al Ministerio Fiscal en su caso", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Comparecencia",
+          "descripcion": "Celebracion de la comparecencia",
+          "tramites": [
+            {"nombre": "Senalamiento de comparecencia", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion de la comparecencia", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informe del Ministerio Fiscal", "responsable": "Ministerio Fiscal", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Resolucion",
+          "descripcion": "Auto o decreto resolviendo el expediente",
+          "tramites": [
+            {"nombre": "Auto resolutorio", "responsable": "Juez", "plazo_dias": 5},
+            {"nombre": "Decreto resolutorio (competencia LAJ)", "responsable": "LAJ", "plazo_dias": 5},
+            {"nombre": "Notificacion a los interesados", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Firmeza y efectos",
+          "descripcion": "Firmeza y ejecucion de lo acordado",
+          "tramites": [
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Libramiento de testimonios", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion a registros publicos", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Archivo del expediente", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "X53": {
+      "nombre": "Conciliacion",
+      "base_legal": "Arts. 139-148 Ley 15/2015 de Jurisdiccion Voluntaria",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Solicitud",
+          "descripcion": "Presentacion de la papeleta de conciliacion",
+          "tramites": [
+            {"nombre": "Decreto de admision de la solicitud de conciliacion", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Citacion a las partes para el acto de conciliacion", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Acto de conciliacion",
+          "descripcion": "Celebracion del acto de conciliacion",
+          "tramites": [
+            {"nombre": "Celebracion del acto de conciliacion", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Avenencia de las partes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Acto sin avenencia", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Incomparecencia de alguna parte", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Testimonio y archivo",
+          "descripcion": "Expedicion de testimonio y archivo",
+          "tramites": [
+            {"nombre": "Decreto aprobando la avenencia", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto declarando intentada sin efecto", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Expedicion de testimonio", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Archivo del expediente", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    }
+  },
+  "penal": {
+    "DUD": {
+      "nombre": "Diligencias Urgentes",
+      "base_legal": "Arts. 795-803 LECrim",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Incoacion",
+          "descripcion": "Recepcion del atestado e incoacion de diligencias urgentes",
+          "tramites": [
+            {"nombre": "Auto de incoacion de diligencias urgentes", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Recepcion del atestado policial", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Designacion de abogado al detenido", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Instruccion urgente",
+          "descripcion": "Practica de diligencias de investigacion esenciales",
+          "tramites": [
+            {"nombre": "Declaracion del investigado", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Declaracion de testigos", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informes periciales urgentes", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Reconocimiento en rueda", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Resolucion intermedia",
+          "descripcion": "Auto de apertura de juicio oral o transformacion",
+          "tramites": [
+            {"nombre": "Auto de apertura de juicio oral", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto de sobreseimiento", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto transformando en diligencias previas", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Escrito de acusacion del Ministerio Fiscal", "responsable": "Ministerio Fiscal", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Juicio oral",
+          "descripcion": "Celebracion del juicio oral ante el Juzgado de lo Penal",
+          "tramites": [
+            {"nombre": "Escrito de defensa", "responsable": "partes", "plazo_dias": null},
+            {"nombre": "Senalamiento de juicio oral", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion del juicio oral", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informes de las partes", "responsable": "partes", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Sentencia",
+          "descripcion": "Dictado de sentencia",
+          "tramites": [
+            {"nombre": "Sentencia in voce o escrita", "responsable": "Juez", "plazo_dias": 5},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 6
+        },
+        {
+          "id": 6,
+          "nombre": "Firmeza",
+          "descripcion": "Firmeza o recurso de apelacion",
+          "tramites": [
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Remision de la causa para ejecucion", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "DPA": {
+      "nombre": "Diligencias Previas",
+      "base_legal": "Arts. 774-789 LECrim",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Incoacion",
+          "descripcion": "Incoacion de diligencias previas",
+          "tramites": [
+            {"nombre": "Auto de incoacion de diligencias previas", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Recepcion del atestado o denuncia", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion al Ministerio Fiscal", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Instruccion",
+          "descripcion": "Practica de diligencias de investigacion",
+          "tramites": [
+            {"nombre": "Declaracion del investigado", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Declaracion de testigos", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informes periciales", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Diligencias de investigacion solicitadas por las partes", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Ruedas de reconocimiento", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Oficios a entidades publicas y privadas", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Fase intermedia",
+          "descripcion": "Auto de procedimiento abreviado o sobreseimiento",
+          "tramites": [
+            {"nombre": "Auto de transformacion en procedimiento abreviado", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto de sobreseimiento libre", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto de sobreseimiento provisional", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Traslado al Ministerio Fiscal para acusacion", "responsable": "LAJ", "plazo_dias": 10},
+            {"nombre": "Escrito de acusacion del Ministerio Fiscal", "responsable": "Ministerio Fiscal", "plazo_dias": null},
+            {"nombre": "Escrito de acusacion particular", "responsable": "partes", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Apertura juicio oral",
+          "descripcion": "Auto de apertura de juicio oral",
+          "tramites": [
+            {"nombre": "Auto de apertura de juicio oral", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Traslado a la defensa para escrito de defensa", "responsable": "LAJ", "plazo_dias": 10},
+            {"nombre": "Escrito de defensa", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Remision al Juzgado de lo Penal", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Juicio oral",
+          "descripcion": "Celebracion del juicio oral ante el Juzgado de lo Penal",
+          "tramites": [
+            {"nombre": "Senalamiento de juicio oral", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion del juicio oral", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Conformidad del acusado en su caso", "responsable": "partes", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informes finales", "responsable": "partes", "plazo_dias": null}
+          ],
+          "siguiente_fase": 6
+        },
+        {
+          "id": 6,
+          "nombre": "Sentencia",
+          "descripcion": "Dictado de sentencia condenatoria o absolutoria",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 10},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "LEV": {
+      "nombre": "Juicio por Delito Leve",
+      "base_legal": "Arts. 962-967 LECrim",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Incoacion",
+          "descripcion": "Incoacion del juicio por delito leve",
+          "tramites": [
+            {"nombre": "Auto de incoacion de juicio por delito leve", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Recepcion del atestado o denuncia", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Citacion a juicio",
+          "descripcion": "Citacion de las partes al acto del juicio",
+          "tramites": [
+            {"nombre": "Decreto de citacion a juicio", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Citacion al denunciante", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Citacion al denunciado", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Citacion a testigos", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Juicio oral",
+          "descripcion": "Celebracion del juicio oral",
+          "tramites": [
+            {"nombre": "Celebracion del juicio oral", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informes finales", "responsable": "partes", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Sentencia",
+          "descripcion": "Dictado de sentencia oral o escrita",
+          "tramites": [
+            {"nombre": "Sentencia oral in voce", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Sentencia escrita", "responsable": "Juez", "plazo_dias": 3},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Firmeza",
+          "descripcion": "Firmeza o recurso de apelacion",
+          "tramites": [
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 5},
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "LEI": {
+      "nombre": "Juicio Leve con Investigado",
+      "base_legal": "Arts. 962-967 LECrim",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Incoacion",
+          "descripcion": "Incoacion con identificacion del investigado",
+          "tramites": [
+            {"nombre": "Auto de incoacion", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Recepcion del atestado con investigado identificado", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Informacion de derechos al investigado", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Citacion a juicio",
+          "descripcion": "Citacion inmediata para juicio oral",
+          "tramites": [
+            {"nombre": "Decreto de citacion a juicio", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Citacion al investigado con apercibimiento", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Citacion a victima y testigos", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Juicio oral",
+          "descripcion": "Celebracion del juicio oral",
+          "tramites": [
+            {"nombre": "Celebracion del juicio oral", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informes finales", "responsable": "partes", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Sentencia",
+          "descripcion": "Dictado de sentencia",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 3},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Firmeza",
+          "descripcion": "Firmeza o recurso",
+          "tramites": [
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 5},
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "POP": {
+      "nombre": "Procedimiento Ordinario Penal",
+      "base_legal": "Arts. 780-793 LECrim (Procedimiento Abreviado)",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Incoacion",
+          "descripcion": "Incoacion de diligencias previas por el Juzgado de Instruccion",
+          "tramites": [
+            {"nombre": "Auto de incoacion de diligencias previas", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Recepcion del atestado o denuncia", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion al Ministerio Fiscal", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Instruccion",
+          "descripcion": "Fase de investigacion y diligencias",
+          "tramites": [
+            {"nombre": "Declaracion del investigado", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Declaracion de testigos", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informes periciales", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Diligencias de investigacion", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Fase intermedia",
+          "descripcion": "Auto de PA y escritos de acusacion y defensa",
+          "tramites": [
+            {"nombre": "Auto de transformacion en procedimiento abreviado", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Escrito de acusacion del Ministerio Fiscal", "responsable": "Ministerio Fiscal", "plazo_dias": 10},
+            {"nombre": "Escrito de acusacion particular", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Auto de apertura de juicio oral", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Escrito de defensa", "responsable": "partes", "plazo_dias": 10}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Juicio oral",
+          "descripcion": "Celebracion del juicio oral",
+          "tramites": [
+            {"nombre": "Senalamiento de juicio oral", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Cuestiones previas", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Conformidad del acusado", "responsable": "partes", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informes finales", "responsable": "partes", "plazo_dias": null},
+            {"nombre": "Ultima palabra del acusado", "responsable": "partes", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Sentencia",
+          "descripcion": "Dictado y notificacion de sentencia",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 10},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 6
+        },
+        {
+          "id": 6,
+          "nombre": "Recursos y firmeza",
+          "descripcion": "Recursos o declaracion de firmeza",
+          "tramites": [
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Remision para ejecucion", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "SU": {
+      "nombre": "Sumario Ordinario",
+      "base_legal": "Arts. 299-749 LECrim",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Incoacion",
+          "descripcion": "Incoacion del sumario por delito grave",
+          "tramites": [
+            {"nombre": "Auto de incoacion de sumario", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Comunicacion al Ministerio Fiscal", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion a la Audiencia Provincial", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Instruccion sumarial",
+          "descripcion": "Practica de diligencias sumariales",
+          "tramites": [
+            {"nombre": "Declaracion indagatoria del investigado", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto de procesamiento", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto de prision provisional o libertad provisional", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Declaracion de testigos", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informes periciales", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Inspecciones oculares", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Diligencias de careo", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Conclusion del sumario",
+          "descripcion": "Auto de conclusion del sumario y remision a la Audiencia",
+          "tramites": [
+            {"nombre": "Auto declarando concluso el sumario", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Remision de la causa a la Audiencia Provincial", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Auto de la Audiencia confirmando o revocando conclusion", "responsable": "Magistrado", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Calificaciones",
+          "descripcion": "Escritos de calificacion provisional",
+          "tramites": [
+            {"nombre": "Auto de apertura de juicio oral", "responsable": "Magistrado", "plazo_dias": null},
+            {"nombre": "Escrito de calificacion provisional del Ministerio Fiscal", "responsable": "Ministerio Fiscal", "plazo_dias": 5},
+            {"nombre": "Escrito de calificacion de la acusacion particular", "responsable": "partes", "plazo_dias": 5},
+            {"nombre": "Escrito de calificacion de la defensa", "responsable": "partes", "plazo_dias": 5}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Juicio oral",
+          "descripcion": "Celebracion del juicio oral ante la Audiencia Provincial",
+          "tramites": [
+            {"nombre": "Senalamiento de juicio oral", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion del juicio oral", "responsable": "Magistrado", "plazo_dias": null},
+            {"nombre": "Practica de prueba", "responsable": "Magistrado", "plazo_dias": null},
+            {"nombre": "Calificaciones definitivas", "responsable": "partes", "plazo_dias": null},
+            {"nombre": "Informes finales", "responsable": "partes", "plazo_dias": null},
+            {"nombre": "Ultima palabra del acusado", "responsable": "partes", "plazo_dias": null}
+          ],
+          "siguiente_fase": 6
+        },
+        {
+          "id": 6,
+          "nombre": "Sentencia",
+          "descripcion": "Sentencia de la Audiencia Provincial",
+          "tramites": [
+            {"nombre": "Sentencia", "responsable": "Magistrado", "plazo_dias": 10},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Recurso de apelacion ante el TSJ", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "JRD": {
+      "nombre": "Juicio Rapido",
+      "base_legal": "Arts. 795-803 LECrim",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Actuaciones policiales",
+          "descripcion": "Atestado policial con citacion para guardia",
+          "tramites": [
+            {"nombre": "Recepcion del atestado con detenido o citado", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Auto de incoacion de diligencias urgentes", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Designacion de abogado", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Guardia judicial",
+          "descripcion": "Diligencias en servicio de guardia",
+          "tramites": [
+            {"nombre": "Declaracion del investigado", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Declaracion de testigos y victimas", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informes periciales de urgencia", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informe de sanidad", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Preparacion juicio oral",
+          "descripcion": "Auto de apertura de juicio oral o sobreseimiento",
+          "tramites": [
+            {"nombre": "Auto de apertura de juicio oral", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Escrito de acusacion del Ministerio Fiscal", "responsable": "Ministerio Fiscal", "plazo_dias": null},
+            {"nombre": "Conformidad del acusado", "responsable": "partes", "plazo_dias": null},
+            {"nombre": "Auto de sobreseimiento", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Juicio oral inmediato",
+          "descripcion": "Celebracion inmediata o con senalamiento proximo",
+          "tramites": [
+            {"nombre": "Celebracion inmediata del juicio oral", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Senalamiento para juicio dentro de 15 dias", "responsable": "LAJ", "plazo_dias": 15},
+            {"nombre": "Practica de prueba", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Informes finales", "responsable": "partes", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Sentencia",
+          "descripcion": "Sentencia oral o escrita",
+          "tramites": [
+            {"nombre": "Sentencia de conformidad", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Sentencia oral in voce", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Sentencia escrita", "responsable": "Juez", "plazo_dias": 5},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 6
+        },
+        {
+          "id": 6,
+          "nombre": "Firmeza",
+          "descripcion": "Firmeza o recurso",
+          "tramites": [
+            {"nombre": "Recurso de apelacion", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Decreto de firmeza", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    }
+  },
+  "ejecucion_civil": {
+    "ETJ": {
+      "nombre": "Ejecucion de Titulos Judiciales",
+      "base_legal": "Arts. 517-570 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Demanda ejecutiva",
+          "descripcion": "Presentacion y admision de la demanda ejecutiva",
+          "tramites": [
+            {"nombre": "Decreto de despacho de ejecucion", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Auto despachando ejecucion", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Requerimiento de pago al ejecutado", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Oposicion",
+          "descripcion": "Plazo de oposicion del ejecutado",
+          "tramites": [
+            {"nombre": "Escrito de oposicion a la ejecucion", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Traslado de la oposicion al ejecutante", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Vista de oposicion en su caso", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto resolviendo la oposicion", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Embargo",
+          "descripcion": "Investigacion patrimonial y embargo de bienes",
+          "tramites": [
+            {"nombre": "Decreto acordando investigacion patrimonial", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Oficios al PNJ para investigacion de bienes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de embargo de bienes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Anotacion preventiva de embargo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Realizacion forzosa",
+          "descripcion": "Subasta o adjudicacion de bienes embargados",
+          "tramites": [
+            {"nombre": "Decreto de valoracion de bienes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto convocando subasta", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion de subasta electronica", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de adjudicacion", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Auto aprobando remate", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Pago y archivo",
+          "descripcion": "Pago al ejecutante y archivo de la ejecucion",
+          "tramites": [
+            {"nombre": "Decreto de pago al ejecutante", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Tasacion de costas", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de archivo de la ejecucion", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "ENJ": {
+      "nombre": "Ejecucion de Titulos No Judiciales",
+      "base_legal": "Arts. 517-520 y 571-580 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Demanda ejecutiva",
+          "descripcion": "Presentacion de la demanda ejecutiva con titulo no judicial",
+          "tramites": [
+            {"nombre": "Auto despachando ejecucion", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Requerimiento de pago al deudor", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Embargo preventivo de bienes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Oposicion",
+          "descripcion": "Oposicion por motivos tasados (arts. 557-558 LEC)",
+          "tramites": [
+            {"nombre": "Escrito de oposicion", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Oposicion por pluspeticion", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Oposicion por pago o cumplimiento", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Vista de oposicion", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto resolviendo la oposicion", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Embargo y realizacion",
+          "descripcion": "Embargo y realizacion forzosa de bienes",
+          "tramites": [
+            {"nombre": "Decreto de embargo", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Investigacion patrimonial", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Subasta de bienes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de adjudicacion", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Pago y archivo",
+          "descripcion": "Pago y archivo de la ejecucion",
+          "tramites": [
+            {"nombre": "Decreto de pago", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Tasacion de costas", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "EJH": {
+      "nombre": "Ejecucion Hipotecaria",
+      "base_legal": "Arts. 681-698 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Demanda ejecutiva",
+          "descripcion": "Demanda de ejecucion hipotecaria con certificacion registral",
+          "tramites": [
+            {"nombre": "Auto despachando ejecucion hipotecaria", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Requerimiento de pago al deudor hipotecario", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Solicitud de certificacion de cargas al Registro", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion a ocupantes de la finca", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Oposicion",
+          "descripcion": "Oposicion del ejecutado por causas tasadas",
+          "tramites": [
+            {"nombre": "Escrito de oposicion por clausulas abusivas", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Control de oficio de clausulas abusivas", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Vista de oposicion", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto resolviendo la oposicion", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Subasta",
+          "descripcion": "Convocatoria y celebracion de subasta electronica",
+          "tramites": [
+            {"nombre": "Decreto convocando subasta electronica", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Publicacion de la subasta en el portal de subastas", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Celebracion de la subasta electronica", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de adjudicacion", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Auto aprobando el remate", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Posesion y distribucion",
+          "descripcion": "Entrega de posesion y distribucion del precio",
+          "tramites": [
+            {"nombre": "Decreto acordando puesta en posesion", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Lanzamiento de ocupantes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de distribucion del precio de remate", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Cancelacion de cargas registrales", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Archivo",
+          "descripcion": "Archivo de la ejecucion",
+          "tramites": [
+            {"nombre": "Tasacion de costas", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "POJ": {
+      "nombre": "Ejecucion Posesoria Judicial",
+      "base_legal": "Arts. 703-704 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Despacho de ejecucion",
+          "descripcion": "Despacho de ejecucion del titulo judicial de posesion",
+          "tramites": [
+            {"nombre": "Auto despachando ejecucion posesoria", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Requerimiento de entrega de posesion", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Oposicion",
+          "descripcion": "Posible oposicion del ejecutado",
+          "tramites": [
+            {"nombre": "Escrito de oposicion", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Auto resolviendo la oposicion", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Lanzamiento",
+          "descripcion": "Senalamiento y practica del lanzamiento",
+          "tramites": [
+            {"nombre": "Decreto senalando fecha de lanzamiento", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Practica del lanzamiento", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Diligencia de lanzamiento", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Puesta en posesion al ejecutante", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Archivo",
+          "descripcion": "Archivo de la ejecucion posesoria",
+          "tramites": [
+            {"nombre": "Decreto de archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "POH": {
+      "nombre": "Ejecucion Posesoria Hipotecaria",
+      "base_legal": "Arts. 681-698 y 703-704 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Solicitud de posesion",
+          "descripcion": "Solicitud de puesta en posesion tras adjudicacion hipotecaria",
+          "tramites": [
+            {"nombre": "Decreto acordando puesta en posesion", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Requerimiento a los ocupantes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Oposicion de ocupantes",
+          "descripcion": "Posible oposicion de terceros ocupantes",
+          "tramites": [
+            {"nombre": "Escrito de oposicion de ocupantes", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Auto resolviendo sobre titulo de los ocupantes", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Lanzamiento",
+          "descripcion": "Practica del lanzamiento",
+          "tramites": [
+            {"nombre": "Decreto senalando lanzamiento", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion a servicios sociales", "responsable": "LAJ", "plazo_dias": 15},
+            {"nombre": "Practica del lanzamiento", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Archivo",
+          "descripcion": "Archivo de la pieza posesoria",
+          "tramites": [
+            {"nombre": "Decreto de archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "POI": {
+      "nombre": "Ejecucion Posesoria Inscrita",
+      "base_legal": "Art. 41 LH y arts. 250.1.7 LEC",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Demanda",
+          "descripcion": "Demanda de tutela sumaria de la posesion inscrita",
+          "tramites": [
+            {"nombre": "Decreto de admision de la demanda", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Requerimiento al perturbador para que cese", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Emplazamiento al demandado", "responsable": "LAJ", "plazo_dias": 5}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Oposicion",
+          "descripcion": "Oposicion limitada del demandado",
+          "tramites": [
+            {"nombre": "Escrito de oposicion", "responsable": "partes", "plazo_dias": 5},
+            {"nombre": "Alegacion de titulo inscrito", "responsable": "partes", "plazo_dias": 5}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Vista y sentencia",
+          "descripcion": "Vista oral y sentencia sumaria",
+          "tramites": [
+            {"nombre": "Celebracion de vista", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Sentencia", "responsable": "Juez", "plazo_dias": 5},
+            {"nombre": "Notificacion a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Ejecucion y archivo",
+          "descripcion": "Ejecucion de la sentencia estimatoria",
+          "tramites": [
+            {"nombre": "Requerimiento de cese de perturbacion", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Lanzamiento en su caso", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    }
+  },
+  "ejecucion_penal": {
+    "EJ": {
+      "nombre": "Ejecutoria Penal",
+      "base_legal": "Arts. 983-998 LECrim y LO 1/1979 LOGP",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Incoacion",
+          "descripcion": "Incoacion de la ejecutoria tras sentencia firme",
+          "tramites": [
+            {"nombre": "Auto de incoacion de ejecutoria", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Requerimiento para cumplimiento de condena", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Liquidacion de condena", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion al Registro Central de Penados", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Cumplimiento de penas",
+          "descripcion": "Tramitacion del cumplimiento de las penas impuestas",
+          "tramites": [
+            {"nombre": "Oficio al centro penitenciario para ingreso", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Orden de busca y captura en su caso", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Requerimiento de pago de multa", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Requerimiento de pago de responsabilidad civil", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Comunicacion de la pena de inhabilitacion", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Suspension y sustitucion",
+          "descripcion": "Tramitacion de suspension o sustitucion de la pena",
+          "tramites": [
+            {"nombre": "Solicitud de suspension de la pena", "responsable": "partes", "plazo_dias": null},
+            {"nombre": "Informe del Ministerio Fiscal sobre suspension", "responsable": "Ministerio Fiscal", "plazo_dias": null},
+            {"nombre": "Auto acordando o denegando la suspension", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Fijacion de condiciones de la suspension", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Control del cumplimiento de condiciones", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Responsabilidad civil",
+          "descripcion": "Ejecucion de la responsabilidad civil derivada del delito",
+          "tramites": [
+            {"nombre": "Requerimiento de pago de indemnizacion", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Investigacion patrimonial del condenado", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Embargo de bienes para responsabilidad civil", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Declaracion de insolvencia", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 5
+        },
+        {
+          "id": 5,
+          "nombre": "Extincion y archivo",
+          "descripcion": "Extincion de la responsabilidad penal y archivo",
+          "tramites": [
+            {"nombre": "Auto de remision definitiva de la pena", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Auto declarando extinguida la responsabilidad penal", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Comunicacion de cancelacion de antecedentes", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de archivo de la ejecutoria", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "EFM": {
+      "nombre": "Ejecutoria de Delitos Leves y Multas",
+      "base_legal": "Arts. 984-988 LECrim",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Incoacion",
+          "descripcion": "Incoacion de la ejecutoria por delito leve",
+          "tramites": [
+            {"nombre": "Auto de incoacion de ejecutoria", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Liquidacion de condena", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Cumplimiento",
+          "descripcion": "Requerimiento para cumplimiento de la condena",
+          "tramites": [
+            {"nombre": "Requerimiento de pago de multa", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Fraccionamiento de pago de multa", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Requerimiento de pago de responsabilidad civil", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Cumplimiento de trabajos en beneficio de la comunidad", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Impago de multa",
+          "descripcion": "Tramitacion del impago de multa",
+          "tramites": [
+            {"nombre": "Declaracion de impago de multa", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Responsabilidad personal subsidiaria", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Embargo de bienes para pago de multa", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Archivo",
+          "descripcion": "Archivo de la ejecutoria",
+          "tramites": [
+            {"nombre": "Auto declarando cumplida la condena", "responsable": "Juez", "plazo_dias": null},
+            {"nombre": "Comunicacion al Registro de Penados", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de archivo", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    },
+    "COG": {
+      "nombre": "Costas Generales",
+      "base_legal": "Arts. 241-246 LEC (aplicacion supletoria) y LECrim",
+      "cuantia_maxima": null,
+      "fases": [
+        {
+          "id": 1,
+          "nombre": "Tasacion",
+          "descripcion": "Tasacion de costas por el LAJ",
+          "tramites": [
+            {"nombre": "Solicitud de tasacion de costas", "responsable": "partes", "plazo_dias": null},
+            {"nombre": "Tasacion de costas por el LAJ", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Traslado de la tasacion a las partes", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 2
+        },
+        {
+          "id": 2,
+          "nombre": "Impugnacion",
+          "descripcion": "Impugnacion de la tasacion de costas",
+          "tramites": [
+            {"nombre": "Escrito de impugnacion por indebidas", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Escrito de impugnacion por excesivas", "responsable": "partes", "plazo_dias": 10},
+            {"nombre": "Informe del Colegio de Abogados", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Auto o decreto resolviendo la impugnacion", "responsable": "Juez", "plazo_dias": null}
+          ],
+          "siguiente_fase": 3
+        },
+        {
+          "id": 3,
+          "nombre": "Aprobacion y pago",
+          "descripcion": "Aprobacion de la tasacion y requerimiento de pago",
+          "tramites": [
+            {"nombre": "Decreto aprobando la tasacion de costas", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Requerimiento de pago al condenado en costas", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Embargo de bienes en caso de impago", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": 4
+        },
+        {
+          "id": 4,
+          "nombre": "Archivo",
+          "descripcion": "Archivo de la pieza de costas",
+          "tramites": [
+            {"nombre": "Pago de las costas", "responsable": "partes", "plazo_dias": null},
+            {"nombre": "Declaracion de insolvencia", "responsable": "LAJ", "plazo_dias": null},
+            {"nombre": "Decreto de archivo de la pieza de costas", "responsable": "LAJ", "plazo_dias": null}
+          ],
+          "siguiente_fase": null
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "fecha_actualizacion": "2026-03-24",
+    "descripcion": "Base de conocimiento de tramitacion procesal para ATENEA-IA",
+    "fuentes": ["Ley 1/2000 de Enjuiciamiento Civil (LEC)", "Real Decreto de 14 de septiembre de 1882, Ley de Enjuiciamiento Criminal (LECrim)", "Ley 15/2015 de Jurisdiccion Voluntaria", "Ley Organica 1/1979 General Penitenciaria", "Ley Hipotecaria"],
+    "jurisdicciones": ["civil", "penal", "ejecucion_civil", "ejecucion_penal"],
+    "total_tipos_procedimiento": 30,
+    "responsables": {
+      "Juez": "Juez o Magistrado titular del organo judicial",
+      "Magistrado": "Magistrado de la Audiencia Provincial o Tribunal Superior",
+      "LAJ": "Letrado de la Administracion de Justicia (antes Secretario Judicial)",
+      "Ministerio Fiscal": "Representante del Ministerio Publico",
+      "partes": "Partes procesales (demandante/demandado, acusacion/defensa)"
+    }
+  }
+}

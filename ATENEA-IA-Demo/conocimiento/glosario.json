@@ -1,0 +1,298 @@
+{
+  "terminos": [
+    {
+      "termino": "NIG",
+      "definicion": "Número de Identificación General. Identificador único asignado a cada asunto judicial en el momento de su registro inicial. Sigue al asunto durante toda su vida procesal independientemente del órgano que lo tramite. Su estructura codifica el partido judicial, orden jurisdiccional, clase de asunto, año e identificador secuencial.",
+      "ejemplo": "36057-42-1-2026-0000123 (Partido Judicial 36057, jurisdicción civil 42, tipo 1, año 2026, número 123)",
+      "relacionados": ["NUE", "Procedimiento", "Registro", "SCRR"]
+    },
+    {
+      "termino": "NUE",
+      "definicion": "Número Único de Expediente. Identificador que asigna cada órgano judicial al procedimiento cuando lo recibe por reparto. A diferencia del NIG, el NUE es propio de cada órgano y cambia si el asunto se remite a otro juzgado. Combina el tipo de procedimiento, el número correlativo y el año.",
+      "ejemplo": "Juicio Verbal 234/2026",
+      "relacionados": ["NIG", "Reparto", "Procedimiento"]
+    },
+    {
+      "termino": "LAJ",
+      "definicion": "Letrado de la Administración de Justicia (anteriormente denominado Secretario Judicial). Funcionario público que ejerce la fe pública judicial, dirige la oficina judicial y dicta decretos y diligencias de ordenación. Es responsable de la tramitación procesal y la documentación de las actuaciones judiciales.",
+      "ejemplo": "El LAJ dicta decreto admitiendo la demanda a trámite.",
+      "relacionados": ["Decreto", "Diligencia de Ordenación", "Portafirmas"]
+    },
+    {
+      "termino": "SCRR",
+      "definicion": "Servicio Común de Registro y Reparto. Oficina judicial compartida que recibe todos los asuntos nuevos de un partido judicial, los registra asignándoles NIG y los reparte entre los órganos judiciales competentes según las normas de reparto aprobadas por la Junta de Jueces.",
+      "ejemplo": "El SCRR reparte la demanda al Juzgado de Primera Instancia n.º 3 por turno correlativo.",
+      "relacionados": ["NIG", "Reparto", "ORR", "Registro"]
+    },
+    {
+      "termino": "ORR",
+      "definicion": "Oficina de Registro y Reparto. Denominación alternativa al SCRR utilizada en algunos partidos judiciales. Cumple las mismas funciones de registro de entrada, asignación de NIG y reparto de asuntos entre los órganos judiciales.",
+      "ejemplo": "La ORR del partido judicial de Madrid registró 450 demandas civiles en una semana.",
+      "relacionados": ["SCRR", "NIG", "Reparto"]
+    },
+    {
+      "termino": "LexNET",
+      "definicion": "Sistema de comunicaciones telemáticas de la Administración de Justicia. Plataforma electrónica obligatoria para la presentación de escritos y la recepción de notificaciones por profesionales (abogados, procuradores, graduados sociales) y Administraciones Públicas. Garantiza la autenticidad, integridad y constancia de la transmisión.",
+      "ejemplo": "El procurador presentó el escrito de contestación a la demanda a través de LexNET.",
+      "relacionados": ["Notificaciones", "Procurador", "Escritos"]
+    },
+    {
+      "termino": "Portafirmas",
+      "definicion": "Aplicación electrónica que permite a Jueces, Magistrados y LAJ firmar documentos judiciales de forma remota mediante certificado digital. Los documentos pendientes se acumulan en una bandeja virtual y pueden firmarse individual o masivamente sin necesidad de acceder a ATENEA directamente.",
+      "ejemplo": "El Juez firma 15 sentencias desde el portafirmas al finalizar la jornada.",
+      "relacionados": ["Firma", "LAJ", "Certificado digital"]
+    },
+    {
+      "termino": "Horus",
+      "definicion": "Sistema de gestión procesal utilizado en la jurisdicción social y en algunas Comunidades Autónomas con competencias transferidas en Justicia. Horus es la alternativa a Minerva/ATENEA en esos territorios y gestiona expedientes judiciales electrónicos con funcionalidad similar.",
+      "ejemplo": "Los Juzgados de lo Social de Cataluña utilizan Horus para la gestión de procedimientos laborales.",
+      "relacionados": ["Expediente Judicial Electrónico", "ATENEA"]
+    },
+    {
+      "termino": "Expediente Judicial Electrónico",
+      "definicion": "Conjunto ordenado de documentos y actuaciones electrónicas que conforman un procedimiento judicial. Sustituye al expediente en papel y contiene todas las resoluciones, escritos, notificaciones y documentos vinculados al asunto. Regulado por la Ley 18/2011 de uso de tecnologías en la Administración de Justicia.",
+      "ejemplo": "El Expediente Judicial Electrónico del JVB 234/2026 contiene la demanda, contestación, acta de audiencia previa y sentencia.",
+      "relacionados": ["NIG", "NUE", "Procedimiento", "ATENEA"]
+    },
+    {
+      "termino": "Itineración",
+      "definicion": "Envío de un expediente judicial o documentación entre órganos judiciales a través del sistema de gestión procesal. Se utiliza para remisiones por inhibición, exhortos, recursos ante órganos superiores y auxilio judicial. La itineración electrónica sustituye al envío físico de autos.",
+      "ejemplo": "Se realiza itineración del procedimiento a la Audiencia Provincial para la resolución del recurso de apelación.",
+      "relacionados": ["Inhibición", "Exhorto", "Auxilio Judicial"]
+    },
+    {
+      "termino": "Señalamiento",
+      "definicion": "Fijación de fecha y hora para la celebración de una vista, juicio, comparecencia u otro acto procesal que requiera la presencia de las partes. El señalamiento se realiza por el LAJ conforme a la agenda del órgano judicial y las disponibilidades de sala.",
+      "ejemplo": "Se señala la vista del Juicio Verbal para el día 15 de mayo de 2026 a las 10:00 horas en la Sala 3.",
+      "relacionados": ["Vista", "Audiencia previa", "Juicio oral", "Acontecimiento"]
+    },
+    {
+      "termino": "Reparto",
+      "definicion": "Distribución de asuntos judiciales entre los órganos competentes de un mismo partido judicial. El reparto se realiza conforme a normas aprobadas por la Junta de Jueces, pudiendo ser por turno correlativo, por materias o mixto, garantizando la equidad de carga entre órganos.",
+      "ejemplo": "La demanda de reclamación de cantidad se reparte al Juzgado de Primera Instancia n.º 5 por turno.",
+      "relacionados": ["SCRR", "NIG", "Estadísticas de reparto"]
+    },
+    {
+      "termino": "Registro",
+      "definicion": "Acto de inscripción de un escrito o asunto en el sistema de gestión procesal, asignándole un número de entrada y fecha de presentación. El registro puede ser presencial (en la oficina del SCRR) o electrónico (a través de LexNET o sede electrónica). Todo escrito debe ser registrado antes de su tramitación.",
+      "ejemplo": "La demanda fue registrada el 10 de marzo de 2026 con número de entrada 4521.",
+      "relacionados": ["SCRR", "LexNET", "NIG"]
+    },
+    {
+      "termino": "Fase procesal",
+      "definicion": "Cada una de las etapas sucesivas en que se divide la tramitación de un procedimiento judicial. Las fases varían según el tipo de procedimiento: admisión, alegaciones, prueba, conclusiones, resolución, ejecución, etc. ATENEA organiza la tramitación guiada por fases.",
+      "ejemplo": "El Juicio Ordinario se encuentra en fase de proposición y admisión de prueba.",
+      "relacionados": ["Trámite", "Tramitación guiada", "Procedimiento"]
+    },
+    {
+      "termino": "Trámite",
+      "definicion": "Cada una de las actuaciones o gestiones que componen una fase procesal. Un trámite puede generar documentos (resoluciones, oficios), plazos, notificaciones o señalamientos. En ATENEA, los trámites disponibles dependen de la fase procesal actual del procedimiento.",
+      "ejemplo": "El trámite de 'admisión de demanda' genera un decreto de admisión y la notificación al demandado.",
+      "relacionados": ["Fase procesal", "Tramitación guiada", "Acontecimiento"]
+    },
+    {
+      "termino": "Acontecimiento",
+      "definicion": "Evento programado en el calendario judicial vinculado a un procedimiento: vistas, comparecencias, reconocimientos judiciales, lanzamientos, subastas, etc. Cada acontecimiento tiene fecha, hora, duración y sala asignada, y genera las citaciones correspondientes a las partes.",
+      "ejemplo": "El acontecimiento de vista oral está señalado para el 20 de abril en la Sala de Vistas 2.",
+      "relacionados": ["Señalamiento", "Vista", "Juicio oral"]
+    },
+    {
+      "termino": "Providencia",
+      "definicion": "Resolución judicial dictada por el Juez o Magistrado para la ordenación material del proceso, decidiendo cuestiones procesales que no requieran la forma de auto. Es la resolución más sencilla y no necesita ser motivada (art. 245.1.a LOPJ, art. 206.2.1ª LEC).",
+      "ejemplo": "Providencia acordando tener por presentado el escrito y unirlo a los autos.",
+      "relacionados": ["Auto", "Sentencia", "Resolución"]
+    },
+    {
+      "termino": "Auto",
+      "definicion": "Resolución judicial motivada dictada por el Juez o Magistrado para resolver cuestiones procesales que afectan a derechos de las partes, incidentes, presupuestos procesales, nulidad del procedimiento, medidas cautelares, y otras materias que la ley exija esta forma (art. 206.2.2ª LEC).",
+      "ejemplo": "Auto acordando la práctica de diligencias preliminares solicitadas por la parte demandante.",
+      "relacionados": ["Providencia", "Sentencia", "Decreto"]
+    },
+    {
+      "termino": "Decreto",
+      "definicion": "Resolución dictada por el Letrado de la Administración de Justicia (LAJ) cuando la ley así lo establezca o sea necesario para la tramitación del proceso. Incluye la admisión de demanda, la admisión de recursos contra sus propias resoluciones y la terminación del procedimiento en determinados supuestos (art. 206.2.3ª LEC).",
+      "ejemplo": "Decreto del LAJ admitiendo a trámite la demanda de juicio monitorio.",
+      "relacionados": ["LAJ", "Diligencia de Ordenación", "Providencia"]
+    },
+    {
+      "termino": "Diligencia de Ordenación",
+      "definicion": "Resolución dictada por el LAJ para la ordenación del proceso, dando a los autos el curso que la ley establezca. Es el equivalente para el LAJ de la providencia del Juez: resoluciones de trámite que no deciden cuestiones de fondo ni requieren motivación especial (art. 206.2.4ª LEC).",
+      "ejemplo": "Diligencia de Ordenación dando traslado del escrito de contestación a la parte actora.",
+      "relacionados": ["LAJ", "Decreto", "Providencia"]
+    },
+    {
+      "termino": "Sentencia",
+      "definicion": "Resolución judicial que decide definitivamente el pleito o causa en cualquier instancia o recurso, pronunciándose sobre las pretensiones de las partes. Debe contener antecedentes de hecho, fundamentos de derecho y fallo. Es la resolución de mayor importancia procesal (art. 206.2.3ª LEC).",
+      "ejemplo": "Sentencia estimando íntegramente la demanda y condenando al demandado al pago de 15.000 euros.",
+      "relacionados": ["Auto", "Providencia", "Ejecutoria", "Recurso"]
+    },
+    {
+      "termino": "Oficio",
+      "definicion": "Comunicación escrita dirigida por el órgano judicial a autoridades, funcionarios, entidades públicas o privadas para solicitar información, colaboración o el cumplimiento de una resolución judicial. No se dirige a las partes procesales sino a terceros.",
+      "ejemplo": "Oficio dirigido al Registro de la Propiedad solicitando nota simple de la finca embargada.",
+      "relacionados": ["Exhorto", "Auxilio Judicial", "Comunicación"]
+    },
+    {
+      "termino": "Exhorto",
+      "definicion": "Comunicación entre órganos judiciales de distinto partido judicial para solicitar la práctica de diligencias que deban realizarse fuera de la circunscripción del órgano que conoce del asunto (art. 171 LEC). Se utiliza principalmente para citaciones, notificaciones y embargos en otra demarcación.",
+      "ejemplo": "Exhorto al Juzgado de Primera Instancia de Sevilla para la práctica de embargo sobre inmueble sito en dicha ciudad.",
+      "relacionados": ["Auxilio Judicial", "Itineración", "Oficio"]
+    },
+    {
+      "termino": "Auxilio Judicial",
+      "definicion": "Cooperación entre órganos judiciales para la práctica de actuaciones que no pueden realizarse directamente por el órgano que conoce del asunto. Puede ser interno (entre órganos nacionales) o internacional. Se instrumenta mediante exhortos, comisiones rogatorias o comunicaciones directas.",
+      "ejemplo": "Se libra auxilio judicial al Juzgado de Paz de Moaña para la práctica de la notificación al demandado residente en dicho municipio.",
+      "relacionados": ["Exhorto", "Itineración", "Inhibición"]
+    },
+    {
+      "termino": "Inhibición",
+      "definicion": "Resolución por la que un órgano judicial declara su falta de competencia para conocer de un asunto y lo remite al órgano que considera competente. Puede ser de oficio o a instancia de parte (declinatoria). Regulada en los arts. 48-49 LEC para el orden civil.",
+      "ejemplo": "El Juzgado de Primera Instancia n.º 2 se inhibe a favor del Juzgado de lo Mercantil por tratarse de una acción de competencia desleal.",
+      "relacionados": ["Itineración", "Exhorto", "Competencia"]
+    },
+    {
+      "termino": "Acumulación",
+      "definicion": "Reunión de varios procesos o pretensiones en un solo procedimiento cuando existe conexión entre ellos, para evitar sentencias contradictorias y por economía procesal. Regulada en los arts. 74-98 LEC para el orden civil y art. 17 LECrim para el penal.",
+      "ejemplo": "Se acuerda la acumulación de los procedimientos JVB 100/2026 y JVB 150/2026 por referirse a la misma relación contractual entre las mismas partes.",
+      "relacionados": ["Desglose", "Procedimiento", "Conexión"]
+    },
+    {
+      "termino": "Sobreseimiento",
+      "definicion": "Resolución que pone fin al procedimiento penal sin pronunciamiento sobre el fondo. Puede ser libre (equivale a absolución, art. 637 LECrim) o provisional (por insuficiencia de pruebas, art. 641 LECrim). En el ámbito civil, existe el sobreseimiento por inactividad de las partes.",
+      "ejemplo": "Auto de sobreseimiento provisional por no resultar debidamente justificada la perpetración del delito.",
+      "relacionados": ["Archivo", "Sentencia", "Rebeldía"]
+    },
+    {
+      "termino": "Rebeldía",
+      "definicion": "Situación procesal en la que se encuentra el demandado (civil) o acusado (penal) que, debidamente citado o emplazado, no comparece en el plazo establecido. En el ámbito civil se regula en los arts. 496-508 LEC. La declaración de rebeldía no implica allanamiento a la demanda.",
+      "ejemplo": "Se declara en rebeldía al demandado por no haber comparecido en el plazo de veinte días desde su emplazamiento.",
+      "relacionados": ["Requisitoria", "Busca y captura", "Emplazamiento"]
+    },
+    {
+      "termino": "Ejecutoria",
+      "definicion": "Procedimiento de ejecución de una sentencia firme o resolución judicial que haya adquirido firmeza. En ATENEA se tramita como un procedimiento derivado del principal, con su propia numeración. La ejecución puede ser dineraria, de hacer, de no hacer o de dar cosa determinada (arts. 517 y ss. LEC).",
+      "ejemplo": "Ejecutoria 89/2026 derivada de la sentencia firme del JO 234/2025 para el cobro de 25.000 euros.",
+      "relacionados": ["Sentencia", "Embargo", "Subasta", "Lanzamiento"]
+    },
+    {
+      "termino": "Embargo",
+      "definicion": "Medida de aseguramiento por la que se afectan bienes del deudor al cumplimiento de la obligación declarada en la resolución judicial. El embargo se practica conforme al orden de prelación del art. 592 LEC: dinero, créditos, joyas, inmuebles, establecimientos mercantiles, etc.",
+      "ejemplo": "Se decreta el embargo de la cuenta corriente del demandado en la entidad bancaria X por importe de 10.000 euros más intereses y costas.",
+      "relacionados": ["Ejecutoria", "Subasta", "Lanzamiento"]
+    },
+    {
+      "termino": "Subasta",
+      "definicion": "Procedimiento de venta pública de bienes embargados para obtener el dinero necesario para satisfacer la deuda. Desde 2015, las subastas judiciales se realizan de forma electrónica a través del Portal de Subastas del BOE (art. 644 y ss. LEC).",
+      "ejemplo": "Se señala subasta electrónica del inmueble embargado a través del Portal de Subastas del BOE con tipo de 120.000 euros.",
+      "relacionados": ["Embargo", "Ejecutoria", "Lanzamiento"]
+    },
+    {
+      "termino": "Lanzamiento",
+      "definicion": "Acto de ejecución por el que se procede al desalojo forzoso de un inmueble, entregando la posesión al titular del derecho reconocido en la resolución judicial. Se practica por el LAJ con auxilio de las Fuerzas y Cuerpos de Seguridad si es necesario (art. 703 LEC).",
+      "ejemplo": "Se señala lanzamiento del inmueble arrendado para el día 10 de junio de 2026, con requerimiento previo de desalojo voluntario.",
+      "relacionados": ["Ejecutoria", "Embargo", "Acontecimiento"]
+    },
+    {
+      "termino": "Interviniente",
+      "definicion": "Toda persona física o jurídica que participa en un procedimiento judicial en cualquier calidad: demandante, demandado, investigado, acusado, víctima, testigo, perito, tercero afectado, etc. En ATENEA, los intervinientes se registran con sus datos identificativos y su rol procesal.",
+      "ejemplo": "Se da de alta como interviniente al demandado D. Juan García López con DNI 12345678A.",
+      "relacionados": ["Procurador", "Abogado de oficio", "Ministerio Fiscal"]
+    },
+    {
+      "termino": "Procurador",
+      "definicion": "Profesional colegiado que ostenta la representación procesal de las partes ante los tribunales. Es obligatoria su intervención en la mayoría de procedimientos civiles (art. 23 LEC). Recibe notificaciones y comunicaciones judiciales a través de LexNET en nombre de su representado.",
+      "ejemplo": "La Procuradora Dña. María Fernández presenta escrito de contestación a la demanda en nombre y representación del demandado.",
+      "relacionados": ["LexNET", "Abogado de oficio", "Interviniente"]
+    },
+    {
+      "termino": "Abogado de oficio",
+      "definicion": "Letrado designado por el Colegio de Abogados para asistir y defender a personas que, careciendo de recursos económicos, tienen derecho a la asistencia jurídica gratuita (Ley 1/1996). La designación se comunica al órgano judicial por el turno de oficio del colegio correspondiente.",
+      "ejemplo": "Se designa abogado de oficio al demandado al acreditarse su derecho a la asistencia jurídica gratuita.",
+      "relacionados": ["Turno de oficio", "Procurador", "Interviniente"]
+    },
+    {
+      "termino": "Turno de oficio",
+      "definicion": "Sistema de organización colegial mediante el cual se asignan abogados y procuradores a quienes tienen reconocido el derecho a la asistencia jurídica gratuita. El turno funciona rotativamente entre los profesionales inscritos en el colegio correspondiente.",
+      "ejemplo": "El Colegio de Abogados comunica la designación del letrado del turno de oficio para la defensa del investigado.",
+      "relacionados": ["Abogado de oficio", "Procurador"]
+    },
+    {
+      "termino": "Ministerio Fiscal",
+      "definicion": "Órgano constitucional que tiene por misión promover la acción de la justicia en defensa de la legalidad, de los derechos de los ciudadanos y del interés público (art. 124 CE). Interviene en todos los procesos penales y en los civiles donde estén implicados menores, incapaces o el interés público.",
+      "ejemplo": "Se da traslado al Ministerio Fiscal del escrito de demanda por afectar a los intereses de un menor de edad.",
+      "relacionados": ["Interviniente", "Conformidad", "Sobreseimiento"]
+    },
+    {
+      "termino": "IMELGA/IMLA",
+      "definicion": "Instituto de Medicina Legal de Galicia (IMELGA) / Instituto de Medicina Legal y Ciencias Forenses de la comunidad autónoma correspondiente (IMLA genérico). Organismo público que presta servicios de medicina forense a los órganos judiciales: autopsias, valoraciones de lesiones, informes de sanidad, etc.",
+      "ejemplo": "Se solicita informe de valoración de lesiones al IMELGA para determinar la gravedad de las lesiones sufridas por la víctima.",
+      "relacionados": ["Pericial", "Medicina Legal"]
+    },
+    {
+      "termino": "Medicina Legal",
+      "definicion": "Rama de la medicina que aplica conocimientos médicos a cuestiones jurídicas. En el ámbito judicial, los médicos forenses adscritos a los Institutos de Medicina Legal emiten informes periciales sobre lesiones, causas de muerte, capacidad mental, valoración del daño corporal, etc.",
+      "ejemplo": "El médico forense emite informe de sanidad determinando que las lesiones tardarán 45 días en curar.",
+      "relacionados": ["IMELGA/IMLA", "Pericial"]
+    },
+    {
+      "termino": "Pericial",
+      "definicion": "Medio de prueba consistente en el dictamen de personas con conocimientos especializados (peritos) sobre materias que requieren conocimiento científico, artístico, técnico o práctico para su valoración (arts. 335-352 LEC). Puede ser de parte o judicial.",
+      "ejemplo": "Se admite la prueba pericial de tasación inmobiliaria aportada por la parte actora y se cita al perito para ratificación en la vista.",
+      "relacionados": ["Medicina Legal", "IMELGA/IMLA", "Vista"]
+    },
+    {
+      "termino": "Insaculación",
+      "definicion": "Procedimiento de selección aleatoria de ciudadanos para la formación de jurados populares o para la designación de peritos judiciales. En ATENEA, el módulo de insaculación gestiona el sorteo conforme a los censos electorales y las listas de candidatos.",
+      "ejemplo": "Se procede a la insaculación de los 36 candidatos a jurado popular para el juicio por homicidio señalado en la Audiencia Provincial.",
+      "relacionados": ["Juicio oral", "Vista"]
+    },
+    {
+      "termino": "Tasación de costas",
+      "definicion": "Procedimiento por el que el LAJ determina el importe exacto de las costas procesales (honorarios de abogado y procurador, gastos judiciales) que debe abonar la parte condenada en costas. Regulada en los arts. 241-246 LEC.",
+      "ejemplo": "Se practica tasación de costas por importe de 3.500 euros (1.800 de abogado, 1.200 de procurador y 500 de gastos).",
+      "relacionados": ["Ejecutoria", "Jura de cuentas", "LAJ"]
+    },
+    {
+      "termino": "Jura de cuentas",
+      "definicion": "Procedimiento especial y privilegiado que permite a abogados y procuradores reclamar a sus clientes los honorarios o derechos devengados y no pagados (arts. 34-35 LEC). Se tramita ante el tribunal que conoció del asunto principal.",
+      "ejemplo": "El procurador formula jura de cuentas contra su poderdante por impago de los derechos devengados en el procedimiento, por importe de 800 euros.",
+      "relacionados": ["Tasación de costas", "Procurador", "Ejecutoria"]
+    },
+    {
+      "termino": "MASC",
+      "definicion": "Medios Adecuados de Solución de Controversias. Comprende mediación, conciliación, negociación y arbitraje como alternativas a la vía judicial. La Ley 7/2017 y reformas posteriores fomentan estos medios. ATENEA permite registrar la derivación a MASC y su resultado.",
+      "ejemplo": "Se deriva a las partes a mediación intrajudicial conforme al protocolo de MASC del CGPJ, suspendiendo el procedimiento por 60 días.",
+      "relacionados": ["Vista", "Audiencia previa", "Procedimiento"]
+    },
+    {
+      "termino": "Vista",
+      "definicion": "Acto procesal oral en el que las partes exponen sus alegaciones y se practican las pruebas ante el Juez o Tribunal. Es el núcleo del Juicio Verbal (art. 443 LEC). La celebración de la vista requiere señalamiento previo y citación de todas las partes e intervinientes.",
+      "ejemplo": "Se celebra la vista del Juicio Verbal con asistencia de ambas partes, practicándose prueba documental e interrogatorio de las partes.",
+      "relacionados": ["Señalamiento", "Juicio oral", "Audiencia previa", "Acontecimiento"]
+    },
+    {
+      "termino": "Audiencia previa",
+      "definicion": "Acto procesal del Juicio Ordinario (art. 414 LEC) que tiene por objeto intentar la conciliación entre las partes, examinar las cuestiones procesales, fijar los hechos controvertidos y proponer y admitir las pruebas. Se celebra antes del juicio oral.",
+      "ejemplo": "En la audiencia previa se resuelve la excepción de litispendencia alegada por el demandado y se admite la prueba propuesta por ambas partes.",
+      "relacionados": ["Vista", "Juicio oral", "Señalamiento"]
+    },
+    {
+      "termino": "Juicio oral",
+      "definicion": "Fase del Juicio Ordinario civil (art. 431 LEC) en la que se practican las pruebas admitidas y las partes formulan sus conclusiones. En el ámbito penal, es la fase esencial del procedimiento donde se practican las pruebas con todas las garantías de oralidad, contradicción e inmediación.",
+      "ejemplo": "Se señala juicio oral para el día 25 de mayo, con práctica de prueba testifical de tres testigos y prueba pericial.",
+      "relacionados": ["Vista", "Audiencia previa", "Sentencia", "Señalamiento"]
+    },
+    {
+      "termino": "Conformidad",
+      "definicion": "En el proceso penal, acuerdo entre la acusación y la defensa sobre los hechos, la calificación jurídica y la pena, que permite dictar sentencia sin necesidad de celebrar juicio oral (arts. 655, 688-700 LECrim y art. 787 LECrim para procedimiento abreviado). Requiere la aceptación del acusado.",
+      "ejemplo": "El acusado presta conformidad con la pena de un año de prisión propuesta por el Ministerio Fiscal, dictándose sentencia de conformidad.",
+      "relacionados": ["Juicio oral", "Ministerio Fiscal", "Sentencia"]
+    },
+    {
+      "termino": "Requisitoria",
+      "definicion": "Llamamiento judicial a una persona cuyo paradero se desconoce para que comparezca ante el órgano judicial en un plazo determinado, bajo apercibimiento de ser declarada en rebeldía (art. 512 LECrim). Se publica en el BOE y se comunica a las fuerzas de seguridad.",
+      "ejemplo": "Se libra requisitoria para la busca, presentación y, en su caso, conducción del investigado D. Antonio Ruiz, cuyo paradero se desconoce.",
+      "relacionados": ["Rebeldía", "Busca y captura", "Emplazamiento"]
+    }
+  ]
+}
