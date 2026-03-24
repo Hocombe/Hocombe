@@ -1,0 +1,17 @@
+[2026-03-14 10:14:09] [INFO] Backup automático programado en 1h
+[2026-03-14 10:14:09] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-14 10:15:45] [INFO] Login superadmin OK
+[2026-03-14 10:16:55] [WARN] Fichero no encontrado tras 4 intentos: C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\dir3.json
+[2026-03-14 10:20:01] [INFO] Backup automático programado en 1h
+[2026-03-14 10:20:01] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-14 10:20:21] [WARN] Fichero no encontrado tras 4 intentos: C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\dir3.json
+[2026-03-14 10:28:51] [INFO] Backup automático programado en 1h
+[2026-03-14 10:28:51] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-14 11:20:02] [INFO] Backup completo generado: auto_2026-03-14_112001.zip
+[2026-03-14 11:20:02] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-14 11:20:02] [INFO] Backup automático programado en 1h
+[2026-03-14 11:25:03] [INFO] Backup automático programado en 1h
+[2026-03-14 11:25:03] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-14 11:28:51] [INFO] Backup completo generado: auto_2026-03-14_112851.zip
+[2026-03-14 11:28:51] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-14 11:28:51] [INFO] Backup automático programado en 1h

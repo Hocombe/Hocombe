@@ -1,0 +1,66 @@
+[2026-03-03 15:50:20] [INFO] Backup automático programado en 1h
+[2026-03-03 15:50:20] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-03 16:18:30] [INFO] Fichero creado: ausencias.json
+[2026-03-03 16:18:30] [INFO] Backup automático programado en 1h
+[2026-03-03 16:18:30] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-03 16:29:45] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-03 16:30:08] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-03 16:30:08] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\JOSEFERREIROS\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\JOSEFERREIROS\\vacaciones.json'
+[2026-03-03 16:30:23] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-03 16:30:23] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-03 16:30:52] [INFO] Login superadmin OK
+[2026-03-03 16:31:39] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-03 16:31:40] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\JOSEFERREIROS\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\JOSEFERREIROS\\vacaciones.json'
+[2026-03-03 16:31:40] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-03 16:36:37] [INFO] [LLM] Config guardada: proveedor=gemini modelo=gemini-2.5-flash modo=combinado
+[2026-03-03 17:08:57] [INFO] Backup automático programado en 1h
+[2026-03-03 17:08:57] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-03 17:42:09] [INFO] Backup automático programado en 1h
+[2026-03-03 17:42:09] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-03 17:42:38] [INFO] Login superadmin OK
+[2026-03-03 17:47:29] [INFO] Login superadmin OK
+[2026-03-03 17:58:00] [INFO] Login superadmin OK
+[2026-03-03 17:58:42] [INFO] Backup automático programado en 1h
+[2026-03-03 18:06:58] [INFO] Login superadmin OK
+[2026-03-03 18:07:49] [INFO] Backup automático programado en 1h
+[2026-03-03 18:08:42] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-03 18:08:42] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\JOSEFERREIROS\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\JOSEFERREIROS\\vacaciones.json'
+[2026-03-03 18:09:05] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-03 18:09:15] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-03 18:25:46] [INFO] Backup automático programado en 1h
+[2026-03-03 18:25:46] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-03 18:42:52] [INFO] Backup automático programado en 1h
+[2026-03-03 18:42:52] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-03 18:52:58] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-03 18:58:54] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-03 18:58:56] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-03 19:00:34] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-03 19:00:34] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-03 19:01:04] [INFO] Login superadmin OK
+[2026-03-03 19:02:56] [INFO] Backup completo generado: manual_2026-03-03_190256.zip
+[2026-03-03 19:03:07] [INFO] Módulo 'notificajud' restaurado desde backup del cliente
+[2026-03-03 19:03:51] [INFO] ZIP restore: módulo 'agenda' restaurado correctamente
+[2026-03-03 19:03:51] [INFO] ZIP restore: módulo 'vencimientos' restaurado correctamente
+[2026-03-03 19:03:51] [INFO] ZIP restore: módulo 'vacaciones' restaurado correctamente
+[2026-03-03 19:03:52] [INFO] ZIP restore: módulo 'clipbox' restaurado correctamente
+[2026-03-03 19:03:52] [INFO] ZIP restore: módulo 'peritos' restaurado correctamente
+[2026-03-03 19:03:52] [INFO] ZIP restore: módulo 'boletin' restaurado correctamente
+[2026-03-03 19:03:52] [INFO] ZIP restore: módulo 'instruccion_penal' restaurado correctamente
+[2026-03-03 19:03:52] [INFO] ZIP restore: módulo 'minutas' restaurado correctamente
+[2026-03-03 19:03:52] [INFO] ZIP restore: módulo 'correos' restaurado correctamente
+[2026-03-03 19:03:52] [INFO] ZIP restore: módulo 'auxilios' restaurado correctamente
+[2026-03-03 19:03:52] [INFO] ZIP restore: módulo 'presos' restaurado correctamente
+[2026-03-03 19:03:52] [INFO] ZIP restore: módulo 'notificajud' restaurado correctamente
+[2026-03-03 19:03:52] [INFO] ZIP restore: módulo 'guardias' restaurado correctamente
+[2026-03-03 19:03:52] [INFO] ZIP restore: módulo 'ausencias' restaurado correctamente
+[2026-03-03 19:19:35] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-03 19:21:26] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-03 19:21:43] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-03 19:29:58] [INFO] Backup automático programado en 1h
+[2026-03-03 19:29:58] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-03 19:30:45] [INFO] [LLM] Config guardada: proveedor=gemini modelo=gemini-2.5-flash modo=combinado
+[2026-03-03 19:30:50] [INFO] [LLM] Config guardada: proveedor=gemini modelo=gemini-2.5-flash modo=combinado
+[2026-03-03 19:43:44] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-03 19:43:48] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-03 19:43:56] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-03 19:43:56] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'

@@ -1,0 +1,26 @@
+[2026-02-27 15:31:32] [INFO] Backup automático programado en 1h
+[2026-02-27 15:31:32] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-02-27 15:35:27] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-02-27 15:35:27] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\JOSEFERRO\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\JOSEFERRO\\vacaciones.json'
+[2026-02-27 15:40:41] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-02-27 15:40:41] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\JOSEFERRO\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\JOSEFERRO\\vacaciones.json'
+[2026-02-27 16:18:13] [INFO] Backup automático programado en 1h
+[2026-02-27 16:18:13] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-02-27 16:23:12] [INFO] Backup automático programado en 1h
+[2026-02-27 16:23:24] [INFO] Backup eliminado: auto_2026-02-24_184340.zip
+[2026-02-27 16:23:28] [INFO] Backup eliminado: auto_2026-02-24_194340.zip
+[2026-02-27 16:23:38] [INFO] Backup eliminado: auto_2026-02-26_174301.zip
+[2026-02-27 16:38:41] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-02-27 16:38:41] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\JOSEFERRO\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\JOSEFERRO\\vacaciones.json'
+[2026-02-27 16:49:49] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-02-27 16:49:49] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\JOSEFERRO\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\JOSEFERRO\\vacaciones.json'
+[2026-02-27 20:12:11] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\JOSEFERRO\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\JOSEFERRO\\vacaciones.json'
+[2026-02-27 20:12:11] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-02-27 20:14:05] [INFO] Backup completo generado: auto_2026-02-27_201405.zip
+[2026-02-27 20:14:05] [INFO] Backup automático programado en 1h
+[2026-02-27 21:13:23] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-02-27 21:13:23] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\JOSEFERRO\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\JOSEFERRO\\vacaciones.json'
+[2026-02-27 21:14:05] [INFO] Backup completo generado: auto_2026-02-27_211405.zip
+[2026-02-27 21:14:05] [INFO] Backup automático programado en 1h
+[2026-02-27 21:22:42] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-02-27 21:22:42] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\JOSEFERRO\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\JOSEFERRO\\vacaciones.json'

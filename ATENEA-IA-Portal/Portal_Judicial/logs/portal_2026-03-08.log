@@ -1,0 +1,57 @@
+[2026-03-08 00:29:10] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 00:29:10] [INFO] Backup automático programado en 1h
+[2026-03-08 01:29:10] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 01:29:11] [INFO] Backup automático programado en 1h
+[2026-03-08 02:29:11] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 02:29:11] [INFO] Backup automático programado en 1h
+[2026-03-08 03:29:12] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 03:29:12] [INFO] Backup automático programado en 1h
+[2026-03-08 04:29:12] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 04:29:12] [INFO] Backup automático programado en 1h
+[2026-03-08 05:29:13] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 05:29:13] [INFO] Backup automático programado en 1h
+[2026-03-08 06:29:13] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 06:29:13] [INFO] Backup automático programado en 1h
+[2026-03-08 07:29:24] [INFO] Backup completo generado: auto_2026-03-08_072914.zip
+[2026-03-08 07:29:25] [INFO] Backup automático programado en 1h
+[2026-03-08 08:29:35] [INFO] Backup completo generado: auto_2026-03-08_082925.zip
+[2026-03-08 08:29:36] [INFO] Backup automático programado en 1h
+[2026-03-08 09:29:46] [INFO] Backup completo generado: auto_2026-03-08_092936.zip
+[2026-03-08 09:29:47] [INFO] Backup automático programado en 1h
+[2026-03-08 10:29:58] [INFO] Backup completo generado: auto_2026-03-08_102948.zip
+[2026-03-08 10:29:59] [INFO] Backup automático programado en 1h
+[2026-03-08 11:30:09] [INFO] Backup completo generado: auto_2026-03-08_112959.zip
+[2026-03-08 11:30:10] [INFO] Backup automático programado en 1h
+[2026-03-08 12:30:21] [INFO] Backup completo generado: auto_2026-03-08_123011.zip
+[2026-03-08 12:30:22] [INFO] Backup automático programado en 1h
+[2026-03-08 13:30:33] [INFO] Backup completo generado: auto_2026-03-08_133022.zip
+[2026-03-08 13:30:34] [INFO] Backup automático programado en 1h
+[2026-03-08 14:30:44] [INFO] Backup completo generado: auto_2026-03-08_143034.zip
+[2026-03-08 14:30:45] [INFO] Backup automático programado en 1h
+[2026-03-08 15:30:55] [INFO] Backup completo generado: auto_2026-03-08_153045.zip
+[2026-03-08 15:30:56] [INFO] Backup automático programado en 1h
+[2026-03-08 16:22:18] [INFO] Backup automático programado en 1h
+[2026-03-08 16:22:18] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-08 16:22:52] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b modo=combinado
+[2026-03-08 16:30:56] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 16:30:57] [INFO] Backup automático programado en 1h
+[2026-03-08 17:30:57] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 17:30:57] [INFO] Backup automático programado en 1h
+[2026-03-08 17:52:18] [INFO] Backup automático programado en 1h
+[2026-03-08 17:52:18] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-08 18:05:05] [INFO] Backup automático programado en 1h
+[2026-03-08 18:05:06] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-08 18:06:28] [INFO] Backup automático programado en 1h
+[2026-03-08 18:06:28] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-08 18:30:57] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 18:30:57] [INFO] Backup automático programado en 1h
+[2026-03-08 19:30:58] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 19:30:58] [INFO] Backup automático programado en 1h
+[2026-03-08 20:30:58] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 20:30:58] [INFO] Backup automático programado en 1h
+[2026-03-08 21:30:58] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 21:30:59] [INFO] Backup automático programado en 1h
+[2026-03-08 22:30:59] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 22:30:59] [INFO] Backup automático programado en 1h
+[2026-03-08 23:31:00] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-08 23:31:00] [INFO] Backup automático programado en 1h

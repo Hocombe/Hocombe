@@ -1,0 +1,105 @@
+═══════════════════════════════════════════════════════════════
+  PORTAL JUDICIAL UNIFICADO
+  Tribunal de Instancia de Vilagarcía de Arousa
+═══════════════════════════════════════════════════════════════
+
+PARA ABRIR EL PORTAL:
+────────────────────
+  → Doble clic en: Iniciar.vbs
+
+  Se abrirá el navegador automáticamente.
+  No aparece ninguna ventana de CMD ni de terminal.
+
+
+MÓDULOS INCLUIDOS (teclas F1–F7):
+──────────────────────────────────
+  F1  📅 Agenda Judicial
+  F2  ⏱️  Calculadora de Vencimientos
+  F3  🏖️  Gestión de Vacaciones
+  F4  📋 Modelos de Resoluciones (ClipBox)
+  F5  📊 Alardes Judiciales
+  F6  🔬 Selector de Peritos
+  F7  📰 Boletín Trimestral
+
+
+DATOS Y BACKUPS:
+────────────────
+  Los datos se guardan en:  Portal_Judicial\datos\
+  Los backups automáticos:  Portal_Judicial\backups\
+
+  Se conservan 60 días de backups automáticos.
+  Puedes hacer un backup manual desde el botón "💾 Backup" del portal.
+  Puedes descargar cada módulo por separado desde ⚙️ > Backups individuales.
+
+  Para configurar backup en red: ⚙️ → "Ruta de backup en red"
+  Ejemplo: \\servidor\judicial\backups
+  (Si la red falla, la aplicación sigue funcionando sin problema)
+
+
+PRIMERA VEZ — MIGRAR DATOS EXISTENTES:
+────────────────────────────────────────
+  Si tienes datos en las aplicaciones antiguas, ejecuta primero:
+
+    python migrar_datos.py
+
+  Esto copia automáticamente:
+    ✅ Agenda Judicial (SQLite → JSON)
+    ✅ Gestión de Vacaciones (JSON → JSON)
+    ✅ Peritos Judiciales (JSON → JSON)
+
+  Para ClipBox (Modelos) y Vencimientos, el script da instrucciones
+  para exportar manualmente desde las apps antiguas.
+
+
+REQUISITOS:
+───────────
+  - Python 3.8 o superior (sin permisos de administrador)
+  - Flask: pip install flask flask-cors
+  - No requiere Node.js ni ningún otro requisito adicional
+
+
+ESTRUCTURA DE CARPETAS:
+────────────────────────
+  Portal_Judicial\
+  ├── Iniciar.vbs         ← EJECUTAR ESTO (doble clic)
+  ├── servidor.py         ← Servidor Flask unificado
+  ├── portal.html         ← Interfaz del portal
+  ├── migrar_datos.py     ← Script de migración (solo la primera vez)
+  ├── LEEME.txt           ← Este archivo
+  ├── datos\
+  │   ├── agenda.json
+  │   ├── vencimientos.json
+  │   ├── vacaciones.json
+  │   ├── clipbox.json
+  │   ├── peritos.json
+  │   └── boletin.json
+  ├── backups\            ← Backups automáticos y manuales
+  ├── config\             ← Configuración de usuario y ruta de red
+  └── logs\               ← Logs diarios del servidor
+
+
+PARA CERRAR EL PORTAL:
+──────────────────────
+  Cierra simplemente la pestaña del navegador.
+  El servidor se detiene automáticamente.
+  (O puedes cerrar el proceso python desde el Administrador de tareas)
+
+
+SOLUCIÓN DE PROBLEMAS:
+───────────────────────
+  "No se abre el navegador"
+    → Abre manualmente: http://localhost:PUERTO
+    → El PUERTO aparece en logs\portal_FECHA.log
+
+  "Python no encontrado"
+    → Instala Python desde python.org (sin permisos de admin)
+    → O coloca Python portable en: Portal_Judicial\python-portable\
+
+  "Flask no instalado"
+    → Ejecuta: python -m pip install flask flask-cors
+
+  "Los datos no aparecen"
+    → Ejecuta migrar_datos.py si es la primera vez
+    → Comprueba que la carpeta datos\ tiene los JSON
+
+═══════════════════════════════════════════════════════════════

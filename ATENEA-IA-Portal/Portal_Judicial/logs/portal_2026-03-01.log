@@ -1,0 +1,197 @@
+[2026-03-01 06:42:41] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-01 06:48:17] [INFO] Backup completo generado: manual_2026-03-01_064817.zip
+[2026-03-01 07:16:40] [INFO] Backup completo generado: auto_2026-03-01_071640.zip
+[2026-03-01 07:16:40] [INFO] Backup automático programado en 1h
+[2026-03-01 07:37:00] [INFO] [IA] Glosario generado desde docx: 33600 chars → C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\glosario_ia.txt
+[2026-03-01 07:37:00] [INFO] Backup automático programado en 1h
+[2026-03-01 07:37:00] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 07:44:11] [INFO] Login superadmin OK
+[2026-03-01 07:59:52] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-01 07:59:52] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presos.json'
+[2026-03-01 08:00:06] [INFO] Backup automático programado en 1h
+[2026-03-01 08:00:06] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 08:00:31] [INFO] [GROQ] Rate-limit en llama-3.3-70b-versatile, probando fallback...
+[2026-03-01 08:00:31] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:01:04] [INFO] [GROQ] Rate-limit en llama-3.3-70b-versatile, probando fallback...
+[2026-03-01 08:01:04] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:01:41] [INFO] [GROQ] Rate-limit en llama-3.3-70b-versatile, probando fallback...
+[2026-03-01 08:01:41] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:01:56] [INFO] [GROQ] Rate-limit en llama-3.3-70b-versatile, probando fallback...
+[2026-03-01 08:01:56] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:02:12] [INFO] [GROQ] Rate-limit en llama-3.3-70b-versatile, probando fallback...
+[2026-03-01 08:02:12] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:02:35] [INFO] [GROQ] Rate-limit en llama-3.3-70b-versatile, probando fallback...
+[2026-03-01 08:02:35] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:02:47] [INFO] [GROQ] Rate-limit en llama-3.3-70b-versatile, probando fallback...
+[2026-03-01 08:02:47] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:03:04] [INFO] [GROQ] Rate-limit en llama-3.3-70b-versatile, probando fallback...
+[2026-03-01 08:03:04] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:03:29] [INFO] [GROQ] Rate-limit en llama-3.3-70b-versatile, probando fallback...
+[2026-03-01 08:03:29] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:03:35] [INFO] [GROQ] Rate-limit en llama-3.3-70b-versatile, probando fallback...
+[2026-03-01 08:03:35] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:04:32] [INFO] [GROQ] Rate-limit en qwen/qwen3-32b, probando fallback...
+[2026-03-01 08:04:33] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:04:42] [INFO] [GROQ] Rate-limit en qwen/qwen3-32b, probando fallback...
+[2026-03-01 08:04:42] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:04:52] [INFO] [GROQ] Rate-limit en qwen/qwen3-32b, probando fallback...
+[2026-03-01 08:04:52] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:31:59] [INFO] Login superadmin OK
+[2026-03-01 08:33:29] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-01 08:34:35] [INFO] [GROQ] Rate-limit en qwen/qwen3-32b, probando fallback...
+[2026-03-01 08:34:36] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:34:48] [INFO] [GROQ] Rate-limit en qwen/qwen3-32b, probando fallback...
+[2026-03-01 08:34:48] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:35:12] [INFO] [GROQ] Rate-limit en qwen/qwen3-32b, probando fallback...
+[2026-03-01 08:35:12] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:35:22] [INFO] [GROQ] Rate-limit en qwen/qwen3-32b, probando fallback...
+[2026-03-01 08:35:22] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:35:29] [INFO] [GROQ] Rate-limit en qwen/qwen3-32b, probando fallback...
+[2026-03-01 08:35:29] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:35:33] [INFO] [GROQ] Rate-limit en qwen/qwen3-32b, probando fallback...
+[2026-03-01 08:35:33] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:37:03] [INFO] [GROQ] Rate-limit en qwen/qwen3-32b, probando fallback...
+[2026-03-01 08:37:03] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:37:28] [INFO] [GROQ] Rate-limit en qwen/qwen3-32b, probando fallback...
+[2026-03-01 08:37:28] [INFO] [GROQ] Rate-limit también en fallback llama-3.1-8b-instant
+[2026-03-01 08:38:12] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:38:17] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:41:33] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:41:37] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:41:40] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:41:53] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:42:03] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:42:33] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:43:03] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:44:05] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:44:14] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:44:41] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:44:56] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:46:49] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-01 08:46:49] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presos.json'
+[2026-03-01 08:47:06] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:47:10] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:47:19] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:47:28] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:49:31] [INFO] [GROQ] Rate-limit en llama-3.1-8b-instant, probando fallback...
+[2026-03-01 08:56:04] [INFO] Backup automático programado en 1h
+[2026-03-01 08:56:04] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 08:56:41] [INFO] Login superadmin OK
+[2026-03-01 09:00:54] [INFO] [LLM] Config guardada: proveedor=gemini modelo=gemini-2.0-flash
+[2026-03-01 09:03:19] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama-3.3-70b
+[2026-03-01 09:46:38] [INFO] [LLM] Config guardada: proveedor=openrouter modelo=google/gemini-2.0-flash-exp:free
+[2026-03-01 09:48:04] [INFO] Backup automático programado en 1h
+[2026-03-01 09:48:04] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 12:02:27] [INFO] Backup automático programado en 1h
+[2026-03-01 12:02:27] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 12:06:15] [INFO] [LLM] Config guardada: proveedor=openrouter modelo=google/gemini-2.0-flash-exp:free
+[2026-03-01 12:09:22] [INFO] [LLM] Config guardada: proveedor=gemini modelo=gemini-2.0-flash
+[2026-03-01 12:14:23] [INFO] [LLM] Config guardada: proveedor=mistral modelo=mistral-small-latest
+[2026-03-01 12:16:20] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b
+[2026-03-01 12:17:28] [INFO] [LLM] Config guardada: proveedor=groq modelo=llama-3.1-8b-instant
+[2026-03-01 12:21:28] [INFO] Backup automático programado en 1h
+[2026-03-01 12:21:28] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 12:22:11] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=qwen-3-235b-a22b-instruct-2507
+[2026-03-01 12:22:49] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b
+[2026-03-01 12:23:06] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-01 12:23:06] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presos.json'
+[2026-03-01 12:23:37] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=gpt-oss-120b
+[2026-03-01 12:25:09] [INFO] [LLM] Config guardada: proveedor=openrouter modelo=mistralai/mistral-small-3.1-24b-instruct:free
+[2026-03-01 12:26:26] [INFO] [LLM] Config guardada: proveedor=gemini modelo=gemini-2.0-flash
+[2026-03-01 12:32:49] [INFO] Backup automático programado en 1h
+[2026-03-01 12:32:49] [INFO] Servidor iniciado en 0.0.0.0:5000
+[2026-03-01 12:33:48] [INFO] [LLM] Config guardada: proveedor=openrouter modelo=google/gemma-3-27b-it:free
+[2026-03-01 12:33:56] [INFO] [LLM/OpenRouter] Rate-limit en google/gemma-3-27b-it:free, probando fallback...
+[2026-03-01 12:33:57] [INFO] [LLM/OpenRouter] Rate-limit en fallback google/gemma-3-12b-it:free
+[2026-03-01 12:33:57] [INFO] [LLM/OpenRouter] Rate-limit en fallback meta-llama/llama-3.3-70b-instruct:free
+[2026-03-01 12:34:18] [INFO] [LLM] Config guardada: proveedor=openrouter modelo=mistralai/mistral-small-3.1-24b-instruct:free
+[2026-03-01 12:34:25] [INFO] [LLM/OpenRouter] Rate-limit en mistralai/mistral-small-3.1-24b-instruct:free, probando fallback...
+[2026-03-01 12:34:26] [INFO] [LLM/OpenRouter] Error en fallback google/gemma-3-12b-it:free: {'error': {'message': 'Provider returned error', 'code': 400, 'metadata': {'raw': '{\n  "error": {\n    "code": 400,\n    "message": "Developer instruction is not enabled for models/gemma-3-12b-it",\n    "status": "INVALID_ARGUMENT"\n  }\n}\n', 'provider_name': 'Google AI Studio', 'is_byok': False}}, 'user_id': 'user_3AKwpEzF8xvg2ajtrZajYiQUkch'}
+[2026-03-01 12:35:07] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b
+[2026-03-01 12:35:13] [INFO] [LLM/Cerebras] Error 403 en llama3.1-8b: {'error': {'message': 'HTTP Error 403: Forbidden', 'code': 403}}
+[2026-03-01 12:36:15] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=gpt-oss-120b
+[2026-03-01 12:36:23] [INFO] [LLM/Cerebras] Error 403 en gpt-oss-120b: {'error': {'message': 'HTTP Error 403: Forbidden', 'code': 403}}
+[2026-03-01 12:37:17] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b
+[2026-03-01 12:37:38] [INFO] [LLM/Cerebras] Error 403 en llama3.1-8b: {'error': {'message': 'HTTP Error 403: Forbidden', 'code': 403}}
+[2026-03-01 12:38:31] [INFO] Backup automático programado en 1h
+[2026-03-01 12:38:31] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 12:42:01] [INFO] Backup automático programado en 1h
+[2026-03-01 12:42:01] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 12:42:22] [INFO] [LLM/Cerebras] Error 400 en llama3.1-8b: {'message': 'Please reduce the length of the messages or completion. Current length is 10737 while limit is 8192', 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded', 'id': ''}
+[2026-03-01 12:44:11] [INFO] [LLM/Cerebras] Error 400 en llama3.1-8b: {'message': 'Please reduce the length of the messages or completion. Current length is 10715 while limit is 8192', 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded', 'id': ''}
+[2026-03-01 12:44:21] [INFO] [LLM/Cerebras] Error 400 en llama3.1-8b: {'message': 'Please reduce the length of the messages or completion. Current length is 10726 while limit is 8192', 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded', 'id': ''}
+[2026-03-01 12:44:27] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presos.json'
+[2026-03-01 12:44:27] [INFO] [LLM/Cerebras] Error 400 en llama3.1-8b: {'message': 'Please reduce the length of the messages or completion. Current length is 10715 while limit is 8192', 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded', 'id': ''}
+[2026-03-01 12:44:30] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-01 12:44:30] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presos.json'
+[2026-03-01 12:44:37] [INFO] [LLM/Cerebras] Error 400 en llama3.1-8b: {'message': 'Please reduce the length of the messages or completion. Current length is 10746 while limit is 8192', 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded', 'id': ''}
+[2026-03-01 12:44:45] [INFO] [LLM/Cerebras] Error 400 en llama3.1-8b: {'message': 'Please reduce the length of the messages or completion. Current length is 10728 while limit is 8192', 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded', 'id': ''}
+[2026-03-01 12:45:17] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=qwen-3-235b-a22b-instruct-2507
+[2026-03-01 12:45:23] [INFO] [LLM/Cerebras] Error 404 en qwen-3-235b-a22b-instruct-2507: {'message': 'Model qwen-3-235b-a22b-instruct-2507 does not exist or you do not have access to it.', 'type': 'not_found_error', 'param': 'model', 'code': 'model_not_found'}
+[2026-03-01 12:46:09] [INFO] Backup automático programado en 1h
+[2026-03-01 12:46:09] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 12:46:35] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=qwen-3-235b-a22b-instruct-2507
+[2026-03-01 12:46:40] [INFO] [LLM/Cerebras] Error 404 en qwen-3-235b-a22b-instruct-2507: {'message': 'Model qwen-3-235b-a22b-instruct-2507 does not exist or you do not have access to it.', 'type': 'not_found_error', 'param': 'model', 'code': 'model_not_found'}
+[2026-03-01 12:47:12] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b
+[2026-03-01 12:47:18] [INFO] [LLM/Cerebras] Error 400 en llama3.1-8b: {'message': 'Please reduce the length of the messages or completion. Current length is 8995 while limit is 8192', 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded', 'id': ''}
+[2026-03-01 12:47:50] [INFO] [LLM/Cerebras] Error 400 en llama3.1-8b: {'message': 'Please reduce the length of the messages or completion. Current length is 8979 while limit is 8192', 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded', 'id': ''}
+[2026-03-01 12:49:45] [INFO] [LLM/Cerebras] Error 400 en llama3.1-8b: {'message': 'Please reduce the length of the messages or completion. Current length is 8995 while limit is 8192', 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded', 'id': ''}
+[2026-03-01 12:51:04] [INFO] Backup automático programado en 1h
+[2026-03-01 12:51:04] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 12:51:30] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b
+[2026-03-01 12:54:02] [INFO] [LLM] Config guardada: proveedor=openrouter modelo=google/gemma-3-27b-it:free
+[2026-03-01 12:54:12] [INFO] [LLM/OpenRouter] Error 400 en google/gemma-3-27b-it:free: {'error': {'message': 'Provider returned error', 'code': 400, 'metadata': {'raw': '{\n  "error": {\n    "code": 400,\n    "message": "Developer instruction is not enabled for models/gemma-3-27b-it",\n    "status": "INVALID_ARGUMENT"\n  }\n}\n', 'provider_name': 'Google AI Studio', 'is_byok': False}}, 'user_id': 'user_3AKwpEzF8xvg2ajtrZajYiQUkch'}
+[2026-03-01 12:54:32] [INFO] [LLM] Config guardada: proveedor=openrouter modelo=meta-llama/llama-3.3-70b-instruct:free
+[2026-03-01 12:54:38] [INFO] [LLM/OpenRouter] Rate-limit en meta-llama/llama-3.3-70b-instruct:free, probando fallback...
+[2026-03-01 12:54:38] [INFO] [LLM/OpenRouter] Error en fallback google/gemma-3-12b-it:free: {'error': {'message': 'Provider returned error', 'code': 400, 'metadata': {'raw': '{\n  "error": {\n    "code": 400,\n    "message": "Developer instruction is not enabled for models/gemma-3-12b-it",\n    "status": "INVALID_ARGUMENT"\n  }\n}\n', 'provider_name': 'Google AI Studio', 'is_byok': False}}, 'user_id': 'user_3AKwpEzF8xvg2ajtrZajYiQUkch'}
+[2026-03-01 12:54:58] [INFO] [LLM] Config guardada: proveedor=gemini modelo=gemini-2.0-flash
+[2026-03-01 12:55:03] [INFO] [LLM/Google Gemini] Rate-limit en gemini-2.0-flash, probando fallback...
+[2026-03-01 12:55:03] [INFO] [LLM/Google Gemini] Error en fallback gemini-1.5-flash: [{'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
+[2026-03-01 12:55:16] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=gpt-oss-120b
+[2026-03-01 12:55:35] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presos.json'
+[2026-03-01 12:57:57] [INFO] Backup automático programado en 1h
+[2026-03-01 12:57:57] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 12:59:12] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presos.json'
+[2026-03-01 12:59:19] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-01 12:59:19] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presos.json'
+[2026-03-01 12:59:39] [INFO] Login superadmin OK
+[2026-03-01 13:00:10] [INFO] Módulo 'presos' restaurado desde backup del cliente
+[2026-03-01 13:07:44] [INFO] [LLM/Cerebras] Excepción en gpt-oss-120b: 'content'
+[2026-03-01 13:08:41] [INFO] [LLM] Config guardada: proveedor=mistral modelo=mistral-small-latest
+[2026-03-01 13:08:51] [INFO] [LLM/Mistral AI] Error 401 en mistral-small-latest: {'detail': 'Unauthorized'}
+[2026-03-01 13:10:39] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=qwen-3-235b-a22b-instruct-2507
+[2026-03-01 13:10:49] [INFO] [LLM/Cerebras] Error 404 en qwen-3-235b-a22b-instruct-2507: {'message': 'Model qwen-3-235b-a22b-instruct-2507 does not exist or you do not have access to it.', 'type': 'not_found_error', 'param': 'model', 'code': 'model_not_found'}
+[2026-03-01 13:10:55] [INFO] [LLM/Cerebras] Error 404 en qwen-3-235b-a22b-instruct-2507: {'message': 'Model qwen-3-235b-a22b-instruct-2507 does not exist or you do not have access to it.', 'type': 'not_found_error', 'param': 'model', 'code': 'model_not_found'}
+[2026-03-01 13:11:05] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=gpt-oss-120b
+[2026-03-01 13:11:58] [INFO] Backup automático programado en 1h
+[2026-03-01 13:11:58] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 13:20:53] [INFO] Backup automático programado en 1h
+[2026-03-01 13:20:53] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 13:41:50] [INFO] Backup automático programado en 1h
+[2026-03-01 13:41:50] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 13:55:56] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-01 13:57:19] [INFO] Login superadmin OK
+[2026-03-01 13:58:04] [INFO] Módulo 'vacaciones' restaurado desde backup del cliente
+[2026-03-01 13:58:08] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-01 13:58:08] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\TRIBUNALINSTANCIAVISIONGENERAL\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\TRIBUNALINSTANCIAVISIONGENERAL\\vacaciones.json'
+[2026-03-01 13:58:27] [INFO] Módulo 'vacaciones' restaurado desde backup del cliente
+[2026-03-01 16:41:59] [INFO] [LLM] Config guardada: proveedor=openrouter modelo=openai/gpt-oss-20b:free
+[2026-03-01 16:42:06] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\TRIBUNALINSTANCIAVISIONGENERAL\vencimientos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\TRIBUNALINSTANCIAVISIONGENERAL\\vencimientos.json'
+[2026-03-01 16:42:07] [INFO] [LLM/OpenRouter] Error 404 en openai/gpt-oss-20b:free: {'error': {'message': 'No endpoints found matching your data policy (Free model publication). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}
+[2026-03-01 16:42:28] [INFO] [LLM] Config guardada: proveedor=openrouter modelo=google/gemma-3-27b-it:free
+[2026-03-01 16:42:33] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\TRIBUNALINSTANCIAVISIONGENERAL\vencimientos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\TRIBUNALINSTANCIAVISIONGENERAL\\vencimientos.json'
+[2026-03-01 16:42:34] [INFO] [LLM/OpenRouter] Rate-limit en google/gemma-3-27b-it:free, probando fallback...
+[2026-03-01 16:42:35] [INFO] [LLM/OpenRouter] Error en fallback openai/gpt-oss-20b:free: {'error': {'message': 'No endpoints found matching your data policy (Free model publication). Configure: https://openrouter.ai/settings/privacy', 'code': 404}}
+[2026-03-01 16:42:49] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=gpt-oss-120b
+[2026-03-01 16:42:54] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\TRIBUNALINSTANCIAVISIONGENERAL\vencimientos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\TRIBUNALINSTANCIAVISIONGENERAL\\vencimientos.json'
+[2026-03-01 16:43:09] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\TRIBUNALINSTANCIAVISIONGENERAL\vencimientos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\TRIBUNALINSTANCIAVISIONGENERAL\\vencimientos.json'
+[2026-03-01 16:46:13] [INFO] [LLM/Cerebras] Excepción en gpt-oss-120b: 'content'
+[2026-03-01 16:46:31] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b
+[2026-03-01 17:10:38] [INFO] Backup automático programado en 1h
+[2026-03-01 17:10:38] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-01 17:12:48] [INFO] Login superadmin OK
+[2026-03-01 17:14:08] [INFO] Módulo 'notificajud' restaurado desde backup del cliente
+[2026-03-01 17:14:34] [INFO] Backup usuarios generado: backup_usuarios_2026-03-01_171433.zip
+[2026-03-01 17:18:04] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-01 17:18:04] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\TRIBUNALINSTANCIAVISIONGENERAL\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\TRIBUNALINSTANCIAVISIONGENERAL\\vacaciones.json'
+[2026-03-01 17:18:28] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'

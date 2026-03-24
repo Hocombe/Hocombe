@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auxilios Judiciales</title>
+<style>
+/* ── Variables de tema ─────────────────────────────── */
+:root {
+  --bg:       #f8fafc; --bg2:    #ffffff; --bg3:    #f1f5f9;
+  --border:   #e2e8f0; --text:   #1e293b; --text2:  #64748b;
+  --primary:  #2a5298; --primary-h:#1e3a6e;
+  --header-bg:#2a5298; --header-t:#ffffff;
+  --input-bg: #ffffff; --input-border:#cbd5e1;
+  --shadow:   0 2px 8px rgba(0,0,0,.10);
+  --radius:   10px;
+}
+[data-tema="oscuro"] {
+  --bg:       #0d1520; --bg2:    #111c2d; --bg3:    #182a44;
+  --border:   #1e3050; --text:   #c8deff; --text2:  #5a7a9a;
+  --primary:  #3b6bbf; --primary-h:#2a5298;
+  --header-bg:linear-gradient(135deg,#1a3a5f,#2a5298); --header-t:#ffffff;
+  --input-bg: #0a1628; --input-border:#1e3a5f;
+  --shadow:   0 2px 12px rgba(0,0,0,.4);
+}
+
+/* ── Reset ─────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+button{cursor:pointer;font-family:inherit}
+input,select,textarea{font-family:inherit}
+
+/* ── Layout principal ──────────────────────────────── */
+#app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+
+/* ── Cabecera ──────────────────────────────────────── */
+#cabecera{
+  background:var(--header-bg);color:var(--header-t);
+  padding:10px 16px;display:flex;align-items:center;gap:12px;
+  flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.25);
+}
+#cabecera h1{font-size:16px;font-weight:700;flex:1}
+#cabecera h1 span{font-size:12px;font-weight:400;opacity:.8;margin-left:6px}
+#btn-nuevo{
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);
+  color:#fff;border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;
+  transition:background .2s;
+}
+#btn-nuevo:hover{background:rgba(255,255,255,.32)}
+
+/* ── Barra de controles ────────────────────────────── */
+#barra-controles{
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:8px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex-shrink:0;
+}
+#barra-controles input[type=text]{
+  flex:1;min-width:160px;max-width:260px;
+  background:var(--input-bg);border:1px solid var(--input-border);
+  color:var(--text);border-radius:7px;padding:6px 10px;font-size:13px;
+}
+#barra-controles input[type=text]:focus{outline:none;border-color:var(--primary)}
+#barra-controles select{
+  background:var(--input-bg);border:1px solid var(--input-border);
+  color:var(--text);border-radius:7px;padding:6px 9px;font-size:12px;
+}
+#barra-controles select:focus{outline:none;border-color:var(--primary)}
+
+.vista-btns{display:flex;gap:3px;margin-left:auto}
+.vista-btn{
+  background:var(--bg3);border:1px solid var(--border);color:var(--text2);
+  border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;transition:all .2s;
+}
+.vista-btn.activa{background:var(--primary);color:#fff;border-color:var(--primary)}
+.vista-btn:hover:not(.activa){background:var(--border)}
+
+/* ── Navegación de fecha ───────────────────────────── */
+#nav-fecha{
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:7px 14px;display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+#nav-fecha button{
+  background:var(--bg3);border:1px solid var(--border);color:var(--text);
+  border-radius:6px;padding:4px 10px;font-size:13px;transition:background .2s;
+}
+#nav-fecha button:hover{background:var(--border)}
+#nav-fecha button.hoy-btn{
+  background:var(--primary);color:#fff;border-color:var(--primary);font-weight:600;
+}
+#nav-fecha button.hoy-btn:hover{background:var(--primary-h)}
+#titulo-fecha{font-size:14px;font-weight:600;color:var(--text);flex:1;text-align:center}
+#contador-auxilios{font-size:12px;color:var(--text2)}
+
+/* ── Área de contenido ─────────────────────────────── */
+#contenido{flex:1;overflow-y:auto;padding:14px}
+
+/* ── Vista Día ─────────────────────────────────────── */
+.dia-vacio{
+  text-align:center;padding:48px 20px;color:var(--text2);
+  font-size:14px;
+}
+.dia-vacio .dia-icon{font-size:40px;margin-bottom:10px}
+
+/* ── Tarjeta de auxilio ────────────────────────────── */
+.auxilio-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px 14px;margin-bottom:10px;display:flex;align-items:flex-start;
+  gap:12px;box-shadow:var(--shadow);transition:box-shadow .2s;
+  border-left:4px solid var(--border);
+}
+.auxilio-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.auxilio-card.estado-pendiente{border-left-color:#f59e0b}
+.auxilio-card.estado-realizado{border-left-color:#10b981}
+.auxilio-card.estado-cancelado{border-left-color:#94a3b8}
+
+.card-hora{
+  font-size:18px;font-weight:700;color:var(--text);
+  min-width:52px;text-align:center;line-height:1.2;
+}
+.card-hora small{display:block;font-size:10px;font-weight:400;color:var(--text2)}
+.card-body{flex:1;min-width:0}
+.card-top{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+.card-tipo{
+  font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;
+  background:var(--bg3);color:var(--text2);
+}
+.badge-estado{
+  font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;
+}
+.badge-pendiente{background:#fef3c7;color:#92400e}
+.badge-realizado{background:#d1fae5;color:#065f46}
+.badge-cancelado{background:#f1f5f9;color:#64748b}
+[data-tema="oscuro"] .badge-pendiente{background:#2a1f00;color:#fcd34d}
+[data-tema="oscuro"] .badge-realizado{background:#022c22;color:#6ee7b7}
+[data-tema="oscuro"] .badge-cancelado{background:#1e293b;color:#64748b}
+.card-tribunal{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-proc{font-size:12px;color:var(--text2)}
+.card-plaza{font-size:11px;color:var(--text2);margin-top:3px}
+.card-detalles{font-size:12px;color:var(--text2);margin-top:4px;line-height:1.4}
+.card-actions{display:flex;gap:6px;flex-shrink:0}
+.card-actions button{
+  background:var(--bg3);border:1px solid var(--border);color:var(--text2);
+  border-radius:6px;padding:5px 9px;font-size:12px;transition:all .2s;
+}
+.card-actions button:hover{background:var(--border);color:var(--text)}
+.card-actions .btn-editar:hover{background:#dbeafe;color:#1d4ed8;border-color:#93c5fd}
+.card-actions .btn-borrar:hover{background:#fee2e2;color:#b91c1c;border-color:#fca5a5}
+[data-tema="oscuro"] .card-actions .btn-editar:hover{background:#1e3a5f;color:#93c5fd;border-color:#1e4a7f}
+[data-tema="oscuro"] .card-actions .btn-borrar:hover{background:#3b0d0d;color:#fca5a5;border-color:#7f1d1d}
+
+/* ── Vista Semana ──────────────────────────────────── */
+.semana-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;min-height:400px}
+.semana-dia{
+  background:var(--bg2);border:1px solid var(--border);border-radius:8px;
+  padding:8px;min-height:120px;
+}
+.semana-dia-header{
+  font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px;
+  text-align:center;padding-bottom:4px;border-bottom:1px solid var(--border);
+}
+.semana-dia-header .dia-num{
+  font-size:16px;font-weight:700;color:var(--text);display:block;
+}
+.semana-dia.hoy-col .dia-num{
+  background:var(--primary);color:#fff;border-radius:50%;
+  width:28px;height:28px;line-height:28px;margin:0 auto;display:flex;align-items:center;justify-content:center;
+}
+.semana-chip{
+  font-size:10px;padding:3px 5px;border-radius:4px;margin-bottom:3px;
+  cursor:pointer;overflow:hidden;
+  border-left:3px solid transparent;background:var(--bg3);
+  transition:opacity .15s;
+}
+.semana-chip:hover{opacity:.8}
+.semana-chip-main{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.semana-chip-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:9px;opacity:.75;margin-top:1px}
+.semana-chip.pendiente{border-left-color:#f59e0b;color:#92400e;background:#fef9c3}
+.semana-chip.realizado{border-left-color:#10b981;color:#065f46;background:#d1fae5}
+.semana-chip.cancelado{border-left-color:#94a3b8;color:#64748b;background:#f1f5f9}
+[data-tema="oscuro"] .semana-chip.pendiente{background:#2a1f00;color:#fcd34d}
+[data-tema="oscuro"] .semana-chip.realizado{background:#022c22;color:#6ee7b7}
+[data-tema="oscuro"] .semana-chip.cancelado{background:#1e293b;color:#94a3b8}
+.semana-mas{font-size:10px;color:var(--primary);text-align:right;cursor:pointer}
+
+/* ── Tooltip flotante ────────────────────────────────── */
+#aux-tooltip{
+  position:fixed;z-index:9500;display:none;pointer-events:none;
+  background:var(--bg2);border:1px solid var(--border);border-radius:10px;
+  padding:11px 14px;box-shadow:0 8px 28px rgba(0,0,0,.4);
+  font-size:12px;max-width:270px;min-width:180px;color:var(--text);
+}
+.tt-titulo{font-size:13px;font-weight:700;color:var(--primary);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.tt-row{display:flex;align-items:flex-start;gap:6px;margin-bottom:4px;line-height:1.3}
+.tt-row .tt-icon{flex-shrink:0;font-size:13px}
+.tt-row .tt-val{color:var(--text2);}
+.tt-row .tt-val strong{color:var(--text);font-weight:600}
+.tt-sep{border:none;border-top:1px solid var(--border);margin:6px 0}
+.tt-detalles{font-size:11px;color:var(--text2);line-height:1.4}
+
+/* ── Vista Mes ─────────────────────────────────────── */
+.mes-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.mes-header-dia{
+  font-size:11px;font-weight:600;color:var(--text2);
+  text-align:center;padding:4px 0;
+}
+.mes-celda{
+  background:var(--bg2);border:1px solid var(--border);border-radius:6px;
+  padding:4px;min-height:80px;
+}
+.mes-celda.otro-mes{opacity:.45}
+.mes-celda.hoy-celda{border-color:var(--primary);border-width:2px}
+.mes-num{
+  font-size:12px;font-weight:700;color:var(--text2);
+  margin-bottom:3px;display:flex;justify-content:space-between;align-items:center;
+}
+.mes-num.hoy-num{color:var(--primary)}
+.mes-chip{
+  font-size:10px;padding:1px 4px;border-radius:3px;margin-bottom:1px;
+  cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.mes-chip.pendiente{background:#fef3c7;color:#92400e}
+.mes-chip.realizado{background:#d1fae5;color:#065f46}
+.mes-chip.cancelado{background:#f1f5f9;color:#64748b}
+[data-tema="oscuro"] .mes-chip.pendiente{background:#2a1f00;color:#fcd34d}
+[data-tema="oscuro"] .mes-chip.realizado{background:#022c22;color:#6ee7b7}
+[data-tema="oscuro"] .mes-chip.cancelado{background:#1e293b;color:#94a3b8}
+.mes-mas{font-size:10px;color:var(--primary);cursor:pointer}
+
+/* ── Vista Año ─────────────────────────────────────── */
+.anio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.anio-mes{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px;cursor:pointer;transition:box-shadow .2s}
+.anio-mes:hover{box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.anio-mes-titulo{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;text-align:center}
+.anio-mini-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.anio-mini-dia{
+  width:100%;aspect-ratio:1;border-radius:2px;font-size:8px;
+  display:flex;align-items:center;justify-content:center;color:var(--text2);
+}
+.anio-mini-dia.tiene-aux{background:var(--primary);color:#fff;border-radius:3px;font-weight:700}
+.anio-mini-dia.vacio{background:transparent}
+.anio-stats{display:flex;gap:6px;margin-top:6px;justify-content:center;font-size:10px;flex-wrap:wrap}
+.anio-stat{padding:1px 5px;border-radius:10px}
+.anio-stat.p{background:#fef3c7;color:#92400e}
+.anio-stat.r{background:#d1fae5;color:#065f46}
+.anio-stat.c{background:#f1f5f9;color:#64748b}
+[data-tema="oscuro"] .anio-stat.p{background:#2a1f00;color:#fcd34d}
+[data-tema="oscuro"] .anio-stat.r{background:#022c22;color:#6ee7b7}
+[data-tema="oscuro"] .anio-stat.c{background:#1e293b;color:#94a3b8}
+
+/* ── Modal ─────────────────────────────────────────── */
+#modal-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);
+  z-index:9000;align-items:center;justify-content:center;padding:16px;
+}
+#modal-overlay.abierto{display:flex}
+#modal-box{
+  background:var(--bg2);border-radius:14px;width:100%;max-width:520px;
+  max-height:90vh;display:flex;flex-direction:column;
+  box-shadow:0 16px 48px rgba(0,0,0,.4);
+}
+#modal-header{
+  background:var(--header-bg);color:#fff;padding:14px 18px;
+  border-radius:14px 14px 0 0;display:flex;align-items:center;gap:10px;flex-shrink:0;
+}
+#modal-header h2{font-size:15px;font-weight:700;flex:1}
+#modal-header button{
+  background:rgba(255,255,255,.2);border:none;color:#fff;
+  border-radius:6px;padding:4px 10px;font-size:14px;
+}
+#modal-header button:hover{background:rgba(255,255,255,.35)}
+#modal-body{padding:16px 18px;overflow-y:auto;flex:1}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.form-row.full{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group label{font-size:12px;font-weight:600;color:var(--text2)}
+.form-group input,.form-group select,.form-group textarea{
+  background:var(--input-bg);border:1px solid var(--input-border);
+  color:var(--text);border-radius:7px;padding:7px 10px;font-size:13px;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--primary);
+}
+.form-group textarea{resize:vertical;min-height:70px}
+#tipo-custom-wrap{display:none}
+#modal-footer{
+  padding:12px 18px;border-top:1px solid var(--border);
+  display:flex;gap:8px;justify-content:flex-end;flex-shrink:0;
+}
+#modal-footer button{border-radius:8px;padding:8px 20px;font-size:13px;font-weight:600;border:none}
+#btn-cancelar-modal{background:var(--bg3);color:var(--text)}
+#btn-cancelar-modal:hover{background:var(--border)}
+#btn-guardar{background:var(--primary);color:#fff}
+#btn-guardar:hover{background:var(--primary-h)}
+
+/* ── Toast / Alertas ───────────────────────────────── */
+#toast-wrap{position:fixed;bottom:20px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{
+  background:#1e3a5f;color:#c8deff;border-radius:10px;padding:12px 16px;
+  font-size:13px;box-shadow:0 6px 20px rgba(0,0,0,.4);max-width:320px;
+  animation:slideIn .3s ease;pointer-events:all;display:flex;align-items:flex-start;gap:10px;
+}
+.toast.alerta{background:#7c2d12;color:#fcd34d;border:1px solid #b45309}
+.toast.ok{background:#064e3b;color:#6ee7b7;border:1px solid #065f46}
+.toast-close{background:none;border:none;color:inherit;font-size:16px;cursor:pointer;opacity:.7;flex-shrink:0}
+.toast-close:hover{opacity:1}
+@keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ── Cabecera ── -->
+  <header id="cabecera">
+    <h1>🔗 Auxilios Judiciales <span id="subtitulo-tribunal"></span></h1>
+    <button id="btn-nuevo" onclick="abrirModal()">＋ Nuevo Auxilio</button>
+  </header>
+
+  <!-- ── Controles ── -->
+  <div id="barra-controles">
+    <input type="text" id="buscar" placeholder="🔍 Buscar tribunal, procedimiento…" oninput="renderVista()">
+    <select id="filtro-tipo" onchange="renderVista()">
+      <option value="">Todos los tipos</option>
+      <option value="videoconferencia">📹 Videoconferencia</option>
+      <option value="exhorto">📜 Exhorto</option>
+      <option value="otro">📋 Otro</option>
+    </select>
+    <select id="filtro-estado" onchange="renderVista()">
+      <option value="">Todos los estados</option>
+      <option value="pendiente">🟡 Pendiente</option>
+      <option value="realizado">🟢 Realizado</option>
+      <option value="cancelado">⚫ Cancelado</option>
+    </select>
+    <select id="filtro-plaza" onchange="renderVista()">
+      <option value="">Todas las plazas</option>
+    </select>
+    <div class="vista-btns">
+      <button class="vista-btn" data-v="dia"    onclick="setVista('dia')">Día</button>
+      <button class="vista-btn" data-v="semana" onclick="setVista('semana')">Semana</button>
+      <button class="vista-btn" data-v="mes"    onclick="setVista('mes')">Mes</button>
+      <button class="vista-btn" data-v="anio"   onclick="setVista('anio')">Año</button>
+    </div>
+  </div>
+
+  <!-- ── Navegación ── -->
+  <div id="nav-fecha">
+    <button onclick="navegar(-1)">◀</button>
+    <button class="hoy-btn" onclick="irHoy()">Hoy</button>
+    <button onclick="navegar(1)">▶</button>
+    <span id="titulo-fecha"></span>
+    <span id="contador-auxilios"></span>
+  </div>
+
+  <!-- ── Contenido ── -->
+  <div id="contenido"></div>
+
+</div><!-- #app -->
+
+<!-- ── Modal ── -->
+<div id="modal-overlay" onclick="e=>e.target===this&&cerrarModal()">
+  <div id="modal-box">
+    <div id="modal-header">
+      <h2 id="modal-titulo">Nuevo Auxilio Judicial</h2>
+      <button onclick="cerrarModal()">✕</button>
+    </div>
+    <div id="modal-body">
+      <input type="hidden" id="f-id">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Fecha *</label>
+          <input type="date" id="f-fecha">
+        </div>
+        <div class="form-group">
+          <label>Hora</label>
+          <input type="time" id="f-hora" value="09:00">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Tipo *</label>
+          <select id="f-tipo" onchange="toggleTipoCustom()">
+            <option value="videoconferencia">📹 Videoconferencia</option>
+            <option value="exhorto">📜 Exhorto</option>
+            <option value="otro">📋 Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Estado</label>
+          <select id="f-estado">
+            <option value="pendiente">🟡 Pendiente</option>
+            <option value="realizado">🟢 Realizado</option>
+            <option value="cancelado">⚫ Cancelado</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full" id="tipo-custom-wrap">
+        <div class="form-group">
+          <label>Especifica el tipo</label>
+          <input type="text" id="f-tipo-custom" placeholder="Ej: Comisión rogatoria…">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Tribunal solicitante</label>
+          <input type="text" id="f-tribunal" placeholder="Ej: Juzgado nº 2 de Vigo">
+        </div>
+        <div class="form-group">
+          <label>Nº procedimiento</label>
+          <input type="text" id="f-proc" placeholder="Ej: DPA 123/2026">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Plaza</label>
+          <select id="f-plaza"></select>
+        </div>
+        <div class="form-group">
+          <label>Alerta previa</label>
+          <select id="f-alerta">
+            <option value="0">Sin alerta</option>
+            <option value="10">10 minutos antes</option>
+            <option value="15" selected>15 minutos antes</option>
+            <option value="30">30 minutos antes</option>
+            <option value="60">1 hora antes</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group">
+          <label>Detalles</label>
+          <textarea id="f-detalles" placeholder="Objeto, instrucciones, sala de videoconferencia…"></textarea>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group">
+          <label>Observaciones</label>
+          <textarea id="f-obs" placeholder="Notas internas…" style="min-height:50px"></textarea>
+        </div>
+      </div>
+    </div>
+    <div id="modal-footer">
+      <button id="btn-cancelar-modal" onclick="cerrarModal()">Cancelar</button>
+      <button id="btn-guardar" onclick="guardarAuxilio()">💾 Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Tooltip flotante ── -->
+<div id="aux-tooltip"></div>
+
+<!-- ── Toasts ── -->
+<div id="toast-wrap"></div>
+
+<script>
+// ── Estado ────────────────────────────────────────────
+let _auxilios  = [];
+let _plazas    = [];
+let _vista     = 'dia';
+let _fecha     = new Date();
+let _alertados = new Set(); // ids ya alertados en esta sesión
+
+const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+               'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const DIAS_CORTO = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+const DIAS_LARGO = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+
+// ── Helpers de fecha ─────────────────────────────────
+function fmtISO(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function addDias(d, n) { const r = new Date(d); r.setDate(r.getDate()+n); return r; }
+function addMeses(d, n) { const r = new Date(d); r.setMonth(r.getMonth()+n); return r; }
+function lunesDe(d) {
+  const r = new Date(d);
+  const dow = r.getDay(); // 0=dom
+  const diff = (dow === 0) ? -6 : 1 - dow;
+  r.setDate(r.getDate() + diff);
+  return r;
+}
+function primerDiaMes(d) { return new Date(d.getFullYear(), d.getMonth(), 1); }
+function ultimoDiaMes(d) { return new Date(d.getFullYear(), d.getMonth()+1, 0); }
+function esHoy(d) { const h = new Date(); return fmtISO(d) === fmtISO(h); }
+
+// ── Inicialización ────────────────────────────────────
+async function init() {
+  // Leer tema del portal
+  const tema = document.documentElement.getAttribute('data-tema') || 'oscuro';
+  // Cargar datos
+  await Promise.all([cargarAuxilios(), cargarPlazas()]);
+  setVista('dia');
+  setInterval(checkAlertas, 60000);
+  setTimeout(checkAlertas, 3000);
+}
+
+// ── API ───────────────────────────────────────────────
+async function cargarAuxilios() {
+  try {
+    const r = await fetch('/api/auxilios');
+    const d = await r.json();
+    _auxilios = d.auxilios || [];
+  } catch(e) { console.error('Error cargando auxilios', e); }
+}
+
+async function cargarPlazas() {
+  try {
+    const r = await fetch('/api/plazas');
+    const d = await r.json();
+    _plazas = d.plazas || [];
+  } catch(e) { _plazas = []; }
+  // Poblar select de plaza en filtros y modal
+  const selF = document.getElementById('filtro-plaza');
+  const selM = document.getElementById('f-plaza');
+  const opts = _plazas.length
+    ? _plazas.map(p => `<option value="${esc(p)}">${esc(p)}</option>`).join('')
+    : '<option value="">Sin plaza</option>';
+  selF.innerHTML = '<option value="">Todas las plazas</option>' + opts;
+  selM.innerHTML = '<option value="">— Sin plaza —</option>' + opts;
+}
+
+async function crearAuxilio(datos) {
+  const r = await fetch('/api/auxilios', {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(datos)
+  });
+  return r.json();
+}
+
+async function actualizarAuxilio(id, datos) {
+  const r = await fetch('/api/auxilios/' + id, {
+    method: 'PUT', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(datos)
+  });
+  return r.json();
+}
+
+async function eliminarAuxilio(id) {
+  const r = await fetch('/api/auxilios/' + id, { method: 'DELETE' });
+  return r.json();
+}
+
+// ── Filtros ───────────────────────────────────────────
+function getAuxiliosFiltrados() {
+  const buscar = document.getElementById('buscar').value.trim().toLowerCase();
+  const tipo   = document.getElementById('filtro-tipo').value;
+  const estado = document.getElementById('filtro-estado').value;
+  const plaza  = document.getElementById('filtro-plaza').value;
+  return _auxilios.filter(a => {
+    if (tipo   && a.tipo   !== tipo)   return false;
+    if (estado && a.estado !== estado) return false;
+    if (plaza  && a.plaza  !== plaza)  return false;
+    if (buscar) {
+      const hay = [a.tribunal, a.procedimiento, a.detalles, a.tipo_nombre, a.observaciones]
+        .join(' ').toLowerCase();
+      if (!hay.includes(buscar)) return false;
+    }
+    return true;
+  });
+}
+
+// ── Vista ─────────────────────────────────────────────
+function setVista(v) {
+  _vista = v;
+  document.querySelectorAll('.vista-btn').forEach(b => b.classList.toggle('activa', b.dataset.v === v));
+  renderVista();
+}
+
+function navegar(dir) {
+  if (_vista === 'dia')    _fecha = addDias(_fecha, dir);
+  else if (_vista === 'semana') _fecha = addDias(_fecha, dir * 7);
+  else if (_vista === 'mes')   _fecha = addMeses(_fecha, dir);
+  else if (_vista === 'anio')  { _fecha = new Date(_fecha.getFullYear() + dir, 0, 1); }
+  renderVista();
+}
+
+function irHoy() { _fecha = new Date(); renderVista(); }
+
+function renderVista() {
+  const ct = document.getElementById('contenido');
+  if (_vista === 'dia')    renderDia(ct);
+  else if (_vista === 'semana') renderSemana(ct);
+  else if (_vista === 'mes')   renderMes(ct);
+  else if (_vista === 'anio')  renderAnio(ct);
+}
+
+// ── Vista Día ─────────────────────────────────────────
+function renderDia(ct) {
+  const iso = fmtISO(_fecha);
+  const dow = (_fecha.getDay() + 6) % 7; // 0=lun
+  document.getElementById('titulo-fecha').textContent =
+    `${DIAS_LARGO[dow]}, ${_fecha.getDate()} de ${MESES[_fecha.getMonth()]} de ${_fecha.getFullYear()}`;
+
+  const todos = getAuxiliosFiltrados().filter(a => a.fecha === iso)
+    .sort((a,b) => (a.hora||'').localeCompare(b.hora||''));
+
+  document.getElementById('contador-auxilios').textContent =
+    todos.length ? `${todos.length} auxilio${todos.length>1?'s':''}` : '';
+
+  if (!todos.length) {
+    ct.innerHTML = `<div class="dia-vacio"><div class="dia-icon">🔗</div>
+      No hay auxilios judiciales para este día<br>
+      <small style="margin-top:8px;display:block">Pulsa "+ Nuevo Auxilio" para añadir uno</small></div>`;
+    return;
+  }
+  ct.innerHTML = todos.map(a => cardHTML(a)).join('');
+}
+
+// ── Vista Semana ──────────────────────────────────────
+function renderSemana(ct) {
+  const lunes = lunesDe(_fecha);
+  const domingo = addDias(lunes, 6);
+  document.getElementById('titulo-fecha').textContent =
+    `Semana del ${lunes.getDate()} al ${domingo.getDate()} de ${MESES[domingo.getMonth()]} de ${domingo.getFullYear()}`;
+
+  const todos = getAuxiliosFiltrados();
+  let cols = '';
+  for (let i = 0; i < 7; i++) {
+    const d = addDias(lunes, i);
+    const iso = fmtISO(d);
+    const del_dia = todos.filter(a => a.fecha === iso).sort((a,b)=>(a.hora||'').localeCompare(b.hora||''));
+    const hoyC = esHoy(d) ? 'hoy-col' : '';
+    const chips = del_dia.slice(0,4).map(a => {
+      const label = a.tipo === 'otro' ? (a.tipo_nombre || 'Otro') : tipoLabel(a.tipo);
+      const sub   = [a.plaza, a.procedimiento].filter(Boolean).join(' · ');
+      return `<div class="semana-chip ${a.estado}"
+        onclick="abrirModal('${a.id}')"
+        onmouseenter="mostrarTooltip(event,'${a.id}')"
+        onmouseleave="ocultarTooltip()"
+        onmousemove="moverTooltip(event)">
+        <div class="semana-chip-main">${a.hora||''} ${tipoIcono(a.tipo)} ${esc(label)}</div>
+        ${sub ? `<div class="semana-chip-sub">${esc(sub)}</div>` : ''}
+      </div>`;
+    }).join('');
+    const mas = del_dia.length > 4
+      ? `<div class="semana-mas" onclick="_fecha=new Date('${iso}');setVista('dia')">+${del_dia.length-4} más</div>` : '';
+    cols += `<div class="semana-dia ${hoyC}">
+      <div class="semana-dia-header">
+        <span>${DIAS_CORTO[i]}</span>
+        <span class="dia-num">${d.getDate()}</span>
+      </div>
+      ${chips}${mas}
+    </div>`;
+  }
+  document.getElementById('contador-auxilios').textContent =
+    `${todos.filter(a=> { const d=new Date(lunes); for(let i=0;i<7;i++,d.setDate(d.getDate()+1)) if(fmtISO(new Date(lunes.getTime()+i*86400000))===a.fecha) return true; return false; }).length} en esta semana`;
+  ct.innerHTML = `<div class="semana-grid">${cols}</div>`;
+}
+
+// ── Vista Mes ─────────────────────────────────────────
+function renderMes(ct) {
+  document.getElementById('titulo-fecha').textContent =
+    `${MESES[_fecha.getMonth()]} ${_fecha.getFullYear()}`;
+
+  const primero = primerDiaMes(_fecha);
+  const ultimo  = ultimoDiaMes(_fecha);
+  // Primer lunes de la cuadrícula
+  const inicioGrid = lunesDe(primero);
+
+  const todos = getAuxiliosFiltrados();
+  const porFecha = {};
+  todos.forEach(a => { if (!porFecha[a.fecha]) porFecha[a.fecha]=[]; porFecha[a.fecha].push(a); });
+
+  let headers = DIAS_CORTO.map(d => `<div class="mes-header-dia">${d}</div>`).join('');
+  let celdas  = '';
+  let cur = new Date(inicioGrid);
+  for (let sem = 0; sem < 6; sem++) {
+    for (let col = 0; col < 7; col++) {
+      const iso = fmtISO(cur);
+      const esMes = cur.getMonth() === _fecha.getMonth();
+      const hoyC  = esHoy(cur) ? 'hoy-celda' : '';
+      const hoyN  = esHoy(cur) ? 'hoy-num'   : '';
+      const daux  = porFecha[iso] || [];
+      const chips = daux.slice(0,3).map(a => {
+        const label = a.tipo === 'otro' ? (a.tipo_nombre||'Otro') : tipoLabel(a.tipo);
+        const info  = [a.hora, tipoIcono(a.tipo), a.procedimiento||a.tribunal].filter(Boolean).join(' ');
+        return `<div class="mes-chip ${a.estado}"
+          onclick="abrirModal('${a.id}')"
+          onmouseenter="mostrarTooltip(event,'${a.id}')"
+          onmouseleave="ocultarTooltip()"
+          onmousemove="moverTooltip(event)">
+          ${esc(info)}
+        </div>`;
+      }).join('');
+      const mas = daux.length > 3
+        ? `<div class="mes-mas" onclick="_fecha=new Date('${iso}');setVista('dia')">+${daux.length-3}</div>` : '';
+      celdas += `<div class="mes-celda ${esMes?'':'otro-mes'} ${hoyC}" onclick="if(event.target===this||event.target.className.includes('mes-num')){_fecha=new Date('${iso}');setVista('dia')}">
+        <div class="mes-num ${hoyN}">${cur.getDate()}${daux.length?`<span style="font-size:10px;color:var(--primary)">${daux.length}</span>`:''}</div>
+        ${chips}${mas}
+      </div>`;
+      cur.setDate(cur.getDate()+1);
+    }
+    // Parar si ya superamos el último día del mes y hemos completado al menos 4 semanas
+    if (cur > ultimo && sem >= 3) break;
+  }
+  const total = todos.filter(a => a.fecha.startsWith(`${_fecha.getFullYear()}-${String(_fecha.getMonth()+1).padStart(2,'0')}`)).length;
+  document.getElementById('contador-auxilios').textContent = total ? `${total} este mes` : '';
+  ct.innerHTML = `<div class="mes-grid">${headers}${celdas}</div>`;
+}
+
+// ── Vista Año ─────────────────────────────────────────
+function renderAnio(ct) {
+  const anio = _fecha.getFullYear();
+  document.getElementById('titulo-fecha').textContent = `Año ${anio}`;
+
+  const todos = getAuxiliosFiltrados().filter(a => a.fecha.startsWith(String(anio)));
+  document.getElementById('contador-auxilios').textContent =
+    todos.length ? `${todos.length} este año` : '';
+
+  let html = '<div class="anio-grid">';
+  for (let m = 0; m < 12; m++) {
+    const primero = new Date(anio, m, 1);
+    const ultimo  = new Date(anio, m+1, 0).getDate();
+    const inicio  = lunesDe(primero);
+    const prefix  = `${anio}-${String(m+1).padStart(2,'0')}`;
+    const deMes   = todos.filter(a => a.fecha.startsWith(prefix));
+    const porDia  = {};
+    deMes.forEach(a => { const d = parseInt(a.fecha.split('-')[2]); porDia[d]=(porDia[d]||0)+1; });
+
+    // Mini-calendario
+    let miniDias = '';
+    let curD = new Date(inicio);
+    let cells = 0;
+    while (curD.getMonth() !== (m+1)%12 || curD.getFullYear() !== (m===11?anio+1:anio) || cells < 28) {
+      if (cells >= 42) break;
+      const d = curD.getDate(); const cm = curD.getMonth();
+      const tieneAux = cm === m && porDia[d];
+      if (cm === m) {
+        const fiso = `${anio}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const hoverEvts = tieneAux
+          ? `onmouseenter="mostrarTooltipFecha(event,'${fiso}')" onmouseleave="ocultarTooltip()" onmousemove="moverTooltip(event)"`
+          : '';
+        miniDias += `<div class="anio-mini-dia ${tieneAux?'tiene-aux':''}" ${hoverEvts}>${d}</div>`;
+      } else {
+        miniDias += `<div class="anio-mini-dia vacio"></div>`;
+      }
+      curD.setDate(curD.getDate()+1); cells++;
+    }
+
+    const pend = deMes.filter(a=>a.estado==='pendiente').length;
+    const real = deMes.filter(a=>a.estado==='realizado').length;
+    const canc = deMes.filter(a=>a.estado==='cancelado').length;
+    const stats = [
+      pend ? `<span class="anio-stat p">🟡${pend}</span>` : '',
+      real ? `<span class="anio-stat r">🟢${real}</span>` : '',
+      canc ? `<span class="anio-stat c">⚫${canc}</span>` : '',
+    ].join('');
+
+    html += `<div class="anio-mes" onclick="_fecha=new Date(${anio},${m},1);setVista('mes')">
+      <div class="anio-mes-titulo">${MESES[m]}</div>
+      <div class="anio-mini-grid">${miniDias}</div>
+      ${stats ? `<div class="anio-stats">${stats}</div>` : ''}
+    </div>`;
+  }
+  html += '</div>';
+  ct.innerHTML = html;
+}
+
+// ── Card HTML ─────────────────────────────────────────
+function cardHTML(a) {
+  const icono = tipoIcono(a.tipo);
+  const label = a.tipo === 'otro' ? (a.tipo_nombre || 'Otro') : tipoLabel(a.tipo);
+  return `<div class="auxilio-card estado-${a.estado}">
+    <div class="card-hora">${a.hora||'--:--'}<small>${a.fecha||''}</small></div>
+    <div class="card-body">
+      <div class="card-top">
+        <span class="card-tipo">${icono} ${esc(label)}</span>
+        <span class="badge-estado badge-${a.estado}">${estadoLabel(a.estado)}</span>
+        ${a.alerta_min > 0 ? `<span style="font-size:11px;color:var(--text2)">🔔 ${a.alerta_min}min</span>` : ''}
+      </div>
+      <div class="card-tribunal">${esc(a.tribunal || '—')}</div>
+      ${a.procedimiento ? `<div class="card-proc">📁 ${esc(a.procedimiento)}</div>` : ''}
+      ${a.plaza ? `<div class="card-plaza">📍 ${esc(a.plaza)}</div>` : ''}
+      ${a.detalles ? `<div class="card-detalles">${esc(a.detalles)}</div>` : ''}
+    </div>
+    <div class="card-actions">
+      <button class="btn-editar" onclick="abrirModal('${a.id}')">✏️</button>
+      <button class="btn-borrar" onclick="confirmarBorrar('${a.id}')">🗑️</button>
+    </div>
+  </div>`;
+}
+
+function tipoIcono(t) {
+  if (t === 'videoconferencia') return '📹';
+  if (t === 'exhorto')         return '📜';
+  return '📋';
+}
+function tipoLabel(t) {
+  if (t === 'videoconferencia') return 'Videoconferencia';
+  if (t === 'exhorto')         return 'Exhorto';
+  return 'Otro';
+}
+function estadoLabel(e) {
+  if (e === 'pendiente') return '🟡 Pendiente';
+  if (e === 'realizado') return '🟢 Realizado';
+  return '⚫ Cancelado';
+}
+
+// ── Modal ─────────────────────────────────────────────
+function abrirModal(id) {
+  const overlay = document.getElementById('modal-overlay');
+  overlay.classList.add('abierto');
+
+  if (id) {
+    // Editar
+    const a = _auxilios.find(x => x.id === id);
+    if (!a) return;
+    document.getElementById('modal-titulo').textContent = '✏️ Editar Auxilio';
+    document.getElementById('f-id').value        = a.id;
+    document.getElementById('f-fecha').value     = a.fecha || '';
+    document.getElementById('f-hora').value      = a.hora  || '09:00';
+    document.getElementById('f-tipo').value      = a.tipo  || 'videoconferencia';
+    document.getElementById('f-tipo-custom').value = a.tipo_nombre || '';
+    document.getElementById('f-estado').value    = a.estado || 'pendiente';
+    document.getElementById('f-tribunal').value  = a.tribunal || '';
+    document.getElementById('f-proc').value      = a.procedimiento || '';
+    document.getElementById('f-plaza').value     = a.plaza || '';
+    document.getElementById('f-alerta').value    = String(a.alerta_min || 0);
+    document.getElementById('f-detalles').value  = a.detalles || '';
+    document.getElementById('f-obs').value       = a.observaciones || '';
+  } else {
+    // Nuevo
+    document.getElementById('modal-titulo').textContent = '＋ Nuevo Auxilio Judicial';
+    document.getElementById('f-id').value        = '';
+    document.getElementById('f-fecha').value     = fmtISO(_fecha);
+    document.getElementById('f-hora').value      = '09:00';
+    document.getElementById('f-tipo').value      = 'videoconferencia';
+    document.getElementById('f-tipo-custom').value = '';
+    document.getElementById('f-estado').value    = 'pendiente';
+    document.getElementById('f-tribunal').value  = '';
+    document.getElementById('f-proc').value      = '';
+    document.getElementById('f-plaza').value     = '';
+    document.getElementById('f-alerta').value    = '15';
+    document.getElementById('f-detalles').value  = '';
+    document.getElementById('f-obs').value       = '';
+  }
+  toggleTipoCustom();
+}
+
+function cerrarModal() {
+  document.getElementById('modal-overlay').classList.remove('abierto');
+}
+
+function toggleTipoCustom() {
+  const tipo = document.getElementById('f-tipo').value;
+  document.getElementById('tipo-custom-wrap').style.display = tipo === 'otro' ? 'grid' : 'none';
+}
+
+async function guardarAuxilio() {
+  const id     = document.getElementById('f-id').value;
+  const fecha  = document.getElementById('f-fecha').value;
+  const tipo   = document.getElementById('f-tipo').value;
+  if (!fecha) { toast('⚠️ La fecha es obligatoria', 'alerta'); return; }
+
+  const datos = {
+    fecha,
+    hora:         document.getElementById('f-hora').value,
+    tipo,
+    tipo_nombre:  tipo === 'otro' ? document.getElementById('f-tipo-custom').value : tipoLabel(tipo),
+    estado:       document.getElementById('f-estado').value,
+    tribunal:     document.getElementById('f-tribunal').value,
+    procedimiento:document.getElementById('f-proc').value,
+    plaza:        document.getElementById('f-plaza').value,
+    alerta_min:   parseInt(document.getElementById('f-alerta').value) || 0,
+    detalles:     document.getElementById('f-detalles').value,
+    observaciones:document.getElementById('f-obs').value,
+  };
+
+  try {
+    let res;
+    if (id) {
+      res = await actualizarAuxilio(id, datos);
+    } else {
+      res = await crearAuxilio(datos);
+    }
+    if (res.success) {
+      await cargarAuxilios();
+      cerrarModal();
+      renderVista();
+      toast(id ? '✅ Auxilio actualizado' : '✅ Auxilio creado', 'ok');
+    } else {
+      toast('❌ Error al guardar: ' + (res.error||''), 'alerta');
+    }
+  } catch(e) {
+    toast('❌ Error de conexión', 'alerta');
+  }
+}
+
+async function confirmarBorrar(id) {
+  const a = _auxilios.find(x => x.id === id);
+  if (!a) return;
+  if (!confirm(`¿Eliminar el auxilio del ${a.fecha} — ${a.tribunal || tipoLabel(a.tipo)}?\n\nEsta acción no se puede deshacer.`)) return;
+  const res = await eliminarAuxilio(id);
+  if (res.success) {
+    await cargarAuxilios();
+    renderVista();
+    toast('🗑️ Auxilio eliminado', 'ok');
+  } else {
+    toast('❌ Error al eliminar', 'alerta');
+  }
+}
+
+// ── Alertas ───────────────────────────────────────────
+async function checkAlertas() {
+  try {
+    const r = await fetch('/api/auxilios/proximos?min=61');
+    const d = await r.json();
+    (d.proximos || []).forEach(a => {
+      if (_alertados.has(a.id)) return;
+      if (!a.alerta_min || a.minutos_restantes > a.alerta_min) return;
+      _alertados.add(a.id);
+      const tipo = a.tipo === 'otro' ? (a.tipo_nombre||'Otro') : tipoLabel(a.tipo);
+      toast(`🔔 ${tipoIcono(a.tipo)} ${tipo} en ${a.minutos_restantes} min\n${a.tribunal||''} · ${a.hora}`, 'alerta', 12000);
+    });
+  } catch(e) {}
+}
+
+// ── Toast ─────────────────────────────────────────────
+function toast(msg, tipo='', duracion=4000) {
+  const wrap = document.getElementById('toast-wrap');
+  const div  = document.createElement('div');
+  div.className = `toast ${tipo}`;
+  div.innerHTML = `<span style="flex:1;white-space:pre-line">${esc(msg)}</span>
+    <button class="toast-close" onclick="this.parentElement.remove()">✕</button>`;
+  wrap.appendChild(div);
+  setTimeout(() => div.remove(), duracion);
+}
+
+// ── Tooltip flotante ─────────────────────────────────
+function mostrarTooltip(e, id) {
+  const a = _auxilios.find(x => x.id === id);
+  if (!a) return;
+  const label = a.tipo === 'otro' ? (a.tipo_nombre || 'Otro') : tipoLabel(a.tipo);
+  const tt = document.getElementById('aux-tooltip');
+  tt.innerHTML = `
+    <div class="tt-titulo">${tipoIcono(a.tipo)} ${esc(label)}
+      <span class="badge-estado badge-${a.estado}" style="margin-left:auto;font-size:10px">${estadoLabel(a.estado)}</span>
+    </div>
+    ${a.hora ? `<div class="tt-row"><span class="tt-icon">🕐</span><span class="tt-val"><strong>${esc(a.hora)}</strong> · ${esc(a.fecha||'')}</span></div>` : ''}
+    ${a.tribunal ? `<div class="tt-row"><span class="tt-icon">🏛️</span><span class="tt-val"><strong>${esc(a.tribunal)}</strong></span></div>` : ''}
+    ${a.procedimiento ? `<div class="tt-row"><span class="tt-icon">📁</span><span class="tt-val">${esc(a.procedimiento)}</span></div>` : ''}
+    ${a.plaza ? `<div class="tt-row"><span class="tt-icon">📍</span><span class="tt-val">${esc(a.plaza)}</span></div>` : ''}
+    ${a.detalles ? `<hr class="tt-sep"><div class="tt-detalles">${esc(a.detalles)}</div>` : ''}
+  `;
+  _posTooltip(tt, e);
+  tt.style.display = 'block';
+}
+
+function mostrarTooltipFecha(e, fecha) {
+  const auxs = _auxilios.filter(a => a.fecha === fecha);
+  if (!auxs.length) return;
+  const tt = document.getElementById('aux-tooltip');
+  tt.innerHTML = `<div class="tt-titulo">📅 ${esc(fecha)}</div>` +
+    auxs.map(a => {
+      const label = a.tipo === 'otro' ? (a.tipo_nombre || 'Otro') : tipoLabel(a.tipo);
+      return `<div class="tt-row">
+        <span class="tt-icon">${tipoIcono(a.tipo)}</span>
+        <span class="tt-val"><strong>${esc(a.hora||'')}</strong> ${esc(label)}
+          ${a.procedimiento ? `<br><small>${esc(a.procedimiento)}</small>` : ''}
+          ${a.plaza ? `<br><small>📍 ${esc(a.plaza)}</small>` : ''}
+        </span>
+        <span class="badge-estado badge-${a.estado}" style="font-size:9px;margin-left:auto;flex-shrink:0">${estadoLabel(a.estado)}</span>
+      </div>`;
+    }).join('');
+  _posTooltip(tt, e);
+  tt.style.display = 'block';
+}
+
+function moverTooltip(e) {
+  const tt = document.getElementById('aux-tooltip');
+  if (tt.style.display === 'none') return;
+  _posTooltip(tt, e);
+}
+
+function ocultarTooltip() {
+  document.getElementById('aux-tooltip').style.display = 'none';
+}
+
+function _posTooltip(tt, e) {
+  const W = 270, H = tt.offsetHeight || 160;
+  let x = e.clientX + 16;
+  let y = e.clientY + 12;
+  if (x + W > window.innerWidth  - 8) x = e.clientX - W - 10;
+  if (y + H > window.innerHeight - 8) y = e.clientY - H - 10;
+  tt.style.left = Math.max(4, x) + 'px';
+  tt.style.top  = Math.max(4, y) + 'px';
+}
+
+// ── Escape HTML ───────────────────────────────────────
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Tema (sync con portal) ────────────────────────────
+window.addEventListener('message', e => {
+  if (!e.data) return;
+  if (e.data.tipo === 'tema') {
+    document.documentElement.setAttribute('data-tema', e.data.oscuro ? 'oscuro' : 'claro');
+  }
+  if (e.data.tipo === 'tribunal') {
+    const el = document.getElementById('subtitulo-tribunal');
+    if (el && e.data.nombre) el.textContent = '— ' + e.data.nombre;
+  }
+});
+
+// ── Arranque ──────────────────────────────────────────
+init();
+</script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

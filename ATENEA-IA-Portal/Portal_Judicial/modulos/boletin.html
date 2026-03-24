@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boletín Estadístico Judicial</title>
+<style>
+/* ── VARIABLES DE TEMA ────────────────────────────────── */
+:root{
+  --bg:#f5f5f5;--bg2:#ffffff;--bg3:#f8f9fa;--bg4:#e9ecef;
+  --border:#dee2e6;--border2:#f1f3f5;
+  --text:#212529;--text2:#495057;--text3:#6c757d;
+  --input-bg:#ffffff;--input-border:#dee2e6;
+  --total-bg:linear-gradient(135deg,#fff3cd 0%,#ffe69c 100%);
+  --total-border:#ffc107;
+  --section-border:#e9ecef;
+  --help-bg:linear-gradient(135deg,#e7f3ff 0%,#f0f7ff 100%);
+  --help-border:#0066cc;--help-text:#004085;
+  --modal-bg:#ffffff;--modal-header-border:#e9ecef;
+  --hist-th-bg:#f8f9fa;--hist-td-first-bg:#f8f9fa;
+  --trim-vacio-bg:#f8f9fa;--trim-vacio-hover:#e9ecef;
+}
+[data-tema="oscuro"]{
+  --bg:#0d1520;--bg2:#111c2d;--bg3:#182a44;--bg4:#1e3050;
+  --border:#1e3050;--border2:#2a3a54;
+  --text:#c8deff;--text2:#8ab4e8;--text3:#5a7a9a;
+  --input-bg:#0a1628;--input-border:#1e3a5f;
+  --total-bg:linear-gradient(135deg,#2a1f00 0%,#3a2a00 100%);
+  --total-border:#b8860b;
+  --section-border:#2a3a54;
+  --help-bg:linear-gradient(135deg,#0d1a30 0%,#111c2d 100%);
+  --help-border:#2a5298;--help-text:#8ab4e8;
+  --modal-bg:#182a44;--modal-header-border:#2a3a54;
+  --hist-th-bg:#1e3050;--hist-td-first-bg:#1a2e4a;
+  --trim-vacio-bg:#1a2e4a;--trim-vacio-hover:#1e3050;
+}
+/* ── ESTILOS BASE ─────────────────────────────────────── */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg);overflow-x:hidden;color:var(--text);}
+.container{max-width:1600px;margin:0 auto;background:var(--bg2);min-height:100vh;box-shadow:0 0 20px rgba(0,0,0,0.1);}
+/* HEADER */
+.header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:15px 30px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,0.2);}
+.header h1{font-size:19px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.navigation-bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.nav-group{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);padding:6px 12px;border-radius:8px;}
+.nav-group label{font-size:12px;font-weight:500;opacity:.9;}
+.nav-group select{padding:6px 10px;font-size:13px;border:none;border-radius:5px;background:white;cursor:pointer;font-weight:600;min-width:180px;}
+.time-navigation{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);padding:4px;border-radius:8px;}
+.time-nav-btn{background:rgba(255,255,255,0.3);border:none;color:white;font-size:16px;width:30px;height:30px;border-radius:5px;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;}
+.time-nav-btn:hover{background:rgba(255,255,255,0.5);transform:scale(1.1);}
+.time-display{background:white;color:#667eea;padding:6px 12px;border-radius:5px;font-weight:700;font-size:13px;min-width:70px;text-align:center;cursor:pointer;transition:all .3s;}
+.time-display:hover{background:#f8f9ff;}
+.btn-historico{background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.3);color:white;padding:6px 12px;border-radius:5px;cursor:pointer;font-weight:600;font-size:13px;transition:all .3s;}
+.btn-historico:hover{background:rgba(255,255,255,0.3);}
+/* TABS */
+.tabs{display:flex;background:var(--bg3);border-bottom:3px solid var(--border);padding:0 30px;}
+.tab{padding:14px 28px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--text3);transition:all .3s;position:relative;}
+.tab:hover{background:var(--bg4);color:var(--text2);}
+.tab.active{background:var(--bg2);color:#667eea;border-bottom:3px solid #667eea;margin-bottom:-3px;}
+/* CONTENT */
+.content{padding:30px;min-height:calc(100vh - 280px);}
+.section-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:18px;padding-bottom:10px;border-bottom:3px solid var(--section-border);display:flex;justify-content:space-between;align-items:center;}
+.section-subtitle{font-size:12px;color:var(--text3);font-weight:400;font-style:italic;}
+.help-box{background:var(--help-bg);border-left:4px solid var(--help-border);padding:12px 16px;margin-bottom:20px;border-radius:6px;display:flex;align-items:center;gap:12px;}
+.help-box-icon{font-size:20px;}
+.help-box-text{font-size:13px;color:var(--help-text);line-height:1.6;}
+.help-box-text strong{display:block;margin-bottom:3px;font-size:14px;}
+/* TABLES */
+.data-table{width:100%;margin-bottom:30px;border-collapse:separate;border-spacing:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.data-table thead{background:linear-gradient(135deg,var(--bg3) 0%,var(--bg4) 100%);}
+.data-table th{padding:12px;text-align:left;font-weight:700;color:var(--text2);border-bottom:2px solid var(--border);font-size:12px;text-transform:uppercase;letter-spacing:.5px;}
+.data-table th.col-number{text-align:center;width:120px;}
+.data-table td{padding:10px 12px;border-bottom:1px solid var(--border2);color:var(--text);}
+.data-table tbody tr:last-child td{border-bottom:none;}
+.data-table tbody tr:hover{background:var(--bg3);}
+.data-table td.label-col{font-weight:500;color:var(--text2);}
+.data-input{width:100%;padding:8px;border:2px solid var(--input-border);border-radius:5px;font-size:14px;text-align:center;font-weight:600;transition:all .3s;background:var(--input-bg);color:var(--text);}
+.data-input:focus{outline:none;border-color:#667eea;background:var(--bg3);box-shadow:0 0 0 3px rgba(102,126,234,0.1);}
+.data-input:disabled{background:#d4edda!important;border-color:#28a745!important;color:#155724;cursor:not-allowed;font-weight:700;}
+[data-tema="oscuro"] .data-input:disabled{background:#1a3a1a!important;border-color:#28a745!important;color:#81c784!important;}
+.total-row{background:var(--total-bg)!important;font-weight:700;}
+.total-row td{border-top:3px solid var(--total-border)!important;padding:12px;font-size:14px;}
+/* ACTION BAR */
+.action-bar{position:sticky;bottom:0;background:var(--bg2);padding:15px 30px;border-top:2px solid var(--border);display:flex;gap:12px;justify-content:space-between;align-items:center;box-shadow:0 -2px 10px rgba(0,0,0,0.05);z-index:90;}
+.action-bar-left,.action-bar-right{display:flex;gap:8px;}
+.btn{padding:10px 20px;font-size:13px;font-weight:600;border:none;border-radius:6px;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:6px;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+.btn:active{transform:translateY(0);}
+.btn-primary{background:#28a745;color:white;}
+.btn-primary:hover{background:#218838;}
+.btn-secondary{background:#6c757d;color:white;}
+.btn-secondary:hover{background:#5a6268;}
+.btn-danger{background:#dc3545;color:white;}
+.btn-danger:hover{background:#c82333;}
+.btn-info{background:#17a2b8;color:white;}
+.btn-info:hover{background:#138496;}
+.btn-export{background:#007bff;color:white;}
+.btn-export:hover{background:#0056b3;}
+/* NOTIFICATIONS */
+.save-indicator{position:fixed;top:20px;right:20px;padding:12px 20px;background:var(--bg2);border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.15);display:none;align-items:center;gap:8px;z-index:1000;font-weight:600;font-size:13px;color:var(--text);}
+.save-indicator.show{display:flex;animation:slideInRight .3s ease-out;}
+.save-indicator.success{border-left:4px solid #28a745;color:#155724;}
+.save-indicator.error{border-left:4px solid #dc3545;color:#721c24;}
+.save-indicator.info{border-left:4px solid #17a2b8;color:#0c5460;}
+[data-tema="oscuro"] .save-indicator.success{color:#81c784;}
+[data-tema="oscuro"] .save-indicator.error{color:#ef9a9a;}
+[data-tema="oscuro"] .save-indicator.info{color:#4fc3f7;}
+@keyframes slideInRight{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
+/* MODAL */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:2000;justify-content:center;align-items:center;}
+.modal.show{display:flex;}
+.modal-content{background:var(--modal-bg);border-radius:12px;padding:35px;max-width:900px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 10px 40px rgba(0,0,0,0.3);color:var(--text);}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;padding-bottom:15px;border-bottom:2px solid var(--modal-header-border);}
+.modal-header h2{font-size:20px;color:var(--text);}
+.btn-close{background:none;border:none;font-size:26px;color:var(--text3);cursor:pointer;padding:0;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .3s;}
+.btn-close:hover{background:var(--bg3);color:var(--text2);}
+.historico-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.historico-table th{background:var(--hist-th-bg);padding:12px;text-align:center;font-weight:700;border-bottom:2px solid var(--border);color:var(--text2);}
+.historico-table td{padding:16px;text-align:center;border-bottom:1px solid var(--border2);border-right:1px solid var(--border2);color:var(--text);}
+.historico-table td:first-child{font-weight:700;background:var(--hist-td-first-bg);text-align:left;padding-left:16px;color:var(--text);}
+.historico-table td:last-child{border-right:none;}
+.historico-table tbody tr:last-child td{border-bottom:none;}
+.trimestre-status{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:6px;font-weight:600;font-size:13px;cursor:pointer;transition:all .3s;}
+.trimestre-status.completado{background:#d4edda;color:#155724;}
+.trimestre-status.completado:hover{background:#c3e6cb;transform:scale(1.05);}
+[data-tema="oscuro"] .trimestre-status.completado{background:#1a3a1a;color:#81c784;}
+[data-tema="oscuro"] .trimestre-status.completado:hover{background:#1e4a1e;}
+.trimestre-status.vacio{background:var(--trim-vacio-bg);color:var(--text3);border:2px dashed var(--border);}
+.trimestre-status.vacio:hover{background:var(--trim-vacio-hover);border-color:var(--text3);}
+/* SECTION SELECTOR */
+.seccion-selector{margin-bottom:25px;display:flex;align-items:center;gap:10px;}
+.seccion-selector label{font-size:15px;font-weight:600;color:var(--text);}
+.seccion-selector select{padding:9px 14px;font-size:14px;border:2px solid var(--border);border-radius:5px;min-width:280px;font-weight:600;cursor:pointer;background:var(--input-bg);color:var(--text);}
+.seccion-selector select:focus{outline:none;border-color:#667eea;}
+/* PRINT */
+@media print{
+  .header,.tabs,.action-bar,.save-indicator,.modal,.seccion-selector .seccion-selector{display:none!important;}
+  .content{padding:10px;}
+  .data-input{border:1px solid #999;background:white!important;color:black!important;}
+  .data-input:disabled{background:#e8f5e9!important;color:black!important;}
+  body{background:white;}
+  .container{box-shadow:none;}
+}
+/* RESPONSIVE */
+@media(max-width:768px){
+  .header{padding:10px 15px;}
+  .content{padding:15px;}
+  .action-bar{flex-direction:column;padding:10px 15px;}
+  .action-bar-left,.action-bar-right{flex-direction:column;width:100%;}
+  .btn{width:100%;justify-content:center;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- HEADER -->
+  <div class="header">
+    <h1><span>📊</span> Boletín Estadístico Trimestral</h1>
+    <div class="navigation-bar">
+      <div class="nav-group">
+        <label>Plaza:</label>
+        <select id="select-plaza" onchange="cambiarPlaza()">
+          <option value="1-CIVIL">Plaza 1 - Sección Instrucción (Civil)</option>
+          <option value="1-PENAL">Plaza 1 - Sección Instrucción (Penal)</option>
+          <option value="2-CIVIL">Plaza 2 - Sección Instrucción (Civil)</option>
+          <option value="2-PENAL">Plaza 2 - Sección Instrucción (Penal)</option>
+          <option value="3-CIVIL">Plaza 3 - Sección Instrucción (Civil)</option>
+          <option value="3-PENAL">Plaza 3 - Sección Instrucción (Penal)</option>
+          <option value="3-VG">Plaza 3 - Violencia de Género</option>
+          <option value="4-VD">Plaza 4 - Violencia Doméstica</option>
+          <option value="5-VS">Plaza 5 - Violencia Sexual</option>
+        </select>
+      </div>
+      <div class="time-navigation">
+        <button class="time-nav-btn" onclick="cambiarAño(-1)" title="Año anterior">◀</button>
+        <div class="time-display" id="display-año">2026</div>
+        <button class="time-nav-btn" onclick="cambiarAño(1)" title="Año siguiente">▶</button>
+      </div>
+      <div class="time-navigation">
+        <button class="time-nav-btn" onclick="cambiarTrimestre(-1)" title="Trimestre anterior">◀</button>
+        <div class="time-display" id="display-trimestre">1º Trim</div>
+        <button class="time-nav-btn" onclick="cambiarTrimestre(1)" title="Trimestre siguiente">▶</button>
+      </div>
+      <button class="btn-historico" onclick="abrirHistorico()">📅 Histórico</button>
+      <button class="btn-historico" onclick="exportarPDF()" style="background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);">📄 PDF</button>
+      <button class="btn-historico" id="_btnTema" onclick="_toggleTemaModulo()">🌙 Oscuro</button>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs" id="tabs-container"></div>
+
+  <!-- CONTENT -->
+  <div class="content" id="content-area">
+    <div class="help-box">
+      <div class="help-box-icon">💡</div>
+      <div class="help-box-text">
+        <strong>¿Cómo funciona?</strong>
+        Rellena las casillas blancas. Las casillas verdes se calculan automáticamente. Los datos se guardan cada 30 segundos y al cambiar de sección.
+      </div>
+    </div>
+    <div class="seccion-selector">
+      <label>Sección:</label>
+      <select id="select-seccion" onchange="cambiarSeccion()"></select>
+    </div>
+    <div id="seccion-datos"></div>
+  </div>
+
+  <!-- ACTION BAR -->
+  <div class="action-bar">
+    <div class="action-bar-left">
+      <button class="btn btn-info" onclick="copiarTrimestreAnterior()">📋 Copiar Trimestre Anterior</button>
+      <button class="btn btn-danger" onclick="limpiarSeccion()">🗑️ Limpiar Sección</button>
+    </div>
+    <div class="action-bar-right">
+      <button class="btn btn-secondary" onclick="crearBackup()">💾 Backup JSON</button>
+      <button class="btn btn-export" onclick="exportarPDF()">📥 Exportar PDF</button>
+      <button class="btn btn-primary" onclick="guardarManual()">💾 Guardar Ahora</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATION -->
+<div class="save-indicator" id="save-indicator">
+  <span id="save-message">✓ Guardado</span>
+</div>
+
+<!-- MODAL HISTÓRICO -->
+<div class="modal" id="modal-historico">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>📅 Histórico de Trimestres</h2>
+      <button class="btn-close" onclick="cerrarHistorico()">×</button>
+    </div>
+    <div id="historico-content">
+      <table class="historico-table">
+        <thead><tr><th>Año</th><th>1º Trimestre</th><th>2º Trimestre</th><th>3º Trimestre</th><th>4º Trimestre</th></tr></thead>
+        <tbody id="historico-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+// =====================================================
+// PORTAL INTEGRATION
+// =====================================================
+let _uid = 'default';
+
+// =====================================================
+// CONSTANTES - TIPOS DE PROCEDIMIENTOS
+// =====================================================
+const TIPOS_PROCEDIMIENTOS = {
+  CIVIL: [
+    {codigo:'ORDINARIOS',nombre:'ORDINARIOS (**)'},
+    {codigo:'VERBALES_ARRENDATICIOS',nombre:'VERBALES ARRENDATICIOS'},
+    {codigo:'VERBALES_POSESORIOS_OCUPACION',nombre:'VERBALES POSESORIOS OCUPACIÓN ILEGAL'},
+    {codigo:'VERBALES_POSESORIOS_RESTANTES',nombre:'VERBALES POSESORIOS RESTANTES'},
+    {codigo:'VERBALES_TRAFICO_AEREO',nombre:'VERBALES TRÁFICO AÉREO (****)'},
+    {codigo:'VERBALES_250_1_14',nombre:'VERBALES ART. 250.1.14 LEC'},
+    {codigo:'DEMAS_VERBALES',nombre:'DEMÁS VERBALES (**)'},
+    {codigo:'CAMBIARIOS',nombre:'CAMBIARIOS'},
+    {codigo:'MONITORIOS',nombre:'MONITORIOS'},
+    {codigo:'PROCESOS_EUROPEOS',nombre:'PROCESOS EUROPEOS DE ESCASA CUANTÍA'},
+    {codigo:'DIVISION_PATRIMONIOS',nombre:'DIVISIÓN DE PATRIMONIOS'},
+    {codigo:'CONCURSO_ACREEDORES',nombre:'CONCURSO DE ACREEDORES'},
+    {codigo:'SUSPENSIONES_PAGOS',nombre:'SUSPENSIONES DE PAGOS'}
+  ],
+  PENAL: [
+    {codigo:'DILIGENCIAS_URGENTES',nombre:'DILIGENCIAS URGENTES'},
+    {codigo:'SUMARIOS',nombre:'SUMARIOS'},
+    {codigo:'DILIGENCIAS_PREVIAS',nombre:'DILIGENCIAS PREVIAS'},
+    {codigo:'PROCEDIMIENTOS_ABREVIADOS',nombre:'PROCEDIMIENTOS ABREVIADOS'},
+    {codigo:'JUICIOS_DELITOS_LEVES',nombre:'JUICIOS SOBRE DELITOS LEVES'},
+    {codigo:'PROCESOS_ACEPTACION',nombre:'PROCESOS POR ACEPTACIÓN DE DECRETO'},
+    {codigo:'LEY_ORGANICA_5_95',nombre:'LEY ORGÁNICA 5/95 (JURADO)'}
+  ],
+  VG: [
+    {codigo:'DILIGENCIAS_URGENTES_VG',nombre:'DILIGENCIAS URGENTES VG'},
+    {codigo:'DILIGENCIAS_PREVIAS_VG',nombre:'DILIGENCIAS PREVIAS VG'},
+    {codigo:'JUICIOS_DELITOS_LEVES_VG',nombre:'JUICIOS DELITOS LEVES VG'}
+  ]
+};
+
+const TIPOS_EJECUCIONES = [
+  {codigo:'DIRECTAMENTE',nombre:'Directamente'},
+  {codigo:'PROCEDENTES_TRANSFORMACION',nombre:'Procedentes de transformación'},
+  {codigo:'POR_TRANSFORMACION',nombre:'Por transformación'},
+  {codigo:'RESTANTES',nombre:'Restantes'}
+];
+
+const TIPOS_AUTOS_CIVIL = [
+  {codigo:'JURISDICCION_VOLUNTARIA',nombre:'En Jurisdicción Voluntaria'},
+  {codigo:'INTERNAMIENTOS',nombre:'En Internamientos'},
+  {codigo:'INCIDENTES',nombre:'En Incidentes'},
+  {codigo:'MEDIDAS',nombre:'En Medidas'},
+  {codigo:'RESTANTES',nombre:'Restantes Autos Finales'}
+];
+
+const TIPOS_AUTOS_PENAL = [
+  {codigo:'SOBRESEIMIENTO_963',nombre:'Sobreseimientos art. 963.1.1ª LECRIM'},
+  {codigo:'RESTO_SOBRESEIMIENTOS',nombre:'Resto de Sobreseimientos'},
+  {codigo:'PRESCRIPCIONES',nombre:'Prescripciones'},
+  {codigo:'RESTANTES_AUTOS',nombre:'Restantes Autos Finales'}
+];
+
+const TIPOS_MEDIDAS_CAUTELARES = [
+  {codigo:'PRISION',nombre:'Prisión'},
+  {codigo:'LIBERTAD_PROVISIONAL',nombre:'Libertad provisional'},
+  {codigo:'ALEJAMIENTO',nombre:'Alejamiento'},
+  {codigo:'PROHIBICION_COMUNICACION',nombre:'Prohibición de comunicación'},
+  {codigo:'OTRAS',nombre:'Otras medidas'}
+];
+
+const TIPOS_VD_MOVIMIENTO = [
+  {codigo:'DILIGENCIAS_URGENTES',nombre:'Diligencias Urgentes'},
+  {codigo:'DILIGENCIAS_PREVIAS',nombre:'Diligencias Previas'},
+  {codigo:'JUICIOS_DELITOS_LEVES',nombre:'Juicios sobre Delitos Leves'}
+];
+
+const TIPOS_VD_MEDIDAS_PENALES = [
+  {codigo:'PRISION_PROVISIONAL',nombre:'Prisión Provisional'},
+  {codigo:'LIBERTAD_PROVISIONAL',nombre:'Libertad Provisional'},
+  {codigo:'ALEJAMIENTO',nombre:'Alejamiento'},
+  {codigo:'SUSPENSION_COMUNICACIONES',nombre:'Suspensión de Comunicaciones'},
+  {codigo:'PRIVACION_ARMAS',nombre:'Privación de Armas'},
+  {codigo:'OTRAS',nombre:'Otras Medidas'}
+];
+
+const TIPOS_VD_MEDIDAS_CIVILES = [
+  {codigo:'ATRIBUCION_VIVIENDA',nombre:'Atribución Uso de Vivienda'},
+  {codigo:'PRESTACION_ALIMENTOS',nombre:'Prestación de Alimentos'},
+  {codigo:'SUSPENSION_PATRIA_POTESTAD',nombre:'Suspensión Patria Potestad'},
+  {codigo:'SUSPENSION_REGIMEN_VISITAS',nombre:'Suspensión Régimen de Visitas'},
+  {codigo:'SUSPENSION_CUSTODIA',nombre:'Suspensión Guarda y Custodia'}
+];
+
+const TIPOS_VD_TERMINACION = [
+  {codigo:'SENTENCIAS_CONDENATORIAS',nombre:'Sentencias Condenatorias'},
+  {codigo:'SENTENCIAS_ABSOLUTORIAS',nombre:'Sentencias Absolutorias'},
+  {codigo:'SOBRESEIMIENTOS',nombre:'Sobreseimientos'},
+  {codigo:'ARCHIVO_DECRETO',nombre:'Archivo por Decreto'}
+];
+
+const TIPOS_VG_MEDIDAS_PENALES = [
+  {codigo:'PRISION_PROVISIONAL',nombre:'Prisión Provisional'},
+  {codigo:'LIBERTAD_PROVISIONAL',nombre:'Libertad Provisional'},
+  {codigo:'ALEJAMIENTO',nombre:'Alejamiento'},
+  {codigo:'PROHIBICION_COMUNICACION',nombre:'Prohibición de Comunicación'},
+  {codigo:'PRIVACION_ARMAS',nombre:'Privación de Armas'},
+  {codigo:'PROHIBICION_RESIDENCIA',nombre:'Prohibición de Residencia'},
+  {codigo:'OTRAS',nombre:'Otras Medidas'}
+];
+
+const TIPOS_VG_MEDIDAS_CIVILES = [
+  {codigo:'PRESTACION_ALIMENTOS',nombre:'Prestación de Alimentos'},
+  {codigo:'ATRIBUCION_VIVIENDA',nombre:'Atribución Uso de Vivienda'},
+  {codigo:'SUSPENSION_PATRIA_POTESTAD',nombre:'Suspensión Patria Potestad'},
+  {codigo:'SUSPENSION_GUARDA_CUSTODIA',nombre:'Suspensión Guarda y Custodia'},
+  {codigo:'SUSPENSION_REGIMEN_VISITAS',nombre:'Suspensión Régimen de Visitas'}
+];
+
+const TIPOS_VS_MEDIDAS_PENALES = [
+  {codigo:'PRISION_PROVISIONAL',nombre:'Prisión Provisional'},
+  {codigo:'ALEJAMIENTO',nombre:'Alejamiento'},
+  {codigo:'PROHIBICION_COMUNICACION',nombre:'Prohibición de Comunicación'},
+  {codigo:'OTRAS',nombre:'Otras Medidas'}
+];
+
+const TIPOS_VS_MEDIDAS_CIVILES = [
+  {codigo:'PRESTACION_ALIMENTOS',nombre:'Prestación de Alimentos'},
+  {codigo:'SUSPENSION_PATRIA_POTESTAD',nombre:'Suspensión Patria Potestad'},
+  {codigo:'OTRAS',nombre:'Otras Medidas'}
+];
+
+const TIPOS_FAMILIA_PROCESOS = [
+  {codigo:'ORDINARIOS',nombre:'Procesos Ordinarios'},
+  {codigo:'VERBALES',nombre:'Procesos Verbales'}
+];
+
+const TIPOS_JURISDICCION_VOLUNTARIA = [
+  {codigo:'ADOPCIONES',nombre:'Adopciones'},
+  {codigo:'ACOGIMIENTOS',nombre:'Acogimientos'},
+  {codigo:'DECLARACIONES_HEREDEROS',nombre:'Declaraciones de Herederos Abintestato'},
+  {codigo:'EXPEDIENTES_DOMINIO',nombre:'Expedientes de Dominio'},
+  {codigo:'CONSIGNACIONES',nombre:'Consignaciones Judiciales'},
+  {codigo:'EXPEDIENTES_PATRIA_POTESTAD',nombre:'Expedientes de Patria Potestad'},
+  {codigo:'EXTRACCION_ORGANOS',nombre:'Extracción de Órganos'},
+  {codigo:'CONCILIACIONES',nombre:'Conciliaciones'},
+  {codigo:'OTROS',nombre:'Otros Expedientes'}
+];
+
+const TIPOS_INCIDENTES_CIVIL = [
+  {codigo:'ART_241_LOPJ',nombre:'Art.241.1 LOPJ'},
+  {codigo:'FASE_DECLARATIVA',nombre:'Fase Declarativa'},
+  {codigo:'EJECUCION',nombre:'Ejecución'},
+  {codigo:'ART_519_2',nombre:'Art.519.2'},
+  {codigo:'CONCURSALES',nombre:'Concursales'}
+];
+
+const TIPOS_TERMINACION_MONITORIOS = [
+  {codigo:'PAGO_ACUERDO',nombre:'Pago o Acuerdo'},
+  {codigo:'OPOSICION',nombre:'Oposición'},
+  {codigo:'ARCHIVO',nombre:'Archivo'},
+  {codigo:'OTROS',nombre:'Otros'}
+];
+
+const TIPOS_EJECUCIONES_DETALLADAS = [
+  {codigo:'MONITORIOS',nombre:'Dimanantes de Monitorios'},
+  {codigo:'FAMILIA',nombre:'Derecho de Familia'},
+  {codigo:'HIPOTECARIAS',nombre:'Hipotecarias'},
+  {codigo:'LAUDOS_ARBITRALES',nombre:'Laudos Arbitrales'},
+  {codigo:'TITULOS_NO_JUDICIALES',nombre:'Títulos No Judiciales'},
+  {codigo:'TITULOS_JUDICIALES',nombre:'Títulos Judiciales'},
+  {codigo:'TITULOS_EUROPEOS',nombre:'Títulos Europeos'}
+];
+
+const TIPOS_AUXILIO_CIVIL = [
+  {codigo:'DESPACHOS_CIVILES',nombre:'Despachos Civiles'},
+  {codigo:'INTERNACIONAL',nombre:'Auxilio Internacional'},
+  {codigo:'RECONOCIMIENTO_MUTUO_UE',nombre:'Reconocimiento Mutuo UE'}
+];
+
+const TIPOS_AUXILIO_PENAL = [
+  {codigo:'DESPACHOS_PENALES',nombre:'Despachos Penales'},
+  {codigo:'COMISIONES_ROGATORIAS',nombre:'Comisiones Rogatorias'}
+];
+
+const TIPOS_SENTENCIAS_PENDIENTES = [
+  {codigo:'CIVIL_GENERAL',nombre:'Civil General'},
+  {codigo:'CIVIL_CONCURSAL',nombre:'Civil Concursal'},
+  {codigo:'PENAL',nombre:'Penal'},
+  {codigo:'FAMILIA',nombre:'Familia'}
+];
+
+const TIPOS_AUTOS_DETALLADOS = [
+  {codigo:'JURISDICCION_VOLUNTARIA',nombre:'Jurisdicción Voluntaria'},
+  {codigo:'INTERNAMIENTOS',nombre:'Internamientos'},
+  {codigo:'INCIDENTES',nombre:'Incidentes'},
+  {codigo:'MEDIDAS',nombre:'Medidas'},
+  {codigo:'OTROS',nombre:'Otros Autos'}
+];
+
+const TIPOS_RESOLUCIONES_MATRIMONIALES = [
+  {codigo:'DIVORCIO',nombre:'Divorcio'},
+  {codigo:'SEPARACION',nombre:'Separación'},
+  {codigo:'NULIDAD',nombre:'Nulidad'},
+  {codigo:'GUARDA_CUSTODIA',nombre:'Guarda y Custodia'},
+  {codigo:'PENSION_ALIMENTICIA',nombre:'Pensión Alimenticia'},
+  {codigo:'REGIMEN_VISITAS',nombre:'Régimen de Visitas'}
+];
+
+const TIPOS_SENTENCIAS_CONCURSALES = [
+  {codigo:'CONVENIO',nombre:'Convenio'},
+  {codigo:'CALIFICACION',nombre:'Calificación'},
+  {codigo:'INCIDENTES_CON_VISTA',nombre:'Incidentes con Vista'},
+  {codigo:'INCIDENTES_SIN_VISTA',nombre:'Incidentes sin Vista'}
+];
+
+// =====================================================
+// SECCIONES DISPONIBLES
+// =====================================================
+const SECCIONES_DISPONIBLES = {
+  CIVIL: [
+    {codigo:'PROCESOS',nombre:'I. Procesos Contenciosos',tipo:'pendientes'},
+    {codigo:'EJECUCIONES',nombre:'II. Ejecuciones',tipo:'pendientes'},
+    {codigo:'SENTENCIAS',nombre:'III. Sentencias',tipo:'sentencias'},
+    {codigo:'AUTOS',nombre:'IV. Autos Finales',tipo:'autos'},
+    {codigo:'FAMILIA_PROCESOS',nombre:'V. Familia - Procesos',tipo:'familia_procesos'},
+    {codigo:'FAMILIA_MEDIDAS',nombre:'VI. Familia - Medidas',tipo:'familia_medidas'},
+    {codigo:'FAMILIA_INCIDENTES',nombre:'VII. Familia - Incidentes',tipo:'familia_incidentes'},
+    {codigo:'CAPACIDAD_PROCESOS',nombre:'VIII. Capacidad - Procesos',tipo:'capacidad_procesos'},
+    {codigo:'CAPACIDAD_INTERNAMIENTOS',nombre:'IX. Capacidad - Internamientos',tipo:'capacidad_internamientos'},
+    {codigo:'CAPACIDAD_AUTORIZACIONES',nombre:'X. Capacidad - Autorizaciones Menores',tipo:'capacidad_autorizaciones'},
+    {codigo:'JURISDICCION_VOLUNTARIA',nombre:'XI. Jurisdicción Voluntaria',tipo:'jurisdiccion_voluntaria'},
+    {codigo:'RECURSOS_APELACION',nombre:'XII. Recursos de Apelación',tipo:'recursos_apelacion_civil'},
+    {codigo:'RECURSOS_REVISION_LAJ',nombre:'XIII. Recursos Revisión LAJ',tipo:'recursos_revision_laj_civil'},
+    {codigo:'CONCURSOS',nombre:'XIV. Concursos Personas Físicas',tipo:'concursos'},
+    {codigo:'ACUERDOS_EXTRAJUDICIALES',nombre:'XV. Acuerdos Extrajudiciales Pagos',tipo:'acuerdos_extrajudiciales'},
+    {codigo:'INCIDENTES_CIVIL',nombre:'XVI. Incidentes Civil',tipo:'incidentes_civil'},
+    {codigo:'MEDIDAS_CAUTELARES',nombre:'XVII. Medidas Cautelares',tipo:'medidas_cautelares_civil'},
+    {codigo:'DILIGENCIAS_PRELIMINARES',nombre:'XVIII. Diligencias Preliminares',tipo:'diligencias_preliminares'},
+    {codigo:'PRUEBA_ANTICIPADA',nombre:'XIX. Prueba Anticipada',tipo:'prueba_anticipada'},
+    {codigo:'TERMINACION_MONITORIOS',nombre:'XX. Terminación Monitorios',tipo:'terminacion_monitorios'},
+    {codigo:'ASUNTOS_SUSPENSION',nombre:'XXI. Asuntos en Suspensión',tipo:'asuntos_suspension'},
+    {codigo:'ARCHIVO_PROVISIONAL',nombre:'XXII. Archivo Provisional',tipo:'archivo_provisional'},
+    {codigo:'PROCEDIMIENTOS_TESTIGO',nombre:'XXIII. Procedimientos Testigo',tipo:'procedimientos_testigo'},
+    {codigo:'MOVIMIENTO_SUSPENDIDOS',nombre:'XXIV. Movimiento Suspendidos',tipo:'movimiento_suspendidos'},
+    {codigo:'EJECUCIONES_DETALLADAS',nombre:'XXV. Ejecuciones Detalladas',tipo:'ejecuciones_detalladas'},
+    {codigo:'TITULO_EJECUTIVO_EUROPEO',nombre:'XXVI. Título Ejecutivo Europeo',tipo:'titulo_ejecutivo_europeo'},
+    {codigo:'EXEQUATUR',nombre:'XXVII. Exequatur',tipo:'exequatur'},
+    {codigo:'PROCEDIMIENTOS_COMPLEJIDAD',nombre:'XXVIII. Procedimientos Complejidad',tipo:'procedimientos_complejidad'},
+    {codigo:'AUXILIO_JUDICIAL_CIVIL',nombre:'XXIX. Auxilio Judicial Civil',tipo:'auxilio_judicial_civil'},
+    {codigo:'SENALAMIENTOS',nombre:'XXX. Señalamientos',tipo:'senalamientos'},
+    {codigo:'TASACIONES_COSTAS',nombre:'XXXI. Tasaciones de Costas',tipo:'tasaciones_costas'},
+    {codigo:'ESCRITOS_PENDIENTES',nombre:'XXXII. Escritos Pendientes',tipo:'escritos_pendientes'},
+    {codigo:'SENTENCIAS_PENDIENTES_CIVIL',nombre:'XXXIII. Sentencias Pendientes',tipo:'sentencias_pendientes_civil'},
+    {codigo:'AUTOS_DETALLADOS_CIVIL',nombre:'XXXIV. Autos Detallados',tipo:'autos_detallados_civil'},
+    {codigo:'RESOLUCIONES_MATRIMONIALES',nombre:'XXXV. Resoluciones Matrimoniales',tipo:'resoluciones_matrimoniales'},
+    {codigo:'SENTENCIAS_CONCURSALES',nombre:'XXXVI. Sentencias Concursales',tipo:'sentencias_concursales'}
+  ],
+  PENAL: [
+    {codigo:'PROCESOS',nombre:'I. Procedimientos',tipo:'pendientes'},
+    {codigo:'MEDIDAS',nombre:'II. Medidas Cautelares',tipo:'medidas'},
+    {codigo:'SENTENCIAS',nombre:'III. Resoluciones',tipo:'sentencias_penal'},
+    {codigo:'RECURSOS_APELACION',nombre:'IV. Recursos de Apelación',tipo:'recursos_apelacion_penal'},
+    {codigo:'RECURSOS_REVISION_LAJ',nombre:'V. Recursos Revisión LAJ',tipo:'recursos_revision_laj_penal'},
+    {codigo:'INCIDENTES_PENAL',nombre:'VI. Incidentes Penal',tipo:'incidentes_penal'},
+    {codigo:'PIEZAS_SEPARADAS',nombre:'VII. Piezas Separadas',tipo:'piezas_separadas'},
+    {codigo:'INSTRUCCION_COMPLEJA',nombre:'VIII. Instrucción Compleja',tipo:'instruccion_compleja'},
+    {codigo:'INSTRUCCION_PRORROGADA',nombre:'IX. Instrucción Prorrogada',tipo:'instruccion_prorrogada'},
+    {codigo:'ENJUICIADOS_DELITOS',nombre:'X. Enjuiciados por Delitos',tipo:'enjuiciados_delitos'},
+    {codigo:'QUEBRANTAMIENTOS',nombre:'XI. Quebrantamientos',tipo:'quebrantamientos'},
+    {codigo:'AUXILIO_JUDICIAL_PENAL',nombre:'XII. Auxilio Judicial Penal',tipo:'auxilio_judicial_penal'},
+    {codigo:'SENTENCIAS_PENDIENTES_PENAL',nombre:'XIII. Sentencias Pendientes',tipo:'sentencias_pendientes_penal'}
+  ],
+  VG: [
+    {codigo:'PROCESOS',nombre:'I. Procedimientos VG',tipo:'pendientes'},
+    {codigo:'VG_ASUNTOS',nombre:'II. Asuntos Ingresados',tipo:'vg_asuntos'},
+    {codigo:'VG_ORDENES',nombre:'III. Órdenes de Protección',tipo:'vg_ordenes'},
+    {codigo:'VG_RELACION',nombre:'IV. Relación Víctima-Denunciado',tipo:'vg_relacion'},
+    {codigo:'VG_MEDIDAS_PENALES',nombre:'V. Medidas Penales',tipo:'vg_medidas_penales'},
+    {codigo:'VG_MEDIDAS_CIVILES',nombre:'VI. Medidas Civiles',tipo:'vg_medidas_civiles'},
+    {codigo:'VG_DISCAPACIDAD',nombre:'VII. Discapacidad',tipo:'vg_discapacidad'}
+  ],
+  VD: [
+    {codigo:'VD_DENUNCIAS',nombre:'I. Denuncias Recibidas',tipo:'vd_denuncias'},
+    {codigo:'VD_MUERTE',nombre:'II. Asuntos con Muerte',tipo:'vd_muerte'},
+    {codigo:'VD_RENUNCIAS',nombre:'III. Renuncias',tipo:'vd_renuncias'},
+    {codigo:'VD_MOVIMIENTO',nombre:'IV. Movimiento de Asuntos',tipo:'vd_movimiento'},
+    {codigo:'VD_ORDENES',nombre:'V. Órdenes de Protección',tipo:'vd_ordenes'},
+    {codigo:'VD_MEDIDAS_PENALES',nombre:'VI. Medidas Penales',tipo:'vd_medidas_penales'},
+    {codigo:'VD_MEDIDAS_CIVILES',nombre:'VII. Medidas Civiles',tipo:'vd_medidas_civiles'},
+    {codigo:'VD_TERMINACION',nombre:'VIII. Forma de Terminación',tipo:'vd_terminacion'},
+    {codigo:'VD_ENJUICIADAS',nombre:'IX. Personas Enjuiciadas',tipo:'vd_enjuiciadas'},
+    {codigo:'VD_EJECUTORIAS',nombre:'X. Ejecutorias',tipo:'vd_ejecutorias'},
+    {codigo:'VD_INCUMPLIMIENTOS',nombre:'XI. Incumplimientos',tipo:'vd_incumplimientos'}
+  ],
+  VS: [
+    {codigo:'VS_ASUNTOS',nombre:'I. Asuntos Ingresados',tipo:'vs_asuntos'},
+    {codigo:'VS_ORDENES',nombre:'II. Órdenes de Protección',tipo:'vs_ordenes'},
+    {codigo:'VS_MEDIDAS_PENALES',nombre:'III. Medidas Penales',tipo:'vs_medidas_penales'},
+    {codigo:'VS_MEDIDAS_CIVILES',nombre:'IV. Medidas Civiles',tipo:'vs_medidas_civiles'},
+    {codigo:'VS_DISCAPACIDAD',nombre:'V. Discapacidad',tipo:'vs_discapacidad'}
+  ]
+};
+
+// =====================================================
+// APP STATE
+// =====================================================
+const AppState = {
+  plazaActual: {id:1, tipo:'CIVIL'},
+  añoActual: 2026,
+  trimestreActual: 1,
+  materiaActual: 'CIVIL',
+  seccionActual: 'PROCESOS',
+  datosActuales: {},
+  datosModificados: false,
+  autoguardadoActivo: true
+};
+
+// Cache de datos completo para el trimestre actual {seccionCodigo: datos}
+let _datosCompleto = {};
+let _autoguardadoTimer = null;
+let _notifTimer = null;
+
+// =====================================================
+// INICIALIZACIÓN
+// =====================================================
+window.addEventListener('DOMContentLoaded', async () => {
+  try {
+    cargarEstadoGuardado();
+    console.log('boletin init:', JSON.stringify({
+      plaza: AppState.plazaActual,
+      materia: AppState.materiaActual,
+      seccion: AppState.seccionActual,
+      ano: AppState.añoActual,
+      trim: AppState.trimestreActual
+    }));
+    actualizarDisplays();
+    generarTabs();
+    generarSelectorSecciones();
+    await cargarTrimestre();
+    iniciarAutoguardado();
+    console.log('boletin: inicialización completa');
+  } catch(err) {
+    console.error('boletin: error en inicialización:', err);
+    const el = document.getElementById('seccion-datos');
+    if (el) el.innerHTML = '<p style="padding:20px;color:red;font-family:monospace">⚠️ Error de inicialización: ' + err.message + '</p>';
+  }
+});
+
+// =====================================================
+// PORTAL INTEGRATION - MESSAGE HANDLER
+// =====================================================
+window.addEventListener('message', async (e) => {
+  if (!e.data) return;
+
+  if (e.data.tipo === 'cambioUsuario') {
+    const nuevoUid = e.data.usuario?.id || 'default';
+    if (nuevoUid === _uid) return;
+    await guardarDatosEnServidor();
+    _uid = nuevoUid;
+    await _cargarTemaModulo();
+    await cargarTrimestre();
+    return;
+  }
+
+  if (e.data.tipo === 'tema') {
+    document.documentElement.setAttribute('data-tema', e.data.oscuro ? 'oscuro' : 'claro');
+    _actualizarBtnTema();
+    return;
+  }
+
+  if (e.data.tipo === 'buscarDesdePortal') {
+    // No aplica en boletín
+    return;
+  }
+
+  if (e.data.tipo === 'permisos') {
+    _aplicarPermisos(e.data.permisos);
+    return;
+  }
+});
+
+function _aplicarPermisos(permisos) {
+  if (!permisos) return;
+  if (permisos.soloLectura) {
+    document.querySelectorAll('.data-input:not(:disabled)').forEach(el => el.disabled = true);
+    document.querySelectorAll('.btn').forEach(el => el.disabled = true);
+  }
+}
+
+// ── TEMA OSCURO ──────────────────────────────────────────
+function _toggleTemaModulo() {
+  const esOscuro = document.documentElement.getAttribute('data-tema') === 'oscuro';
+  document.documentElement.setAttribute('data-tema', esOscuro ? 'claro' : 'oscuro');
+  _actualizarBtnTema();
+  fetch('/api/config/boletin_tema_' + _uid, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({tema: esOscuro ? 'claro' : 'oscuro'})
+  }).catch(() => {});
+}
+function _actualizarBtnTema() {
+  const btn = document.getElementById('_btnTema');
+  if (!btn) return;
+  const esOscuro = document.documentElement.getAttribute('data-tema') === 'oscuro';
+  btn.textContent = esOscuro ? '☀️ Claro' : '🌙 Oscuro';
+}
+async function _cargarTemaModulo() {
+  try {
+    const r = await fetch('/api/config/boletin_tema_' + _uid);
+    const d = await r.json();
+    if (d.config && d.config.tema === 'oscuro') {
+      document.documentElement.setAttribute('data-tema', 'oscuro');
+    } else {
+      document.documentElement.removeAttribute('data-tema');
+    }
+  } catch(_) {}
+  _actualizarBtnTema();
+}
+_cargarTemaModulo();
+
+// =====================================================
+// NAVEGACIÓN
+// =====================================================
+async function cambiarPlaza() {
+  await guardarDatosEnServidor();
+  const select = document.getElementById('select-plaza');
+  const [id, tipo] = select.value.split('-');
+  AppState.plazaActual = {id: parseInt(id), tipo};
+  AppState.materiaActual = tipo;
+  const _seccs = SECCIONES_DISPONIBLES[tipo] || [];
+  AppState.seccionActual = _seccs.length > 0 ? _seccs[0].codigo : 'PROCESOS';
+  _datosCompleto = {};
+  generarTabs();
+  generarSelectorSecciones();
+  await cargarTrimestre();
+  guardarEstado();
+}
+
+async function cambiarAño(delta) {
+  const nuevoAño = AppState.añoActual + delta;
+  if (nuevoAño < 2026) { mostrarNotificacion('⚠️ No hay años anteriores a 2026', 'error'); return; }
+  await guardarDatosEnServidor();
+  AppState.añoActual = nuevoAño;
+  _datosCompleto = {};
+  actualizarDisplays();
+  await cargarTrimestre();
+  guardarEstado();
+}
+
+async function cambiarTrimestre(delta) {
+  let nuevoTrim = AppState.trimestreActual + delta;
+  let nuevoAño = AppState.añoActual;
+  if (nuevoTrim > 4) { nuevoTrim = 1; nuevoAño++; }
+  else if (nuevoTrim < 1) { nuevoTrim = 4; nuevoAño--; }
+  if (nuevoAño < 2026) { mostrarNotificacion('⚠️ No hay trimestres anteriores a 2026', 'error'); return; }
+  await guardarDatosEnServidor();
+  AppState.añoActual = nuevoAño;
+  AppState.trimestreActual = nuevoTrim;
+  _datosCompleto = {};
+  actualizarDisplays();
+  await cargarTrimestre();
+  guardarEstado();
+}
+
+function actualizarDisplays() {
+  document.getElementById('display-año').textContent = AppState.añoActual;
+  document.getElementById('display-trimestre').textContent = AppState.trimestreActual + 'º Trim';
+}
+
+// =====================================================
+// TABS Y SECCIONES
+// =====================================================
+function generarTabs() {
+  const container = document.getElementById('tabs-container');
+  const materia = AppState.plazaActual.tipo;
+  let tabs = [];
+  if (['CIVIL','PENAL'].includes(materia)) {
+    tabs = [{id:'CIVIL',nombre:'📋 Civil'},{id:'PENAL',nombre:'⚖️ Penal'}];
+    // Plaza 3 tiene VG también
+    if (AppState.plazaActual.id === 3) tabs.push({id:'VG',nombre:'⚠️ Violencia de Género'});
+  } else if (materia === 'VG') {
+    tabs = [{id:'CIVIL',nombre:'📋 Civil'},{id:'PENAL',nombre:'⚖️ Penal'},{id:'VG',nombre:'⚠️ Violencia de Género'}];
+  } else if (materia === 'VD') {
+    tabs = [{id:'VD',nombre:'🏠 Violencia Doméstica'}];
+  } else if (materia === 'VS') {
+    tabs = [{id:'VS',nombre:'🔴 Violencia Sexual'}];
+  }
+  container.innerHTML = tabs.map(t =>
+    `<button class="tab ${t.id===AppState.materiaActual?'active':''}" onclick="cambiarMateria('${t.id}')">${t.nombre}</button>`
+  ).join('');
+}
+
+async function cambiarMateria(materia) {
+  if (materia === AppState.materiaActual) return;
+  await guardarDatosEnServidor();
+  AppState.materiaActual = materia;
+  AppState.seccionActual = SECCIONES_DISPONIBLES[materia][0].codigo;
+  _datosCompleto = {};
+  generarTabs();
+  generarSelectorSecciones();
+  await cargarTrimestre();
+  guardarEstado();
+}
+
+function generarSelectorSecciones() {
+  const select = document.getElementById('select-seccion');
+  const secciones = SECCIONES_DISPONIBLES[AppState.materiaActual] || [];
+  select.innerHTML = secciones.map(s =>
+    `<option value="${s.codigo}" ${s.codigo===AppState.seccionActual?'selected':''}>${s.nombre}</option>`
+  ).join('');
+}
+
+async function cambiarSeccion() {
+  // Guardar datos de la sección anterior antes de cambiar
+  _datosCompleto[AppState.seccionActual] = AppState.datosActuales;
+  await guardarDatosEnServidor();
+  const select = document.getElementById('select-seccion');
+  AppState.seccionActual = select.value;
+  cargarSeccionDesdeCache();
+  guardarEstado();
+}
+
+// =====================================================
+// API - DATOS
+// =====================================================
+function _getKey() {
+  return `${AppState.plazaActual.id}_${AppState.materiaActual}_${AppState.añoActual}_${AppState.trimestreActual}`;
+}
+
+async function cargarTrimestre() {
+  try {
+    const url = `/api/boletin/datos?plaza=${AppState.plazaActual.id}&materia=${AppState.materiaActual}&ano=${AppState.añoActual}&trimestre=${AppState.trimestreActual}&uid=${encodeURIComponent(_uid)}`;
+    const resp = await fetch(url);
+    if (resp.ok) {
+      const json = await resp.json();
+      _datosCompleto = json.datos || {};
+    } else {
+      _datosCompleto = {};
+    }
+  } catch(e) {
+    _datosCompleto = {};
+  }
+  cargarSeccionDesdeCache();
+}
+
+function cargarSeccionDesdeCache() {
+  AppState.datosActuales = _datosCompleto[AppState.seccionActual] || {};
+  cargarDatosActuales();
+}
+
+async function guardarDatosEnServidor() {
+  if (!AppState.datosModificados) return;
+  _datosCompleto[AppState.seccionActual] = AppState.datosActuales;
+  try {
+    await fetch('/api/boletin/datos', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        plaza: AppState.plazaActual.id,
+        materia: AppState.materiaActual,
+        ano: AppState.añoActual,
+        trimestre: AppState.trimestreActual,
+        uid: _uid,
+        datos: _datosCompleto
+      })
+    });
+    AppState.datosModificados = false;
+  } catch(e) {
+    console.error('Error al guardar:', e);
+  }
+}
+
+// =====================================================
+// RENDERIZADO PRINCIPAL (dispatch)
+// =====================================================
+function cargarDatosActuales() {
+  const seccionInfo = (SECCIONES_DISPONIBLES[AppState.materiaActual] || []).find(s => s.codigo === AppState.seccionActual);
+  if (!seccionInfo) {
+    const seccsDisp = SECCIONES_DISPONIBLES[AppState.materiaActual] || [];
+    if (seccsDisp.length > 0) {
+      // Resetear a primera sección válida y reintentar
+      AppState.seccionActual = seccsDisp[0].codigo;
+      const sel = document.getElementById('select-seccion');
+      if (sel) sel.value = AppState.seccionActual;
+      cargarDatosActuales();
+    } else {
+      document.getElementById('seccion-datos').innerHTML = '<p style="padding:20px;color:#666">Seleccione una sección del listado.</p>';
+    }
+    return;
+  }
+  try {
+  const c = document.getElementById('seccion-datos');
+  switch(seccionInfo.tipo) {
+    case 'pendientes': renderTablaPendientes(seccionInfo); break;
+    case 'sentencias': renderTablaSentenciasCivil(); break;
+    case 'sentencias_penal': renderTablaSentenciasPenal(); break;
+    case 'autos': renderTablaAutos(); break;
+    case 'medidas': renderTablaMedidas(); break;
+    case 'vg_asuntos': renderSingleNumero('ASUNTOS INGRESADOS - VG','numero_asuntos','actualizarSimple'); break;
+    case 'vg_ordenes': renderOrdenes('ÓRDENES DE PROTECCIÓN - VG','vg'); break;
+    case 'vg_relacion': renderVgRelacion(); break;
+    case 'vg_medidas_penales': renderMedidasTipos('MEDIDAS PENALES - VG',TIPOS_VG_MEDIDAS_PENALES,'vgMP'); break;
+    case 'vg_medidas_civiles': renderMedidasTipos('MEDIDAS CIVILES - VG',TIPOS_VG_MEDIDAS_CIVILES,'vgMC'); break;
+    case 'vg_discapacidad': renderDiscapacidad('VÍCTIMAS CON DISCAPACIDAD - VG'); break;
+    case 'vd_denuncias': renderSingleNumero('DENUNCIAS RECIBIDAS - VD','numero_denuncias','actualizarSimple'); break;
+    case 'vd_muerte': renderSingleNumero('ASUNTOS CON RESULTADO DE MUERTE - VD','numero_asuntos','actualizarSimple'); break;
+    case 'vd_renuncias': renderSingleNumero('RENUNCIAS - VD','numero_renuncias','actualizarSimple'); break;
+    case 'vd_movimiento': renderMovimientoTipos('MOVIMIENTO DE ASUNTOS - VD',TIPOS_VD_MOVIMIENTO); break;
+    case 'vd_ordenes': renderVdOrdenes(); break;
+    case 'vd_medidas_penales': renderMedidasTipos('MEDIDAS PENALES - VD',TIPOS_VD_MEDIDAS_PENALES,'vdMP'); break;
+    case 'vd_medidas_civiles': renderMedidasTipos('MEDIDAS CIVILES - VD',TIPOS_VD_MEDIDAS_CIVILES,'vdMC'); break;
+    case 'vd_terminacion': renderTerminacion('FORMA DE TERMINACIÓN - VD',TIPOS_VD_TERMINACION); break;
+    case 'vd_enjuiciadas': renderSingleNumero('PERSONAS ENJUICIADAS - VD','numero_personas','actualizarSimple'); break;
+    case 'vd_ejecutorias': renderVdEjecutorias(); break;
+    case 'vd_incumplimientos': renderSingleNumero('INCUMPLIMIENTOS - VD','numero_incumplimientos','actualizarSimple'); break;
+    case 'vs_asuntos': renderSingleNumero('ASUNTOS INGRESADOS - VS','numero_asuntos','actualizarSimple'); break;
+    case 'vs_ordenes': renderOrdenes('ÓRDENES DE PROTECCIÓN - VS','vs'); break;
+    case 'vs_medidas_penales': renderMedidasTipos('MEDIDAS PENALES - VS',TIPOS_VS_MEDIDAS_PENALES,'vsMP'); break;
+    case 'vs_medidas_civiles': renderMedidasTipos('MEDIDAS CIVILES - VS',TIPOS_VS_MEDIDAS_CIVILES,'vsMC'); break;
+    case 'vs_discapacidad': renderDiscapacidad('VÍCTIMAS CON DISCAPACIDAD - VS'); break;
+    case 'familia_procesos': renderMovimientoTipos('PROCESOS DE FAMILIA',TIPOS_FAMILIA_PROCESOS); break;
+    case 'familia_medidas': renderFamiliaMedidas(); break;
+    case 'familia_incidentes': renderSimpleMovimiento('INCIDENTES EN FAMILIA'); break;
+    case 'capacidad_procesos': renderSimpleMovimiento('PROCESOS DISCAPACIDAD'); break;
+    case 'capacidad_internamientos': renderSimpleMovimiento('INTERNAMIENTOS'); break;
+    case 'capacidad_autorizaciones': renderSingleNumero('AUTORIZACIONES MENORES','numero_autorizaciones','actualizarSimple'); break;
+    case 'jurisdiccion_voluntaria': renderJurisdiccionVoluntaria(); break;
+    case 'recursos_apelacion_civil': renderSimpleMovimiento('RECURSOS DE APELACIÓN - CIVIL'); break;
+    case 'recursos_revision_laj_civil': renderSimpleMovimiento('RECURSOS REVISIÓN LAJ - CIVIL'); break;
+    case 'recursos_apelacion_penal': renderSimpleMovimiento('RECURSOS DE APELACIÓN - PENAL'); break;
+    case 'recursos_revision_laj_penal': renderSimpleMovimiento('RECURSOS REVISIÓN LAJ - PENAL'); break;
+    case 'concursos': renderSimpleMovimiento('CONCURSOS PERSONAS FÍSICAS'); break;
+    case 'acuerdos_extrajudiciales': renderSimpleMovimiento('ACUERDOS EXTRAJUDICIALES PAGOS'); break;
+    case 'incidentes_civil': renderMovimientoTipos('INCIDENTES CIVIL',TIPOS_INCIDENTES_CIVIL); break;
+    case 'medidas_cautelares_civil': renderSingleNumero('MEDIDAS CAUTELARES CIVIL','numero_medidas','actualizarSimple'); break;
+    case 'diligencias_preliminares': renderSingleNumero('DILIGENCIAS PRELIMINARES','numero_diligencias','actualizarSimple'); break;
+    case 'prueba_anticipada': renderSingleNumero('PRUEBA ANTICIPADA','numero_pruebas','actualizarSimple'); break;
+    case 'terminacion_monitorios': renderTerminacion('TERMINACIÓN MONITORIOS',TIPOS_TERMINACION_MONITORIOS); break;
+    case 'asuntos_suspension': renderSingleNumero('ASUNTOS EN SUSPENSIÓN','numero_asuntos','actualizarSimple'); break;
+    case 'archivo_provisional': renderSingleNumero('ARCHIVO PROVISIONAL','numero_asuntos','actualizarSimple'); break;
+    case 'procedimientos_testigo': renderSingleNumero('PROCEDIMIENTOS TESTIGO','numero_procedimientos','actualizarSimple'); break;
+    case 'movimiento_suspendidos': renderSimpleMovimiento('MOVIMIENTO SUSPENDIDOS'); break;
+    case 'ejecuciones_detalladas': renderMovimientoTipos('EJECUCIONES DETALLADAS',TIPOS_EJECUCIONES_DETALLADAS); break;
+    case 'titulo_ejecutivo_europeo': renderSingleNumero('TÍTULO EJECUTIVO EUROPEO','numero_certificados','actualizarSimple'); break;
+    case 'exequatur': renderSingleNumero('EXEQUATUR','numero_solicitudes','actualizarSimple'); break;
+    case 'procedimientos_complejidad': renderSingleNumero('PROCEDIMIENTOS COMPLEJIDAD','numero_procedimientos','actualizarSimple'); break;
+    case 'auxilio_judicial_civil': renderAuxilioJudicial('AUXILIO JUDICIAL CIVIL',TIPOS_AUXILIO_CIVIL); break;
+    case 'senalamientos': renderSenalamientos(); break;
+    case 'tasaciones_costas': renderSingleNumero('TASACIONES DE COSTAS','numero_tasaciones','actualizarSimple'); break;
+    case 'escritos_pendientes': renderSingleNumero('ESCRITOS PENDIENTES','numero_escritos','actualizarSimple'); break;
+    case 'sentencias_pendientes_civil': renderSentenciasPendientes('civil'); break;
+    case 'autos_detallados_civil': renderAutosDetallados(); break;
+    case 'resoluciones_matrimoniales': renderResolucionesMatrimoniales(); break;
+    case 'sentencias_concursales': renderSentenciasConcursales(); break;
+    case 'incidentes_penal': renderSimpleMovimiento('INCIDENTES PENAL'); break;
+    case 'piezas_separadas': renderSingleNumero('PIEZAS SEPARADAS','numero_piezas','actualizarSimple'); break;
+    case 'instruccion_compleja': renderSingleNumero('INSTRUCCIÓN COMPLEJA','numero_asuntos','actualizarSimple'); break;
+    case 'instruccion_prorrogada': renderSingleNumero('INSTRUCCIÓN PRORROGADA','numero_causas','actualizarSimple'); break;
+    case 'enjuiciados_delitos': renderSingleNumero('ENJUICIADOS POR DELITOS','numero_enjuiciados','actualizarSimple'); break;
+    case 'quebrantamientos': renderSingleNumero('QUEBRANTAMIENTOS','numero_quebrantamientos','actualizarSimple'); break;
+    case 'auxilio_judicial_penal': renderAuxilioJudicial('AUXILIO JUDICIAL PENAL',TIPOS_AUXILIO_PENAL); break;
+    case 'sentencias_pendientes_penal': renderSentenciasPendientes('penal'); break;
+    default: document.getElementById('seccion-datos').innerHTML = '<p style="padding:20px;color:#666">Sección no implementada.</p>';
+  }
+  } catch(err) {
+    console.error('boletin: error renderizando sección "' + AppState.seccionActual + '":', err);
+    document.getElementById('seccion-datos').innerHTML = '<p style="padding:20px;color:red;font-family:monospace">⚠️ Error al renderizar: ' + err.message + '</p>';
+  }
+}
+
+// =====================================================
+// HELPERS DE RENDERIZADO
+// =====================================================
+function _subtitulo() {
+  return `<span class="section-subtitle">Plaza ${AppState.plazaActual.id} · ${AppState.añoActual} · ${AppState.trimestreActual}º Trimestre</span>`;
+}
+
+function _inp(val, fn, extra='') {
+  return `<input type="number" class="data-input" value="${val||0}" onchange="${fn}" min="0" ${extra}>`;
+}
+
+function _inpDis(val) {
+  return `<input type="number" class="data-input" value="${val||0}" disabled>`;
+}
+
+function _calcPendFin(d) {
+  return (parseInt(d.pendientes_inicio)||0) + (parseInt(d.ingresados)||0) - (parseInt(d.resueltos)||0);
+}
+
+// =====================================================
+// RENDERIZADO - TABLA PENDIENTES
+// =====================================================
+function renderTablaPendientes(seccionInfo) {
+  const esEjecuciones = AppState.seccionActual === 'EJECUCIONES';
+  const tipos = esEjecuciones ? TIPOS_EJECUCIONES : (TIPOS_PROCEDIMIENTOS[AppState.materiaActual] || []);
+  const titulo = esEjecuciones ? 'II. EJECUCIONES CIVILES'
+    : AppState.materiaActual === 'CIVIL' ? 'I. PROCESOS CONTENCIOSOS'
+    : AppState.materiaActual === 'PENAL' ? 'I. PROCEDIMIENTOS PENALES'
+    : 'I. PROCEDIMIENTOS VG';
+
+  let tot = {pendientes_inicio:0,ingresados:0,resueltos:0,pendientes_fin:0};
+  let rows = tipos.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {pendientes_inicio:0,ingresados:0,resueltos:0,pendientes_fin:0};
+    tot.pendientes_inicio += parseInt(d.pendientes_inicio)||0;
+    tot.ingresados += parseInt(d.ingresados)||0;
+    tot.resueltos += parseInt(d.resueltos)||0;
+    tot.pendientes_fin += parseInt(d.pendientes_fin)||0;
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.pendientes_inicio,`upd('${t.codigo}','pendientes_inicio',this.value)`)}</td>
+      <td>${_inp(d.ingresados,`upd('${t.codigo}','ingresados',this.value)`)}</td>
+      <td>${_inp(d.resueltos,`upd('${t.codigo}','resueltos',this.value)`)}</td>
+      <td>${_inpDis(d.pendientes_fin)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">${titulo} ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr>
+        <th>Tipo</th>
+        <th class="col-number">Pendientes<br>Inicio</th>
+        <th class="col-number">Ingresados</th>
+        <th class="col-number">Resueltos</th>
+        <th class="col-number">Pendientes<br>Final</th>
+      </tr></thead>
+      <tbody>${rows}
+        <tr class="total-row">
+          <td><strong>TOTAL</strong></td>
+          <td>${_inpDis(tot.pendientes_inicio)}</td>
+          <td>${_inpDis(tot.ingresados)}</td>
+          <td>${_inpDis(tot.resueltos)}</td>
+          <td>${_inpDis(tot.pendientes_fin)}</td>
+        </tr>
+      </tbody>
+    </table>`;
+}
+
+// =====================================================
+// RENDERIZADO - SENTENCIAS CIVIL
+// =====================================================
+function renderTablaSentenciasCivil() {
+  const tipos = TIPOS_PROCEDIMIENTOS.CIVIL;
+  let tot = {estimatorias:0,desestimatorias:0,total:0};
+  let rows = tipos.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {estimatorias:0,desestimatorias:0};
+    const total = (parseInt(d.estimatorias)||0)+(parseInt(d.desestimatorias)||0);
+    tot.estimatorias += parseInt(d.estimatorias)||0;
+    tot.desestimatorias += parseInt(d.desestimatorias)||0;
+    tot.total += total;
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.estimatorias,`updSentCivil('${t.codigo}','estimatorias',this.value)`)}</td>
+      <td>${_inp(d.desestimatorias,`updSentCivil('${t.codigo}','desestimatorias',this.value)`)}</td>
+      <td>${_inpDis(total)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">III. SENTENCIAS CIVILES ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr>
+        <th>Tipo de Procedimiento</th>
+        <th class="col-number">Estimatorias</th>
+        <th class="col-number">Desestimatorias</th>
+        <th class="col-number">Total</th>
+      </tr></thead>
+      <tbody>${rows}
+        <tr class="total-row">
+          <td><strong>TOTAL</strong></td>
+          <td>${_inpDis(tot.estimatorias)}</td>
+          <td>${_inpDis(tot.desestimatorias)}</td>
+          <td>${_inpDis(tot.total)}</td>
+        </tr>
+      </tbody>
+    </table>`;
+}
+
+// =====================================================
+// RENDERIZADO - SENTENCIAS PENAL
+// =====================================================
+function renderTablaSentenciasPenal() {
+  const tipos = TIPOS_PROCEDIMIENTOS.PENAL;
+  let tot = {condenatorias:0,absolutorias:0,total:0};
+  let rows = tipos.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {condenatorias:0,absolutorias:0};
+    const total = (parseInt(d.condenatorias)||0)+(parseInt(d.absolutorias)||0);
+    tot.condenatorias += parseInt(d.condenatorias)||0;
+    tot.absolutorias += parseInt(d.absolutorias)||0;
+    tot.total += total;
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.condenatorias,`updSentPenal('${t.codigo}','condenatorias',this.value)`)}</td>
+      <td>${_inp(d.absolutorias,`updSentPenal('${t.codigo}','absolutorias',this.value)`)}</td>
+      <td>${_inpDis(total)}</td>
+    </tr>`;
+  }).join('');
+
+  let totA = {vd:0,resto:0,total:0};
+  let rowsA = TIPOS_AUTOS_PENAL.map(t => {
+    const d = AppState.datosActuales['AUTO_'+t.codigo] || {violencia_domestica:0,resto:0};
+    const total = (parseInt(d.violencia_domestica)||0)+(parseInt(d.resto)||0);
+    totA.vd += parseInt(d.violencia_domestica)||0;
+    totA.resto += parseInt(d.resto)||0;
+    totA.total += total;
+    return `<tr data-tipo="AUTO_${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.violencia_domestica,`updAutoPenal('${t.codigo}','violencia_domestica',this.value)`)}</td>
+      <td>${_inp(d.resto,`updAutoPenal('${t.codigo}','resto',this.value)`)}</td>
+      <td>${_inpDis(total)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">III. RESOLUCIONES PENALES ${_subtitulo()}</div>
+    <h3 style="margin:16px 0 8px 0;color:#2c3e50">SENTENCIAS</h3>
+    <table class="data-table">
+      <thead><tr>
+        <th>Tipo de Procedimiento</th>
+        <th class="col-number">Condenatorias</th>
+        <th class="col-number">Absolutorias</th>
+        <th class="col-number">Total</th>
+      </tr></thead>
+      <tbody>${rows}
+        <tr class="total-row"><td><strong>TOTAL SENTENCIAS</strong></td>
+          <td>${_inpDis(tot.condenatorias)}</td><td>${_inpDis(tot.absolutorias)}</td><td>${_inpDis(tot.total)}</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 style="margin:24px 0 8px 0;color:#2c3e50">AUTOS FINALES</h3>
+    <table class="data-table">
+      <thead><tr>
+        <th>Tipo de Auto</th>
+        <th class="col-number">Violencia Doméstica</th>
+        <th class="col-number">Resto</th>
+        <th class="col-number">Total</th>
+      </tr></thead>
+      <tbody>${rowsA}
+        <tr class="total-row"><td><strong>TOTAL AUTOS</strong></td>
+          <td>${_inpDis(totA.vd)}</td><td>${_inpDis(totA.resto)}</td><td>${_inpDis(totA.total)}</td>
+        </tr>
+      </tbody>
+    </table>`;
+}
+
+// =====================================================
+// RENDERIZADO - AUTOS CIVILES
+// =====================================================
+function renderTablaAutos() {
+  let total = 0;
+  let rows = TIPOS_AUTOS_CIVIL.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {cantidad:0};
+    total += parseInt(d.cantidad)||0;
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.cantidad,`updAutoCivil('${t.codigo}',this.value)`)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">IV. AUTOS FINALES (CIVIL) ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Tipo de Auto</th><th class="col-number">Cantidad</th></tr></thead>
+      <tbody>${rows}
+        <tr class="total-row"><td><strong>TOTAL</strong></td><td>${_inpDis(total)}</td></tr>
+      </tbody>
+    </table>`;
+}
+
+// =====================================================
+// RENDERIZADO - MEDIDAS CAUTELARES PENAL
+// =====================================================
+function renderTablaMedidas() {
+  let tot = {solicitadas:0,acordadas:0,denegadas:0};
+  let rows = TIPOS_MEDIDAS_CAUTELARES.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {solicitadas:0,acordadas:0,denegadas:0};
+    tot.solicitadas += parseInt(d.solicitadas)||0;
+    tot.acordadas += parseInt(d.acordadas)||0;
+    tot.denegadas += parseInt(d.denegadas)||0;
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.solicitadas,`updMedida('${t.codigo}','solicitadas',this.value)`)}</td>
+      <td>${_inp(d.acordadas,`updMedida('${t.codigo}','acordadas',this.value)`)}</td>
+      <td>${_inp(d.denegadas,`updMedida('${t.codigo}','denegadas',this.value)`)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">II. MEDIDAS CAUTELARES PENALES ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr>
+        <th>Tipo de Medida</th>
+        <th class="col-number">Solicitadas</th>
+        <th class="col-number">Acordadas</th>
+        <th class="col-number">Denegadas</th>
+      </tr></thead>
+      <tbody>${rows}
+        <tr class="total-row"><td><strong>TOTAL</strong></td>
+          <td>${_inpDis(tot.solicitadas)}</td>
+          <td>${_inpDis(tot.acordadas)}</td>
+          <td>${_inpDis(tot.denegadas)}</td>
+        </tr>
+      </tbody>
+    </table>`;
+}
+
+// =====================================================
+// RENDERIZADO - GENÉRICOS
+// =====================================================
+
+// Single number field
+function renderSingleNumero(titulo, campo, fn) {
+  const val = AppState.datosActuales[campo] || 0;
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">${titulo} ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Concepto</th><th class="col-number">Cantidad</th></tr></thead>
+      <tbody><tr>
+        <td class="label-col">Número Total</td>
+        <td>${_inp(val,`updSimple('${campo}',this.value)`)}</td>
+      </tr></tbody>
+    </table>`;
+}
+
+// Simple movimiento (pendientes_inicio, ingresados, resueltos, pendientes_fin)
+function renderSimpleMovimiento(titulo) {
+  const d = AppState.datosActuales;
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">${titulo} ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Concepto</th><th class="col-number">Cantidad</th></tr></thead>
+      <tbody>
+        <tr><td class="label-col">Pendientes Inicio</td><td>${_inp(d.pendientes_inicio||0,`updSimpleMovimiento('pendientes_inicio',this.value)`)}</td></tr>
+        <tr><td class="label-col">Ingresados</td><td>${_inp(d.ingresados||0,`updSimpleMovimiento('ingresados',this.value)`)}</td></tr>
+        <tr><td class="label-col">Resueltos</td><td>${_inp(d.resueltos||0,`updSimpleMovimiento('resueltos',this.value)`)}</td></tr>
+        <tr><td class="label-col" style="background:#d4edda;color:#155724;font-weight:700;">Pendientes Fin</td><td>${_inpDis(d.pendientes_fin||0)}</td></tr>
+      </tbody>
+    </table>`;
+}
+
+// Movimiento con tipos (filas)
+function renderMovimientoTipos(titulo, tipos) {
+  let rows = tipos.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {pendientes_inicio:0,ingresados:0,resueltos:0,pendientes_fin:0};
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.pendientes_inicio,`updMovTipo('${t.codigo}','pendientes_inicio',this.value)`)}</td>
+      <td>${_inp(d.ingresados,`updMovTipo('${t.codigo}','ingresados',this.value)`)}</td>
+      <td>${_inp(d.resueltos,`updMovTipo('${t.codigo}','resueltos',this.value)`)}</td>
+      <td>${_inpDis(d.pendientes_fin)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">${titulo} ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr>
+        <th>Tipo</th>
+        <th class="col-number">P.Inicio</th>
+        <th class="col-number">Ingresados</th>
+        <th class="col-number">Resueltos</th>
+        <th class="col-number">P.Fin</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+// Medidas con tipos (solicitadas, acordadas, denegadas)
+function renderMedidasTipos(titulo, tipos, ns) {
+  let tot = {solicitadas:0,acordadas:0,denegadas:0};
+  let rows = tipos.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {solicitadas:0,acordadas:0,denegadas:0};
+    tot.solicitadas += parseInt(d.solicitadas)||0;
+    tot.acordadas += parseInt(d.acordadas)||0;
+    tot.denegadas += parseInt(d.denegadas)||0;
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.solicitadas,`updMedidaTipo('${t.codigo}','solicitadas',this.value)`)}</td>
+      <td>${_inp(d.acordadas,`updMedidaTipo('${t.codigo}','acordadas',this.value)`)}</td>
+      <td>${_inp(d.denegadas,`updMedidaTipo('${t.codigo}','denegadas',this.value)`)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">${titulo} ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr>
+        <th>Tipo</th>
+        <th class="col-number">Solic.</th>
+        <th class="col-number">Acord.</th>
+        <th class="col-number">Deneg.</th>
+      </tr></thead>
+      <tbody>${rows}
+        <tr class="total-row"><td><strong>TOTAL</strong></td>
+          <td>${_inpDis(tot.solicitadas)}</td>
+          <td>${_inpDis(tot.acordadas)}</td>
+          <td>${_inpDis(tot.denegadas)}</td>
+        </tr>
+      </tbody>
+    </table>`;
+}
+
+// Órdenes simple (solicitadas/adoptadas/denegadas)
+function renderOrdenes(titulo, ns) {
+  const d = AppState.datosActuales;
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">${titulo} ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Concepto</th><th class="col-number">Cantidad</th></tr></thead>
+      <tbody>
+        <tr><td class="label-col">Solicitadas</td><td>${_inp(d.solicitadas||0,`updOrden('solicitadas',this.value)`)}</td></tr>
+        <tr><td class="label-col">Adoptadas</td><td>${_inp(d.adoptadas||0,`updOrden('adoptadas',this.value)`)}</td></tr>
+        <tr><td class="label-col">Denegadas</td><td>${_inp(d.denegadas||0,`updOrden('denegadas',this.value)`)}</td></tr>
+      </tbody>
+    </table>`;
+}
+
+// Discapacidad (ordenes solicitadas/adoptadas/denegadas)
+function renderDiscapacidad(titulo) {
+  const d = AppState.datosActuales;
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">${titulo} ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Concepto</th><th class="col-number">Cantidad</th></tr></thead>
+      <tbody>
+        <tr><td class="label-col">Órdenes Solicitadas</td><td>${_inp(d.ordenes_solicitadas||0,`updSimple('ordenes_solicitadas',this.value)`)}</td></tr>
+        <tr><td class="label-col">Órdenes Adoptadas</td><td>${_inp(d.ordenes_adoptadas||0,`updSimple('ordenes_adoptadas',this.value)`)}</td></tr>
+        <tr><td class="label-col">Órdenes Denegadas</td><td>${_inp(d.ordenes_denegadas||0,`updSimple('ordenes_denegadas',this.value)`)}</td></tr>
+      </tbody>
+    </table>`;
+}
+
+// Terminación (tipo → cantidad)
+function renderTerminacion(titulo, tipos) {
+  let rows = tipos.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {cantidad:0};
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.cantidad,`updTerminacion('${t.codigo}',this.value)`)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">${titulo} ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Tipo</th><th class="col-number">Cantidad</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+// Auxilio judicial (tipo → numero_solicitudes)
+function renderAuxilioJudicial(titulo, tipos) {
+  let rows = tipos.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {numero_solicitudes:0};
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.numero_solicitudes,`updAuxilioJudicial('${t.codigo}',this.value)`)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">${titulo} ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Tipo</th><th class="col-number">Número</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+// =====================================================
+// RENDERIZADOS ESPECÍFICOS
+// =====================================================
+
+function renderVgRelacion() {
+  const d = AppState.datosActuales;
+  const rels = [
+    {c:'conyugal',n:'Conyugal'},{c:'exconyugal',n:'Ex-conyugal'},
+    {c:'pareja_hecho',n:'Pareja de Hecho'},{c:'expareja_hecho',n:'Ex-pareja de Hecho'},
+    {c:'novios',n:'Novios'},{c:'exnovios',n:'Ex-novios'},
+    {c:'relacion_afectiva_analoga',n:'Relación Afectiva Análoga'}
+  ];
+  const rows = rels.map(r =>
+    `<tr><td class="label-col">${r.n}</td><td>${_inp(d[r.c]||0,`updSimple('${r.c}',this.value)`)}</td></tr>`
+  ).join('');
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">RELACIÓN VÍCTIMA-DENUNCIADO - VG ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Tipo de Relación</th><th class="col-number">Cantidad</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function renderVdOrdenes() {
+  const d = AppState.datosActuales;
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">ÓRDENES DE PROTECCIÓN - VD ${_subtitulo()}</div>
+    <h3 style="margin:16px 0 8px 0;color:#2c3e50">Órdenes de Protección</h3>
+    <table class="data-table">
+      <thead><tr><th>Concepto</th><th class="col-number">Cantidad</th></tr></thead>
+      <tbody>
+        <tr><td class="label-col">Solicitadas</td><td>${_inp(d.solicitadas||0,`updSimple('solicitadas',this.value)`)}</td></tr>
+        <tr><td class="label-col">Adoptadas</td><td>${_inp(d.adoptadas||0,`updSimple('adoptadas',this.value)`)}</td></tr>
+        <tr><td class="label-col">Denegadas</td><td>${_inp(d.denegadas||0,`updSimple('denegadas',this.value)`)}</td></tr>
+      </tbody>
+    </table>
+    <h3 style="margin:24px 0 8px 0;color:#2c3e50">Relación Víctima-Denunciado</h3>
+    <table class="data-table">
+      <thead><tr><th>Tipo de Relación</th><th class="col-number">Cantidad</th></tr></thead>
+      <tbody>
+        <tr><td class="label-col">Relación Conyugal</td><td>${_inp(d.relacion_conyugal||0,`updSimple('relacion_conyugal',this.value)`)}</td></tr>
+        <tr><td class="label-col">Relación Afectiva</td><td>${_inp(d.relacion_afectiva||0,`updSimple('relacion_afectiva',this.value)`)}</td></tr>
+        <tr><td class="label-col">Relación Familiar</td><td>${_inp(d.relacion_familiar||0,`updSimple('relacion_familiar',this.value)`)}</td></tr>
+      </tbody>
+    </table>`;
+}
+
+function renderVdEjecutorias() {
+  const d = AppState.datosActuales;
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">EJECUTORIAS - VD ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Concepto</th><th class="col-number">Cantidad</th></tr></thead>
+      <tbody>
+        <tr><td class="label-col">Pendientes Inicio</td><td>${_inp(d.pendientes_inicio||0,`updSimpleMovimiento('pendientes_inicio',this.value)`)}</td></tr>
+        <tr><td class="label-col">Ingresadas</td><td>${_inp(d.ingresadas||0,`updVdEjecutorias('ingresadas',this.value)`)}</td></tr>
+        <tr><td class="label-col">Cumplidas</td><td>${_inp(d.cumplidas||0,`updVdEjecutorias('cumplidas',this.value)`)}</td></tr>
+        <tr><td class="label-col" style="background:#d4edda;color:#155724;font-weight:700;">Pendientes Fin</td><td>${_inpDis(d.pendientes_fin||0)}</td></tr>
+      </tbody>
+    </table>`;
+}
+
+function renderFamiliaMedidas() {
+  const d = AppState.datosActuales;
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">MEDIDAS EN FAMILIA ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Concepto</th><th class="col-number">Cantidad</th></tr></thead>
+      <tbody>
+        <tr><td class="label-col">Número de Medidas</td><td>${_inp(d.numero_medidas||0,`updSimple('numero_medidas',this.value)`)}</td></tr>
+        <tr><td class="label-col">Privación/Suspensión Visitas</td><td>${_inp(d.privacion_suspension_visitas||0,`updSimple('privacion_suspension_visitas',this.value)`)}</td></tr>
+      </tbody>
+    </table>`;
+}
+
+function renderJurisdiccionVoluntaria() {
+  let rows = TIPOS_JURISDICCION_VOLUNTARIA.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {numero_expedientes:0};
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.numero_expedientes,`updJurisdiccionVol('${t.codigo}',this.value)`)}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">JURISDICCIÓN VOLUNTARIA ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Tipo de Expediente</th><th class="col-number">Número</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function renderSenalamientos() {
+  const d = AppState.datosActuales;
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">SEÑALAMIENTOS ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Concepto</th><th class="col-number">Valor</th></tr></thead>
+      <tbody>
+        <tr><td class="label-col">Fecha Último Señalamiento</td>
+          <td><input type="date" class="data-input" value="${d.fecha_ultimo_senalamiento||''}" onchange="updSimple('fecha_ultimo_senalamiento',this.value)" style="min-width:160px;"></td>
+        </tr>
+        <tr><td class="label-col">Número Señalamientos</td>
+          <td>${_inp(d.numero_senalamientos||0,`updSimple('numero_senalamientos',this.value)`)}</td>
+        </tr>
+      </tbody>
+    </table>`;
+}
+
+function renderSentenciasPendientes(tipo) {
+  const tipos = tipo === 'penal'
+    ? [{codigo:'PENAL',nombre:'Penal'}]
+    : TIPOS_SENTENCIAS_PENDIENTES.filter(t => t.codigo !== 'PENAL');
+  const titulo = tipo === 'penal' ? 'SENTENCIAS PENDIENTES - PENAL' : 'SENTENCIAS PENDIENTES - CIVIL';
+  let rows = tipos.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {numero_pendientes:0};
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.numero_pendientes,`updSentPendientes('${t.codigo}',this.value)`)}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">${titulo} ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Tipo</th><th class="col-number">Pendientes</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function renderAutosDetallados() {
+  let rows = TIPOS_AUTOS_DETALLADOS.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {numero_autos:0};
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.numero_autos,`updAutosDetallados('${t.codigo}',this.value)`)}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">AUTOS DETALLADOS - CIVIL ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Tipo</th><th class="col-number">Número</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function renderResolucionesMatrimoniales() {
+  let rows = TIPOS_RESOLUCIONES_MATRIMONIALES.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {numero_resoluciones:0};
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.numero_resoluciones,`updResolucionesMatrimoniales('${t.codigo}',this.value)`)}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">RESOLUCIONES MATRIMONIALES ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Tipo</th><th class="col-number">Número</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function renderSentenciasConcursales() {
+  let rows = TIPOS_SENTENCIAS_CONCURSALES.map(t => {
+    const d = AppState.datosActuales[t.codigo] || {numero_sentencias:0};
+    return `<tr data-tipo="${t.codigo}">
+      <td class="label-col">${t.nombre}</td>
+      <td>${_inp(d.numero_sentencias,`updSentConcursales('${t.codigo}',this.value)`)}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('seccion-datos').innerHTML = `
+    <div class="section-title">SENTENCIAS CONCURSALES ${_subtitulo()}</div>
+    <table class="data-table">
+      <thead><tr><th>Tipo</th><th class="col-number">Número</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+// =====================================================
+// FUNCIONES DE ACTUALIZACIÓN (upd*)
+// =====================================================
+function _markDirty() {
+  AppState.datosModificados = true;
+  _datosCompleto[AppState.seccionActual] = AppState.datosActuales;
+}
+
+// Tipo pendientes (PROCESOS / EJECUCIONES)
+function upd(codigo, campo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {pendientes_inicio:0,ingresados:0,resueltos:0,pendientes_fin:0};
+  AppState.datosActuales[codigo][campo] = parseInt(valor)||0;
+  const d = AppState.datosActuales[codigo];
+  d.pendientes_fin = (parseInt(d.pendientes_inicio)||0) + (parseInt(d.ingresados)||0) - (parseInt(d.resueltos)||0);
+  // Update disabled field
+  const fila = document.querySelector(`tr[data-tipo="${codigo}"]`);
+  if (fila) {
+    const dis = fila.querySelector('input:disabled');
+    if (dis) dis.value = d.pendientes_fin;
+  }
+  recalcularTotalesTabla();
+  _markDirty();
+}
+
+// Sentencias civil
+function updSentCivil(codigo, campo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {estimatorias:0,desestimatorias:0};
+  AppState.datosActuales[codigo][campo] = parseInt(valor)||0;
+  const d = AppState.datosActuales[codigo];
+  const total = (parseInt(d.estimatorias)||0) + (parseInt(d.desestimatorias)||0);
+  const fila = document.querySelector(`tr[data-tipo="${codigo}"]`);
+  if (fila) { const dis = fila.querySelector('input:disabled'); if (dis) dis.value = total; }
+  recalcularTotalesTabla();
+  _markDirty();
+}
+
+// Sentencias penal
+function updSentPenal(codigo, campo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {condenatorias:0,absolutorias:0};
+  AppState.datosActuales[codigo][campo] = parseInt(valor)||0;
+  const d = AppState.datosActuales[codigo];
+  const total = (parseInt(d.condenatorias)||0) + (parseInt(d.absolutorias)||0);
+  const fila = document.querySelector(`tr[data-tipo="${codigo}"]`);
+  if (fila) { const dis = fila.querySelector('input:disabled'); if (dis) dis.value = total; }
+  recalcularTotalesTabla();
+  _markDirty();
+}
+
+// Autos penal
+function updAutoPenal(codigo, campo, valor) {
+  const key = 'AUTO_'+codigo;
+  if (!AppState.datosActuales[key]) AppState.datosActuales[key] = {violencia_domestica:0,resto:0};
+  AppState.datosActuales[key][campo] = parseInt(valor)||0;
+  const d = AppState.datosActuales[key];
+  const total = (parseInt(d.violencia_domestica)||0) + (parseInt(d.resto)||0);
+  const fila = document.querySelector(`tr[data-tipo="AUTO_${codigo}"]`);
+  if (fila) { const dis = fila.querySelector('input:disabled'); if (dis) dis.value = total; }
+  recalcularTotalesTabla();
+  _markDirty();
+}
+
+// Autos civil
+function updAutoCivil(codigo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {cantidad:0};
+  AppState.datosActuales[codigo].cantidad = parseInt(valor)||0;
+  recalcularTotalesTabla();
+  _markDirty();
+}
+
+// Medidas cautelares penal
+function updMedida(codigo, campo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {solicitadas:0,acordadas:0,denegadas:0};
+  AppState.datosActuales[codigo][campo] = parseInt(valor)||0;
+  recalcularTotalesTabla();
+  _markDirty();
+}
+
+// Medidas con tipos (genérico)
+function updMedidaTipo(codigo, campo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {solicitadas:0,acordadas:0,denegadas:0};
+  AppState.datosActuales[codigo][campo] = parseInt(valor)||0;
+  recalcularTotalesTabla();
+  _markDirty();
+}
+
+// Simple (single value)
+function updSimple(campo, valor) {
+  AppState.datosActuales[campo] = (campo === 'fecha_ultimo_senalamiento') ? valor : (parseInt(valor)||0);
+  _markDirty();
+}
+
+// Simple movimiento (pendientes_inicio/ingresados/resueltos)
+function updSimpleMovimiento(campo, valor) {
+  AppState.datosActuales[campo] = parseInt(valor)||0;
+  const d = AppState.datosActuales;
+  d.pendientes_fin = (parseInt(d.pendientes_inicio)||0) + (parseInt(d.ingresados)||0) - (parseInt(d.resueltos)||0);
+  document.querySelectorAll('input:disabled').forEach(el => { if (!el.closest('.total-row')) el.value = d.pendientes_fin; });
+  _markDirty();
+}
+
+// VD ejecutorias
+function updVdEjecutorias(campo, valor) {
+  AppState.datosActuales[campo] = parseInt(valor)||0;
+  const d = AppState.datosActuales;
+  d.pendientes_fin = (parseInt(d.pendientes_inicio)||0) + (parseInt(d.ingresadas)||0) - (parseInt(d.cumplidas)||0);
+  document.querySelectorAll('input:disabled').forEach(el => { if (!el.closest('.total-row')) el.value = d.pendientes_fin; });
+  _markDirty();
+}
+
+// Movimiento con tipos
+function updMovTipo(codigo, campo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {pendientes_inicio:0,ingresados:0,resueltos:0,pendientes_fin:0};
+  AppState.datosActuales[codigo][campo] = parseInt(valor)||0;
+  const d = AppState.datosActuales[codigo];
+  d.pendientes_fin = (parseInt(d.pendientes_inicio)||0) + (parseInt(d.ingresados)||0) - (parseInt(d.resueltos)||0);
+  const fila = document.querySelector(`tr[data-tipo="${codigo}"]`);
+  if (fila) { const dis = fila.querySelector('input:disabled'); if (dis) dis.value = d.pendientes_fin; }
+  _markDirty();
+}
+
+// Orden
+function updOrden(campo, valor) {
+  AppState.datosActuales[campo] = parseInt(valor)||0;
+  _markDirty();
+}
+
+// Terminación (tipo → cantidad)
+function updTerminacion(codigo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {cantidad:0};
+  AppState.datosActuales[codigo].cantidad = parseInt(valor)||0;
+  _markDirty();
+}
+
+// Auxilio judicial
+function updAuxilioJudicial(codigo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {numero_solicitudes:0};
+  AppState.datosActuales[codigo].numero_solicitudes = parseInt(valor)||0;
+  _markDirty();
+}
+
+// Jurisdicción voluntaria
+function updJurisdiccionVol(codigo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {numero_expedientes:0};
+  AppState.datosActuales[codigo].numero_expedientes = parseInt(valor)||0;
+  _markDirty();
+}
+
+// Sentencias pendientes
+function updSentPendientes(codigo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {numero_pendientes:0};
+  AppState.datosActuales[codigo].numero_pendientes = parseInt(valor)||0;
+  _markDirty();
+}
+
+// Autos detallados
+function updAutosDetallados(codigo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {numero_autos:0};
+  AppState.datosActuales[codigo].numero_autos = parseInt(valor)||0;
+  _markDirty();
+}
+
+// Resoluciones matrimoniales
+function updResolucionesMatrimoniales(codigo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {numero_resoluciones:0};
+  AppState.datosActuales[codigo].numero_resoluciones = parseInt(valor)||0;
+  _markDirty();
+}
+
+// Sentencias concursales
+function updSentConcursales(codigo, valor) {
+  if (!AppState.datosActuales[codigo]) AppState.datosActuales[codigo] = {numero_sentencias:0};
+  AppState.datosActuales[codigo].numero_sentencias = parseInt(valor)||0;
+  _markDirty();
+}
+
+// =====================================================
+// RECALCULAR TOTALES EN TABLA
+// =====================================================
+function recalcularTotalesTabla() {
+  const filaTotales = document.querySelector('.total-row');
+  if (!filaTotales) return;
+  const inputs = filaTotales.querySelectorAll('input');
+  const numCols = inputs.length;
+  for (let i = 0; i < numCols; i++) {
+    let suma = 0;
+    document.querySelectorAll('tbody tr:not(.total-row)').forEach(fila => {
+      const inp = fila.querySelectorAll('input')[i];
+      if (inp) suma += parseInt(inp.value) || 0;
+    });
+    inputs[i].value = suma;
+  }
+}
+
+// =====================================================
+// ACCIONES
+// =====================================================
+async function guardarManual() {
+  _datosCompleto[AppState.seccionActual] = AppState.datosActuales;
+  AppState.datosModificados = true;
+  await guardarDatosEnServidor();
+  mostrarNotificacion('✓ Guardado correctamente', 'success');
+}
+
+async function copiarTrimestreAnterior() {
+  if (!confirm('¿Copiar los pendientes finales del trimestre anterior como inicio de este trimestre?\n\nEsto solo afecta a las secciones de tipo "movimiento" (pendientes/ingresados/resueltos).')) return;
+
+  let trimAnt = AppState.trimestreActual - 1;
+  let añoAnt = AppState.añoActual;
+  if (trimAnt < 1) { trimAnt = 4; añoAnt--; }
+  if (añoAnt < 2026) { mostrarNotificacion('⚠️ No hay trimestre anterior disponible', 'error'); return; }
+
+  try {
+    const url = `/api/boletin/datos?plaza=${AppState.plazaActual.id}&materia=${AppState.materiaActual}&ano=${añoAnt}&trimestre=${trimAnt}&uid=${encodeURIComponent(_uid)}`;
+    const resp = await fetch(url);
+    if (!resp.ok) { mostrarNotificacion('⚠️ No hay datos del trimestre anterior', 'error'); return; }
+    const json = await resp.json();
+    const datosAnt = json.datos || {};
+
+    // Para cada sección con pendientes, copiar pendientes_fin → pendientes_inicio
+    const seccionesMovimiento = (SECCIONES_DISPONIBLES[AppState.materiaActual] || []).filter(
+      s => s.tipo === 'pendientes' || s.tipo === 'familia_procesos' || s.tipo === 'incidentes_civil'
+        || s.tipo === 'movimiento_suspendidos' || s.tipo === 'ejecuciones_detalladas'
+        || s.tipo === 'capacidad_procesos' || s.tipo === 'capacidad_internamientos'
+        || s.tipo === 'familia_incidentes' || s.tipo === 'recursos_apelacion_civil'
+        || s.tipo === 'recursos_revision_laj_civil' || s.tipo === 'recursos_apelacion_penal'
+        || s.tipo === 'recursos_revision_laj_penal' || s.tipo === 'concursos'
+        || s.tipo === 'acuerdos_extrajudiciales' || s.tipo === 'vd_movimiento'
+        || s.tipo === 'incidentes_penal' || s.tipo === 'movimiento_suspendidos'
+    );
+
+    let copiados = 0;
+    seccionesMovimiento.forEach(sec => {
+      const ant = datosAnt[sec.codigo];
+      if (!ant) return;
+      if (!_datosCompleto[sec.codigo]) _datosCompleto[sec.codigo] = {};
+      const cur = _datosCompleto[sec.codigo];
+
+      // Casos con subtipos (objetos con claves)
+      const tipos = getTiposParaSeccion(sec);
+      if (tipos && tipos.length > 0) {
+        tipos.forEach(t => {
+          const antD = ant[t.codigo];
+          if (antD && antD.pendientes_fin !== undefined) {
+            if (!cur[t.codigo]) cur[t.codigo] = {pendientes_inicio:0,ingresados:0,resueltos:0,pendientes_fin:0};
+            cur[t.codigo].pendientes_inicio = antD.pendientes_fin;
+            cur[t.codigo].ingresados = 0;
+            cur[t.codigo].resueltos = 0;
+            cur[t.codigo].pendientes_fin = antD.pendientes_fin;
+            copiados++;
+          }
+        });
+      } else if (ant.pendientes_fin !== undefined) {
+        cur.pendientes_inicio = ant.pendientes_fin;
+        cur.ingresados = 0;
+        cur.resueltos = 0;
+        cur.pendientes_fin = ant.pendientes_fin;
+        copiados++;
+      }
+    });
+
+    AppState.datosModificados = true;
+    await guardarDatosEnServidor();
+    // Recargar sección actual
+    AppState.datosActuales = _datosCompleto[AppState.seccionActual] || {};
+    cargarDatosActuales();
+    mostrarNotificacion(`✓ ${copiados} elementos copiados del trimestre anterior`, 'success');
+  } catch(e) {
+    mostrarNotificacion('⚠️ Error al copiar trimestre anterior', 'error');
+  }
+}
+
+function getTiposParaSeccion(sec) {
+  switch(sec.tipo) {
+    case 'pendientes': return sec.codigo === 'EJECUCIONES' ? TIPOS_EJECUCIONES : (TIPOS_PROCEDIMIENTOS[AppState.materiaActual] || []);
+    case 'familia_procesos': return TIPOS_FAMILIA_PROCESOS;
+    case 'incidentes_civil': return TIPOS_INCIDENTES_CIVIL;
+    case 'ejecuciones_detalladas': return TIPOS_EJECUCIONES_DETALLADAS;
+    case 'vd_movimiento': return TIPOS_VD_MOVIMIENTO;
+    default: return null;
+  }
+}
+
+async function limpiarSeccion() {
+  if (!confirm(`¿Borrar todos los datos de la sección actual?\n\nSección: ${AppState.seccionActual}`)) return;
+  AppState.datosActuales = {};
+  _datosCompleto[AppState.seccionActual] = {};
+  AppState.datosModificados = true;
+  await guardarDatosEnServidor();
+  cargarDatosActuales();
+  mostrarNotificacion('✓ Sección limpiada', 'success');
+}
+
+async function crearBackup() {
+  // Guardar primero
+  _datosCompleto[AppState.seccionActual] = AppState.datosActuales;
+  AppState.datosModificados = true;
+  await guardarDatosEnServidor();
+
+  // Descargar como JSON
+  const backup = {
+    fecha: new Date().toISOString(),
+    plaza: AppState.plazaActual,
+    materia: AppState.materiaActual,
+    año: AppState.añoActual,
+    trimestre: AppState.trimestreActual,
+    uid: _uid,
+    datos: _datosCompleto
+  };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `boletin_plaza${AppState.plazaActual.id}_${AppState.materiaActual}_${AppState.añoActual}T${AppState.trimestreActual}_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  mostrarNotificacion('✓ Backup descargado', 'success');
+}
+
+function exportarPDF() {
+  mostrarNotificacion('📄 Preparando impresión...', 'info');
+  setTimeout(() => window.print(), 500);
+}
+
+// =====================================================
+// HISTÓRICO
+// =====================================================
+async function abrirHistorico() {
+  const modal = document.getElementById('modal-historico');
+  const tbody = document.getElementById('historico-tbody');
+
+  let trimestresConDatos = new Set();
+  try {
+    const url = `/api/boletin/historico?plaza=${AppState.plazaActual.id}&materia=${AppState.materiaActual}&uid=${encodeURIComponent(_uid)}`;
+    const resp = await fetch(url);
+    if (resp.ok) {
+      const json = await resp.json();
+      (json.trimestres || []).forEach(t => trimestresConDatos.add(`${t.año}-${t.trimestre}`));
+    }
+  } catch(e) {}
+
+  let html = '';
+  for (let año = 2026; año <= 2030; año++) {
+    html += `<tr><td>${año}</td>`;
+    for (let trim = 1; trim <= 4; trim++) {
+      const tiene = trimestresConDatos.has(`${año}-${trim}`);
+      html += `<td><div class="trimestre-status ${tiene?'completado':'vacio'}" onclick="irATrimestre(${año},${trim})">
+        ${tiene ? '✓ Editar' : '○ Vacío'}
+      </div></td>`;
+    }
+    html += '</tr>';
+  }
+  tbody.innerHTML = html;
+  modal.classList.add('show');
+}
+
+function cerrarHistorico() {
+  document.getElementById('modal-historico').classList.remove('show');
+}
+
+async function irATrimestre(año, trimestre) {
+  cerrarHistorico();
+  await guardarDatosEnServidor();
+  AppState.añoActual = año;
+  AppState.trimestreActual = trimestre;
+  _datosCompleto = {};
+  actualizarDisplays();
+  await cargarTrimestre();
+  guardarEstado();
+}
+
+// =====================================================
+// PERSISTENCIA Y AUTOGUARDADO
+// =====================================================
+function guardarEstado() {
+  // Estado de vista se mantiene solo en memoria durante la sesión
+}
+
+function cargarEstadoGuardado() {
+  // Sin persistencia — se usan los defaults de AppState al cargar
+}
+
+function iniciarAutoguardado() {
+  setInterval(async () => {
+    if (AppState.datosModificados) {
+      await guardarDatosEnServidor();
+      mostrarNotificacion('✓ Autoguardado', 'success');
+    }
+  }, 30000);
+}
+
+// =====================================================
+// NOTIFICACIONES
+// =====================================================
+function mostrarNotificacion(msg, tipo = 'success') {
+  const el = document.getElementById('save-indicator');
+  const msgEl = document.getElementById('save-message');
+  msgEl.textContent = msg;
+  el.className = 'save-indicator show ' + tipo;
+  clearTimeout(_notifTimer);
+  _notifTimer = setTimeout(() => el.classList.remove('show'), 3000);
+}
+</script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

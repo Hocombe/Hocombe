@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Directorio DIR3</title>
+<style>
+:root{
+  --bg:#f0f4ff; --bg2:#fff; --ink:#1e293b; --muted:#64748b;
+  --primary:#1e3a5f; --primary-light:#2c5282; --border:#d0daea;
+  --hover:#e8eef8; --input-bg:#fff; --input-border:#cbd5e1;
+  --success:#16a34a; --success-bg:#dcfce7;
+  --fav:#f59e0b; --fav-bg:rgba(245,158,11,.08);
+  --header-bg:linear-gradient(135deg,#1e3a5f,#2c5282);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg);color:var(--ink)}
+body{display:flex;flex-direction:column;overflow:hidden}
+
+/* Header */
+.app-header{
+  background:var(--header-bg);color:#fff;padding:12px 20px;
+  display:flex;align-items:center;gap:12px;flex-shrink:0;
+}
+.app-header h1{font-size:16px;font-weight:700;flex:1}
+.app-header button{background:rgba(255,255,255,.15);border:none;color:#fff;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:12px}
+.app-header button:hover{background:rgba(255,255,255,.25)}
+
+/* Search area */
+.search-area{padding:14px 20px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0}
+.search-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search-input{
+  flex:1;min-width:260px;padding:11px 16px;border:2px solid var(--input-border);
+  border-radius:10px;font-size:15px;background:var(--input-bg);color:var(--ink);
+  transition:border-color .2s;
+}
+.search-input:focus{outline:none;border-color:var(--primary-light)}
+.search-input::placeholder{color:#94a3b8}
+
+.filter-select{
+  padding:9px 12px;border:1px solid var(--input-border);border-radius:8px;
+  font-size:13px;background:var(--input-bg);color:var(--ink);min-width:150px;
+}
+.search-info{font-size:13px;color:var(--muted);padding:6px 0 0}
+
+/* Tabs favoritos/resultados */
+.tabs-bar{display:flex;gap:0;padding:0 20px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0}
+.tab-btn{
+  padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;border:none;
+  background:transparent;color:var(--muted);border-bottom:3px solid transparent;
+  transition:all .2s;
+}
+.tab-btn:hover{color:var(--ink)}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* Results */
+.results-area{flex:1;overflow-y:auto;padding:12px 20px}
+.result-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:10px;
+  padding:14px 18px;margin-bottom:8px;cursor:pointer;
+  transition:all .15s;display:flex;align-items:flex-start;gap:14px;
+}
+.result-card:hover{border-color:var(--primary-light);box-shadow:0 2px 8px rgba(30,58,95,.1);transform:translateY(-1px)}
+.result-card.copiado{border-color:var(--success);background:var(--success-bg)}
+.result-card.es-fav{border-left:3px solid var(--fav)}
+
+.rc-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+.rc-body{flex:1;min-width:0}
+.rc-code{font-size:16px;font-weight:700;color:var(--primary);font-family:'Consolas','Courier New',monospace;letter-spacing:.5px}
+.rc-name{font-size:14px;color:var(--ink);margin-top:3px}
+.rc-org{font-size:12px;color:var(--muted);margin-top:3px}
+.rc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.rc-tag{font-size:11px;padding:3px 9px;border-radius:5px;background:rgba(30,58,95,.08);color:var(--primary)}
+.rc-actions{display:flex;flex-direction:column;gap:6px;align-items:center;flex-shrink:0;align-self:center}
+.rc-copy{font-size:11px;color:var(--muted)}
+.btn-fav{
+  background:none;border:none;cursor:pointer;font-size:18px;padding:2px;
+  opacity:.4;transition:opacity .2s,transform .2s;
+}
+.btn-fav:hover{opacity:.8;transform:scale(1.2)}
+.btn-fav.activo{opacity:1}
+
+/* Empty & loading */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state .icon{font-size:48px;margin-bottom:12px}
+.empty-state h3{font-size:17px;margin-bottom:6px;color:var(--ink)}
+.empty-state p{font-size:14px}
+
+/* Toast */
+#toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--primary);color:#fff;padding:10px 20px;border-radius:10px;
+  font-size:13px;box-shadow:0 4px 16px rgba(0,0,0,.2);
+  transition:transform .3s ease;z-index:9999;pointer-events:none;
+}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* Scrollbar */
+.results-area::-webkit-scrollbar{width:8px}
+.results-area::-webkit-scrollbar-track{background:var(--bg)}
+.results-area::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
+
+/* ── MODO OSCURO ────────────────────── */
+[data-tema="oscuro"]{
+  --bg:#0f172a; --bg2:#1e293b; --ink:#e2e8f0; --muted:#94a3b8;
+  --primary:#60a5fa; --primary-light:#3b82f6; --border:#334155;
+  --hover:#334155; --input-bg:#0f172a; --input-border:#475569;
+  --success:#22c55e; --success-bg:rgba(34,197,94,.15);
+  --fav:#fbbf24; --fav-bg:rgba(251,191,36,.08);
+  --header-bg:linear-gradient(135deg,#0f172a,#1e293b);
+  color-scheme:dark;
+}
+[data-tema="oscuro"] .rc-tag{background:rgba(96,165,250,.12);color:#93c5fd}
+[data-tema="oscuro"] .results-area::-webkit-scrollbar-track{background:#0f172a}
+[data-tema="oscuro"] .results-area::-webkit-scrollbar-thumb{background:#475569}
+[data-tema="oscuro"] .tab-btn.active{color:#60a5fa;border-bottom-color:#60a5fa}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <span style="font-size:22px">🏢</span>
+  <h1>Directorio DIR3 — Oficinas de Registro</h1>
+  <button id="_btnTema" onclick="_toggleTema()">🌙 Oscuro</button>
+</div>
+
+<div class="search-area">
+  <div class="search-row">
+    <input type="text" id="searchInput" class="search-input"
+      placeholder="Buscar oficina, organismo, provincia... (ej: catastro pontevedra)"
+      autocomplete="off"/>
+    <select id="filtroNivel" class="filter-select" onchange="buscar()">
+      <option value="">Todos los niveles</option>
+    </select>
+    <select id="filtroComunidad" class="filter-select" onchange="buscar()">
+      <option value="">Todas las comunidades</option>
+    </select>
+    <select id="filtroProvincia" class="filter-select" onchange="buscar()">
+      <option value="">Todas las provincias</option>
+    </select>
+  </div>
+  <div class="search-info" id="searchInfo"></div>
+</div>
+
+<div class="tabs-bar">
+  <button class="tab-btn active" id="tabResultados" onclick="cambiarVista('resultados')">🔍 Resultados</button>
+  <button class="tab-btn" id="tabFavoritos" onclick="cambiarVista('favoritos')">⭐ Favoritos <span id="favCount"></span></button>
+</div>
+
+<div class="results-area" id="resultsArea">
+  <div class="empty-state" id="emptyState">
+    <div class="icon">🔍</div>
+    <h3>Busca una direcci&oacute;n DIR3</h3>
+    <p>Escribe el nombre de la oficina, organismo o localidad.<br>Haz clic en un resultado para copiar el c&oacute;digo DIR3.<br>Usa ⭐ para guardar favoritos.</p>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════
+// ESTADO
+// ══════════════════════════════════════════════
+let _uid = 'default';
+let _debounceTimer = null;
+let _filtrosDisponibles = { niveles: [], comunidades: [], provincias: [] };
+let _favoritos = []; // Array de {code, name, ofiCode, ofiName, orgCode, orgName, nv, cm, pr, fa}
+let _vistaActual = 'resultados'; // 'resultados' | 'favoritos'
+let _ultimosResultados = [];
+let _ultimoTotal = 0;
+
+function _apiBase() {
+    if (window.self !== window.top) {
+        try { return window.top.location.origin; } catch(_) {}
+    }
+    return window.location.origin;
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', async () => {
+    await cargarFiltros();
+    await cargarFavoritos();
+    await _cargarTema();
+
+    document.getElementById('searchInput').addEventListener('input', () => {
+        clearTimeout(_debounceTimer);
+        _debounceTimer = setTimeout(buscar, 300);
+    });
+    document.getElementById('searchInput').addEventListener('keydown', e => {
+        if (e.key === 'Enter') { clearTimeout(_debounceTimer); buscar(); }
+    });
+    document.getElementById('searchInput').focus();
+    _actualizarFavCount();
+});
+
+window.addEventListener('message', async e => {
+    if (!e.data) return;
+    if (e.data.tipo === 'cambioUsuario') {
+        _uid = (e.data.usuario && e.data.usuario.id) || 'default';
+        await cargarFavoritos();
+        await _cargarTema();
+        _actualizarFavCount();
+        if (_vistaActual === 'favoritos') renderFavoritos();
+        return;
+    }
+    if (e.data.tipo === 'tema') {
+        document.documentElement.setAttribute('data-tema', e.data.oscuro ? 'oscuro' : 'claro');
+        _actualizarBtnTema();
+        return;
+    }
+    if (e.data.tipo === 'buscarDesdePortal') {
+        const q = e.data.q || '';
+        document.getElementById('searchInput').value = q;
+        cambiarVista('resultados');
+        buscar();
+        return;
+    }
+});
+
+// ══════════════════════════════════════════════
+// VISTAS
+// ══════════════════════════════════════════════
+function cambiarVista(vista) {
+    _vistaActual = vista;
+    document.getElementById('tabResultados').classList.toggle('active', vista === 'resultados');
+    document.getElementById('tabFavoritos').classList.toggle('active', vista === 'favoritos');
+    if (vista === 'favoritos') {
+        renderFavoritos();
+    } else {
+        if (_ultimosResultados.length) {
+            renderResultados(_ultimosResultados, _ultimoTotal);
+        } else {
+            document.getElementById('resultsArea').innerHTML = `
+              <div class="empty-state">
+                <div class="icon">🔍</div>
+                <h3>Busca una direcci&oacute;n DIR3</h3>
+                <p>Escribe el nombre de la oficina, organismo o localidad.<br>Haz clic en un resultado para copiar el c&oacute;digo DIR3.<br>Usa ⭐ para guardar favoritos.</p>
+              </div>`;
+        }
+    }
+}
+
+// ══════════════════════════════════════════════
+// FILTROS
+// ══════════════════════════════════════════════
+async function cargarFiltros() {
+    try {
+        const r = await fetch(_apiBase() + '/api/dir3/filtros');
+        if (!r.ok) return;
+        _filtrosDisponibles = await r.json();
+
+        const selNivel = document.getElementById('filtroNivel');
+        (_filtrosDisponibles.niveles || []).forEach(n => {
+            const opt = document.createElement('option');
+            opt.value = n; opt.textContent = n;
+            selNivel.appendChild(opt);
+        });
+        const selCom = document.getElementById('filtroComunidad');
+        (_filtrosDisponibles.comunidades || []).forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c; opt.textContent = c;
+            selCom.appendChild(opt);
+        });
+        const selProv = document.getElementById('filtroProvincia');
+        (_filtrosDisponibles.provincias || []).forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p; opt.textContent = p;
+            selProv.appendChild(opt);
+        });
+    } catch(err) {
+        console.warn('[DIR3] Error cargando filtros:', err);
+    }
+}
+
+// ══════════════════════════════════════════════
+// BUSCAR
+// ══════════════════════════════════════════════
+async function buscar() {
+    if (_vistaActual !== 'resultados') cambiarVista('resultados');
+
+    const q = (document.getElementById('searchInput').value || '').trim();
+    const nivel = document.getElementById('filtroNivel').value;
+    const comunidad = document.getElementById('filtroComunidad').value;
+    const provincia = document.getElementById('filtroProvincia').value;
+
+    if (!q && !nivel && !comunidad && !provincia) {
+        _ultimosResultados = [];
+        _ultimoTotal = 0;
+        document.getElementById('resultsArea').innerHTML = `
+          <div class="empty-state">
+            <div class="icon">🔍</div>
+            <h3>Busca una direcci&oacute;n DIR3</h3>
+            <p>Escribe el nombre de la oficina, organismo o localidad.<br>Haz clic en un resultado para copiar el c&oacute;digo DIR3.<br>Usa ⭐ para guardar favoritos.</p>
+          </div>`;
+        document.getElementById('searchInfo').textContent = '';
+        return;
+    }
+
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    if (nivel) params.set('nivel', nivel);
+    if (comunidad) params.set('comunidad', comunidad);
+    if (provincia) params.set('provincia', provincia);
+    params.set('limit', '100');
+
+    try {
+        document.getElementById('searchInfo').textContent = 'Buscando...';
+        const r = await fetch(_apiBase() + '/api/dir3/buscar?' + params.toString());
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const data = await r.json();
+        _ultimosResultados = data.resultados;
+        _ultimoTotal = data.total;
+        renderResultados(data.resultados, data.total);
+    } catch(err) {
+        document.getElementById('searchInfo').textContent = 'Error al buscar: ' + err.message;
+    }
+}
+
+// ══════════════════════════════════════════════
+// RENDER RESULTADOS
+// ══════════════════════════════════════════════
+function renderResultados(resultados, total) {
+    const area = document.getElementById('resultsArea');
+    const info = document.getElementById('searchInfo');
+
+    if (!resultados.length) {
+        area.innerHTML = `
+          <div class="empty-state">
+            <div class="icon">📭</div>
+            <h3>Sin resultados</h3>
+            <p>Prueba con otros t&eacute;rminos o ajusta los filtros.</p>
+          </div>`;
+        info.textContent = '0 resultados';
+        return;
+    }
+
+    info.textContent = total >= 100 ? `Mostrando 100 de ${total}+ resultados \u2014 afina tu b\u00fasqueda` : `${total} resultado${total > 1 ? 's' : ''}`;
+    area.innerHTML = resultados.map(r => _renderCard(r, false)).join('');
+}
+
+// ══════════════════════════════════════════════
+// RENDER FAVORITOS
+// ══════════════════════════════════════════════
+function renderFavoritos() {
+    const area = document.getElementById('resultsArea');
+    document.getElementById('searchInfo').textContent = _favoritos.length ? `${_favoritos.length} favorito${_favoritos.length > 1 ? 's' : ''}` : '';
+
+    if (!_favoritos.length) {
+        area.innerHTML = `
+          <div class="empty-state">
+            <div class="icon">⭐</div>
+            <h3>Sin favoritos</h3>
+            <p>Busca una direcci&oacute;n DIR3 y pulsa ⭐ para guardarla aqu&iacute;.</p>
+          </div>`;
+        return;
+    }
+    area.innerHTML = _favoritos.map(f => _renderCard(f, true)).join('');
+}
+
+// ══════════════════════════════════════════════
+// RENDER CARD (compartido)
+// ══════════════════════════════════════════════
+function _renderCard(r, esFavView) {
+    const dir3Code = _esc(r.cu || r.co);
+    const dir3Name = _esc(r.cu ? r.nu : r.no);
+    const ofiCode = _esc(r.co);
+    const ofiName = _esc(r.no);
+    const orgCode = _esc(r.cr);
+    const orgName = _esc(r.nr);
+    const nivel = _esc(r.nv);
+    const comunidad = _esc(r.cm);
+    const provincia = _esc(r.pr);
+    const esFav = _esFavorito(dir3Code);
+
+    const tags = [];
+    if (nivel) tags.push(nivel);
+    if (comunidad) tags.push(comunidad);
+    if (provincia) tags.push(provincia);
+    if (r.fa) tags.push('Activo: ' + _fmtFecha(r.fa));
+
+    const mostrarOficina = r.cu && r.co;
+
+    // Serializar datos para favorito
+    const dataJson = _esc(JSON.stringify({co:r.co,no:r.no,cu:r.cu,nu:r.nu,cr:r.cr,nr:r.nr,nv:r.nv,cm:r.cm,pr:r.pr,fa:r.fa}));
+
+    return `<div class="result-card ${esFav ? 'es-fav' : ''}" onclick="copiarCodigo(this, '${dir3Code}')">
+      <div class="rc-icon">🏢</div>
+      <div class="rc-body">
+        <div class="rc-code">${dir3Code}</div>
+        <div class="rc-name">${dir3Name}</div>
+        ${mostrarOficina ? `<div class="rc-org">📮 Oficina: ${ofiCode} \u2014 ${ofiName}</div>` : ''}
+        ${orgName && orgName !== dir3Name && orgName !== ofiName ? `<div class="rc-org">📁 ${orgCode} \u2014 ${orgName}</div>` : ''}
+        <div class="rc-tags">${tags.map(t => `<span class="rc-tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="rc-actions">
+        <button class="btn-fav ${esFav ? 'activo' : ''}" onclick="event.stopPropagation(); toggleFavorito('${dir3Code}', this, '${dataJson}')" title="${esFav ? 'Quitar de favoritos' : 'Añadir a favoritos'}">${esFav ? '⭐' : '☆'}</button>
+        <div class="rc-copy">Clic para copiar</div>
+      </div>
+    </div>`;
+}
+
+// ══════════════════════════════════════════════
+// FAVORITOS — Persistencia
+// ══════════════════════════════════════════════
+function _esFavorito(code) {
+    return _favoritos.some(f => (f.cu || f.co) === code);
+}
+
+function toggleFavorito(code, btn, dataJsonStr) {
+    const idx = _favoritos.findIndex(f => (f.cu || f.co) === code);
+    if (idx >= 0) {
+        _favoritos.splice(idx, 1);
+        showToast('Eliminado de favoritos');
+    } else {
+        try {
+            const data = JSON.parse(dataJsonStr);
+            _favoritos.push(data);
+            showToast('⭐ Añadido a favoritos');
+        } catch(_) {}
+    }
+    guardarFavoritos();
+    _actualizarFavCount();
+    // Re-render la vista actual
+    if (_vistaActual === 'favoritos') renderFavoritos();
+    else if (_ultimosResultados.length) renderResultados(_ultimosResultados, _ultimoTotal);
+}
+
+async function guardarFavoritos() {
+    try {
+        await fetch(_apiBase() + '/api/config/dir3_favs_' + _uid, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ favoritos: _favoritos })
+        });
+    } catch(_) {}
+}
+
+async function cargarFavoritos() {
+    try {
+        const r = await fetch(_apiBase() + '/api/config/dir3_favs_' + _uid);
+        const d = await r.json();
+        if (d.config && Array.isArray(d.config.favoritos)) {
+            _favoritos = d.config.favoritos;
+        } else {
+            _favoritos = [];
+        }
+    } catch(_) { _favoritos = []; }
+}
+
+function _actualizarFavCount() {
+    const el = document.getElementById('favCount');
+    if (el) el.textContent = _favoritos.length ? `(${_favoritos.length})` : '';
+}
+
+// ══════════════════════════════════════════════
+// COPIAR AL PORTAPAPELES
+// ══════════════════════════════════════════════
+async function copiarCodigo(el, code) {
+    try {
+        await navigator.clipboard.writeText(code);
+    } catch(_) {
+        const ta = document.createElement('textarea');
+        ta.value = code;
+        ta.style.cssText = 'position:fixed;left:-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+    }
+    el.classList.add('copiado');
+    const copyLabel = el.querySelector('.rc-copy');
+    if (copyLabel) copyLabel.textContent = '✅ Copiado';
+    showToast('Copiado: ' + code);
+    setTimeout(() => {
+        el.classList.remove('copiado');
+        if (copyLabel) copyLabel.textContent = 'Clic para copiar';
+    }, 2000);
+}
+
+// ══════════════════════════════════════════════
+// UTILIDADES
+// ══════════════════════════════════════════════
+function _esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+function _fmtFecha(s) { if (!s) return ''; const [y,m,d] = s.split('-'); return `${d}/${m}/${y}`; }
+
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ══════════════════════════════════════════════
+// MODO OSCURO
+// ══════════════════════════════════════════════
+function _toggleTema() {
+    const esOscuro = document.documentElement.getAttribute('data-tema') === 'oscuro';
+    document.documentElement.setAttribute('data-tema', esOscuro ? 'claro' : 'oscuro');
+    _actualizarBtnTema();
+    fetch(_apiBase() + '/api/config/dir3_tema_' + _uid, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tema: esOscuro ? 'claro' : 'oscuro' })
+    }).catch(() => {});
+}
+
+async function _cargarTema() {
+    try {
+        const r = await fetch(_apiBase() + '/api/config/dir3_tema_' + _uid);
+        const d = await r.json();
+        if (d.config && d.config.tema === 'oscuro') {
+            document.documentElement.setAttribute('data-tema', 'oscuro');
+        } else {
+            document.documentElement.removeAttribute('data-tema');
+        }
+    } catch(_) {}
+    _actualizarBtnTema();
+}
+
+function _actualizarBtnTema() {
+    const btn = document.getElementById('_btnTema');
+    if (!btn) return;
+    const oscuro = document.documentElement.getAttribute('data-tema') === 'oscuro';
+    btn.textContent = oscuro ? '☀️ Claro' : '🌙 Oscuro';
+}
+</script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

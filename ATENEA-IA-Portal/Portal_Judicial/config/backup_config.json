@@ -1,0 +1,26 @@
+{
+  "frecuencia_horas": 1,
+  "rutas_externas": [],
+  "modulos": [
+    "agenda",
+    "vencimientos",
+    "vacaciones",
+    "clipbox",
+    "peritos",
+    "instruccion_penal",
+    "minutas",
+    "correos",
+    "auxilios",
+    "boletin",
+    "presos",
+    "notificajud",
+    "guardias",
+    "ausencias",
+    "archivo"
+  ],
+  "max_backups_locales": 5,
+  "intervalo_backup_min": 10,
+  "ultimo_auto": "2026-03-14T11:28:51.661624",
+  "hora_inicio": "07:00",
+  "hora_fin": "16:00"
+}

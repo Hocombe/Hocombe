@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minutas</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f4ff;color:#1a2a4a;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+
+/* CABECERA */
+.cab{background:linear-gradient(135deg,#1a3a6b,#2563eb);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.cab h1{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
+.cab-tabs{display:flex;gap:6px;margin-left:auto}
+.cab-tab{background:rgba(255,255,255,0.15);border:none;color:#fff;padding:5px 14px;border-radius:20px;cursor:pointer;font-size:13px;transition:.2s}
+.cab-tab.active,.cab-tab:hover{background:rgba(255,255,255,0.3)}
+
+/* LAYOUT PRINCIPAL */
+.layout{display:flex;flex:1;overflow:hidden;gap:0}
+
+/* PANEL IZQUIERDO — LISTA */
+.pnl-lista{width:280px;min-width:220px;background:#fff;border-right:1px solid #e2e8f0;display:flex;flex-direction:column;flex-shrink:0}
+.lista-tabs{display:flex;border-bottom:1px solid #e2e8f0}
+.lista-tab{flex:1;padding:10px 8px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;border:none;background:none;color:#64748b;border-bottom:2px solid transparent;transition:.2s}
+.lista-tab.active{color:#2563eb;border-bottom-color:#2563eb;background:#f0f7ff}
+.lista-busq{padding:8px;border-bottom:1px solid #f1f5f9}
+.lista-busq input{width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:6px 10px;font-size:12px;outline:none}
+.lista-busq input:focus{border-color:#2563eb}
+.lista-items{flex:1;overflow-y:auto}
+.m-item{padding:10px 12px;border-bottom:1px solid #f1f5f9;cursor:pointer;transition:.15s;position:relative}
+.m-item:hover{background:#f8faff}
+.m-item.sel{background:#eff6ff;border-left:3px solid #2563eb}
+.m-item.urgente{border-left:3px solid #ef4444}
+.m-item.sel.urgente{border-left:3px solid #ef4444;background:#fff5f5}
+.m-item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+.m-item-quien{font-size:12px;font-weight:600;color:#1e40af;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.m-item-fecha{font-size:10px;color:#94a3b8}
+.m-item-asunto{font-size:12px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m-item-foot{display:flex;gap:4px;margin-top:4px;align-items:center}
+.badge-estado{font-size:10px;padding:1px 6px;border-radius:10px;font-weight:600}
+.badge-pendiente{background:#fef9c3;color:#a16207}
+.badge-leida{background:#dbeafe;color:#1d4ed8}
+.badge-resuelta{background:#dcfce7;color:#15803d}
+.badge-urgente{background:#fee2e2;color:#dc2626;font-size:10px;padding:1px 5px;border-radius:10px;font-weight:700}
+.m-item-no-leido{width:8px;height:8px;background:#2563eb;border-radius:50%;margin-left:auto}
+.lista-vacia{padding:32px 16px;text-align:center;color:#94a3b8;font-size:13px}
+
+/* PANEL CENTRAL — DETALLE */
+.pnl-detalle{flex:1;background:#fff;border-right:1px solid #e2e8f0;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.det-vacio{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#94a3b8;gap:12px;font-size:14px}
+.det-vacio .ico{font-size:48px}
+.det-scroll{flex:1;overflow-y:auto;padding:16px}
+.det-cab{background:#f8faff;border:1px solid #e2e8f0;border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.det-cab-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.det-asunto{font-size:16px;font-weight:700;color:#1e3a8a}
+.det-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:12px;color:#64748b}
+.det-meta span{background:#f1f5f9;padding:2px 8px;border-radius:8px;display:flex;align-items:center;gap:4px}
+.det-ref{background:#fefce8;border:1px solid #fde68a;border-radius:10px;padding:10px 12px;margin-bottom:12px;cursor:pointer;user-select:none}
+.det-ref-head{font-size:12px;font-weight:700;color:#92400e;display:flex;align-items:center;gap:6px;justify-content:space-between}
+.det-ref-body{font-size:12px;color:#78350f;margin-top:6px;display:none}
+.det-ref-body.open{display:block}
+.det-ref-row{margin:3px 0}
+.det-cuerpo{font-size:14px;line-height:1.6;color:#374151;padding:12px 0;border-bottom:1px solid #f1f5f9;margin-bottom:12px;white-space:pre-wrap}
+/* Hilo */
+.hilo{display:flex;flex-direction:column;gap:10px}
+.hilo-msg{padding:10px 12px;border-radius:10px;max-width:85%;font-size:13px}
+.hilo-msg.propio{background:#dbeafe;align-self:flex-end;color:#1e3a8a}
+.hilo-msg.otro{background:#f1f5f9;align-self:flex-start;color:#374151}
+.hilo-msg-quien{font-size:11px;font-weight:700;margin-bottom:4px;opacity:.75}
+.hilo-msg-fecha{font-size:10px;opacity:.6;margin-top:4px;text-align:right}
+/* Acciones */
+.det-acciones{padding:12px 16px;border-top:1px solid #e2e8f0;background:#fafbff;display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.det-acciones-row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:7px 14px;border:none;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:5px}
+.btn:hover{opacity:.85}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-leida{background:#dbeafe;color:#1d4ed8}
+.btn-resuelta{background:#dcfce7;color:#15803d}
+.btn-reabrir{background:#fef9c3;color:#a16207}
+.btn-eliminar{background:#fee2e2;color:#dc2626}
+.btn-responder{background:#f1f5f9;color:#374151}
+.btn-enviar{background:#2563eb;color:#fff}
+.btn-cancelar{background:#f1f5f9;color:#64748b}
+.responder-form{display:none;flex-direction:column;gap:6px}
+.responder-form.show{display:flex}
+.responder-form textarea{border:1px solid #e2e8f0;border-radius:8px;padding:8px;font-size:13px;resize:vertical;min-height:60px;outline:none;font-family:inherit}
+.responder-form textarea:focus{border-color:#2563eb}
+.comment-form{display:none;flex-direction:column;gap:6px}
+.comment-form.show{display:flex}
+.comment-form textarea{border:1px solid #e2e8f0;border-radius:8px;padding:8px;font-size:13px;resize:vertical;min-height:50px;outline:none;font-family:inherit}
+
+/* PANEL DERECHO — NUEVA MINUTA */
+.pnl-nueva{width:300px;min-width:260px;background:#fff;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.nueva-head{padding:12px 16px;border-bottom:1px solid #e2e8f0;font-size:13px;font-weight:700;color:#1e3a8a;display:flex;align-items:center;gap:6px}
+.nueva-scroll{flex:1;overflow-y:auto;padding:12px 16px}
+.form-grp{margin-bottom:12px}
+.form-lbl{font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;display:block}
+.form-input,.form-select,.form-textarea{width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:13px;outline:none;font-family:inherit;transition:.2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.form-textarea{resize:vertical;min-height:80px}
+.prio-row{display:flex;gap:8px}
+.prio-btn{flex:1;padding:7px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;text-align:center;transition:.2s;background:#fff;color:#64748b}
+.prio-btn.sel-normal{border-color:#2563eb;background:#eff6ff;color:#2563eb}
+.prio-btn.sel-urgente{border-color:#ef4444;background:#fff5f5;color:#ef4444}
+.dest-filtros{display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap}
+.dest-filtro{font-size:11px;padding:3px 8px;border-radius:10px;cursor:pointer;border:1px solid #e2e8f0;background:#f8faff;color:#64748b;transition:.2s}
+.dest-filtro.act{background:#2563eb;color:#fff;border-color:#2563eb}
+.dest-lista{max-height:130px;overflow-y:auto;border:1px solid #e2e8f0;border-radius:8px}
+.dest-item{display:flex;align-items:center;gap:8px;padding:6px 10px;cursor:pointer;transition:.15s;font-size:12px}
+.dest-item:hover{background:#f8faff}
+.dest-item input[type=checkbox]{accent-color:#2563eb}
+.dest-item-avatar{font-size:14px}
+.dest-item-info{flex:1;min-width:0}
+.dest-item-nombre{font-weight:600;color:#1e40af;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dest-item-rol{font-size:10px;color:#94a3b8;text-transform:capitalize}
+.ref-toggle{display:flex;align-items:center;gap:6px;font-size:12px;color:#2563eb;cursor:pointer;margin-bottom:8px;user-select:none}
+.ref-toggle input{accent-color:#2563eb}
+.ref-campos{display:none;flex-direction:column;gap:8px}
+.ref-campos.show{display:flex}
+.ref-fila{display:flex;gap:6px}
+.ref-fila .form-input{flex:1}
+.nueva-foot{padding:12px 16px;border-top:1px solid #e2e8f0;flex-shrink:0}
+
+/* PESTAÑA CONFIGURACIÓN */
+.pnl-config{padding:20px;flex:1;overflow-y:auto}
+.config-sec{background:#fff;border-radius:12px;padding:16px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.config-sec h3{font-size:14px;font-weight:700;color:#1e3a8a;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.plaza-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:13px}
+.plaza-item:last-child{border:none}
+.plaza-item span{flex:1}
+.btn-sm{padding:4px 10px;font-size:11px;border:none;border-radius:6px;cursor:pointer;font-weight:600}
+.btn-sm-red{background:#fee2e2;color:#dc2626}
+.btn-sm-blue{background:#dbeafe;color:#1d4ed8}
+.add-plaza-row{display:flex;gap:8px;margin-top:10px}
+.add-plaza-row input{flex:1;border:1px solid #e2e8f0;border-radius:8px;padding:6px 10px;font-size:13px;outline:none}
+.add-plaza-row input:focus{border-color:#2563eb}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;background:#1e3a8a;color:#fff;padding:10px 16px;border-radius:10px;font-size:13px;z-index:9999;animation:fadeIn .3s;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.toast.ok{background:#15803d}
+.toast.err{background:#dc2626}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#f1f5f9}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .pnl-nueva{display:none}
+}
+
+/* ══════════════════════════════
+   MODO OSCURO
+   ══════════════════════════════ */
+:root{
+  --bg-base:#f0f4ff;
+  --bg-panel:#fff;
+  --bg-panel2:#fafbff;
+  --bg-hover:#f8faff;
+  --bg-sel:#eff6ff;
+  --bg-input:#fff;
+  --border:#e2e8f0;
+  --border-light:#f1f5f9;
+  --text-main:#1a2a4a;
+  --text-sec:#374151;
+  --text-muted:#64748b;
+  --text-faint:#94a3b8;
+  --text-link:#1e40af;
+  --text-title:#1e3a8a;
+  --accent:#2563eb;
+  --accent-light:#dbeafe;
+  --accent-light-text:#1d4ed8;
+  --badge-pend-bg:#fef9c3; --badge-pend-text:#a16207;
+  --badge-leida-bg:#dbeafe; --badge-leida-text:#1d4ed8;
+  --badge-res-bg:#dcfce7;   --badge-res-text:#15803d;
+  --badge-urg-bg:#fee2e2;   --badge-urg-text:#dc2626;
+  --ref-bg:#fefce8;  --ref-border:#fde68a; --ref-head:#92400e; --ref-body:#78350f;
+  --meta-bg:#f1f5f9;
+  --hilo-propio-bg:#dbeafe; --hilo-propio-text:#1e3a8a;
+  --hilo-otro-bg:#f1f5f9;   --hilo-otro-text:#374151;
+  --btn-leida-bg:#dbeafe;   --btn-leida-text:#1d4ed8;
+  --btn-res-bg:#dcfce7;     --btn-res-text:#15803d;
+  --btn-reabrir-bg:#fef9c3; --btn-reabrir-text:#a16207;
+  --btn-del-bg:#fee2e2;     --btn-del-text:#dc2626;
+  --btn-resp-bg:#f1f5f9;    --btn-resp-text:#374151;
+  --btn-cancel-bg:#f1f5f9;  --btn-cancel-text:#64748b;
+  --config-sec-shadow:rgba(0,0,0,.06);
+  --scrollbar-track:#f1f5f9; --scrollbar-thumb:#cbd5e1;
+}
+
+body.dark{
+  --bg-base:#0f1623;
+  --bg-panel:#1a2235;
+  --bg-panel2:#151d2e;
+  --bg-hover:#202d42;
+  --bg-sel:#1e3a5f;
+  --bg-input:#1e2d45;
+  --border:#2a3a55;
+  --border-light:#1e2d45;
+  --text-main:#e2e8f0;
+  --text-sec:#cbd5e1;
+  --text-muted:#94a3b8;
+  --text-faint:#64748b;
+  --text-link:#93c5fd;
+  --text-title:#bfdbfe;
+  --accent:#3b82f6;
+  --accent-light:#1e3a5f;
+  --accent-light-text:#93c5fd;
+  --badge-pend-bg:#3d2e00; --badge-pend-text:#fbbf24;
+  --badge-leida-bg:#1e3a5f; --badge-leida-text:#93c5fd;
+  --badge-res-bg:#0d3320;   --badge-res-text:#4ade80;
+  --badge-urg-bg:#3d0e0e;   --badge-urg-text:#f87171;
+  --ref-bg:#2a2000;  --ref-border:#4d3a00; --ref-head:#fbbf24; --ref-body:#d97706;
+  --meta-bg:#1e2d45;
+  --hilo-propio-bg:#1e3a5f; --hilo-propio-text:#93c5fd;
+  --hilo-otro-bg:#1e2d45;   --hilo-otro-text:#cbd5e1;
+  --btn-leida-bg:#1e3a5f;   --btn-leida-text:#93c5fd;
+  --btn-res-bg:#0d3320;     --btn-res-text:#4ade80;
+  --btn-reabrir-bg:#3d2e00; --btn-reabrir-text:#fbbf24;
+  --btn-del-bg:#3d0e0e;     --btn-del-text:#f87171;
+  --btn-resp-bg:#1e2d45;    --btn-resp-text:#cbd5e1;
+  --btn-cancel-bg:#1e2d45;  --btn-cancel-text:#94a3b8;
+  --config-sec-shadow:rgba(0,0,0,.3);
+  --scrollbar-track:#1a2235; --scrollbar-thumb:#2a3a55;
+}
+
+/* Aplicar variables a los elementos */
+body{background:var(--bg-base);color:var(--text-main)}
+.pnl-lista{background:var(--bg-panel);border-right-color:var(--border)}
+.lista-tabs{border-bottom-color:var(--border)}
+.lista-tab{color:var(--text-muted)}
+.lista-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:var(--bg-sel)}
+.lista-busq{border-bottom-color:var(--border-light)}
+.lista-busq input{border-color:var(--border);background:var(--bg-input);color:var(--text-main)}
+.lista-busq input:focus{border-color:var(--accent)}
+.lista-busq input::placeholder{color:var(--text-faint)}
+.m-item{border-bottom-color:var(--border-light)}
+.m-item:hover{background:var(--bg-hover)}
+.m-item.sel{background:var(--bg-sel);border-left-color:var(--accent)}
+.m-item-quien{color:var(--text-link)}
+.m-item-fecha{color:var(--text-faint)}
+.m-item-asunto{color:var(--text-sec)}
+.badge-pendiente{background:var(--badge-pend-bg);color:var(--badge-pend-text)}
+.badge-leida{background:var(--badge-leida-bg);color:var(--badge-leida-text)}
+.badge-resuelta{background:var(--badge-res-bg);color:var(--badge-res-text)}
+.badge-urgente{background:var(--badge-urg-bg);color:var(--badge-urg-text)}
+.m-item-no-leido{background:var(--accent)}
+.lista-vacia{color:var(--text-faint)}
+.pnl-detalle{background:var(--bg-panel);border-right-color:var(--border)}
+.det-vacio{color:var(--text-faint)}
+.det-cab{background:var(--bg-panel2);border-color:var(--border)}
+.det-asunto{color:var(--text-title)}
+.det-meta span{background:var(--meta-bg);color:var(--text-muted)}
+.det-ref{background:var(--ref-bg);border-color:var(--ref-border)}
+.det-ref-head{color:var(--ref-head)}
+.det-ref-body{color:var(--ref-body)}
+.det-cuerpo{color:var(--text-sec);border-bottom-color:var(--border-light)}
+.hilo-msg.propio{background:var(--hilo-propio-bg);color:var(--hilo-propio-text)}
+.hilo-msg.otro{background:var(--hilo-otro-bg);color:var(--hilo-otro-text)}
+.det-acciones{border-top-color:var(--border);background:var(--bg-panel2)}
+.btn-leida{background:var(--btn-leida-bg);color:var(--btn-leida-text)}
+.btn-resuelta{background:var(--btn-res-bg);color:var(--btn-res-text)}
+.btn-reabrir{background:var(--btn-reabrir-bg);color:var(--btn-reabrir-text)}
+.btn-eliminar{background:var(--btn-del-bg);color:var(--btn-del-text)}
+.btn-responder{background:var(--btn-resp-bg);color:var(--btn-resp-text)}
+.btn-cancelar{background:var(--btn-cancel-bg);color:var(--btn-cancel-text)}
+.responder-form textarea,.comment-form textarea{border-color:var(--border);background:var(--bg-input);color:var(--text-main);font-family:inherit}
+.responder-form textarea:focus,.comment-form textarea:focus{border-color:var(--accent)}
+.pnl-nueva{background:var(--bg-panel)}
+.nueva-head{border-bottom-color:var(--border);color:var(--text-title)}
+.form-lbl{color:var(--text-muted)}
+.form-input,.form-select,.form-textarea{border-color:var(--border);background:var(--bg-input);color:var(--text-main)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+.prio-btn{border-color:var(--border);background:var(--bg-input);color:var(--text-muted)}
+.prio-btn.sel-normal{border-color:var(--accent);background:var(--bg-sel);color:var(--accent)}
+.prio-btn.sel-urgente{border-color:#ef4444;background:var(--btn-del-bg);color:var(--btn-del-text)}
+.dest-filtro{border-color:var(--border);background:var(--bg-panel2);color:var(--text-muted)}
+.dest-filtro.act{background:var(--accent);color:#fff;border-color:var(--accent)}
+.dest-lista{border-color:var(--border)}
+.dest-item:hover{background:var(--bg-hover)}
+.dest-item-nombre{color:var(--text-link)}
+.dest-item-rol{color:var(--text-faint)}
+.nueva-foot{border-top-color:var(--border)}
+.pnl-config{background:var(--bg-base)}
+.config-sec{background:var(--bg-panel);box-shadow:0 1px 3px var(--config-sec-shadow)}
+.config-sec h3{color:var(--text-title)}
+.plaza-item{border-bottom-color:var(--border-light);color:var(--text-sec)}
+.add-plaza-row input{border-color:var(--border);background:var(--bg-input);color:var(--text-main)}
+.add-plaza-row input:focus{border-color:var(--accent)}
+::-webkit-scrollbar-track{background:var(--scrollbar-track)}
+::-webkit-scrollbar-thumb{background:var(--scrollbar-thumb)}
+</style>
+</head>
+<body>
+
+<!-- CABECERA -->
+<div class="cab">
+  <h1>📨 Minutas</h1>
+  <div class="cab-tabs">
+    <button class="cab-tab active" onclick="cambiarVista('minutas')">📋 Minutas</button>
+    <button class="cab-tab" onclick="cambiarVista('config')">⚙️ Configuración</button>
+    <button id="_btnTemaMinutas" onclick="_toggleTemaMinutas()" style="font-size:11px;padding:3px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;white-space:nowrap;margin-left:8px">☀️ Claro</button>
+  </div>
+</div>
+
+<!-- VISTA MINUTAS -->
+<div class="layout" id="vista-minutas">
+
+  <!-- PANEL IZQUIERDO -->
+  <div class="pnl-lista">
+    <div class="lista-tabs">
+      <button class="lista-tab active" id="tab-recibidas" onclick="cambiarTab('recibidas')">📥 Recibidas</button>
+      <button class="lista-tab" id="tab-enviadas" onclick="cambiarTab('enviadas')">📤 Enviadas</button>
+    </div>
+    <div class="lista-busq">
+      <input type="text" id="busq-lista" placeholder="🔍 Buscar minuta..." oninput="renderLista()">
+    </div>
+    <div class="lista-items" id="lista-items">
+      <div class="lista-vacia">📭 Cargando...</div>
+    </div>
+  </div>
+
+  <!-- PANEL CENTRAL -->
+  <div class="pnl-detalle" id="pnl-detalle">
+    <div class="det-vacio" id="det-vacio">
+      <div class="ico">📨</div>
+      <div>Selecciona una minuta para verla</div>
+    </div>
+    <div id="det-contenido" style="display:none;flex:1;flex-direction:column;overflow:hidden">
+      <div class="det-scroll" id="det-scroll">
+        <!-- Se rellena dinámicamente -->
+      </div>
+      <div class="det-acciones" id="det-acciones">
+        <!-- Acciones dinámicas -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL DERECHO — NUEVA MINUTA -->
+  <div class="pnl-nueva">
+    <div class="nueva-head">✏️ Nueva minuta</div>
+    <div class="nueva-scroll">
+
+      <div class="form-grp">
+        <label class="form-lbl">Asunto *</label>
+        <input type="text" class="form-input" id="n-asunto" placeholder="Resumen de la minuta...">
+      </div>
+
+      <div class="form-grp">
+        <label class="form-lbl">Prioridad</label>
+        <div class="prio-row">
+          <div class="prio-btn sel-normal" id="prio-normal" onclick="selPrio('normal')">📋 Normal</div>
+          <div class="prio-btn" id="prio-urgente" onclick="selPrio('urgente')">🚨 Urgente</div>
+        </div>
+      </div>
+
+      <div class="form-grp">
+        <label class="form-lbl">Plaza</label>
+        <select class="form-select" id="n-plaza">
+          <option value="">— Sin plaza —</option>
+        </select>
+      </div>
+
+      <div class="form-grp">
+        <label class="ref-toggle">
+          <input type="checkbox" id="ref-check" onchange="toggleRef()">
+          Añadir referencia a procedimiento
+        </label>
+        <div class="ref-campos" id="ref-campos">
+          <select class="form-select" id="ref-modulo" onchange="onRefModuloChange()">
+            <option value="">— Módulo —</option>
+            <option value="instruccion_penal">⚖️ Instrucción Penal</option>
+            <option value="agenda">📅 Agenda Judicial</option>
+            <option value="vencimientos">⏱️ Vencimientos</option>
+            <option value="libre">✏️ Entrada libre</option>
+          </select>
+          <div class="ref-fila" id="ref-fila-tipo" style="display:none">
+            <select class="form-select" id="ref-tipo">
+              <option value="">Tipo</option>
+              <option>D.P.</option><option>P.A.</option><option>J.R.</option>
+              <option>P.O.</option><option>Sumario</option>
+            </select>
+          </div>
+          <div class="ref-fila">
+            <input type="text" class="form-input" id="ref-numero" placeholder="Número">
+            <input type="text" class="form-input" id="ref-anyo" placeholder="Año" style="max-width:80px">
+          </div>
+          <input type="text" class="form-input" id="ref-plaza" placeholder="Plaza del procedimiento (opcional)">
+          <input type="text" class="form-input" id="ref-desc" placeholder="Descripción (opcional)">
+        </div>
+      </div>
+
+      <div class="form-grp">
+        <label class="form-lbl">Destinatarios *</label>
+        <div class="dest-filtros" id="dest-filtros">
+          <span class="dest-filtro act" data-filtro="" onclick="filtrarDest(this)">Todos</span>
+        </div>
+        <div class="dest-lista" id="dest-lista">
+          <!-- Se rellena dinámicamente -->
+        </div>
+      </div>
+
+      <div class="form-grp">
+        <label class="form-lbl">Mensaje *</label>
+        <textarea class="form-textarea" id="n-cuerpo" placeholder="Escribe el contenido de la minuta..."></textarea>
+      </div>
+
+    </div>
+    <div class="nueva-foot">
+      <button class="btn btn-enviar" style="width:100%;justify-content:center" onclick="enviarMinuta()">📨 Enviar minuta</button>
+    </div>
+  </div>
+
+</div><!-- /layout minutas -->
+
+<!-- VISTA CONFIGURACIÓN -->
+<div id="vista-config" style="display:none;flex:1;overflow-y:auto">
+  <div class="pnl-config">
+    <div class="config-sec">
+      <h3>🏢 Plazas propias de Minutas</h3>
+      <div id="plazas-propias-lista"></div>
+      <div class="add-plaza-row">
+        <input type="text" id="nueva-plaza-prop" placeholder="Nueva plaza...">
+        <button class="btn btn-enviar btn-sm" onclick="addPlazaPropia()">+ Añadir</button>
+      </div>
+    </div>
+    <div class="config-sec">
+      <h3>ℹ️ Plazas de Agenda Judicial</h3>
+      <div id="plazas-agenda-lista" style="font-size:13px;color:#64748b"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// ESTADO GLOBAL
+// ══════════════════════════════════════════════
+let _minutas       = [];
+let _plazasPropias = [];
+let _plazasAgenda  = [];
+let _usuarios      = [];
+let _usuarioActivo = null;   // {id, nombre, rol}
+let _tabActual     = 'recibidas'; // 'recibidas' | 'enviadas'
+let _minutaSel     = null;
+let _prioSel       = 'normal';
+let _destSel       = new Set();
+let _filtroDestRol = '';
+let _vistaActual   = 'minutas';
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+async function init() {
+  await Promise.all([cargarUsuario(), cargarUsuarios(), cargarPlazas()]);
+  await cargarMinutas();
+  renderDestLista();
+  renderDestFiltros();
+}
+
+async function cargarUsuario() {
+  try {
+    const r = await fetch('/api/usuario-activo').then(r => r.json());
+    // El endpoint devuelve el usuario activo
+    const lista = await fetch('/api/usuarios').then(r => r.json());
+    const u = (lista.usuarios || []).find(x => x.id === r.id);
+    _usuarioActivo = u || { id: r.id, nombre: r.nombre, rol: 'funcionario' };
+  } catch(e) { _usuarioActivo = { id: 'UNKNOWN', nombre: 'Usuario', rol: 'funcionario' }; }
+}
+
+async function cargarUsuarios() {
+  try {
+    const r = await fetch('/api/usuarios').then(r => r.json());
+    _usuarios = r.usuarios || [];
+  } catch(e) { _usuarios = []; }
+}
+
+async function cargarPlazas() {
+  try {
+    const r = await fetch('/api/minutas/plazas').then(r => r.json());
+    _plazasAgenda  = r.plazas_agenda  || [];
+    _plazasPropias = r.plazas_propias || [];
+    renderSelectPlaza();
+    renderConfigPlazas();
+  } catch(e) {}
+}
+
+async function cargarMinutas(mantenerSel = false) {
+  try {
+    const r = await fetch('/api/minutas').then(r => r.json());
+    _minutas = r.minutas || [];
+    _plazasPropias = r.plazas_propias || _plazasPropias;
+  } catch(e) { _minutas = []; }
+  renderLista();
+  if (mantenerSel && _minutaSel) {
+    const actualizada = _minutas.find(m => m.id === _minutaSel.id);
+    if (actualizada) { _minutaSel = actualizada; renderDetalle(); }
+  }
+  // Notificar al portal el número de no leídas
+  const sinLeer = _minutas.filter(m =>
+    (m.para || []).some(p => p.id === (_usuarioActivo?.id) && !p.leido)
+  ).length;
+  window.parent.postMessage({ tipo: 'minutasSinLeer', count: sinLeer }, '*');
+}
+
+// ══════════════════════════════════════════════
+// NAVEGACIÓN DE VISTAS
+// ══════════════════════════════════════════════
+function cambiarVista(v) {
+  _vistaActual = v;
+  document.getElementById('vista-minutas').style.display = v === 'minutas' ? 'flex' : 'none';
+  document.getElementById('vista-config').style.display  = v === 'config'  ? 'flex' : 'none';
+  document.querySelectorAll('.cab-tab').forEach((t,i) => {
+    t.classList.toggle('active', (i===0 && v==='minutas') || (i===1 && v==='config'));
+  });
+  if (v === 'config') renderConfigPlazas();
+}
+
+function cambiarTab(tab) {
+  _tabActual = tab;
+  _minutaSel = null;
+  document.getElementById('tab-recibidas').classList.toggle('active', tab==='recibidas');
+  document.getElementById('tab-enviadas').classList.toggle('active', tab==='enviadas');
+  document.getElementById('det-vacio').style.display = 'flex';
+  document.getElementById('det-contenido').style.display = 'none';
+  renderLista();
+}
+
+// ══════════════════════════════════════════════
+// LISTA DE MINUTAS
+// ══════════════════════════════════════════════
+function renderLista() {
+  const uid   = _usuarioActivo?.id || '';
+  const busq  = (document.getElementById('busq-lista')?.value || '').toLowerCase();
+  let lista   = _minutas.filter(m => {
+    const esRecibida = (m.para || []).some(p => p.id === uid);
+    const esEnviada  = m.de?.id === uid;
+    if (_tabActual === 'recibidas') return esRecibida;
+    return esEnviada;
+  });
+  if (busq) {
+    lista = lista.filter(m =>
+      (m.asunto||'').toLowerCase().includes(busq) ||
+      (m.cuerpo||'').toLowerCase().includes(busq) ||
+      (m.de?.nombre||'').toLowerCase().includes(busq)
+    );
+  }
+  // Ordenar: más recientes primero
+  lista.sort((a,b) => new Date(b.creadaEn||0) - new Date(a.creadaEn||0));
+  const cont = document.getElementById('lista-items');
+  if (!lista.length) {
+    cont.innerHTML = `<div class="lista-vacia">📭 No hay minutas ${_tabActual === 'recibidas' ? 'recibidas' : 'enviadas'}</div>`;
+    return;
+  }
+  cont.innerHTML = lista.map(m => {
+    const sel    = _minutaSel?.id === m.id ? ' sel' : '';
+    const urg    = m.prioridad === 'urgente' ? ' urgente' : '';
+    const uid2   = _usuarioActivo?.id || '';
+    const noLeido = _tabActual === 'recibidas' && (m.para||[]).some(p => p.id === uid2 && !p.leido);
+    const quien  = _tabActual === 'recibidas'
+      ? (m.de?.nombre || '?')
+      : (m.para||[]).map(p=>p.nombre||p.id).join(', ') || '?';
+    const fecha  = _fmtFecha(m.creadaEn);
+    const badge  = _badgeEstado(m.estado);
+    const urgBadge = m.prioridad === 'urgente' ? `<span class="badge-urgente">🚨 Urgente</span>` : '';
+    const puntito = noLeido ? `<span class="m-item-no-leido"></span>` : '';
+    return `<div class="m-item${sel}${urg}" onclick="selMinuta('${m.id}')">
+      <div class="m-item-head">
+        <span class="m-item-quien">${_esc(quien)}</span>
+        <span class="m-item-fecha">${fecha}</span>
+      </div>
+      <div class="m-item-asunto">${_esc(m.asunto || '(Sin asunto)')}</div>
+      <div class="m-item-foot">${badge}${urgBadge}${puntito}</div>
+    </div>`;
+  }).join('');
+}
+
+function _badgeEstado(e) {
+  if (e === 'leida')    return `<span class="badge-estado badge-leida">🔵 Leída</span>`;
+  if (e === 'resuelta') return `<span class="badge-estado badge-resuelta">🟢 Resuelta</span>`;
+  return `<span class="badge-estado badge-pendiente">🟡 Pendiente</span>`;
+}
+
+// ══════════════════════════════════════════════
+// DETALLE DE MINUTA
+// ══════════════════════════════════════════════
+async function selMinuta(id) {
+  _minutaSel = _minutas.find(m => m.id === id) || null;
+  if (!_minutaSel) return;
+  renderLista(); // resaltar selección
+  renderDetalle();
+  // Si el usuario es destinatario y está pendiente → marcar como leída
+  const uid = _usuarioActivo?.id || '';
+  const esDestPendiente = (_minutaSel.para||[]).some(p => p.id === uid && !p.leido);
+  if (esDestPendiente) {
+    await fetch(`/api/minutas/${_minutaSel.id}`, {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ marcar_leido: true })
+    });
+    // Si estaba pendiente (y era el único destinatario / o la marcamos leída para él), actualizamos localmente
+    const dest = (_minutaSel.para||[]).find(p => p.id === uid);
+    if (dest) { dest.leido = true; dest.leido_en = new Date().toISOString(); }
+    // Actualizar estado a leida si todos los destinatarios han leído
+    const todosLeidos = (_minutaSel.para||[]).every(p => p.leido);
+    if (todosLeidos && _minutaSel.estado === 'pendiente') {
+      _minutaSel.estado = 'leida';
+      await fetch(`/api/minutas/${_minutaSel.id}`, {
+        method: 'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ estado: 'leida' })
+      });
+    }
+    renderLista();
+    renderDetalle();
+    // Actualizar badge
+    const sinLeer = _minutas.filter(m => (m.para||[]).some(p => p.id === uid && !p.leido)).length;
+    window.parent.postMessage({ tipo: 'minutasSinLeer', count: sinLeer }, '*');
+  }
+}
+
+function renderDetalle() {
+  if (!_minutaSel) return;
+  const m   = _minutaSel;
+  const uid = _usuarioActivo?.id || '';
+  const esReceptor = (m.para||[]).some(p => p.id === uid);
+  const esCreador  = m.de?.id === uid;
+
+  document.getElementById('det-vacio').style.display = 'none';
+  const cont = document.getElementById('det-contenido');
+  cont.style.display = 'flex';
+
+  // Cabecera
+  const destNombres = (m.para||[]).map(p => p.nombre||p.id).join(', ');
+  const refHtml = m.ref && (m.ref.numero || m.ref.modulo)
+    ? `<div class="det-ref" onclick="toggleRefDetalle(this)">
+        <div class="det-ref-head">
+          📎 ${_iconoModulo(m.ref.modulo)} Referencia a procedimiento
+          <span>▼</span>
+        </div>
+        <div class="det-ref-body">
+          ${m.ref.tipo ? `<div class="det-ref-row"><b>Tipo:</b> ${_esc(m.ref.tipo)}</div>` : ''}
+          ${m.ref.numero ? `<div class="det-ref-row"><b>Número:</b> ${_esc(m.ref.numero)}${m.ref.anyo ? '/'+m.ref.anyo : ''}</div>` : ''}
+          ${m.ref.plaza ? `<div class="det-ref-row"><b>Plaza:</b> ${_esc(m.ref.plaza)}</div>` : ''}
+          ${m.ref.descripcion ? `<div class="det-ref-row"><b>Descripción:</b> ${_esc(m.ref.descripcion)}</div>` : ''}
+          ${m.ref.modulo ? `<div class="det-ref-row"><b>Módulo:</b> ${_esc(m.ref.modulo)}</div>` : ''}
+        </div>
+      </div>` : '';
+
+  // Comentario de resolución
+  const comentHtml = m.estado === 'resuelta' && m.comentario_resolucion
+    ? `<div style="background:#dcfce7;border:1px solid #86efac;border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:12px">
+        <b>✅ Resolución:</b> ${_esc(m.comentario_resolucion)}
+      </div>` : '';
+
+  // Hilo
+  const hiloHtml = (m.hilo||[]).length
+    ? `<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:700;color:#94a3b8;margin-bottom:8px;text-transform:uppercase">Conversación</div>
+       <div class="hilo">
+         ${m.hilo.map(msg => `<div class="hilo-msg ${msg.de === uid ? 'propio':'otro'}">
+           <div class="hilo-msg-quien">${_esc(msg.nombre||msg.de)}</div>
+           <div>${_esc(msg.texto)}</div>
+           <div class="hilo-msg-fecha">${_fmtFecha(msg.fecha)}</div>
+         </div>`).join('')}
+       </div></div>` : '';
+
+  document.getElementById('det-scroll').innerHTML = `
+    <div class="det-cab">
+      <div class="det-cab-top">
+        <div class="det-asunto">${_esc(m.asunto||'(Sin asunto)')}</div>
+        ${m.prioridad==='urgente' ? `<span class="badge-urgente">🚨 Urgente</span>` : ''}
+      </div>
+      <div class="det-meta">
+        <span>👤 De: ${_esc(m.de?.nombre||m.de?.id||'?')}</span>
+        <span>📬 Para: ${_esc(destNombres)}</span>
+        ${m.plaza_minuta ? `<span>🏢 ${_esc(m.plaza_minuta)}</span>` : ''}
+        <span>📅 ${_fmtFechaLarga(m.creadaEn)}</span>
+        ${_badgeEstado(m.estado)}
+      </div>
+    </div>
+    ${refHtml}
+    <div class="det-cuerpo">${_esc(m.cuerpo||'')}</div>
+    ${comentHtml}
+    ${hiloHtml}
+  `;
+
+  // Acciones
+  renderAcciones(m, esReceptor, esCreador);
+}
+
+function renderAcciones(m, esReceptor, esCreador) {
+  const uid = _usuarioActivo?.id || '';
+  let html = `<div class="det-acciones-row">`;
+  // Marcar resuelta
+  if (esReceptor && m.estado !== 'resuelta') {
+    html += `<button class="btn btn-resuelta" onclick="accionResuelta()">🟢 Marcar resuelta</button>`;
+  }
+  // Reabrir
+  if (m.estado === 'resuelta') {
+    html += `<button class="btn btn-reabrir" onclick="accionReabrir()">🔄 Reabrir</button>`;
+  }
+  // Responder
+  html += `<button class="btn btn-responder" onclick="toggleResponder()">💬 Responder</button>`;
+  // Eliminar
+  if (esCreador) {
+    html += `<button class="btn btn-eliminar" onclick="accionEliminar()">🗑️ Eliminar</button>`;
+  }
+  html += `</div>`;
+  // Form responder
+  html += `<div class="responder-form" id="resp-form">
+    <textarea id="resp-txt" placeholder="Escribe tu respuesta..."></textarea>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-enviar" onclick="enviarRespuesta()">Enviar</button>
+      <button class="btn btn-cancelar" onclick="toggleResponder()">Cancelar</button>
+    </div>
+  </div>`;
+  // Form comentario resolución
+  html += `<div class="comment-form" id="comment-form">
+    <textarea id="comment-txt" placeholder="Comentario de resolución (opcional)..."></textarea>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-resuelta" onclick="confirmarResuelta()">✅ Confirmar</button>
+      <button class="btn btn-cancelar" onclick="cerrarCommentForm()">Cancelar</button>
+    </div>
+  </div>`;
+  document.getElementById('det-acciones').innerHTML = html;
+}
+
+function toggleRefDetalle(el) {
+  el.querySelector('.det-ref-body').classList.toggle('open');
+}
+
+function toggleResponder() {
+  const f = document.getElementById('resp-form');
+  f.classList.toggle('show');
+  if (f.classList.contains('show')) document.getElementById('resp-txt').focus();
+}
+
+async function enviarRespuesta() {
+  const txt = (document.getElementById('resp-txt')?.value || '').trim();
+  if (!txt) return;
+  const r = await fetch(`/api/minutas/${_minutaSel.id}`, {
+    method: 'PUT',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ hilo_mensaje: txt })
+  });
+  if ((await r.json()).success) {
+    toast('💬 Respuesta enviada', 'ok');
+    await cargarMinutas(true);
+  }
+}
+
+function accionResuelta() {
+  const cf = document.getElementById('comment-form');
+  const rf = document.getElementById('resp-form');
+  if (rf) rf.classList.remove('show');
+  cf.classList.toggle('show');
+  if (cf.classList.contains('show')) document.getElementById('comment-txt').focus();
+}
+
+function cerrarCommentForm() {
+  document.getElementById('comment-form').classList.remove('show');
+}
+
+async function confirmarResuelta() {
+  const comentario = (document.getElementById('comment-txt')?.value || '').trim();
+  const r = await fetch(`/api/minutas/${_minutaSel.id}`, {
+    method: 'PUT',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ estado: 'resuelta', comentario_resolucion: comentario })
+  });
+  if ((await r.json()).success) {
+    toast('🟢 Marcada como resuelta', 'ok');
+    await cargarMinutas(true);
+  }
+}
+
+async function accionReabrir() {
+  const r = await fetch(`/api/minutas/${_minutaSel.id}`, {
+    method: 'PUT',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ estado: 'pendiente' })
+  });
+  if ((await r.json()).success) {
+    toast('🔄 Reabierta', 'ok');
+    await cargarMinutas(true);
+  }
+}
+
+async function accionEliminar() {
+  if (!confirm('¿Eliminar esta minuta? Esta acción no se puede deshacer.')) return;
+  const r = await fetch(`/api/minutas/${_minutaSel.id}`, { method: 'DELETE' });
+  if ((await r.json()).success) {
+    _minutaSel = null;
+    document.getElementById('det-vacio').style.display = 'flex';
+    document.getElementById('det-contenido').style.display = 'none';
+    toast('🗑️ Minuta eliminada', 'ok');
+    await cargarMinutas();
+  }
+}
+
+// ══════════════════════════════════════════════
+// FORMULARIO NUEVA MINUTA
+// ══════════════════════════════════════════════
+function selPrio(p) {
+  _prioSel = p;
+  document.getElementById('prio-normal').className  = 'prio-btn' + (p==='normal' ? ' sel-normal':'');
+  document.getElementById('prio-urgente').className = 'prio-btn' + (p==='urgente' ? ' sel-urgente':'');
+}
+
+function toggleRef() {
+  const on = document.getElementById('ref-check').checked;
+  document.getElementById('ref-campos').classList.toggle('show', on);
+}
+
+function onRefModuloChange() {
+  const mod = document.getElementById('ref-modulo').value;
+  const mostrarTipo = ['instruccion_penal'].includes(mod);
+  document.getElementById('ref-fila-tipo').style.display = mostrarTipo ? '' : 'none';
+}
+
+function renderSelectPlaza() {
+  const sel = document.getElementById('n-plaza');
+  if (!sel) return;
+  const todas = [..._plazasAgenda, ..._plazasPropias];
+  sel.innerHTML = `<option value="">— Sin plaza —</option>` +
+    todas.map(p => `<option>${_esc(p)}</option>`).join('');
+}
+
+function renderDestFiltros() {
+  const roles = [...new Set(_usuarios.filter(u => u.id !== (_usuarioActivo?.id||'') && u.rol !== 'superadmin').map(u => u.rol || 'funcionario'))];
+  const cont = document.getElementById('dest-filtros');
+  cont.innerHTML = `<span class="dest-filtro act" data-filtro="" onclick="filtrarDest(this)">Todos</span>` +
+    roles.map(r => `<span class="dest-filtro" data-filtro="${r}" onclick="filtrarDest(this)">${_labelRol(r)}</span>`).join('');
+}
+
+function filtrarDest(el) {
+  _filtroDestRol = el.dataset.filtro;
+  document.querySelectorAll('.dest-filtro').forEach(x => x.classList.toggle('act', x === el));
+  renderDestLista();
+}
+
+function renderDestLista() {
+  const uid = _usuarioActivo?.id || '';
+  let lista = _usuarios.filter(u => u.id !== uid && u.rol !== 'superadmin');
+  if (_filtroDestRol) lista = lista.filter(u => (u.rol||'funcionario') === _filtroDestRol);
+  const cont = document.getElementById('dest-lista');
+  if (!lista.length) { cont.innerHTML = `<div style="padding:12px;font-size:12px;color:#94a3b8;text-align:center">Sin usuarios</div>`; return; }
+  cont.innerHTML = lista.map(u => `
+    <label class="dest-item">
+      <input type="checkbox" ${_destSel.has(u.id)?'checked':''} onchange="toggleDest('${u.id}')">
+      <span class="dest-item-avatar">${u.avatar||'👤'}</span>
+      <span class="dest-item-info">
+        <div class="dest-item-nombre">${_esc(u.nombre)}</div>
+        <div class="dest-item-rol">${_labelRol(u.rol||'funcionario')}</div>
+      </span>
+    </label>`).join('');
+}
+
+function toggleDest(uid) {
+  if (_destSel.has(uid)) _destSel.delete(uid); else _destSel.add(uid);
+}
+
+async function enviarMinuta() {
+  const asunto = (document.getElementById('n-asunto')?.value||'').trim();
+  const cuerpo = (document.getElementById('n-cuerpo')?.value||'').trim();
+  if (!asunto) { toast('⚠️ Introduce un asunto', 'err'); return; }
+  if (!cuerpo) { toast('⚠️ Escribe el mensaje', 'err'); return; }
+  if (!_destSel.size) { toast('⚠️ Selecciona al menos un destinatario', 'err'); return; }
+
+  const refOn = document.getElementById('ref-check').checked;
+  const ref = refOn ? {
+    modulo:      document.getElementById('ref-modulo').value,
+    tipo:        (document.getElementById('ref-tipo')?.value||'').trim(),
+    numero:      document.getElementById('ref-numero').value.trim(),
+    anyo:        document.getElementById('ref-anyo').value.trim(),
+    plaza:       document.getElementById('ref-plaza').value.trim(),
+    descripcion: document.getElementById('ref-desc').value.trim()
+  } : {};
+
+  const para = [..._destSel].map(uid => {
+    const u = _usuarios.find(x => x.id === uid);
+    return { id: uid, nombre: u?.nombre||uid, leido: false, leido_en: null };
+  });
+
+  const body = {
+    asunto,
+    cuerpo,
+    ref,
+    plaza_minuta: document.getElementById('n-plaza').value,
+    de: { id: _usuarioActivo?.id||'', nombre: _usuarioActivo?.nombre||'', rol: _usuarioActivo?.rol||'funcionario' },
+    para,
+    prioridad: _prioSel
+  };
+
+  const r = await fetch('/api/minutas', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  });
+  if ((await r.json()).success) {
+    toast('✅ Minuta enviada', 'ok');
+    // Limpiar formulario
+    document.getElementById('n-asunto').value = '';
+    document.getElementById('n-cuerpo').value = '';
+    document.getElementById('ref-check').checked = false;
+    document.getElementById('ref-campos').classList.remove('show');
+    document.getElementById('n-plaza').value = '';
+    _destSel.clear();
+    selPrio('normal');
+    renderDestLista();
+    await cargarMinutas();
+  } else {
+    toast('❌ Error al enviar', 'err');
+  }
+}
+
+// ══════════════════════════════════════════════
+// CONFIGURACIÓN — PLAZAS PROPIAS
+// ══════════════════════════════════════════════
+function renderConfigPlazas() {
+  const cont = document.getElementById('plazas-propias-lista');
+  if (!cont) return;
+  if (!_plazasPropias.length) {
+    cont.innerHTML = `<div style="font-size:13px;color:#94a3b8;padding:6px 0">Sin plazas propias</div>`;
+  } else {
+    cont.innerHTML = _plazasPropias.map((p,i) => `
+      <div class="plaza-item">
+        <span>${_esc(p)}</span>
+        <button class="btn-sm btn-sm-red" onclick="eliminarPlazaPropia(${i})">🗑️</button>
+      </div>`).join('');
+  }
+  const agCont = document.getElementById('plazas-agenda-lista');
+  if (agCont) {
+    agCont.innerHTML = _plazasAgenda.length
+      ? _plazasAgenda.map(p => `<div style="padding:4px 0;border-bottom:1px solid #f1f5f9;font-size:13px">${_esc(p)}</div>`).join('')
+      : `<div style="color:#94a3b8;font-size:13px">Sin plazas de agenda</div>`;
+  }
+}
+
+async function addPlazaPropia() {
+  const v = (document.getElementById('nueva-plaza-prop').value||'').trim();
+  if (!v) return;
+  if (_plazasPropias.includes(v)) { toast('Ya existe esa plaza', 'err'); return; }
+  _plazasPropias.push(v);
+  document.getElementById('nueva-plaza-prop').value = '';
+  await guardarPlazasPropias();
+  renderConfigPlazas();
+  renderSelectPlaza();
+}
+
+async function eliminarPlazaPropia(i) {
+  _plazasPropias.splice(i, 1);
+  await guardarPlazasPropias();
+  renderConfigPlazas();
+  renderSelectPlaza();
+}
+
+async function guardarPlazasPropias() {
+  await fetch('/api/minutas/plazas-propias', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ plazas_propias: _plazasPropias })
+  });
+}
+
+// ══════════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════════
+function _esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function _fmtFecha(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  const hoy = new Date();
+  const mismaFecha = d.toDateString() === hoy.toDateString();
+  if (mismaFecha) return d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+  const ayer = new Date(hoy); ayer.setDate(ayer.getDate()-1);
+  if (d.toDateString() === ayer.toDateString()) return 'ayer';
+  return d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'});
+}
+
+function _fmtFechaLarga(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return isNaN(d) ? '' : d.toLocaleString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+
+function _labelRol(r) {
+  const m = {funcionario:'👷 Funcionario', juez:'👨‍⚖️ Juez', letrado:'⚖️ Letrado', superadmin:'👑 Superadmin'};
+  return m[r] || r;
+}
+
+function _iconoModulo(m) {
+  const i = {instruccion_penal:'⚖️', agenda:'📅', vencimientos:'⏱️', libre:'✏️'};
+  return i[m] || '📎';
+}
+
+function toast(msg, tipo = '') {
+  const t = document.createElement('div');
+  t.className = 'toast ' + tipo;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+
+// ══════════════════════════════════════════════
+// TEMA (modo oscuro)
+// ══════════════════════════════════════════════
+function aplicarTema(oscuro) {
+  document.body.classList.toggle('dark', !!oscuro);
+  _actualizarBtnTemaMinutas();
+}
+
+function _actualizarBtnTemaMinutas() {
+  const btn = document.getElementById('_btnTemaMinutas');
+  if (!btn) return;
+  const esOscuro = document.body.classList.contains('dark');
+  btn.textContent = esOscuro ? '🌙 Oscuro' : '☀️ Claro';
+}
+
+function _toggleTemaMinutas() {
+  const esOscuro = document.body.classList.contains('dark');
+  aplicarTema(!esOscuro);
+  // Guardar preferencia local
+  try { localStorage.setItem('minutas_tema', esOscuro ? 'claro' : 'oscuro'); } catch(_) {}
+  // Notificar al portal para sincronizar otros módulos
+  try { window.parent.postMessage({ tipo: 'temaPortal', oscuro: !esOscuro }, '*'); } catch(_) {}
+}
+
+function _leerTemaPortal() {
+  try {
+    // El portal aplica data-tema="oscuro" en el <html> del padre
+    const temaPortal = window.parent.document.documentElement.getAttribute('data-tema');
+    return temaPortal === 'oscuro';
+  } catch(_) {
+    return false;
+  }
+}
+
+// Leer tema al cargar: portal > localStorage > sistema
+(function() {
+  const portalOscuro = _leerTemaPortal();
+  if (portalOscuro) { aplicarTema(true); return; }
+  try {
+    const guardado = localStorage.getItem('minutas_tema');
+    if (guardado === 'oscuro') { aplicarTema(true); return; }
+    if (guardado === 'claro') { aplicarTema(false); return; }
+  } catch(_) {}
+  // Sin preferencia guardada → oscuro por defecto
+  aplicarTema(true);
+})();
+
+// Observar cambios de tema en el portal (MutationObserver sobre el <html> del padre)
+try {
+  const _obs = new MutationObserver(() => aplicarTema(_leerTemaPortal()));
+  _obs.observe(window.parent.document.documentElement, { attributes: true, attributeFilter: ['data-tema'] });
+} catch(_) {
+  // Si no se puede acceder al padre, usar preferencia del sistema como fallback
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) aplicarTema(true);
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => aplicarTema(e.matches));
+}
+
+// Escuchar mensajes del portal (permisos, cambio de usuario, tema, etc.)
+window.addEventListener('message', async e => {
+  if (!e.data) return;
+  if (e.data.tipo === 'permisos') return; // las minutas no usan permisos de borrar/editar global
+  if (e.data.tipo === 'buscarDesdePortal') return;
+  // Sincronizar tema con el portal
+  if (e.data.tipo === 'tema') {
+    aplicarTema(e.data.oscuro);
+    return;
+  }
+  // Prefill destinatario desde el widget de chat
+  if (e.data.tipo === 'prefillDestinatario') {
+    const para = e.data.para || [];
+    _destSel = new Set(para.map(p => p.id));
+    renderDestLista();
+    return;
+  }
+  // Cuando el portal cambia de usuario activo, recargar datos del módulo
+  if (e.data.tipo === 'cambioUsuario') {
+    const u = e.data.usuario;
+    if (u && u.id) {
+      _usuarioActivo = u;
+    } else {
+      await cargarUsuario();
+    }
+    _minutaSel = null;
+    document.getElementById('det-vacio').style.display = 'flex';
+    document.getElementById('det-contenido').style.display = 'none';
+    await cargarMinutas();
+    renderDestLista();
+    renderDestFiltros();
+    // Notificar badge al portal
+    const uid = _usuarioActivo?.id || '';
+    const sinLeer = _minutas.filter(m => (m.para||[]).some(p => p.id === uid && !p.leido)).length;
+    window.parent.postMessage({ tipo: 'minutasSinLeer', count: sinLeer }, '*');
+  }
+});
+
+// Arrancar
+init();
+
+// Recargar minutas cada 30 segundos (polling)
+setInterval(() => cargarMinutas(true), 30000);
+</script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

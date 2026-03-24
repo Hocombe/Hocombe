@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitudes de Archivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar { min-height: 100vh; }
+        .table-container { max-height: calc(100vh - 220px); overflow-y: auto; }
+        .sticky-header th {
+            position: sticky;
+            top: 0;
+            background: #f1f5f9;
+            z-index: 10;
+        }
+        .toast { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to   { transform: translateX(0);    opacity: 1; }
+        }
+        .modal-backdrop { background: rgba(0,0,0,0.5); }
+
+        /* ── Estado con dot de color ── */
+        .estado-btn { display:inline-flex; align-items:center; gap:8px; padding:5px 28px 5px 12px; border-radius:999px; border:1px solid #cbd5e1; background:#f8fafc; cursor:pointer; user-select:none; white-space:nowrap; position:relative; }
+        .estado-btn::after { content:'▾'; position:absolute; right:10px; top:50%; transform:translateY(-50%); font-size:10px; color:#94a3b8; pointer-events:none; }
+        .estado-dot  { width:10px; height:10px; border-radius:50%; flex-shrink:0; display:inline-block; }
+        .estado-dot.solicitado { background:#3b82f6; }
+        .estado-dot.entregado  { background:#22c55e; }
+        .estado-dot.devuelto   { background:#ef4444; }
+        .estado-lbl  { font-size:12px; font-weight:600; color:#334155; }
+        /* Menu flotante fixed para no cortarse con overflow */
+        #estado-dropdown { display:none; position:fixed; min-width:150px; background:#fff; border:1px solid #e2e8f0; border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,.15); z-index:9999; overflow:hidden; }
+        #estado-dropdown.open { display:block; }
+        .estado-opt { display:flex; align-items:center; gap:8px; padding:8px 14px; font-size:12px; font-weight:500; color:#334155; cursor:pointer; transition:background .1s; }
+        .estado-opt:hover { background:#f1f5f9; }
+        .estado-opt.active { background:#eff6ff; font-weight:700; }
+
+        /* ── MODO OSCURO ── */
+        [data-tema="oscuro"] body              { background: #0f172a; color: #e2e8f0; }
+        [data-tema="oscuro"] aside             { background: #020617 !important; }
+        [data-tema="oscuro"] header            { background: #1e293b !important; border-color: #334155 !important; }
+        [data-tema="oscuro"] .bg-slate-50      { background: #0f172a !important; }
+        [data-tema="oscuro"] .bg-white         { background: #1e293b !important; }
+        [data-tema="oscuro"] .bg-slate-100,
+        [data-tema="oscuro"] .sticky-header th { background: #334155 !important; color: #cbd5e1; }
+        [data-tema="oscuro"] .border-slate-200,
+        [data-tema="oscuro"] .border-slate-300,
+        [data-tema="oscuro"] .border-b         { border-color: #334155 !important; }
+        [data-tema="oscuro"] .text-slate-800   { color: #e2e8f0  !important; }
+        [data-tema="oscuro"] .text-slate-700   { color: #cbd5e1  !important; }
+        [data-tema="oscuro"] .text-slate-600   { color: #94a3b8  !important; }
+        [data-tema="oscuro"] .text-slate-500   { color: #64748b  !important; }
+        [data-tema="oscuro"] .text-slate-400   { color: #475569  !important; }
+        [data-tema="oscuro"] input, [data-tema="oscuro"] select {
+            background: #0f172a !important;
+            color: #e2e8f0   !important;
+            border-color: #475569 !important;
+        }
+        [data-tema="oscuro"] tr:hover          { background: #1e293b !important; }
+        [data-tema="oscuro"] .shadow           { box-shadow: 0 1px 8px rgba(0,0,0,.6); }
+        [data-tema="oscuro"] .hover\:bg-slate-100:hover { background: #334155 !important; }
+        [data-tema="oscuro"] .modal-backdrop   { background: rgba(0,0,0,0.75); }
+        [data-tema="oscuro"] #toast            { background: #1e293b !important; color: #e2e8f0; }
+        [data-tema="oscuro"] label             { color: #cbd5e1 !important; }
+        [data-tema="oscuro"] .rounded-lg.shadow { background: #1e293b; }
+        [data-tema="oscuro"] #empty-state      { color: #64748b; }
+        [data-tema="oscuro"] #empty-state h3   { color: #94a3b8 !important; }
+        [data-tema="oscuro"] #empty-state p    { color: #64748b !important; }
+        [data-tema="oscuro"] td             { color: #e2e8f0; }
+        [data-tema="oscuro"] .estado-btn   { background:#1e293b; border-color:#475569; }
+        [data-tema="oscuro"] .estado-btn::after { color:#64748b; }
+        [data-tema="oscuro"] .estado-lbl   { color:#e2e8f0 !important; }
+        [data-tema="oscuro"] #estado-dropdown { background:#1e293b; border-color:#334155; box-shadow:0 4px 16px rgba(0,0,0,.5); }
+        [data-tema="oscuro"] .estado-opt   { color:#cbd5e1; }
+        [data-tema="oscuro"] .estado-opt:hover  { background:#334155; }
+        [data-tema="oscuro"] .estado-opt.active { background:#1e3a5f; }
+    </style>
+</head>
+<body class="bg-slate-50">
+<div class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar w-64 bg-slate-900 text-white flex flex-col flex-shrink-0">
+        <div class="p-4 border-b border-slate-700">
+            <h1 class="text-lg font-bold flex items-center gap-2">
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+                </svg>
+                Solicitudes de Archivo
+            </h1>
+            <p class="text-slate-400 text-xs mt-1">Expedientes judiciales</p>
+        </div>
+
+        <div class="p-3 border-b border-slate-700">
+            <button onclick="openModal('modal-plaza')" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded-lg flex items-center justify-center gap-2 transition text-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                </svg>
+                Nueva Plaza
+            </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-3">
+            <h2 class="text-slate-400 text-xs uppercase tracking-wider mb-2">Plazas</h2>
+            <div id="plazas-list" class="space-y-1"></div>
+        </div>
+
+        <div class="p-3 border-t border-slate-700 space-y-2">
+            <div class="text-xs text-slate-400">
+                <span id="storage-info">0</span> solicitudes registradas
+            </div>
+            <button onclick="_toggleTema()" id="_btnTema" class="w-full text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 py-1.5 px-3 rounded-lg transition">🌙 Oscuro</button>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 flex flex-col min-w-0">
+        <header class="bg-white border-b border-slate-200 p-4">
+            <div class="flex items-center justify-between gap-3 flex-wrap">
+                <div class="min-w-0">
+                    <h2 id="plaza-seleccionada" class="text-lg font-semibold text-slate-800 truncate">Seleccione una plaza</h2>
+                    <p id="plaza-info" class="text-sm text-slate-500">Cree o seleccione una plaza para comenzar</p>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                    <button onclick="openModal('modal-nueva-solicitud')" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-3 rounded-lg flex items-center gap-2 transition text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        Nueva Solicitud
+                    </button>
+                    <button onclick="imprimirSolicitudes()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 px-3 rounded-lg transition text-sm" title="Imprimir">🖨️</button>
+                    <button onclick="exportarExcelArchivo()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 px-3 rounded-lg transition text-sm" title="Exportar Excel">📥 Excel</button>
+                    <div class="relative">
+                        <input type="text" id="busqueda" placeholder="Buscar expediente..."
+                               class="pl-9 pr-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm w-48"
+                               oninput="filtrarSolicitudes()">
+                        <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <select id="filtro-estado" onchange="filtrarSolicitudes()" class="py-2 px-3 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Todos los estados</option>
+                        <option value="solicitado">🔵 Solicitado</option>
+                        <option value="entregado">🟢 Entregado</option>
+                        <option value="devuelto">🔴 Devuelto</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 p-4 overflow-auto">
+            <div id="empty-state" class="flex flex-col items-center justify-center h-full text-center py-16">
+                <svg class="w-20 h-20 text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+                </svg>
+                <h3 class="text-lg font-semibold text-slate-600 mb-2">No hay solicitudes</h3>
+                <p class="text-slate-500">Seleccione una plaza o cree una nueva para comenzar</p>
+            </div>
+
+            <div id="table-container" class="hidden bg-white rounded-lg shadow">
+                <div class="table-container">
+                    <table class="min-w-full">
+                        <thead class="sticky-header">
+                            <tr class="text-left text-xs text-slate-600 uppercase tracking-wide">
+                                <th class="px-4 py-3 font-semibold">Fecha</th>
+                                <th class="px-4 py-3 font-semibold">Plaza</th>
+                                <th class="px-4 py-3 font-semibold">Expediente</th>
+                                <th class="px-4 py-3 font-semibold">Estado</th>
+                                <th class="px-4 py-3 font-semibold text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="solicitudes-table" class="text-sm divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
+                <div class="p-3 border-t border-slate-200 text-sm text-slate-600 flex justify-between items-center">
+                    <span>Total: <strong id="total-registros">0</strong> solicitudes</span>
+                    <span id="save-status" class="text-xs text-slate-400"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- MODAL: Nueva Plaza -->
+<div id="modal-plaza" class="fixed inset-0 modal-backdrop hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+        <div class="p-4 border-b border-slate-200 flex justify-between items-center">
+            <h3 class="text-lg font-semibold">Nueva Plaza</h3>
+            <button onclick="closeModal('modal-plaza')" class="text-slate-400 hover:text-slate-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="p-4">
+            <label class="block text-sm font-medium text-slate-700 mb-2">Nombre de la Plaza</label>
+            <input type="text" id="nombre-plaza" placeholder="Ej: Juzgado de Instruccion n 1"
+                   class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   onkeydown="if(event.key==='Enter') crearPlaza()">
+        </div>
+        <div class="p-4 border-t border-slate-200 flex justify-end gap-2">
+            <button onclick="closeModal('modal-plaza')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition">Cancelar</button>
+            <button onclick="crearPlaza()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Crear Plaza</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: Confirmar Eliminar Plaza -->
+<div id="modal-eliminar-plaza" class="fixed inset-0 modal-backdrop hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+        <div class="p-4 border-b border-slate-200">
+            <h3 class="text-lg font-semibold text-red-600">Eliminar Plaza</h3>
+        </div>
+        <div class="p-4">
+            <p class="text-slate-600">Se eliminar la plaza "<strong id="plaza-a-eliminar"></strong>" y todas sus solicitudes.</p>
+        </div>
+        <div class="p-4 border-t border-slate-200 flex justify-end gap-2">
+            <button onclick="closeModal('modal-eliminar-plaza')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition">Cancelar</button>
+            <button onclick="confirmarEliminarPlaza()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: Nueva Solicitud -->
+<div id="modal-nueva-solicitud" class="fixed inset-0 modal-backdrop hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-lg">
+        <div class="p-4 border-b border-slate-200 flex justify-between items-center">
+            <h3 class="text-lg font-semibold">Nueva Solicitud de Expediente</h3>
+            <button onclick="closeModal('modal-nueva-solicitud')" class="text-slate-400 hover:text-slate-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="p-4 space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Fecha de solicitud</label>
+                <input type="date" id="new-fecha" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Expediente <span class="text-red-500">*</span></label>
+                <input type="text" id="new-expediente" placeholder="Ej: PA 123/2025, JVP 45/2024"
+                       class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       onkeydown="if(event.key==='Enter'){event.preventDefault();guardarNuevaSolicitud()}">
+                <p class="text-xs text-slate-500 mt-1">Tipo de procedimiento, numero y anno</p>
+            </div>
+        </div>
+        <div class="p-4 border-t border-slate-200 flex justify-end gap-2">
+            <button onclick="closeModal('modal-nueva-solicitud')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition">Cancelar</button>
+            <button onclick="guardarNuevaSolicitud()" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: Editar Solicitud -->
+<div id="modal-editar" class="fixed inset-0 modal-backdrop hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-lg">
+        <div class="p-4 border-b border-slate-200 flex justify-between items-center">
+            <h3 class="text-lg font-semibold">Editar Solicitud</h3>
+            <button onclick="closeModal('modal-editar')" class="text-slate-400 hover:text-slate-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="p-4 space-y-4">
+            <input type="hidden" id="edit-id">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Fecha de solicitud</label>
+                <input type="date" id="edit-fecha" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Expediente</label>
+                <input type="text" id="edit-expediente" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Estado</label>
+                <select id="edit-estado" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="solicitado">Solicitado</option>
+                    <option value="entregado">Entregado</option>
+                    <option value="devuelto">Devuelto</option>
+                </select>
+            </div>
+        </div>
+        <div class="p-4 border-t border-slate-200 flex justify-between">
+            <button onclick="eliminarSolicitud()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm">Eliminar</button>
+            <div class="flex gap-2">
+                <button onclick="closeModal('modal-editar')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition">Cancelar</button>
+                <button onclick="guardarEdicion()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dropdown estado global (fixed, fuera del overflow) -->
+<div id="estado-dropdown">
+    <div class="estado-opt" data-v="solicitado"><span class="estado-dot solicitado"></span>Solicitado</div>
+    <div class="estado-opt" data-v="entregado"><span class="estado-dot entregado"></span>Entregado</div>
+    <div class="estado-opt" data-v="devuelto"><span class="estado-dot devuelto"></span>Devuelto</div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed top-4 right-4 bg-white shadow-lg rounded-lg p-4 hidden z-50 toast">
+    <div class="flex items-center gap-2">
+        <svg id="toast-icon" class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+        <p id="toast-message" class="text-sm font-medium"></p>
+    </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// ESTADO
+// ══════════════════════════════════════════════
+let plazas = [];
+let solicitudes = [];
+let plazaActiva = null;
+let _uid = 'default';
+
+function _apiBase() {
+    if (window.self !== window.top) {
+        try { return window.top.location.origin; } catch(_) {}
+    }
+    return window.location.origin;
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', async () => {
+    document.getElementById('new-fecha').valueAsDate = new Date();
+    await cargarDatos();
+    await _cargarTema();
+    renderizarPlazas();
+    actualizarStorageInfo();
+});
+
+window.addEventListener('message', async e => {
+    if (!e.data) return;
+
+    if (e.data.tipo === 'cambioUsuario') {
+        const nuevoUid = (e.data.usuario && e.data.usuario.id) || 'default';
+        if (nuevoUid === _uid) return;
+        _uid = nuevoUid;
+        plazaActiva = null;
+        document.getElementById('plaza-seleccionada').textContent = 'Seleccione una plaza';
+        document.getElementById('plaza-info').textContent = 'Cargando...';
+        document.getElementById('empty-state').classList.remove('hidden');
+        document.getElementById('table-container').classList.add('hidden');
+        await cargarDatos();
+        await _cargarTema();
+        renderizarPlazas();
+        actualizarStorageInfo();
+        return;
+    }
+
+    if (e.data.tipo === 'tema') {
+        document.documentElement.setAttribute('data-tema', e.data.oscuro ? 'oscuro' : 'claro');
+        _actualizarBtnTema();
+        return;
+    }
+
+    if (e.data.tipo === 'buscarDesdePortal') {
+        const q = e.data.q || '';
+        const inp = document.getElementById('busqueda');
+        if (inp) { inp.value = q; filtrarSolicitudes(); }
+        return;
+    }
+});
+
+// ══════════════════════════════════════════════
+// PERSISTENCIA
+// ══════════════════════════════════════════════
+async function cargarDatos() {
+    try {
+        const r = await fetch(_apiBase() + '/api/archivo?uid=' + encodeURIComponent(_uid) + '&t=' + Date.now());
+        if (r.ok) {
+            const datos = await r.json();
+            plazas = datos.plazas || [];
+            solicitudes = datos.solicitudes || [];
+        }
+    } catch(err) {
+        console.warn('[Archivo] Error al cargar datos:', err);
+    }
+}
+
+function guardarDatos() {
+    actualizarStorageInfo();
+    const statusEl = document.getElementById('save-status');
+    if (statusEl) statusEl.textContent = 'Guardando...';
+    clearTimeout(guardarDatos._t);
+    guardarDatos._t = setTimeout(async () => {
+        try {
+            const r = await fetch(_apiBase() + '/api/archivo?uid=' + encodeURIComponent(_uid), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ plazas, solicitudes })
+            });
+            if (r.ok && statusEl) {
+                statusEl.textContent = 'Guardado';
+                setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 2000);
+            }
+        } catch(err) {
+            console.warn('[Archivo] Error al guardar:', err);
+            if (statusEl) statusEl.textContent = 'Error al guardar';
+        }
+    }, 600);
+}
+
+function actualizarStorageInfo() {
+    document.getElementById('storage-info').textContent = solicitudes.length;
+}
+
+// ══════════════════════════════════════════════
+// MODO OSCURO
+// ══════════════════════════════════════════════
+function _toggleTema() {
+    const esOscuro = document.documentElement.getAttribute('data-tema') === 'oscuro';
+    document.documentElement.setAttribute('data-tema', esOscuro ? 'claro' : 'oscuro');
+    _actualizarBtnTema();
+    fetch(_apiBase() + '/api/config/archivo_tema_' + _uid, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tema: esOscuro ? 'claro' : 'oscuro' })
+    }).catch(() => {});
+}
+
+async function _cargarTema() {
+    try {
+        const r = await fetch(_apiBase() + '/api/config/archivo_tema_' + _uid);
+        const d = await r.json();
+        if (d.config && d.config.tema === 'oscuro') {
+            document.documentElement.setAttribute('data-tema', 'oscuro');
+        } else {
+            document.documentElement.removeAttribute('data-tema');
+        }
+    } catch(_) {}
+    _actualizarBtnTema();
+}
+
+function _actualizarBtnTema() {
+    const btn = document.getElementById('_btnTema');
+    if (!btn) return;
+    const oscuro = document.documentElement.getAttribute('data-tema') === 'oscuro';
+    btn.textContent = oscuro ? '☀️ Claro' : '🌙 Oscuro';
+}
+
+// ══════════════════════════════════════════════
+// PLAZAS
+// ══════════════════════════════════════════════
+function renderizarPlazas() {
+    const container = document.getElementById('plazas-list');
+    if (!plazas.length) {
+        container.innerHTML = '<p class="text-xs text-slate-500 italic">Sin plazas creadas</p>';
+        return;
+    }
+    container.innerHTML = plazas.map(p => {
+        const count = solicitudes.filter(s => s.plaza_id === p.id).length;
+        const active = p.id === plazaActiva;
+        return `<div class="flex items-center group">
+            <button onclick="seleccionarPlaza('${p.id}')"
+                class="flex-1 text-left px-3 py-2 rounded-lg text-sm transition truncate ${active ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800'}">
+                ${p.nombre} <span class="text-xs opacity-60">(${count})</span>
+            </button>
+            <button onclick="pedirEliminarPlaza('${p.id}')"
+                class="opacity-0 group-hover:opacity-100 text-slate-500 hover:text-red-400 p-1 transition" title="Eliminar plaza">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>`;
+    }).join('');
+}
+
+function crearPlaza() {
+    const input = document.getElementById('nombre-plaza');
+    const nombre = input.value.trim();
+    if (!nombre) { showToast('Escriba un nombre para la plaza', 'error'); return; }
+    plazas.push({ id: crypto.randomUUID(), nombre });
+    guardarDatos();
+    renderizarPlazas();
+    input.value = '';
+    closeModal('modal-plaza');
+    showToast('Plaza creada correctamente');
+}
+
+let _plazaAEliminar = null;
+function pedirEliminarPlaza(id) {
+    _plazaAEliminar = id;
+    const plaza = plazas.find(p => p.id === id);
+    document.getElementById('plaza-a-eliminar').textContent = plaza ? plaza.nombre : '';
+    openModal('modal-eliminar-plaza');
+}
+
+function confirmarEliminarPlaza() {
+    if (!_plazaAEliminar) return;
+    plazas = plazas.filter(p => p.id !== _plazaAEliminar);
+    solicitudes = solicitudes.filter(s => s.plaza_id !== _plazaAEliminar);
+    if (plazaActiva === _plazaAEliminar) {
+        plazaActiva = null;
+        document.getElementById('plaza-seleccionada').textContent = 'Seleccione una plaza';
+        document.getElementById('plaza-info').textContent = '';
+        document.getElementById('empty-state').classList.remove('hidden');
+        document.getElementById('table-container').classList.add('hidden');
+    }
+    _plazaAEliminar = null;
+    guardarDatos();
+    renderizarPlazas();
+    closeModal('modal-eliminar-plaza');
+    showToast('Plaza eliminada');
+}
+
+function seleccionarPlaza(id) {
+    plazaActiva = id;
+    const plaza = plazas.find(p => p.id === id);
+    document.getElementById('plaza-seleccionada').textContent = plaza ? plaza.nombre : '';
+    renderizarPlazas();
+    renderizarSolicitudes();
+}
+
+// ══════════════════════════════════════════════
+// SOLICITUDES
+// ══════════════════════════════════════════════
+function renderizarSolicitudes() {
+    if (!plazaActiva) return;
+    const filtradas = obtenerSolicitudesFiltradas();
+    const tbody = document.getElementById('solicitudes-table');
+    const total = document.getElementById('total-registros');
+    const empty = document.getElementById('empty-state');
+    const table = document.getElementById('table-container');
+
+    if (!filtradas.length) {
+        tbody.innerHTML = '';
+        total.textContent = '0';
+        empty.classList.remove('hidden');
+        table.classList.add('hidden');
+        document.getElementById('plaza-info').textContent = '0 solicitudes';
+        return;
+    }
+
+    empty.classList.add('hidden');
+    table.classList.remove('hidden');
+    total.textContent = filtradas.length;
+    document.getElementById('plaza-info').textContent = `${filtradas.length} solicitudes`;
+
+    tbody.innerHTML = filtradas.map(s => {
+        const plaza = plazas.find(p => p.id === s.plaza_id);
+        const plazaNombre = plaza ? plaza.nombre : '-';
+        return `<tr class="hover:bg-slate-50 cursor-pointer" ondblclick="abrirEdicion('${s.id}')">
+            <td class="px-4 py-3">${formatFecha(s.fecha)}</td>
+            <td class="px-4 py-3">${plazaNombre}</td>
+            <td class="px-4 py-3 font-medium">${escapeHtml(s.expediente)}</td>
+            <td class="px-4 py-3">
+                <div class="estado-btn" onclick="abrirEstadoMenu(this,'${s.id}','${s.estado}')">
+                    <span class="estado-dot ${s.estado}"></span>
+                    <span class="estado-lbl">${s.estado.charAt(0).toUpperCase()+s.estado.slice(1)}</span>
+                </div>
+            </td>
+            <td class="px-4 py-3 text-center">
+                <button onclick="abrirEdicion('${s.id}')" class="text-slate-400 hover:text-blue-600 transition" title="Editar">
+                    <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                </button>
+            </td>
+        </tr>`;
+    }).join('');
+}
+
+function obtenerSolicitudesFiltradas() {
+    if (!plazaActiva) return [];
+    let lista = solicitudes.filter(s => s.plaza_id === plazaActiva);
+    const q = (document.getElementById('busqueda').value || '').toLowerCase().trim();
+    const estado = document.getElementById('filtro-estado').value;
+    if (q) lista = lista.filter(s => s.expediente.toLowerCase().includes(q));
+    if (estado) lista = lista.filter(s => s.estado === estado);
+    lista.sort((a, b) => (b.fecha || '').localeCompare(a.fecha || ''));
+    return lista;
+}
+
+function filtrarSolicitudes() {
+    renderizarSolicitudes();
+}
+
+function cambiarEstado(id, nuevoEstado) {
+    const s = solicitudes.find(x => x.id === id);
+    if (!s) return;
+    s.estado = nuevoEstado;
+    if (nuevoEstado === 'entregado' && !s.fechaEntrega) s.fechaEntrega = new Date().toISOString().split('T')[0];
+    if (nuevoEstado === 'devuelto' && !s.fechaDevolucion) s.fechaDevolucion = new Date().toISOString().split('T')[0];
+    guardarDatos();
+    cerrarEstadoMenu();
+    renderizarSolicitudes();
+}
+
+// ── Dropdown estado (fixed, no se corta con overflow) ──
+let _estadoSolId = null;
+const _dropEl = document.getElementById('estado-dropdown');
+
+function abrirEstadoMenu(btn, solId, estadoActual) {
+    _estadoSolId = solId;
+    const rect = btn.getBoundingClientRect();
+    _dropEl.style.top  = (rect.bottom + 4) + 'px';
+    _dropEl.style.left = rect.left + 'px';
+    _dropEl.querySelectorAll('.estado-opt').forEach(o => {
+        o.classList.toggle('active', o.dataset.v === estadoActual);
+    });
+    _dropEl.classList.add('open');
+}
+
+function cerrarEstadoMenu() {
+    _dropEl.classList.remove('open');
+    _estadoSolId = null;
+}
+
+_dropEl.addEventListener('click', e => {
+    const opt = e.target.closest('.estado-opt');
+    if (opt && _estadoSolId) cambiarEstado(_estadoSolId, opt.dataset.v);
+});
+
+document.addEventListener('click', e => {
+    if (!e.target.closest('.estado-btn') && !e.target.closest('#estado-dropdown')) cerrarEstadoMenu();
+});
+
+// ══════════════════════════════════════════════
+// CREAR SOLICITUD
+// ══════════════════════════════════════════════
+function guardarNuevaSolicitud() {
+    const expediente = document.getElementById('new-expediente').value.trim();
+    const fecha = document.getElementById('new-fecha').value;
+    if (!expediente) { showToast('El expediente es obligatorio', 'error'); return; }
+    if (!plazaActiva) { showToast('Seleccione una plaza primero', 'error'); return; }
+
+    solicitudes.push({
+        id: crypto.randomUUID(),
+        plaza_id: plazaActiva,
+        fecha: fecha || new Date().toISOString().split('T')[0],
+        expediente,
+        estado: 'solicitado',
+        fechaEntrega: null,
+        fechaDevolucion: null
+    });
+
+    guardarDatos();
+    renderizarSolicitudes();
+    renderizarPlazas();
+    document.getElementById('new-expediente').value = '';
+    document.getElementById('new-fecha').valueAsDate = new Date();
+    closeModal('modal-nueva-solicitud');
+    showToast('Solicitud registrada');
+}
+
+// ══════════════════════════════════════════════
+// EDITAR / ELIMINAR
+// ══════════════════════════════════════════════
+function abrirEdicion(id) {
+    const s = solicitudes.find(x => x.id === id);
+    if (!s) return;
+    document.getElementById('edit-id').value = s.id;
+    document.getElementById('edit-fecha').value = s.fecha || '';
+    document.getElementById('edit-expediente').value = s.expediente || '';
+    document.getElementById('edit-estado').value = s.estado || 'solicitado';
+    openModal('modal-editar');
+}
+
+function guardarEdicion() {
+    const id = document.getElementById('edit-id').value;
+    const s = solicitudes.find(x => x.id === id);
+    if (!s) return;
+    s.fecha = document.getElementById('edit-fecha').value;
+    s.expediente = document.getElementById('edit-expediente').value.trim();
+    const nuevoEstado = document.getElementById('edit-estado').value;
+    if (nuevoEstado !== s.estado) {
+        s.estado = nuevoEstado;
+        if (nuevoEstado === 'entregado' && !s.fechaEntrega) s.fechaEntrega = new Date().toISOString().split('T')[0];
+        if (nuevoEstado === 'devuelto' && !s.fechaDevolucion) s.fechaDevolucion = new Date().toISOString().split('T')[0];
+    }
+    guardarDatos();
+    renderizarSolicitudes();
+    closeModal('modal-editar');
+    showToast('Solicitud actualizada');
+}
+
+function eliminarSolicitud() {
+    const id = document.getElementById('edit-id').value;
+    if (!confirm('Eliminar esta solicitud?')) return;
+    solicitudes = solicitudes.filter(s => s.id !== id);
+    guardarDatos();
+    renderizarSolicitudes();
+    renderizarPlazas();
+    closeModal('modal-editar');
+    showToast('Solicitud eliminada');
+}
+
+// ══════════════════════════════════════════════
+// UTILIDADES
+// ══════════════════════════════════════════════
+function formatFecha(f) {
+    if (!f) return '-';
+    const [y, m, d] = f.split('-');
+    return `${d}/${m}/${y}`;
+}
+
+// ══════════════════════════════════════════════
+// IMPRIMIR / EXCEL
+// ══════════════════════════════════════════════
+function imprimirSolicitudes() {
+    const filtradas = obtenerSolicitudesFiltradas();
+    if (!filtradas.length) { showToast('No hay solicitudes para imprimir','error'); return; }
+    const filas = filtradas.map(s => {
+        const plaza = plazas.find(p => p.id === s.plaza_id);
+        return `<tr>
+            <td>${formatFecha(s.fecha)}</td>
+            <td>${plaza ? plaza.nombre : '-'}</td>
+            <td>${s.expediente||''}</td>
+            <td>${s.estado ? s.estado.charAt(0).toUpperCase()+s.estado.slice(1) : ''}</td>
+        </tr>`;
+    }).join('');
+    const w = window.open('','_blank');
+    w.document.write(`<html><head><meta charset="UTF-8"/><title>Solicitudes de Archivo</title><style>
+        body{font-family:'Segoe UI',sans-serif;padding:20px}
+        h1{color:#1e3a5f;font-size:18px;margin-bottom:12px}
+        table{width:100%;border-collapse:collapse;font-size:12px}
+        th{background:#1e3a5f;color:#fff;padding:6px 8px;text-align:left}
+        td{border:1px solid #ddd;padding:4px 6px}
+        @page{size:A4 portrait;margin:1cm}
+    </style></head><body>
+        <h1>Solicitudes de Archivo — ${new Date().toLocaleDateString('es-ES')}</h1>
+        <table><thead><tr><th>Fecha</th><th>Plaza</th><th>Expediente</th><th>Estado</th></tr></thead>
+        <tbody>${filas}</tbody></table>
+        <script>window.onload=function(){window.print()}<\/script>
+    </body></html>`);
+    w.document.close();
+}
+
+function exportarExcelArchivo() {
+    const filtradas = obtenerSolicitudesFiltradas();
+    if (!filtradas.length) { showToast('No hay solicitudes para exportar','error'); return; }
+    const data = filtradas.map(s => {
+        const plaza = plazas.find(p => p.id === s.plaza_id);
+        return {
+            'Fecha': formatFecha(s.fecha), 'Plaza': plaza ? plaza.nombre : '',
+            'Expediente': s.expediente||'',
+            'Estado': s.estado ? s.estado.charAt(0).toUpperCase()+s.estado.slice(1) : ''
+        };
+    });
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Solicitudes');
+    XLSX.writeFile(wb, `solicitudes_archivo_${new Date().toISOString().slice(0,10)}.xlsx`);
+}
+
+function escapeHtml(t) {
+    const d = document.createElement('div');
+    d.textContent = t || '';
+    return d.innerHTML;
+}
+
+function openModal(id) {
+    document.getElementById(id).classList.remove('hidden');
+    if (id === 'modal-nueva-solicitud') {
+        document.getElementById('new-fecha').valueAsDate = new Date();
+        setTimeout(() => document.getElementById('new-expediente').focus(), 100);
+    }
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.add('hidden');
+}
+
+function showToast(msg, type) {
+    const el = document.getElementById('toast');
+    const icon = document.getElementById('toast-icon');
+    document.getElementById('toast-message').textContent = msg;
+    icon.classList.toggle('text-green-500', type !== 'error');
+    icon.classList.toggle('text-red-500', type === 'error');
+    el.classList.remove('hidden');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => el.classList.add('hidden'), 3000);
+}
+</script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

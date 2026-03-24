@@ -1,0 +1,51 @@
+[2026-03-04 15:26:53] [INFO] Backup automático programado en 1h
+[2026-03-04 15:26:53] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-04 15:27:06] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-04 15:27:15] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-04 15:27:21] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-04 15:27:21] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\ANABELENPINTOPINTO\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\ANABELENPINTOPINTO\\vacaciones.json'
+[2026-03-04 15:30:59] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\vacaciones.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\vacaciones.json'
+[2026-03-04 15:55:41] [INFO] Backup automático programado en 1h
+[2026-03-04 15:55:41] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-04 16:00:19] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-04 16:00:25] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-04 16:00:25] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\JUANANTONIOPEREZRODRIGUEZ\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\JUANANTONIOPEREZRODRIGUEZ\\presos.json'
+[2026-03-04 16:01:04] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-04 16:01:29] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-04 16:07:12] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-04 16:07:12] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\ANABELENPINTOPINTO\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\ANABELENPINTOPINTO\\presos.json'
+[2026-03-04 16:07:12] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\ANABELENPINTOPINTO\vencimientos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\ANABELENPINTOPINTO\\vencimientos.json'
+[2026-03-04 16:08:22] [INFO] Login superadmin OK
+[2026-03-04 16:17:17] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-04 16:17:17] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\MARINAPIAYLONGUEIRA\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\MARINAPIAYLONGUEIRA\\presos.json'
+[2026-03-04 16:20:36] [ERROR] Error cargando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-04 16:39:18] [INFO] Backup automático programado en 1h
+[2026-03-04 16:39:18] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-04 16:42:23] [INFO] Login superadmin OK
+[2026-03-04 16:47:40] [INFO] Backup automático programado en 1h
+[2026-03-04 16:47:40] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-04 16:52:49] [INFO] Login superadmin OK
+[2026-03-04 16:53:37] [INFO] Backup completo generado: manual_2026-03-04_165337.zip
+[2026-03-04 16:55:19] [INFO] Backup automático programado en 1h
+[2026-03-04 16:55:24] [INFO] Backup automático programado en 1h
+[2026-03-04 17:11:33] [INFO] Fichero creado: archivo.json
+[2026-03-04 17:11:33] [INFO] Backup automático programado en 1h
+[2026-03-04 17:11:33] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-04 17:18:34] [INFO] Backup automático programado en 1h
+[2026-03-04 17:18:51] [INFO] Login superadmin OK
+[2026-03-04 17:22:29] [INFO] Login superadmin OK
+[2026-03-04 17:23:33] [INFO] Login superadmin OK
+[2026-03-04 17:27:36] [INFO] Backup automático programado en 1h
+[2026-03-04 17:27:36] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-04 17:28:17] [INFO] Login superadmin OK
+[2026-03-04 17:44:42] [INFO] Login superadmin OK
+[2026-03-04 17:56:06] [INFO] Backup automático programado en 1h
+[2026-03-04 17:56:06] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-04 17:56:35] [INFO] Login superadmin OK
+[2026-03-04 17:58:37] [ERROR] Error guardando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\config\vilagarcia\usuarios_lista.json: [WinError 5] Acceso denegado: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\config\\vilagarcia\\usuarios_lista.json.tmp' -> 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\config\\vilagarcia\\usuarios_lista.json'
+[2026-03-04 17:58:37] [ERROR] Error guardando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\config\vilagarcia\usuarios_lista.json: [WinError 5] Acceso denegado: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\config\\vilagarcia\\usuarios_lista.json.tmp' -> 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\config\\vilagarcia\\usuarios_lista.json'
+[2026-03-04 17:58:37] [ERROR] Error guardando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\config\vilagarcia\usuarios_lista.json: [WinError 5] Acceso denegado: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\config\\vilagarcia\\usuarios_lista.json.tmp' -> 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\config\\vilagarcia\\usuarios_lista.json'
+[2026-03-04 17:58:37] [ERROR] Error guardando C:\Users\PC\Desktop\Portal_judicial_Multitribunal\config\vilagarcia\usuarios_lista.json: [WinError 5] Acceso denegado: 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\config\\vilagarcia\\usuarios_lista.json.tmp' -> 'C:\\Users\\PC\\Desktop\\Portal_judicial_Multitribunal\\config\\vilagarcia\\usuarios_lista.json'
+[2026-03-04 18:05:02] [INFO] PIN establecido para usuario JOSEFERREIROS
+[2026-03-04 18:06:22] [INFO] PIN establecido para usuario JOSEFERREIROS
+[2026-03-04 18:07:51] [INFO] Login superadmin OK

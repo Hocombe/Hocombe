@@ -1,0 +1,25 @@
+{
+  "usarTurnoConTiempo": false,
+  "duracionTurnoMinutos": 15,
+  "coloresPersonalizados": {
+    "1": "#e74c3c",
+    "2": "#3498db",
+    "3": "#2ecc71",
+    "4": "#9b59b6",
+    "5": "#f39c12"
+  },
+  "filtrosAvanzados": {
+    "abiertos": true,
+    "terminacionEspecifica": "",
+    "tiposDesmarcados": []
+  },
+  "filtrosTabla": {
+    "fechaDesde": "",
+    "fechaHasta": "",
+    "plaza": "",
+    "tipo": "",
+    "expediente": "",
+    "terminacionTabla": ""
+  },
+  "intervaloHuecos": 30
+}

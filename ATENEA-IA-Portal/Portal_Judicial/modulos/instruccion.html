@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Control de Instrucción Penal</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{
+  --azul:#1a3a5f; --azul2:#2a5298; --azul3:#3a7aaf;
+  --verde:#16a34a; --verde-bg:rgba(22,163,74,.12);
+  --ambar:#d97706; --ambar-bg:rgba(217,119,6,.12);
+  --rojo:#dc2626;  --rojo-bg:rgba(220,38,38,.12);
+  --gris:#64748b;  --gris-bg:rgba(100,116,139,.1);
+  --borde:#d0daea; --blanco:#f8faff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#eef2f8;color:#1e293b}
+
+/* ── LAYOUT ─────────────────────────────── */
+body{display:flex;flex-direction:column;overflow:hidden}
+#app-header{
+  background:linear-gradient(135deg,var(--azul),var(--azul2));
+  color:#fff;padding:14px 20px;display:flex;align-items:center;gap:14px;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,0,0,.25);
+}
+#app-header h1{font-size:16px;font-weight:700;flex:1}
+#app-header .badges{display:flex;gap:8px}
+.chip{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:3px 10px;font-size:11px}
+
+#main-layout{flex:1;display:grid;grid-template-columns:380px 1fr;gap:0;overflow:hidden}
+@media(max-width:900px){#main-layout{grid-template-columns:1fr;grid-template-rows:auto 1fr}}
+
+/* ── PANEL IZQUIERDO ────────────────────── */
+#panel-form{
+  background:#fff;border-right:1px solid var(--borde);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+#panel-form .section-header{
+  background:linear-gradient(135deg,var(--azul),var(--azul2));
+  color:#fff;padding:12px 18px;font-size:13px;font-weight:700;flex-shrink:0;
+}
+#form-scroll{flex:1;overflow-y:auto;padding:16px}
+
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:#475569;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:9px 12px;border:1px solid var(--borde);border-radius:8px;
+  font-size:13px;color:#1e293b;background:#f8faff;transition:border .15s;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--azul3);background:#fff}
+.form-group .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-group .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+
+/* Selector con botón editar al lado */
+.select-row{display:flex;gap:6px;align-items:center}
+.select-row select{flex:1}
+.btn-edit-list{
+  flex-shrink:0;width:32px;height:32px;border-radius:7px;border:1px solid var(--borde);
+  background:#f1f5f9;color:#475569;cursor:pointer;font-size:14px;
+  display:flex;align-items:center;justify-content:center;transition:.15s;
+}
+.btn-edit-list:hover{background:#dbeafe;border-color:var(--azul3);color:var(--azul2)}
+
+.btn{padding:9px 16px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:600;transition:.15s}
+.btn-pri{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff}
+.btn-pri:hover{opacity:.9}
+.btn-sec{background:#f1f5f9;color:#334155;border:1px solid var(--borde)}
+.btn-sec:hover{background:#e2e8f0}
+.btn-danger{background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5}
+.btn-danger:hover{background:#fecaca}
+.btn-full{width:100%;margin-top:6px}
+.btn-sm{padding:5px 10px;font-size:11px;border-radius:6px}
+
+/* Selector de meses */
+#selector-meses{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.mes-btn{
+  width:44px;height:36px;border-radius:8px;border:2px solid var(--borde);
+  background:#f8faff;color:#334155;font-size:13px;font-weight:600;
+  cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;
+}
+.mes-btn:hover{border-color:var(--azul3);background:#eff6ff}
+.mes-btn.sel{border-color:var(--azul2);background:var(--azul2);color:#fff}
+.mes-btn-manual{
+  flex:1;height:36px;border-radius:8px;border:2px dashed var(--borde);
+  background:#f8faff;color:#64748b;font-size:11px;font-weight:600;
+  cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:3px;
+}
+.mes-btn-manual:hover{border-color:var(--azul3);background:#eff6ff;color:var(--azul2)}
+.mes-btn-manual.sel{border-color:var(--azul2);background:#eff6ff;color:var(--azul2)}
+
+/* Fecha manual de vencimiento */
+#venc-fecha-manual{display:none;margin-top:8px}
+#venc-fecha-manual input{
+  width:100%;padding:9px 12px;border:2px solid var(--azul3);border-radius:8px;
+  font-size:13px;color:#1e293b;background:#eff6ff;font-weight:600;
+}
+
+/* ── PANEL DERECHO ─────────────────────── */
+#panel-right{display:flex;flex-direction:column;overflow:hidden}
+
+/* Tabs internos */
+#tabs-inner{
+  background:var(--azul);display:flex;gap:2px;padding:0 12px;flex-shrink:0;
+}
+.tab-inner{
+  padding:10px 18px;font-size:13px;font-weight:500;color:rgba(255,255,255,.7);
+  cursor:pointer;border-radius:6px 6px 0 0;transition:.15s;
+}
+.tab-inner:hover{background:rgba(255,255,255,.1);color:#fff}
+.tab-inner.active{background:#eef2f8;color:var(--azul);font-weight:700}
+
+#content-right{flex:1;overflow-y:auto;padding:16px}
+
+/* ── TABLA DE PROCEDIMIENTOS ────────────── */
+#search-bar{
+  display:flex;gap:10px;align-items:center;margin-bottom:14px;
+  background:#fff;padding:10px 14px;border-radius:10px;border:1px solid var(--borde);
+}
+#search-bar input{flex:1;border:none;font-size:13px;outline:none;background:transparent;color:#1e293b}
+#search-bar input::placeholder{color:#94a3b8}
+.filter-chips{display:flex;gap:6px;flex-wrap:wrap}
+.filter-chip{
+  padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600;cursor:pointer;
+  border:1px solid transparent;transition:.15s;
+}
+.filter-chip.all   {background:#e2e8f0;color:#334155;border-color:#cbd5e1}
+.filter-chip.verde {background:var(--verde-bg);color:var(--verde);border-color:var(--verde)}
+.filter-chip.ambar {background:var(--ambar-bg);color:var(--ambar);border-color:var(--ambar)}
+.filter-chip.rojo  {background:var(--rojo-bg);color:var(--rojo);border-color:var(--rojo)}
+.filter-chip.active{box-shadow:0 0 0 2px currentColor}
+
+.tabla-wrap{background:#fff;border-radius:12px;border:1px solid var(--borde);overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff}
+th{padding:10px 12px;text-align:left;font-size:11px;font-weight:600;letter-spacing:.4px;white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr.row-verde{border-left:3px solid var(--verde)}
+tr.row-ambar{border-left:3px solid var(--ambar);background:rgba(217,119,6,.03)}
+tr.row-rojo {border-left:3px solid var(--rojo);background:rgba(220,38,38,.04)}
+tr.row-vencido{border-left:3px solid #7f1d1d;background:rgba(127,29,29,.06)}
+tr.row-cerrado{opacity:.5;filter:grayscale(.4)}
+tr:hover{background:#f8faff}
+.empty-state{text-align:center;padding:40px;color:#94a3b8;font-size:14px}
+
+/* Chip de urgencia */
+.urgencia{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11px;font-weight:700;border-radius:999px;
+  padding:3px 9px;white-space:nowrap;
+}
+.urg-verde  {background:var(--verde-bg);color:var(--verde);border:1px solid var(--verde)}
+.urg-ambar  {background:var(--ambar-bg);color:var(--ambar);border:1px solid var(--ambar)}
+.urg-rojo   {background:var(--rojo-bg);color:var(--rojo);border:1px solid var(--rojo)}
+.urg-vencido{background:rgba(127,29,29,.15);color:#7f1d1d;border:1px solid #7f1d1d}
+.urg-cerrado{background:var(--gris-bg);color:var(--gris);border:1px solid var(--gris)}
+
+/* ── CALENDARIO ─────────────────────────── */
+#cal-header{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+#cal-header h3{font-size:15px;font-weight:700;color:var(--azul);flex:1;text-align:center}
+.cal-nav{width:34px;height:34px;border-radius:8px;border:1px solid var(--borde);background:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+.cal-nav:hover{background:#eff6ff;border-color:var(--azul3)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px;align-items:start}
+.cal-dow{text-align:center;font-size:11px;font-weight:600;color:#94a3b8;padding:4px 0}
+.cal-day{
+  border-radius:8px;border:1px solid transparent;
+  font-size:11px;display:flex;flex-direction:column;align-items:stretch;
+  cursor:default;position:relative;padding:3px;min-height:52px;
+}
+.cal-day.other-month{opacity:.3}
+.cal-day.today{border-color:var(--azul2);background:#eff6ff;font-weight:700}
+.cal-day.has-event{cursor:pointer}
+.cal-day.has-event:hover{background:#f0f4ff}
+.cal-day .day-num{font-size:11px;line-height:1;text-align:right;padding:1px 2px;color:#64748b;font-weight:600}
+.cal-day.today .day-num{color:var(--azul2)}
+/* Tarjetas de evento dentro del día */
+.cal-evento{
+  display:block;border-radius:4px;padding:1px 3px;margin-top:2px;
+  font-size:9px;line-height:1.3;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  color:#fff;
+}
+.cal-evento.verde{background:var(--verde)}
+.cal-evento.ambar{background:var(--ambar)}
+.cal-evento.rojo{background:var(--rojo)}
+.cal-evento.vencido{background:#7f1d1d}
+/* Tooltip al hover */
+.cal-evento-tip{
+  position:absolute;left:100%;top:0;z-index:50;
+  background:#1e293b;color:#f8faff;font-size:11px;font-weight:400;
+  border-radius:8px;padding:8px 10px;white-space:nowrap;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.3);opacity:0;transition:opacity .15s;min-width:180px;
+}
+.cal-day:hover .cal-evento-tip{opacity:1}
+/* fallback puntos para días con muchos eventos */
+.cal-dots{display:flex;gap:2px;flex-wrap:wrap;justify-content:center;max-width:100%}
+.cal-dot{width:6px;height:6px;border-radius:50%}
+.cal-dot.verde{background:var(--verde)}
+.cal-dot.ambar{background:var(--ambar)}
+.cal-dot.rojo{background:var(--rojo)}
+.cal-dot.vencido{background:#7f1d1d}
+
+/* Leyenda del calendario */
+.cal-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.cal-legend span{display:flex;align-items:center;gap:5px;font-size:11px;color:#475569}
+.cal-legend .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* ── MODAL ─────────────────────────────── */
+#modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.5);
+  backdrop-filter:blur(4px);z-index:1000;
+  display:none;align-items:center;justify-content:center;
+}
+#modal-overlay.visible{display:flex}
+#modal-box{
+  background:#fff;border-radius:14px;width:min(480px,95vw);
+  max-height:88vh;overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+#modal-box header{
+  background:linear-gradient(135deg,var(--azul),var(--azul2));
+  color:#fff;padding:16px 20px;border-radius:14px 14px 0 0;
+  display:flex;justify-content:space-between;align-items:center;
+}
+#modal-box header h2{font-size:15px;font-weight:700}
+.modal-close{background:transparent;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1}
+#modal-body{padding:20px}
+
+/* Lista editable en modal */
+.lista-editable{list-style:none;margin-bottom:12px;max-height:220px;overflow-y:auto;border:1px solid var(--borde);border-radius:8px}
+.lista-editable li{
+  display:flex;align-items:center;gap:8px;padding:9px 12px;
+  border-bottom:1px solid #f1f5f9;font-size:13px;
+}
+.lista-editable li:last-child{border-bottom:none}
+.lista-editable li .item-text{flex:1}
+.lista-editable li .item-default{font-size:10px;color:#94a3b8;font-style:italic}
+.lista-editable li .btn-del-item{
+  background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;
+  border-radius:5px;padding:2px 7px;font-size:11px;cursor:pointer;
+}
+.lista-editable li .btn-del-item:hover{background:#fecaca}
+.add-item-row{display:flex;gap:8px;margin-top:4px}
+.add-item-row input{flex:1;padding:8px 12px;border:1px solid var(--borde);border-radius:8px;font-size:13px}
+.add-item-row button{flex-shrink:0;padding:8px 14px;border-radius:8px;border:none;background:var(--azul2);color:#fff;cursor:pointer;font-size:13px;font-weight:600}
+.add-item-row button:hover{opacity:.9}
+
+/* ── NOTIFICACIÓN TOAST ─────────────────── */
+#toast-container{position:fixed;top:14px;right:14px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.toast{
+  background:#1e293b;color:#fff;padding:12px 18px;border-radius:10px;
+  font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,.3);
+  display:flex;align-items:center;gap:10px;max-width:360px;
+  animation:slideIn .3s ease;
+}
+.toast.alerta{background:#7f1d1d;border-left:4px solid #ef4444}
+.toast.aviso {background:#78350f;border-left:4px solid #f59e0b}
+.toast.ok    {background:#14532d;border-left:4px solid #22c55e}
+@keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideOut{to{transform:translateX(120%);opacity:0}}
+
+/* ── SCROLLBAR ─────────────────────────── */
+*::-webkit-scrollbar{width:8px}
+*::-webkit-scrollbar-track{background:#f1f5f9}
+*::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
+*::-webkit-scrollbar-thumb:hover{background:#94a3b8}
+
+/* ── MODO OSCURO ─────────────────────── */
+[data-tema="oscuro"]{color-scheme:dark}
+[data-tema="oscuro"] html,[data-tema="oscuro"] body{background:#111c2d;color:#c8deff}
+[data-tema="oscuro"] #panel-form{background:#182a44;border-color:#2a3a54}
+[data-tema="oscuro"] #content-right{background:#111c2d}
+[data-tema="oscuro"] #search-bar{background:#182a44;border-color:#2a3a54;color:#c8deff}
+[data-tema="oscuro"] #search-bar input{color:#c8deff}
+[data-tema="oscuro"] #search-bar input::placeholder{color:#4a6080}
+[data-tema="oscuro"] .form-group label{color:#8ab4e8}
+[data-tema="oscuro"] .form-group input,[data-tema="oscuro"] .form-group select,[data-tema="oscuro"] .form-group textarea{background:#0d1a30;color:#c8deff;border-color:#2a4a80}
+[data-tema="oscuro"] .form-group input:focus,[data-tema="oscuro"] .form-group select:focus,[data-tema="oscuro"] .form-group textarea:focus{background:#0f1e38;border-color:#4a9eff}
+[data-tema="oscuro"] .tab-inner.active{background:#182a44;color:#8ab4e8}
+[data-tema="oscuro"] .btn-sec{background:#1e3a6e;color:#a8d0ff;border-color:#2a4a80}
+[data-tema="oscuro"] .btn-sec:hover{background:#1a3060}
+[data-tema="oscuro"] .btn-edit-list{background:#1e3a6e;border-color:#2a4a80;color:#8ab4e8}
+[data-tema="oscuro"] .btn-edit-list:hover{background:#1a3060;border-color:#4a9eff}
+[data-tema="oscuro"] .mes-btn{background:#182a44;border-color:#2a4a80;color:#c8deff}
+[data-tema="oscuro"] .mes-btn:hover{background:#1e3a6e;border-color:#4a9eff}
+[data-tema="oscuro"] .mes-btn-manual{background:#182a44;border-color:#2a4a80;color:#8ab4e8}
+[data-tema="oscuro"] #venc-fecha-manual input{background:#1a3060;color:#c8deff;border-color:#4a9eff}
+[data-tema="oscuro"] table{color:#c8deff}
+[data-tema="oscuro"] th{background:#1e3a6e;color:#8ab4e8;border-color:#2a4a80}
+[data-tema="oscuro"] td{border-color:#2a3a54;background:#182a44}
+[data-tema="oscuro"] tr:hover td{background:#1e3a6e}
+[data-tema="oscuro"] .card{background:#182a44;border-color:#2a4a80;color:#c8deff}
+[data-tema="oscuro"] #modal-box{background:#182a44;color:#c8deff}
+[data-tema="oscuro"] #modal-body{color:#c8deff}
+[data-tema="oscuro"] #modal-body p{color:#8ab4e8!important}
+[data-tema="oscuro"] .lista-editable{border-color:#2a4a80;background:#0d1a30}
+[data-tema="oscuro"] .lista-editable li{border-color:#2a3a54;color:#c8deff}
+[data-tema="oscuro"] .lista-editable li .item-text{color:#c8deff}
+[data-tema="oscuro"] .lista-editable li .item-default{color:#5a7a9e}
+[data-tema="oscuro"] .lista-editable li .btn-del-item{background:#3b1a1a;color:#f87171;border-color:#7f1d1d}
+[data-tema="oscuro"] .lista-editable li .btn-del-item:hover{background:#5a1a1a}
+[data-tema="oscuro"] .add-item-row input{background:#0d1a30;color:#c8deff;border-color:#2a4a80}
+[data-tema="oscuro"] .add-item-row input::placeholder{color:#4a6080}
+[data-tema="oscuro"] .modal-overlay{background:rgba(0,0,0,.7)}
+[data-tema="oscuro"] *::-webkit-scrollbar-track{background:#0d1a30}
+[data-tema="oscuro"] *::-webkit-scrollbar-thumb{background:#2a4a80}
+[data-tema="oscuro"] .cal-nav{background:#182a44;border-color:#2a4a80;color:#c8deff}
+[data-tema="oscuro"] .cal-nav:hover{background:#1e3a6e;border-color:#4a9eff}
+[data-tema="oscuro"] #cal-header h3{color:#8ab4e8}
+</style>
+</head>
+<body>
+
+<div id="app-header">
+  <span style="font-size:20px">⚖️</span>
+  <h1>Control de Instrucción Penal — Plazos de Prórroga</h1>
+  <div class="badges">
+    <span class="chip" id="chip-total">0 procedimientos</span>
+    <span class="chip" id="chip-urgentes" style="background:rgba(220,38,38,.4);display:none">⚠️ 0 urgentes</span>
+    <button id="_btnTema" onclick="_toggleTemaModulo()" style="margin-left:auto;font-size:11px;padding:3px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;white-space:nowrap" title="Cambiar tema">☀️ Claro</button>
+  </div>
+</div>
+
+<div id="main-layout">
+
+  <!-- ── PANEL IZQUIERDO: FORMULARIO ──────────── -->
+  <div id="panel-form">
+    <div class="section-header" id="form-title">➕ Nuevo Procedimiento</div>
+    <div id="form-scroll">
+      <input type="hidden" id="edit-id"/>
+
+      <div class="form-group">
+        <label>Tipo de Procedimiento</label>
+        <div class="select-row">
+          <select id="f-tipo"></select>
+          <button class="btn-edit-list" title="Gestionar tipos" onclick="abrirModalLista('tipos')">✏️</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Número y Año</label>
+        <div class="row2">
+          <input type="text" id="f-numero" placeholder="Nº (ej: 123)" />
+          <input type="number" id="f-anyo" placeholder="Año" min="2000" max="2099" value="2025"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Plaza / Órgano</label>
+        <div class="select-row">
+          <select id="f-plaza"></select>
+          <button class="btn-edit-list" title="Gestionar plazas" onclick="abrirModalLista('plazas')">✏️</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Fecha del Auto de Prórroga</label>
+        <input type="date" id="f-fecha-auto"/>
+      </div>
+
+      <div class="form-group">
+        <label>Duración de la prórroga</label>
+        <div id="selector-meses">
+          <button class="mes-btn sel" data-m="6" onclick="selMes(this)">6 m</button>
+          <button class="mes-btn" data-m="5" onclick="selMes(this)">5 m</button>
+          <button class="mes-btn" data-m="4" onclick="selMes(this)">4 m</button>
+          <button class="mes-btn" data-m="3" onclick="selMes(this)">3 m</button>
+          <button class="mes-btn" data-m="2" onclick="selMes(this)">2 m</button>
+          <button class="mes-btn" data-m="1" onclick="selMes(this)">1 m</button>
+          <button class="mes-btn-manual" id="btn-fecha-manual" onclick="selFechaManual(this)" title="Establecer fecha de vencimiento directamente">📅 Fecha exacta</button>
+        </div>
+        <!-- Campo fecha manual (date picker) -->
+        <div id="venc-fecha-manual">
+          <input type="date" id="f-venc-manual" placeholder="Fecha de vencimiento" oninput="actualizarPreviewFecha()" onchange="actualizarPreviewFecha()"/>
+        </div>
+        <div id="fecha-vencimiento-preview" style="margin-top:8px;font-size:12px;color:#475569"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Imputados / Descripción (opcional)</label>
+        <textarea id="f-descripcion" rows="2" placeholder="Nombre del investigado, delito, etc."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Notas</label>
+        <textarea id="f-notas" rows="2" placeholder="Observaciones adicionales…"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Alertar cuando queden</label>
+        <select id="f-alerta-dias">
+          <option value="30">30 días antes</option>
+          <option value="20">20 días antes</option>
+          <option value="15" selected>15 días antes</option>
+          <option value="10">10 días antes</option>
+          <option value="7">7 días antes</option>
+        </select>
+      </div>
+
+      <button class="btn btn-pri btn-full" onclick="guardarProcedimiento()">💾 Guardar procedimiento</button>
+      <button class="btn btn-sec btn-full" onclick="limpiarFormulario()" style="margin-top:6px">✕ Cancelar / Nuevo</button>
+
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0;display:flex;gap:8px">
+        <button class="btn btn-sec" style="flex:1;font-size:11px" onclick="exportarJSON()">📤 Exportar JSON</button>
+        <label class="btn btn-sec" style="flex:1;font-size:11px;cursor:pointer;text-align:center">
+          📥 Importar JSON<input type="file" accept=".json" style="display:none" onchange="importarJSON(event)"/>
+        </label>
+      </div>
+      <div style="margin-top:8px;display:flex;gap:8px">
+        <button class="btn btn-sec" style="flex:1;font-size:11px" onclick="imprimirTabla()">🖨️ Imprimir</button>
+        <button class="btn btn-sec" style="flex:1;font-size:11px" onclick="exportarExcel()">📥 Excel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL DERECHO ─────────────────────── -->
+  <div id="panel-right">
+    <div id="tabs-inner">
+      <div class="tab-inner active" onclick="mostrarVista('lista')">📋 Procedimientos</div>
+      <div class="tab-inner" onclick="mostrarVista('calendario')">📅 Calendario</div>
+    </div>
+
+    <div id="content-right">
+
+      <!-- VISTA: LISTA -->
+      <div id="vista-lista">
+        <div id="search-bar">
+          <span style="font-size:15px;color:#94a3b8">🔍</span>
+          <input type="text" id="buscador" placeholder="Buscar por número, tipo, plaza, imputado…" oninput="renderTabla()"/>
+          <div class="filter-chips">
+            <span class="filter-chip all active" onclick="setFiltro('all',this)">Todos</span>
+            <span class="filter-chip rojo" onclick="setFiltro('rojo',this)">🔴 Urgentes</span>
+            <span class="filter-chip ambar" onclick="setFiltro('ambar',this)">🟡 Próximos</span>
+            <span class="filter-chip verde" onclick="setFiltro('verde',this)">🟢 Ok</span>
+          </div>
+        </div>
+        <div class="tabla-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Procedimiento</th>
+                <th>Plaza</th>
+                <th>Auto prórroga</th>
+                <th>Duración</th>
+                <th>Vence</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VISTA: CALENDARIO -->
+      <div id="vista-calendario" style="display:none">
+        <div id="cal-header">
+          <button class="cal-nav" onclick="cambiarMesCal(-1)">◀</button>
+          <h3 id="cal-titulo"></h3>
+          <button class="cal-nav" onclick="cambiarMesCal(1)">▶</button>
+        </div>
+        <div class="cal-legend">
+          <span><div class="dot" style="background:var(--verde);width:10px;height:10px;border-radius:50%"></div> &gt;15 días</span>
+          <span><div class="dot" style="background:var(--ambar);width:10px;height:10px;border-radius:50%"></div> 8-15 días</span>
+          <span><div class="dot" style="background:var(--rojo);width:10px;height:10px;border-radius:50%"></div> ≤7 días</span>
+          <span><div class="dot" style="background:#7f1d1d;width:10px;height:10px;border-radius:50%"></div> Vencido</span>
+        </div>
+        <div class="cal-grid" id="cal-dias-semana"></div>
+        <div class="cal-grid" id="cal-grid"></div>
+        <div id="cal-detalle" style="margin-top:14px"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal genérico -->
+<div id="modal-overlay">
+  <div id="modal-box">
+    <header>
+      <h2 id="modal-titulo">Editar lista</h2>
+      <button class="modal-close" onclick="cerrarModal()">×</button>
+    </header>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toast-container"></div>
+
+<script>
+// ──────────────────────────────────────────────────────
+// ESTADO
+// ──────────────────────────────────────────────────────
+let procedimientos = [];
+let mesCalActual = new Date().getMonth();
+let anyoCalActual = new Date().getFullYear();
+let filtroChip = 'all';
+let mesSel = 6;        // número de meses seleccionados, o null si se usa fecha manual
+let modoFechaManual = false;
+
+// Usuario activo (sincronizado con el portal)
+let _uid = 'default';
+let _datosCargados = false;  // true tras el primer cargarDatos() del arranque
+
+// Listas personalizables
+const TIPOS_DEFAULT = ['D.P.','P.A.','J.R.','P.O.','Sumario','Otro'];
+const PLAZAS_DEFAULT = ['Plaza 1','Plaza 2','Plaza 3','Decanato','Guardia'];
+
+let tiposList = [];
+let plazasList = [];
+
+// ──────────────────────────────────────────────────────
+// PERSISTENCIA DE LISTAS
+// ──────────────────────────────────────────────────────
+async function cargarListas(){
+  try{
+    const r = await fetch('/api/instruccion-penal/listas', {cache:'no-store'});
+    if(r.ok){
+      const d = await r.json();
+      tiposList  = d.tipos  || [...TIPOS_DEFAULT];
+      plazasList = d.plazas || [...PLAZAS_DEFAULT];
+      return;
+    }
+  } catch(_){}
+  // Si el servidor no responde, usar defaults
+  tiposList  = [...TIPOS_DEFAULT];
+  plazasList = [...PLAZAS_DEFAULT];
+}
+
+async function guardarListas(){
+  const payload = {tipos: tiposList, plazas: plazasList};
+  try{
+    await fetch('/api/instruccion-penal/listas', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+  } catch(err){
+    console.warn('[instruccion] guardarListas: servidor no disponible', err);
+  }
+}
+
+function poblarSelect(selectId, lista, valorActual){
+  const sel = document.getElementById(selectId);
+  const prev = valorActual || sel.value;
+  sel.innerHTML = '';
+  lista.forEach(item => {
+    const op = document.createElement('option');
+    op.value = item;
+    const [codigo, ...resto] = item.split(' — ');
+    op.textContent = item;
+    sel.appendChild(op);
+  });
+  // Restaurar valor previo si existe
+  if(prev && lista.includes(prev)) sel.value = prev;
+}
+
+function poblarSelects(tipoVal, plazaVal){
+  poblarSelect('f-tipo',  tiposList,  tipoVal);
+  poblarSelect('f-plaza', plazasList, plazaVal);
+}
+
+// ──────────────────────────────────────────────────────
+// MODAL LISTAS EDITABLES
+// ──────────────────────────────────────────────────────
+let modalListaTipo = null; // 'tipos' | 'plazas'
+
+function abrirModalLista(tipo){
+  modalListaTipo = tipo;
+  const esTipos = tipo === 'tipos';
+  const lista = esTipos ? tiposList : plazasList;
+  const defaults = esTipos ? TIPOS_DEFAULT : PLAZAS_DEFAULT;
+  const titulo = esTipos ? '⚖️ Tipos de Procedimiento' : '🏛️ Plazas / Órganos';
+
+  document.getElementById('modal-titulo').textContent = titulo;
+
+  const items = lista.map((item, i) => {
+    const esDefault = defaults.includes(item);
+    return `<li data-idx="${i}">
+      <span class="item-text">${item}</span>
+      ${esDefault ? '<span class="item-default">predeterminado</span>' : ''}
+      <button class="btn-del-item" onclick="eliminarItemLista(${i})" title="Eliminar">🗑</button>
+    </li>`;
+  }).join('');
+
+  document.getElementById('modal-body').innerHTML = `
+    <p style="font-size:12px;color:#64748b;margin-bottom:10px">
+      ${esTipos ? 'Gestiona los tipos de procedimiento disponibles en el formulario.' : 'Gestiona las plazas/órganos disponibles en el formulario.'}
+    </p>
+    <ul class="lista-editable" id="modal-lista">${items}</ul>
+    <div class="add-item-row">
+      <input type="text" id="input-nuevo-item" placeholder="${esTipos ? 'Ej: Habeas Corpus' : 'Ej: Plaza 4'}"
+        onkeydown="if(event.key==='Enter') agregarItemLista()"/>
+      <button onclick="agregarItemLista()">➕ Añadir</button>
+    </div>
+    <p style="font-size:11px;color:#94a3b8;margin-top:10px">Los cambios se guardan automáticamente al añadir o eliminar.</p>
+  `;
+
+  document.getElementById('modal-overlay').classList.add('visible');
+  setTimeout(() => document.getElementById('input-nuevo-item').focus(), 100);
+}
+
+function eliminarItemLista(idx){
+  const esTipos = modalListaTipo === 'tipos';
+  const lista = esTipos ? tiposList : plazasList;
+  lista.splice(idx, 1);
+  if(esTipos) tiposList = lista; else plazasList = lista;
+  guardarListas();
+  poblarSelects();
+  abrirModalLista(modalListaTipo); // refrescar modal
+  toast('✅ Elemento eliminado', 'ok', 2000);
+}
+
+function agregarItemLista(){
+  const input = document.getElementById('input-nuevo-item');
+  const val = input.value.trim();
+  if(!val){ toast('Escribe un nombre primero', 'aviso', 2000); return; }
+  const lista = modalListaTipo === 'tipos' ? tiposList : plazasList;
+  if(lista.includes(val)){ toast('Ya existe ese elemento', 'aviso', 2000); return; }
+  lista.push(val);
+  if(modalListaTipo === 'tipos') tiposList = lista; else plazasList = lista;
+  guardarListas();
+  poblarSelects();
+  // Seleccionar el nuevo valor en el form
+  const selectId = modalListaTipo === 'tipos' ? 'f-tipo' : 'f-plaza';
+  document.getElementById(selectId).value = val;
+  abrirModalLista(modalListaTipo);
+  toast(`✅ "${val}" añadido`, 'ok', 2000);
+}
+
+// ──────────────────────────────────────────────────────
+// UTILIDADES
+// ──────────────────────────────────────────────────────
+function ymd(d){ return d.toISOString().split('T')[0]; }
+
+function addMonths(fechaStr, meses){
+  const d = new Date(fechaStr + 'T12:00:00');
+  const diaOriginal = d.getDate();
+  d.setDate(1);                          // Evitar desbordamiento al cambiar el mes
+  d.setMonth(d.getMonth() + meses);
+  // Si el mes destino tiene menos días, usar el último día del mes
+  const maxDia = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+  d.setDate(Math.min(diaOriginal, maxDia));
+  return ymd(d);
+}
+
+function diasHasta(fechaStr){
+  const hoy = new Date(); hoy.setHours(0,0,0,0);
+  const fin  = new Date(fechaStr + 'T12:00:00');
+  return Math.round((fin - hoy) / 86400000);
+}
+
+function urgencia(p){
+  if(p.cerrado) return {nivel:'cerrado', texto:'✔ Cerrado', cls:'urg-cerrado'};
+  const dias = diasHasta(p.fechaVencimiento);
+  if(dias < 0)  return {nivel:'vencido', texto:`⛔ Vencido (${Math.abs(dias)}d)`, cls:'urg-vencido'};
+  if(dias <= 7) return {nivel:'rojo',    texto:`🔴 ${dias}d`, cls:'urg-rojo'};
+  if(dias <= 15)return {nivel:'ambar',   texto:`🟡 ${dias}d`, cls:'urg-ambar'};
+  return         {nivel:'verde',  texto:`🟢 ${dias}d`, cls:'urg-verde'};
+}
+
+function rowClass(p){
+  const u = urgencia(p);
+  return u.nivel === 'vencido' ? 'row-vencido' :
+         u.nivel === 'rojo'    ? 'row-rojo'    :
+         u.nivel === 'ambar'   ? 'row-ambar'   :
+         u.nivel === 'cerrado' ? 'row-cerrado' : 'row-verde';
+}
+
+function fmtFecha(s){
+  if(!s) return '-';
+  const [y,m,d] = s.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+function genId(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
+// ──────────────────────────────────────────────────────
+// SELECTOR DE MESES / FECHA MANUAL
+// ──────────────────────────────────────────────────────
+function selMes(btn){
+  // Desactivar modo fecha manual
+  modoFechaManual = false;
+  document.getElementById('venc-fecha-manual').style.display = 'none';
+  document.getElementById('btn-fecha-manual').classList.remove('sel');
+  document.getElementById('f-venc-manual').value = '';
+
+  document.querySelectorAll('.mes-btn').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  mesSel = parseInt(btn.dataset.m);
+  actualizarPreviewFecha();
+}
+
+function selFechaManual(btn){
+  modoFechaManual = !modoFechaManual;
+  if(modoFechaManual){
+    // Activar modo fecha manual
+    btn.classList.add('sel');
+    document.getElementById('venc-fecha-manual').style.display = 'block';
+    document.querySelectorAll('.mes-btn').forEach(b => b.classList.remove('sel'));
+    mesSel = null;
+    document.getElementById('f-venc-manual').focus();
+  } else {
+    // Volver a modo meses
+    btn.classList.remove('sel');
+    document.getElementById('venc-fecha-manual').style.display = 'none';
+    document.getElementById('f-venc-manual').value = '';
+    mesSel = 6;
+    document.querySelectorAll('.mes-btn').forEach(b =>
+      b.classList.toggle('sel', b.dataset.m === '6'));
+  }
+  actualizarPreviewFecha();
+}
+
+function actualizarPreviewFecha(){
+  const prev = document.getElementById('fecha-vencimiento-preview');
+
+  if(modoFechaManual){
+    const vencManual = document.getElementById('f-venc-manual').value;
+    if(vencManual){
+      const dias = diasHasta(vencManual);
+      const color = dias < 0 ? '#dc2626' : dias <= 15 ? '#d97706' : '#16a34a';
+      prev.innerHTML = `➜ Vence: <strong style="color:${color}">${fmtFecha(vencManual)}</strong> (${dias >= 0 ? 'en '+dias+'d' : 'hace '+Math.abs(dias)+'d'})`;
+    } else {
+      prev.textContent = 'Selecciona la fecha de vencimiento en el calendario';
+    }
+    return;
+  }
+
+  const fechaAuto = document.getElementById('f-fecha-auto').value;
+  if(fechaAuto && mesSel){
+    const venc = addMonths(fechaAuto, mesSel);
+    const dias = diasHasta(venc);
+    const color = dias < 0 ? '#dc2626' : dias <= 15 ? '#d97706' : '#16a34a';
+    prev.innerHTML = `➜ Vence: <strong style="color:${color}">${fmtFecha(venc)}</strong> (${dias >= 0 ? 'en '+dias+'d' : 'hace '+Math.abs(dias)+'d'})`;
+  } else {
+    prev.textContent = 'Selecciona la fecha del auto para ver el vencimiento';
+  }
+}
+
+document.getElementById('f-fecha-auto').addEventListener('input',  actualizarPreviewFecha);
+document.getElementById('f-fecha-auto').addEventListener('change', actualizarPreviewFecha);
+
+// ──────────────────────────────────────────────────────
+// PERSISTENCIA DE PROCEDIMIENTOS
+// ──────────────────────────────────────────────────────
+async function cargarDatos(){
+  try{
+    const r = await fetch('/api/instruccion-penal?uid=' + encodeURIComponent(_uid), {cache:'no-store'});
+    if(r.ok){ const d = await r.json(); procedimientos = d.procedimientos || []; }
+  } catch(err){
+    console.warn('[instruccion] cargarDatos: servidor no disponible', err);
+  }
+}
+
+async function guardarDatos(){
+  const payload = {procedimientos};
+  try{
+    const r = await fetch('/api/instruccion-penal?uid=' + encodeURIComponent(_uid), {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+  } catch(err){
+    console.warn('[instruccion] guardarDatos: servidor no disponible', err);
+  }
+}
+
+// ──────────────────────────────────────────────────────
+// FORMULARIO
+// ──────────────────────────────────────────────────────
+function limpiarFormulario(){
+  document.getElementById('edit-id').value = '';
+  document.getElementById('f-numero').value = '';
+  document.getElementById('f-anyo').value = new Date().getFullYear();
+  document.getElementById('f-fecha-auto').value = '';
+  document.getElementById('f-descripcion').value = '';
+  document.getElementById('f-notas').value = '';
+  document.getElementById('f-alerta-dias').value = '15';
+  document.getElementById('fecha-vencimiento-preview').textContent = '';
+  // Reset meses
+  modoFechaManual = false;
+  document.getElementById('venc-fecha-manual').style.display = 'none';
+  document.getElementById('btn-fecha-manual').classList.remove('sel');
+  document.getElementById('f-venc-manual').value = '';
+  mesSel = 6;
+  document.querySelectorAll('.mes-btn').forEach(b => b.classList.toggle('sel', b.dataset.m === '6'));
+  // Reset selects al primer valor
+  if(tiposList.length) document.getElementById('f-tipo').value = tiposList[0];
+  if(plazasList.length) document.getElementById('f-plaza').value = plazasList[0];
+  document.getElementById('form-title').textContent = '➕ Nuevo Procedimiento';
+}
+
+function cargarEnFormulario(p){
+  document.getElementById('edit-id').value = p.id;
+  document.getElementById('f-tipo').value = p.tipo || (tiposList[0] || '');
+  document.getElementById('f-numero').value = p.numero || '';
+  document.getElementById('f-anyo').value = p.anyo || new Date().getFullYear();
+  document.getElementById('f-plaza').value = p.plaza || (plazasList[0] || '');
+  document.getElementById('f-fecha-auto').value = p.fechaAuto || '';
+  document.getElementById('f-descripcion').value = p.descripcion || '';
+  document.getElementById('f-notas').value = p.notas || '';
+  document.getElementById('f-alerta-dias').value = p.alertaDias || '15';
+
+  // Meses vs fecha manual
+  if(p.fechaManual){
+    // Guardado con fecha manual
+    modoFechaManual = true;
+    document.getElementById('venc-fecha-manual').style.display = 'block';
+    document.getElementById('btn-fecha-manual').classList.add('sel');
+    document.getElementById('f-venc-manual').value = p.fechaVencimiento;
+    mesSel = null;
+    document.querySelectorAll('.mes-btn').forEach(b => b.classList.remove('sel'));
+  } else {
+    modoFechaManual = false;
+    document.getElementById('venc-fecha-manual').style.display = 'none';
+    document.getElementById('btn-fecha-manual').classList.remove('sel');
+    document.getElementById('f-venc-manual').value = '';
+    mesSel = p.meses || 6;
+    document.querySelectorAll('.mes-btn').forEach(b =>
+      b.classList.toggle('sel', parseInt(b.dataset.m) === mesSel));
+  }
+
+  actualizarPreviewFecha();
+  document.getElementById('form-title').textContent = '✏️ Editar Procedimiento';
+  document.getElementById('form-scroll').scrollTop = 0;
+}
+
+async function guardarProcedimiento(){
+  const numero = document.getElementById('f-numero').value.trim();
+  const fechaAuto = document.getElementById('f-fecha-auto').value;
+  if(!numero){ toast('Introduce el número del procedimiento', 'aviso'); return; }
+
+  let fechaVencimiento, mesesGuardado, esFechaManual;
+
+  if(modoFechaManual){
+    fechaVencimiento = document.getElementById('f-venc-manual').value;
+    if(!fechaVencimiento){ toast('Selecciona la fecha de vencimiento', 'aviso'); return; }
+    mesesGuardado = null;
+    esFechaManual = true;
+  } else {
+    if(!fechaAuto){ toast('Selecciona la fecha del auto de prórroga', 'aviso'); return; }
+    fechaVencimiento = addMonths(fechaAuto, mesSel);
+    mesesGuardado = mesSel;
+    esFechaManual = false;
+  }
+
+  const id = document.getElementById('edit-id').value || genId();
+
+  const p = {
+    id,
+    tipo:             document.getElementById('f-tipo').value,
+    numero,
+    anyo:             parseInt(document.getElementById('f-anyo').value),
+    plaza:            document.getElementById('f-plaza').value,
+    fechaAuto:        fechaAuto || '',
+    meses:            mesesGuardado,
+    fechaManual:      esFechaManual,
+    fechaVencimiento,
+    descripcion:      document.getElementById('f-descripcion').value.trim(),
+    notas:            document.getElementById('f-notas').value.trim(),
+    alertaDias:       parseInt(document.getElementById('f-alerta-dias').value),
+    cerrado:          false,
+    creadoEn:         new Date().toISOString()
+  };
+
+  const idx = procedimientos.findIndex(x => x.id === id);
+  if(idx >= 0){ procedimientos[idx] = {...procedimientos[idx], ...p}; }
+  else { procedimientos.push(p); }
+
+  await guardarDatos();
+  renderTabla();
+  renderCalendario();
+  actualizarBadges();
+  limpiarFormulario();
+  toast(`✅ ${p.tipo} ${p.numero}/${p.anyo} guardado`, 'ok');
+}
+
+// ──────────────────────────────────────────────────────
+// TABLA
+// ──────────────────────────────────────────────────────
+function setFiltro(f, el){
+  filtroChip = f;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderTabla();
+}
+
+function renderTabla(){
+  const q = document.getElementById('buscador').value.toLowerCase().trim();
+  const tbody = document.getElementById('tabla-body');
+  tbody.innerHTML = '';
+
+  const lista = [...procedimientos].sort((a,b) => a.fechaVencimiento.localeCompare(b.fechaVencimiento));
+  let n = 0;
+  lista.forEach(p => {
+    const u = urgencia(p);
+    if(filtroChip !== 'all' && u.nivel !== filtroChip) return;
+    if(q){
+      const estadoTxt = p.cerrado ? 'cerrado' : (p.fechaManual ? 'prorroga prórroga' : 'abierto');
+      const hay = [p.tipo, p.numero, String(p.anyo), p.plaza, p.descripcion, p.notas, p.fechaVencimiento || '', estadoTxt, 'vence'].join(' ').toLowerCase();
+      if(!hay.includes(q)) return;
+    }
+    n++;
+    const durLabel = p.fechaManual ? '📅 Manual' : `${p.meses} m`;
+    const tr = document.createElement('tr');
+    tr.className = rowClass(p);
+    tr.innerHTML = `
+      <td style="color:#94a3b8;font-size:11px">${n}</td>
+      <td>
+        <strong>${p.tipo} ${p.numero}/${p.anyo}</strong>
+        ${p.descripcion ? `<br><small style="color:#64748b">${p.descripcion}</small>` : ''}
+      </td>
+      <td><span style="font-size:12px">${p.plaza}</span></td>
+      <td style="font-size:12px">${p.fechaAuto ? fmtFecha(p.fechaAuto) : '<em style="color:#94a3b8">—</em>'}</td>
+      <td style="text-align:center"><strong>${durLabel}</strong></td>
+      <td style="font-size:12px;font-weight:600">${fmtFecha(p.fechaVencimiento)}</td>
+      <td><span class="urgencia ${u.cls}">${u.texto}</span></td>
+      <td>
+        <div style="display:flex;gap:4px;flex-wrap:wrap">
+          <button class="btn btn-sec btn-sm" data-permiso="editar" onclick="editarProc('${p.id}')">✏️</button>
+          <button class="btn btn-sec btn-sm" data-permiso="editar" onclick="renovarProc('${p.id}')" title="Renovar prórroga">🔄</button>
+          <button class="btn btn-sec btn-sm" data-permiso="editar" onclick="toggleCerrado('${p.id}')" title="${p.cerrado?'Reabrir':'Cerrar'}">${p.cerrado?'🔓':'🔒'}</button>
+          <button class="btn btn-danger btn-sm" data-permiso="borrar" onclick="borrarProc('${p.id}')">🗑</button>
+        </div>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+
+  if(n === 0){
+    tbody.innerHTML = `<tr><td colspan="8" class="empty-state">
+      ${procedimientos.length === 0 ? '📂 No hay procedimientos. Añade el primero con el formulario.' : '🔍 No hay coincidencias con el filtro actual.'}
+    </td></tr>`;
+  }
+  // Re-aplicar permisos a los botones recién creados
+  _aplicarPermisos(_permisos);
+}
+
+// ──────────────────────────────────────────────────────
+// ACCIONES SOBRE PROCEDIMIENTOS
+// ──────────────────────────────────────────────────────
+function editarProc(id){
+  const p = procedimientos.find(x => x.id === id);
+  if(p) cargarEnFormulario(p);
+}
+
+function toggleCerrado(id){
+  const p = procedimientos.find(x => x.id === id);
+  if(!p) return;
+  p.cerrado = !p.cerrado;
+  guardarDatos(); renderTabla(); renderCalendario(); actualizarBadges();
+  toast(p.cerrado ? `🔒 ${p.tipo} ${p.numero}/${p.anyo} cerrado` : `🔓 Reabierto`, 'ok');
+}
+
+function borrarProc(id){
+  const p = procedimientos.find(x => x.id === id);
+  if(!p) return;
+  if(!confirm(`¿Eliminar ${p.tipo} ${p.numero}/${p.anyo}?`)) return;
+  procedimientos = procedimientos.filter(x => x.id !== id);
+  guardarDatos(); renderTabla(); renderCalendario(); actualizarBadges();
+  toast('🗑 Procedimiento eliminado', 'ok');
+}
+
+function renovarProc(id){
+  const p = procedimientos.find(x => x.id === id);
+  if(!p) return;
+  const nuevo = {...p, id: genId(), fechaAuto: p.fechaVencimiento, creadoEn: new Date().toISOString()};
+  if(!nuevo.fechaManual){
+    nuevo.fechaVencimiento = addMonths(nuevo.fechaAuto, nuevo.meses);
+  }
+  cargarEnFormulario(nuevo);
+  toast(`🔄 Preparada renovación de ${p.tipo} ${p.numero}/${p.anyo} — revisa y guarda`, 'aviso');
+}
+
+// ──────────────────────────────────────────────────────
+// CALENDARIO
+// ──────────────────────────────────────────────────────
+function cambiarMesCal(delta){
+  mesCalActual += delta;
+  if(mesCalActual > 11){ mesCalActual = 0; anyoCalActual++; }
+  if(mesCalActual < 0) { mesCalActual = 11; anyoCalActual--; }
+  renderCalendario();
+}
+
+function renderCalendario(){
+  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const dias  = ['L','M','X','J','V','S','D'];
+  document.getElementById('cal-titulo').textContent = `${meses[mesCalActual]} ${anyoCalActual}`;
+
+  // Cabecera días semana
+  const hdow = document.getElementById('cal-dias-semana');
+  hdow.innerHTML = dias.map(d => `<div class="cal-dow">${d}</div>`).join('');
+
+  const hoy = ymd(new Date());
+  const primerDia = new Date(anyoCalActual, mesCalActual, 1);
+  const ultimoDia = new Date(anyoCalActual, mesCalActual + 1, 0).getDate();
+  // Lunes = 0
+  let startDow = (primerDia.getDay() + 6) % 7;
+
+  // Agrupar vencimientos por fecha (incluyendo también cerrados para visibilidad)
+  const eventoPorFecha = {};
+  procedimientos.forEach(p => {
+    const f = p.fechaVencimiento;
+    if(!eventoPorFecha[f]) eventoPorFecha[f] = [];
+    eventoPorFecha[f].push(p);
+  });
+
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+
+  // Días del mes anterior (celdas vacías)
+  for(let i = 0; i < startDow; i++){
+    const d = document.createElement('div');
+    d.className = 'cal-day other-month';
+    d.innerHTML = '<span class="day-num" style="opacity:.3">&nbsp;</span>';
+    grid.appendChild(d);
+  }
+
+  for(let dia = 1; dia <= ultimoDia; dia++){
+    const fechaDia = `${anyoCalActual}-${String(mesCalActual+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+    const eventos = eventoPorFecha[fechaDia] || [];
+    const activos = eventos.filter(p => !p.cerrado);
+    const d = document.createElement('div');
+    d.className = 'cal-day'
+      + (fechaDia === hoy ? ' today' : '')
+      + (activos.length > 0 ? ' has-event' : '');
+    // Tarjetas con texto: mostrar hasta 3, luego "+N más"
+    const MAX_VISIBLE = 3;
+    const tarjetas = activos.slice(0, MAX_VISIBLE).map(p => {
+      const u = urgencia(p);
+      const niv = u.nivel === 'vencido' ? 'vencido' : u.nivel;
+      const label = `${p.tipo} ${p.numero}/${p.anyo}`;
+      const tip = `${p.tipo} ${p.numero}/${p.anyo} — ${p.plaza}\n${u.texto}${p.descripcion ? '\n'+p.descripcion : ''}`;
+      return `<span class="cal-evento ${niv}" title="${tip.replace(/"/g,'&quot;')}">${label}</span>`;
+    }).join('');
+    const masLabel = activos.length > MAX_VISIBLE
+      ? `<span style="font-size:9px;color:#64748b;padding-left:2px">+${activos.length - MAX_VISIBLE} más</span>` : '';
+    d.innerHTML = `<span class="day-num">${dia}</span>${tarjetas}${masLabel}`;
+    if(activos.length > 0){
+      d.onclick = () => mostrarDetalleCalendario(fechaDia, activos);
+    }
+    grid.appendChild(d);
+  }
+
+  // Limpiar detalle al re-renderizar
+  document.getElementById('cal-detalle').innerHTML = '';
+}
+
+function mostrarDetalleCalendario(fecha, eventos){
+  const det = document.getElementById('cal-detalle');
+  const items = eventos.map(p => {
+    const u = urgencia(p);
+    const colorBorde = u.nivel==='vencido'?'#7f1d1d':u.nivel==='rojo'?'#dc2626':u.nivel==='ambar'?'#d97706':'#16a34a';
+    return `<div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:8px;border-left:3px solid ${colorBorde}">
+      <strong>${p.tipo} ${p.numero}/${p.anyo}</strong> — ${p.plaza}
+      <span class="urgencia ${u.cls}" style="margin-left:8px">${u.texto}</span>
+      ${p.descripcion ? `<br><small style="color:#64748b">${p.descripcion}</small>` : ''}
+      ${p.notas ? `<br><small style="color:#94a3b8;font-style:italic">${p.notas}</small>` : ''}
+    </div>`;
+  }).join('');
+  det.innerHTML = `<div style="font-size:13px;font-weight:700;color:#1e293b;margin-bottom:8px">📅 Vencimientos el ${fmtFecha(fecha)}:</div>${items}`;
+}
+
+// ──────────────────────────────────────────────────────
+// VISTAS — llamar renderCalendario al activar tab
+// ──────────────────────────────────────────────────────
+function mostrarVista(v){
+  document.getElementById('vista-lista').style.display      = v === 'lista'      ? '' : 'none';
+  document.getElementById('vista-calendario').style.display = v === 'calendario' ? '' : 'none';
+  document.querySelectorAll('.tab-inner').forEach((t,i) =>
+    t.classList.toggle('active', (i === 0 && v === 'lista') || (i === 1 && v === 'calendario')));
+  if(v === 'calendario'){
+    // Forzar re-render del calendario al cambiar de vista
+    renderCalendario();
+  }
+}
+
+// ──────────────────────────────────────────────────────
+// BADGES / CHIPS DE CABECERA
+// ──────────────────────────────────────────────────────
+function actualizarBadges(){
+  const total = procedimientos.filter(p => !p.cerrado).length;
+  const urgentes = procedimientos.filter(p => !p.cerrado && ['rojo','vencido'].includes(urgencia(p).nivel)).length;
+  document.getElementById('chip-total').textContent = `${total} procedimientos activos`;
+  const chipUrg = document.getElementById('chip-urgentes');
+  chipUrg.style.display = urgentes > 0 ? '' : 'none';
+  chipUrg.textContent = `⚠️ ${urgentes} urgentes`;
+
+  // Enviar datos al portal padre para el widget
+  try{
+    window.parent.postMessage({
+      tipo: 'instruccionPenal',
+      urgentes,
+      proximos: procedimientos
+        .filter(p => !p.cerrado)
+        .map(p => ({...p, _urgencia: urgencia(p)}))
+        .filter(p => ['rojo','ambar','vencido'].includes(p._urgencia.nivel))
+        .sort((a,b) => a.fechaVencimiento.localeCompare(b.fechaVencimiento))
+        .slice(0,5)
+    }, '*');
+  }catch(_){}
+}
+
+// ──────────────────────────────────────────────────────
+// TOASTS / NOTIFICACIONES
+// ──────────────────────────────────────────────────────
+function toast(msg, tipo='ok', duracion=3500){
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = `toast ${tipo}`;
+  t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(() => {
+    t.style.animation = 'slideOut .3s ease forwards';
+    setTimeout(() => t.remove(), 300);
+  }, duracion);
+}
+
+// ──────────────────────────────────────────────────────
+// ALERTAS AUTOMÁTICAS AL CARGAR
+// ──────────────────────────────────────────────────────
+function comprobarAlertas(){
+  procedimientos.forEach(p => {
+    if(p.cerrado) return;
+    const dias = diasHasta(p.fechaVencimiento);
+    if(dias < 0){
+      toast(`⛔ VENCIDO: ${p.tipo} ${p.numero}/${p.anyo} — ${p.plaza}`, 'alerta', 8000);
+    } else if(dias <= (p.alertaDias || 15)){
+      toast(`⚠️ ${p.tipo} ${p.numero}/${p.anyo} vence en ${dias} días (${fmtFecha(p.fechaVencimiento)})`, 'aviso', 6000);
+    }
+  });
+}
+
+// ──────────────────────────────────────────────────────
+// EXPORT / IMPORT
+// ──────────────────────────────────────────────────────
+function exportarJSON(){
+  const blob = new Blob([JSON.stringify({
+    procedimientos,
+    listas: {tipos: tiposList, plazas: plazasList},
+    exportadoEn: new Date().toISOString()
+  }, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `instruccion_penal_${ymd(new Date())}.json`;
+  a.click(); a.remove();
+}
+
+function importarJSON(evt){
+  const f = evt.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try{
+      const d = JSON.parse(r.result);
+      if(d.procedimientos){
+        procedimientos = d.procedimientos;
+        if(d.listas){
+          if(d.listas.tipos)  tiposList  = d.listas.tipos;
+          if(d.listas.plazas) plazasList = d.listas.plazas;
+          guardarListas();
+          poblarSelects();
+        }
+        guardarDatos(); renderTabla(); renderCalendario(); actualizarBadges();
+        toast(`✅ ${procedimientos.length} procedimientos importados`, 'ok');
+      }
+    } catch(_){ toast('❌ JSON no válido', 'alerta'); }
+  };
+  r.readAsText(f);
+}
+
+// ──────────────────────────────────────────────────────
+// IMPRIMIR / EXCEL
+// ──────────────────────────────────────────────────────
+function imprimirTabla(){
+  if(!procedimientos.length){ toast('No hay procedimientos para imprimir','aviso'); return; }
+  const filas = procedimientos.map(p => {
+    const u = urgencia(p);
+    const dur = p.fechaManual ? 'Manual' : `${p.meses} m`;
+    return `<tr>
+      <td>${p.tipo}</td><td>${p.numero}/${p.anyo}</td><td>${p.plaza}</td>
+      <td>${p.fechaAuto ? fmtFecha(p.fechaAuto) : '-'}</td><td>${dur}</td>
+      <td>${fmtFecha(p.fechaVencimiento)}</td><td>${u.texto}</td>
+      <td>${p.cerrado ? 'Cerrado' : 'Abierto'}</td>
+      <td>${p.descripcion || ''}</td>
+    </tr>`;
+  }).join('');
+  const w = window.open('','_blank');
+  w.document.write(`<html><head><meta charset="UTF-8"/><title>Procedimientos</title><style>
+    body{font-family:'Segoe UI',sans-serif;padding:20px}
+    h1{color:#1a3a5f;font-size:18px;margin-bottom:12px}
+    table{width:100%;border-collapse:collapse;font-size:12px}
+    th{background:#1e3a5f;color:#fff;padding:6px 8px;text-align:left}
+    td{border:1px solid #ddd;padding:4px 6px}
+    @page{size:A4 landscape;margin:1cm}
+  </style></head><body>
+    <h1>Control de Instrucción Penal — ${new Date().toLocaleDateString('es-ES')}</h1>
+    <table><thead><tr><th>Tipo</th><th>Número</th><th>Plaza</th><th>Fecha Auto</th><th>Duración</th><th>Vencimiento</th><th>Estado Urg.</th><th>Abierto/Cerrado</th><th>Descripción</th></tr></thead>
+    <tbody>${filas}</tbody></table>
+    <script>window.onload=function(){window.print()}<\/script>
+  </body></html>`);
+  w.document.close();
+}
+
+function exportarExcel(){
+  if(!procedimientos.length){ toast('No hay procedimientos para exportar','aviso'); return; }
+  const data = procedimientos.map(p => {
+    const u = urgencia(p);
+    return {
+      'Tipo': p.tipo, 'Número': p.numero, 'Año': p.anyo, 'Plaza': p.plaza,
+      'Fecha Auto': p.fechaAuto ? fmtFecha(p.fechaAuto) : '',
+      'Duración': p.fechaManual ? 'Manual' : `${p.meses} meses`,
+      'Vencimiento': fmtFecha(p.fechaVencimiento),
+      'Estado': u.texto, 'Abierto/Cerrado': p.cerrado ? 'Cerrado' : 'Abierto',
+      'Descripción': p.descripcion || ''
+    };
+  });
+  const ws = XLSX.utils.json_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Procedimientos');
+  XLSX.writeFile(wb, `instruccion_penal_${ymd(new Date())}.xlsx`);
+}
+
+// ──────────────────────────────────────────────────────
+// MODAL — cerrar
+// ──────────────────────────────────────────────────────
+function cerrarModal(){
+  document.getElementById('modal-overlay').classList.remove('visible');
+  modalListaTipo = null;
+}
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if(e.target === document.getElementById('modal-overlay')) cerrarModal();
+});
+
+// ──────────────────────────────────────────────────────
+// ARRANQUE
+// ──────────────────────────────────────────────────────
+(async () => {
+  await cargarListas();
+  poblarSelects();
+  await cargarDatos();
+  _datosCargados = true;
+  renderTabla();
+  renderCalendario();
+  actualizarBadges();
+  setTimeout(comprobarAlertas, 1200);
+})();
+
+// ── Botón de tema individual ──────────────────────────────
+function _toggleTemaModulo(){
+  const html = document.documentElement;
+  const esOscuro = html.getAttribute('data-tema') === 'oscuro';
+  if(esOscuro){ html.removeAttribute('data-tema'); fetch('/api/config/instruccion_tema_'+_uid,{method:'POST',headers:{'Content-Type':'application/json'},body:'{"tema":"claro"}'}).catch(()=>{}); }
+  else { html.setAttribute('data-tema','oscuro'); fetch('/api/config/instruccion_tema_'+_uid,{method:'POST',headers:{'Content-Type':'application/json'},body:'{"tema":"oscuro"}'}).catch(()=>{}); }
+  _actualizarBtnTemaModulo();
+}
+function _actualizarBtnTemaModulo(){
+  const btn = document.getElementById('_btnTema');
+  if(!btn) return;
+  const esOscuro = document.documentElement.getAttribute('data-tema') === 'oscuro';
+  btn.textContent = esOscuro ? '🌙 Oscuro' : '☀️ Claro';
+}
+async function _cargarTemaModulo(){ try{ const r=await fetch('/api/config/instruccion_tema_'+_uid); const d=await r.json(); if(d.config&&d.config.tema==='oscuro'){document.documentElement.setAttribute('data-tema','oscuro');}else{document.documentElement.removeAttribute('data-tema');} }catch(_){} _actualizarBtnTemaModulo(); }
+_cargarTemaModulo();
+
+// Permisos recibidos desde el portal
+let _permisos = {borrar: true, editar: true};
+function _aplicarPermisos(p) {
+  _permisos = p;
+  document.querySelectorAll('[data-permiso]').forEach(el => {
+    const perm = el.dataset.permiso;
+    if (!p[perm]) {
+      el.disabled = true;
+      el.title = '🔒 Sin permisos';
+      el.style.opacity = '0.35';
+      el.style.cursor = 'not-allowed';
+    } else {
+      el.disabled = false;
+      el.style.opacity = '';
+      el.style.cursor = '';
+    }
+  });
+}
+
+window.addEventListener('message', async e => {
+  if (!e.data) return;
+  if (e.data.tipo === 'permisos') {
+    _aplicarPermisos(e.data.permisos);
+    return;
+  }
+  if (e.data.tipo === 'cambioUsuario') {
+    const nuevoUid = e.data.usuario?.id || 'default';
+    if (nuevoUid === _uid) return;
+    // Guardar datos del usuario anterior solo si los datos ya se cargaron
+    // y había un usuario real (no el placeholder 'default' del arranque).
+    // Evita machaciar el servidor con un array vacío si cambioUsuario
+    // llega mientras cargarDatos() del arranque aún está en vuelo.
+    if (_datosCargados && _uid !== 'default') {
+      await guardarDatos();
+    }
+    // Cambiar al nuevo usuario
+    _uid = nuevoUid;
+    // Cargar tema del nuevo usuario
+    _cargarTemaModulo();
+    // Cargar datos del nuevo usuario
+    await cargarDatos();
+    // Re-renderizar
+    renderTabla();
+    renderCalendario();
+    actualizarBadges();
+    return;
+  }
+  if (e.data.tipo !== 'buscarDesdePortal') return;
+  const q = e.data.q || '';
+  const inp = document.getElementById('buscador');
+  if (!inp) return;
+  inp.value = q;
+  renderTabla();
+  inp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  inp.focus();
+});
+</script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

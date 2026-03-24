@@ -1,0 +1,347 @@
+[2026-03-05 00:50:14] [INFO] Backup completo generado: auto_2026-03-05_004956.zip
+[2026-03-05 00:50:16] [INFO] Backup automático programado en 1h
+[2026-03-05 01:50:36] [INFO] Backup completo generado: auto_2026-03-05_015016.zip
+[2026-03-05 01:50:38] [INFO] Backup automático programado en 1h
+[2026-03-05 02:51:01] [INFO] Backup completo generado: auto_2026-03-05_025038.zip
+[2026-03-05 02:51:02] [INFO] Backup automático programado en 1h
+[2026-03-05 03:51:22] [INFO] Backup completo generado: auto_2026-03-05_035103.zip
+[2026-03-05 03:51:23] [INFO] Backup automático programado en 1h
+[2026-03-05 04:51:44] [INFO] Backup completo generado: auto_2026-03-05_045124.zip
+[2026-03-05 04:51:46] [INFO] Backup automático programado en 1h
+[2026-03-05 05:52:06] [INFO] Backup completo generado: auto_2026-03-05_055147.zip
+[2026-03-05 05:52:07] [INFO] Backup automático programado en 1h
+[2026-03-05 06:19:24] [INFO] Backup automático programado en 1h
+[2026-03-05 06:19:24] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-05 06:23:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-05 06:24:13] [INFO] Backup eliminado: auto_2026-02-27_103937.zip
+[2026-03-05 06:24:30] [INFO] Backup completo generado: manual_2026-03-05_062420.zip
+[2026-03-05 06:25:01] [INFO] Login superadmin OK
+[2026-03-05 06:26:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\default\presos.json: [Errno 2] No such file or directory: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\default\\presos.json'
+[2026-03-05 06:26:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\usuarios\NOEMIMACIASALONSO\presos.json: [Errno 2] No such file or directory: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\usuarios\\NOEMIMACIASALONSO\\presos.json'
+[2026-03-05 06:38:01] [INFO] Fichero creado: archivo.json
+[2026-03-05 06:38:02] [INFO] Backup automático programado en 1h
+[2026-03-05 06:38:02] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-05 06:40:45] [INFO] Login superadmin OK
+[2026-03-05 06:41:28] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\config\vilagarcia\usuarios_lista.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\config\\vilagarcia\\usuarios_lista.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\config\\vilagarcia\\usuarios_lista.json'
+[2026-03-05 06:44:32] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b modo=combinado
+[2026-03-05 06:50:00] [INFO] Login superadmin OK
+[2026-03-05 06:50:21] [INFO] Módulo 'vacaciones' restaurado desde backup del cliente
+[2026-03-05 06:52:07] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-05 06:52:08] [INFO] Backup automático programado en 1h
+[2026-03-05 06:52:57] [INFO] Login superadmin OK
+[2026-03-05 07:00:53] [INFO] Backup automático programado en 1h
+[2026-03-05 07:00:53] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-05 07:04:38] [INFO] Login superadmin OK
+[2026-03-05 07:05:12] [INFO] Módulo 'presos' restaurado desde backup del cliente
+[2026-03-05 07:05:45] [INFO] Módulo 'presos' restaurado desde backup del cliente
+[2026-03-05 07:09:52] [INFO] Backup automático programado en 1h
+[2026-03-05 07:11:55] [INFO] Login superadmin OK
+[2026-03-05 07:12:37] [INFO] Módulo 'presos' restaurado desde backup del cliente
+[2026-03-05 07:51:14] [INFO] Backup automático programado en 1h
+[2026-03-05 07:51:14] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-05 07:52:28] [INFO] Backup completo generado: auto_2026-03-05_075208.zip
+[2026-03-05 07:52:30] [INFO] Backup automático programado en 1h
+[2026-03-05 07:54:40] [INFO] Backup automático programado en 1h
+[2026-03-05 07:54:40] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-05 07:54:48] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-05 08:10:02] [INFO] Backup completo generado: auto_2026-03-05_080952.zip
+[2026-03-05 08:10:03] [INFO] Backup automático programado en 1h
+[2026-03-05 08:15:53] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b modo=combinado
+[2026-03-05 08:45:09] [INFO] Backup automático programado en 1h
+[2026-03-05 08:45:09] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-05 08:47:23] [INFO] Backup automático programado en 1h
+[2026-03-05 08:47:23] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-05 08:48:00] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b modo=combinado
+[2026-03-05 08:51:25] [INFO] Backup completo generado: auto_2026-03-05_085114.zip
+[2026-03-05 08:51:26] [INFO] Backup automático programado en 1h
+[2026-03-05 09:10:13] [INFO] Backup completo generado: auto_2026-03-05_091003.zip
+[2026-03-05 09:10:14] [INFO] Backup automático programado en 1h
+[2026-03-05 09:23:29] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-05 09:47:45] [INFO] Backup completo generado: auto_2026-03-05_094723.zip
+[2026-03-05 09:47:46] [INFO] Backup automático programado en 1h
+[2026-03-05 09:51:36] [INFO] Backup completo generado: auto_2026-03-05_095126.zip
+[2026-03-05 09:51:37] [INFO] Backup automático programado en 1h
+[2026-03-05 10:10:24] [INFO] Backup completo generado: auto_2026-03-05_101015.zip
+[2026-03-05 10:10:25] [INFO] Backup automático programado en 1h
+[2026-03-05 10:48:07] [INFO] Backup completo generado: auto_2026-03-05_104747.zip
+[2026-03-05 10:48:09] [INFO] Backup automático programado en 1h
+[2026-03-05 10:51:48] [INFO] Backup completo generado: auto_2026-03-05_105137.zip
+[2026-03-05 10:51:48] [INFO] Backup automático programado en 1h
+[2026-03-05 11:10:39] [INFO] Backup completo generado: auto_2026-03-05_111026.zip
+[2026-03-05 11:10:40] [INFO] Backup automático programado en 1h
+[2026-03-05 11:34:49] [INFO] [LLM/Cerebras] Rate-limit en llama3.1-8b, probando fallback...
+[2026-03-05 11:34:50] [INFO] [LLM/Cerebras] Error en fallback qwen-3-235b-a22b-instruct-2507: {'message': 'Model qwen-3-235b-a22b-instruct-2507 does not exist or you do not have access to it.', 'type': 'not_found_error', 'param': 'model', 'code': 'model_not_found'}
+[2026-03-05 11:48:33] [INFO] Backup completo generado: auto_2026-03-05_114809.zip
+[2026-03-05 11:48:34] [INFO] Backup automático programado en 1h
+[2026-03-05 11:51:59] [INFO] Backup completo generado: auto_2026-03-05_115148.zip
+[2026-03-05 11:52:00] [INFO] Backup automático programado en 1h
+[2026-03-05 12:10:55] [INFO] Backup completo generado: auto_2026-03-05_121045.zip
+[2026-03-05 12:10:56] [INFO] Backup automático programado en 1h
+[2026-03-05 12:48:51] [INFO] Backup completo generado: auto_2026-03-05_124834.zip
+[2026-03-05 12:48:51] [INFO] Backup automático programado en 1h
+[2026-03-05 12:52:11] [INFO] Backup completo generado: auto_2026-03-05_125200.zip
+[2026-03-05 12:52:12] [INFO] Backup automático programado en 1h
+[2026-03-05 13:11:06] [INFO] Backup completo generado: auto_2026-03-05_131056.zip
+[2026-03-05 13:11:07] [INFO] Backup automático programado en 1h
+[2026-03-05 13:17:54] [INFO] [LLM/Cerebras] Rate-limit en llama3.1-8b, probando fallback...
+[2026-03-05 13:17:54] [INFO] [LLM/Cerebras] Error en fallback qwen-3-235b-a22b-instruct-2507: {'message': 'Model qwen-3-235b-a22b-instruct-2507 does not exist or you do not have access to it.', 'type': 'not_found_error', 'param': 'model', 'code': 'model_not_found'}
+[2026-03-05 13:18:34] [INFO] [LLM/Cerebras] Excepción en llama3.1-8b: The read operation timed out
+[2026-03-05 13:20:55] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-05 13:38:18] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\agenda.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\agenda.json'
+[2026-03-05 13:38:29] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json: [WinError 32] El proceso no tiene acceso al archivo porque está siendo utilizado por otro proceso: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\agenda.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\agenda.json'
+[2026-03-05 13:38:31] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json: [WinError 32] El proceso no tiene acceso al archivo porque está siendo utilizado por otro proceso: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\agenda.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\agenda.json'
+[2026-03-05 13:38:31] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json: [WinError 32] El proceso no tiene acceso al archivo porque está siendo utilizado por otro proceso: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\agenda.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\agenda.json'
+[2026-03-05 13:38:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:38:42] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:38:44] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:38:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:38:55] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:39:00] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:39:05] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:39:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:39:15] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:39:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:39:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:39:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:39:35] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:39:40] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:39:45] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:40:06] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:40:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:41:08] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:41:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:42:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:43:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:44:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:44:49] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:44:51] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:45:00] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:45:09] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:45:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:45:29] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:45:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:45:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:46:00] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:46:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:47:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:48:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:49:05] [INFO] Backup completo generado: auto_2026-03-05_134852.zip
+[2026-03-05 13:49:06] [INFO] Backup automático programado en 1h
+[2026-03-05 13:49:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:50:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:51:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:52:23] [INFO] Backup completo generado: auto_2026-03-05_135212.zip
+[2026-03-05 13:52:24] [INFO] Backup automático programado en 1h
+[2026-03-05 13:52:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:53:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:55:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:55:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:55:34] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:55:44] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:55:54] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:56:04] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:56:14] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:56:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:56:34] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:56:44] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:56:54] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:57:04] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:57:14] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:57:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:57:35] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:57:44] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:57:54] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:58:04] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:58:14] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:58:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:58:34] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:58:44] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:58:54] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:59:04] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:59:14] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:59:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:59:34] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:59:45] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 13:59:54] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:00:05] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:00:15] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:00:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:00:34] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:00:44] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:00:54] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:01:04] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:01:14] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:01:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:01:34] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:01:44] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:01:54] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:02:05] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:02:15] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:02:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:02:35] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:02:45] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:03:06] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:04:01] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:04:04] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:04:15] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:04:26] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:08:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:09:00] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:09:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:09:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:09:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:09:40] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:09:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:10:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:11:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:12:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:13:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:14:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:15:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:16:02] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:16:03] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:16:09] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:16:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:16:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:16:29] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:16:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:16:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:16:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:17:09] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:17:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:17:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:17:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:17:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:17:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:17:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:18:09] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:18:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:18:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:18:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:18:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:18:49] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:18:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:19:09] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:19:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:19:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:19:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:19:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:19:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:19:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:20:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:20:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:20:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:20:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:20:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:20:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:20:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:21:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:21:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:21:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:21:29] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:21:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:21:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:21:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:22:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:22:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:22:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:22:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:22:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:22:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:22:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:23:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:23:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:23:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:23:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:23:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:23:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:23:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:24:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:24:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:24:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:24:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:24:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:24:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:24:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:25:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:25:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:25:25] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:25:29] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:25:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:25:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:25:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:26:09] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:26:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:26:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:26:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:26:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:26:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:26:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:27:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:27:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:27:24] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:27:29] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:27:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:27:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:27:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:28:09] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:28:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:28:29] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:28:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:28:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:28:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:29:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:29:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:29:29] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:29:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:29:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:30:00] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:30:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:30:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:30:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:31:13] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:31:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:31:29] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:31:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:31:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:31:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:32:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:32:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:32:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:32:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:32:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:32:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:33:09] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:33:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:33:29] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:33:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:33:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:33:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:34:09] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:34:19] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:34:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:34:40] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:34:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:35:00] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:35:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:35:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:36:13] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:37:13] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:37:37] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:37:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:37:49] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:37:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:38:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:38:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:38:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:38:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:38:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:38:59] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:39:10] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:39:20] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:39:30] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:39:40] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:39:50] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:40:00] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:40:13] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)
+[2026-03-05 14:40:39] [ERROR] Error cargando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\agenda.json tras 3 intentos: Extra data: line 76885 column 2 (char 2029590)

@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Envíos Postales</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#f0f4f8;color:#1a2a3a;font-size:13px;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+
+/* ── CABECERA ── */
+#cab{background:linear-gradient(135deg,#1a3a5f,#2a5298);color:#fff;padding:10px 18px;display:flex;align-items:center;gap:14px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+#cab h1{font-size:15px;font-weight:700;flex:1}
+#cab .contador{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 14px;font-size:13px;font-weight:700;white-space:nowrap}
+#cab .contador span{font-size:18px;font-weight:900}
+
+/* ── AVISO 10 ── */
+#aviso10{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center}
+#aviso10.visible{display:flex}
+#aviso10-box{background:#fff;border-radius:14px;padding:30px 36px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);max-width:340px}
+#aviso10-box .ico{font-size:48px;margin-bottom:12px}
+#aviso10-box h2{font-size:20px;color:#1a3a5f;margin-bottom:8px}
+#aviso10-box p{color:#555;margin-bottom:20px;line-height:1.5}
+#aviso10-box button{background:#1a3a5f;color:#fff;border:none;border-radius:8px;padding:10px 28px;font-size:14px;font-weight:700;cursor:pointer}
+
+/* ── LAYOUT PRINCIPAL ── */
+#main{display:flex;flex:1;overflow:hidden;gap:0}
+
+/* ── PANEL IZQUIERDO: FORMULARIO ── */
+#panel-form{width:520px;flex-shrink:0;background:#fff;border-right:2px solid #dce4ef;display:flex;flex-direction:column;overflow:hidden}
+#panel-form .form-header{background:#e8eef6;padding:10px 16px;font-weight:700;font-size:13px;color:#1a3a5f;border-bottom:1px solid #dce4ef;display:flex;align-items:center;gap:8px;flex-shrink:0}
+#panel-form .form-body{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:13px}
+#panel-form .form-footer{padding:12px 16px;border-top:1px solid #dce4ef;display:flex;gap:8px;flex-shrink:0}
+
+label.campo{display:flex;flex-direction:column;gap:5px;font-weight:700;color:#374151;font-size:13px}
+label.campo input,label.campo select{padding:11px 14px;border:1.5px solid #d1dae8;border-radius:8px;font-size:15px;font-family:inherit;background:#fafcff;transition:border-color .2s;width:100%}
+label.campo input:focus,label.campo select:focus{outline:none;border-color:#2a5298;background:#fff}
+label.campo input.readonly{background:#f0f4f8;color:#666;cursor:default}
+.autocomplete-wrap{position:relative;width:100%}
+
+.fila2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fila3{display:grid;grid-template-columns:2fr 1fr;gap:10px}
+
+/* tipo selector — eliminado */
+/* btn modo oscuro cabecera */
+#btn-tema{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;padding:5px 12px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;white-space:nowrap;transition:background .2s}
+#btn-tema:hover{background:rgba(255,255,255,.3)}
+
+/* botones */
+.btn-add{flex:1;background:#27ae60;color:#fff;border:none;border-radius:8px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s}
+.btn-add:hover{background:#219a52}
+.btn-limpiar{background:#f0f4f8;color:#555;border:1.5px solid #d1dae8;border-radius:8px;padding:10px 14px;font-size:13px;cursor:pointer}
+.btn-limpiar:hover{background:#e0e8f0}
+
+/* ── PANEL DERECHO: LISTA ── */
+#panel-lista{flex:1;display:flex;flex-direction:column;overflow:hidden}
+#panel-lista .lista-header{background:#e8eef6;padding:10px 16px;font-weight:700;font-size:13px;color:#1a3a5f;border-bottom:1px solid #dce4ef;display:flex;align-items:center;gap:10px;flex-shrink:0}
+#panel-lista .lista-header .acciones{margin-left:auto;display:flex;gap:8px}
+
+#tabla-wrap{flex:1;overflow-y:auto;padding:10px}
+#tabla-registros{width:100%;border-collapse:collapse;font-size:12px}
+#tabla-registros th{background:#1a3a5f;color:#fff;padding:8px 10px;text-align:left;font-weight:600;position:sticky;top:0;z-index:2}
+#tabla-registros td{padding:7px 10px;border-bottom:1px solid #e8eef6;vertical-align:middle}
+#tabla-registros tr:hover td{background:#f0f6ff}
+#tabla-registros tr.hoy10 td{background:#fff3cd}
+.tipo-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-weight:700;font-size:11px}
+.tipo-C{background:#dbeafe;color:#1d4ed8}
+.tipo-R{background:#dcfce7;color:#15803d}
+.tipo-F{background:#fce7f3;color:#be185d}
+.btn-del{background:none;border:none;color:#e74c3c;cursor:pointer;font-size:15px;padding:2px 6px;border-radius:4px}
+.btn-del:hover{background:#fde8e8}
+.empty-msg{text-align:center;padding:40px;color:#9ab;font-size:14px}
+
+/* ── BARRA INFERIOR ── */
+#bar-bottom{background:#fff;border-top:2px solid #dce4ef;padding:10px 16px;display:flex;gap:10px;align-items:center;flex-shrink:0}
+.btn-guardar{background:#f0a500;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer}
+.btn-guardar:hover{background:#d4900a}
+.btn-cargar{background:#6c757d;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer}
+.btn-cargar:hover{background:#565e64}
+.btn-generar{background:#1a3a5f;color:#fff;border:none;border-radius:8px;padding:9px 22px;font-size:13px;font-weight:700;cursor:pointer;margin-left:auto}
+.btn-generar:hover{background:#2a5298}
+.btn-nuevo{background:#e74c3c;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer}
+.btn-nuevo:hover{background:#c0392b}
+
+/* ── AUTOCOMPLETADO ── */
+.autocomplete-list{position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid #2a5298;border-top:none;border-radius:0 0 7px 7px;max-height:160px;overflow-y:auto;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.autocomplete-item{padding:7px 10px;cursor:pointer;font-size:12px;border-bottom:1px solid #f0f4f8}
+.autocomplete-item:hover,.autocomplete-item.sel{background:#e8eef6;color:#1a3a5f}
+.autocomplete-item:last-child{border-bottom:none}
+
+/* scrollbar */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:#f0f4f8}
+::-webkit-scrollbar-thumb{background:#bcc8d8;border-radius:3px}
+
+/* ══ MODO OSCURO ══════════════════════════════════════════ */
+body.oscuro{background:#0d1a2e;color:#c8deff}
+body.oscuro #panel-form{background:#111c2d;border-right-color:#1e3050}
+body.oscuro #panel-form .form-header{background:#0d1a2e;color:#8ab4e8;border-bottom-color:#1e3050}
+body.oscuro #panel-form .form-body{background:#111c2d}
+body.oscuro #panel-form .form-footer{border-top-color:#1e3050}
+body.oscuro label.campo{color:#8ab4e8}
+body.oscuro label.campo input,body.oscuro label.campo select{background:#0a1628;border-color:#1e3a5f;color:#c8deff}
+body.oscuro label.campo input:focus,body.oscuro label.campo select:focus{border-color:#4a9eff;background:#0d1f3a}
+body.oscuro label.campo input.readonly{background:#0a1628;color:#6a88aa}
+body.oscuro .tipo-btn{background:#0a1628;border-color:#1e3a5f;color:#8ab4e8}
+body.oscuro .tipo-btn.activo{background:#1a3a6e;border-color:#4a9eff;color:#a8d0ff}
+body.oscuro .btn-limpiar{background:#111c2d;color:#8ab4e8;border-color:#1e3a5f}
+body.oscuro .btn-limpiar:hover{background:#1a2d4a}
+body.oscuro #panel-lista .lista-header{background:#0d1a2e;color:#8ab4e8;border-bottom-color:#1e3050}
+body.oscuro #tabla-wrap{background:#0d1a2e}
+body.oscuro #tabla-registros td{border-bottom-color:#1e3050;color:#c8deff}
+body.oscuro #tabla-registros tr:hover td{background:#1a2d4a}
+body.oscuro #tabla-registros tr.hoy10 td{background:#2a2000}
+body.oscuro #bar-bottom{background:#111c2d;border-top-color:#1e3050}
+body.oscuro .autocomplete-list{background:#0d1a2e;border-color:#4a9eff}
+body.oscuro .autocomplete-item{border-bottom-color:#1e3050;color:#c8deff}
+body.oscuro .autocomplete-item:hover,body.oscuro .autocomplete-item.sel{background:#1a3a6e;color:#a8d0ff}
+body.oscuro #aviso10-box{background:#111c2d;color:#c8deff}
+body.oscuro #aviso10-box h2{color:#a8d0ff}
+body.oscuro #aviso10-box p{color:#8ab4e8}
+body.oscuro ::-webkit-scrollbar-track{background:#0d1a2e}
+body.oscuro ::-webkit-scrollbar-thumb{background:#1e3a5f}
+
+/* ── TIRADOR ── */
+#resizer{width:6px;flex-shrink:0;background:#dce4ef;cursor:col-resize;position:relative;transition:background .2s;display:flex;align-items:center;justify-content:center}
+#resizer:hover,#resizer.arrastrando{background:#2a5298}
+#resizer::after{content:'⋮';color:#aab;font-size:14px;line-height:1;pointer-events:none}
+body.oscuro #resizer{background:#1e3050}
+body.oscuro #resizer:hover,body.oscuro #resizer.arrastrando{background:#4a9eff}
+</style>
+</head>
+<body>
+
+<!-- AVISO MÚLTIPLO DE 10 -->
+<div id="aviso10">
+  <div id="aviso10-box">
+    <div class="ico">📬</div>
+    <h2 id="aviso10-titulo">¡10 registros!</h2>
+    <p id="aviso10-msg">Tienes <strong id="aviso10-num">10</strong> registros.<br>Recuerda que las pegatinas van de 10 en 10.</p>
+    <button onclick="document.getElementById('aviso10').classList.remove('visible')">Continuar</button>
+  </div>
+</div>
+
+<!-- CABECERA -->
+<div id="cab">
+  <span style="font-size:22px">📮</span>
+  <h1>Confección de Envíos Postales</h1>
+  <div class="contador">Registros: <span id="num-registros">0</span></div>
+  <button id="btn-tema" onclick="_toggleTema()">🌙 Oscuro</button>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- FORMULARIO -->
+  <div id="panel-form">
+    <div class="form-header">➕ Nuevo registro</div>
+    <div class="form-body">
+
+      <label class="campo">
+        Nombre y apellidos
+        <div class="autocomplete-wrap">
+          <input id="f-nombre" type="text" placeholder="Nombre completo del destinatario" autocomplete="off"
+            oninput="_ac(this,'nombre')" onkeydown="_acKey(event,'nombre')" onblur="_acHide('nombre',300)"/>
+          <div id="ac-nombre" class="autocomplete-list" style="display:none"></div>
+        </div>
+      </label>
+
+      <label class="campo">
+        Empresa
+        <div class="autocomplete-wrap">
+          <input id="f-empresa" type="text" placeholder="Razón social (opcional)" autocomplete="off"
+            oninput="_ac(this,'empresa')" onkeydown="_acKey(event,'empresa')" onblur="_acHide('empresa',300)"/>
+          <div id="ac-empresa" class="autocomplete-list" style="display:none"></div>
+        </div>
+      </label>
+
+      <label class="campo">
+        Dirección
+        <div class="autocomplete-wrap">
+          <input id="f-direccion" type="text" placeholder="Calle, número, piso..." autocomplete="off"
+            oninput="_ac(this,'direccion')" onkeydown="_acKey(event,'direccion')" onblur="_acHide('direccion',300)"/>
+          <div id="ac-direccion" class="autocomplete-list" style="display:none"></div>
+        </div>
+      </label>
+
+      <div class="fila3">
+        <label class="campo">
+          Localidad
+          <div class="autocomplete-wrap">
+            <input id="f-localidad" type="text" placeholder="Localidad" autocomplete="off"
+              oninput="_ac(this,'localidad');_sugerirCP()" onkeydown="_acKey(event,'localidad')" onblur="_acHide('localidad',300)"/>
+            <div id="ac-localidad" class="autocomplete-list" style="display:none"></div>
+          </div>
+        </label>
+        <label class="campo">
+          Código postal
+          <div class="autocomplete-wrap">
+            <input id="f-cp" type="text" placeholder="00000" maxlength="5" autocomplete="off"
+              oninput="_ac(this,'cp');_sugerirLocalidad()" onkeydown="_acKey(event,'cp')" onblur="_acHide('cp',300)"/>
+            <div id="ac-cp" class="autocomplete-list" style="display:none"></div>
+          </div>
+        </label>
+      </div>
+
+      <label class="campo">
+        Referencia cliente / Nº expediente
+        <div class="autocomplete-wrap">
+          <input id="f-referencia" type="text" placeholder="Ej: 09-03 DIOR 12-2-26" autocomplete="off"
+            oninput="_ac(this,'referencia')" onkeydown="_acKey(event,'referencia')" onblur="_acHide('referencia',300)"/>
+          <div id="ac-referencia" class="autocomplete-list" style="display:none"></div>
+        </div>
+      </label>
+
+      <div class="fila2">
+        <label class="campo">
+          Peso (páginas)
+          <input id="f-peso" type="number" placeholder="0" min="1" max="9999"/>
+        </label>
+        <label class="campo">
+          Prueba de entrega
+          <input id="f-prueba" type="text" value="3" class="readonly" readonly/>
+        </label>
+      </div>
+
+    </div>
+    <div class="form-footer">
+      <button class="btn-limpiar" onclick="_limpiarForm()">🗑 Limpiar</button>
+      <button class="btn-add" onclick="_addRegistro()">➕ Añadir registro</button>
+    </div>
+  </div>
+
+  <!-- TIRADOR DE REDIMENSIÓN -->
+  <div id="resizer"></div>
+
+  <!-- LISTA DE REGISTROS -->
+  <div id="panel-lista">
+    <div class="lista-header">
+      📋 Registros del envío
+      <div class="acciones">
+        <button class="btn-limpiar" onclick="_borrarTodos()" style="font-size:12px;padding:5px 10px">🗑 Borrar todos</button>
+      </div>
+    </div>
+    <div id="tabla-wrap">
+      <table id="tabla-registros">
+        <thead>
+          <tr>
+            <th style="width:30px">#</th>
+            <th>Nombre</th>
+            <th>Empresa</th>
+            <th>Dirección</th>
+            <th>Localidad</th>
+            <th style="width:55px">CP</th>
+            <th>Referencia</th>
+            <th style="width:50px">Peso</th>
+            <th style="width:36px"></th>
+          </tr>
+        </thead>
+        <tbody id="tbody-registros">
+          <tr><td colspan="9" class="empty-msg">No hay registros aún.<br>Rellena el formulario y pulsa ➕ Añadir.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- BARRA INFERIOR -->
+<div id="bar-bottom">
+  <button class="btn-nuevo" onclick="_nuevoEnvio()">🆕 Nuevo envío</button>
+  <button class="btn-guardar" onclick="_guardarBorrador()">💾 Guardar borrador</button>
+  <button class="btn-cargar" onclick="_cargarBorrador()">📂 Cargar borrador</button>
+  <button class="btn-generar" onclick="_generarTXT()">📄 Generar archivo .TXT</button>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// DATOS
+// ══════════════════════════════════════════════════════════
+const CAMPOS_AC = ['nombre','empresa','direccion','localidad','cp','referencia'];
+let _sugerencias    = {};
+let _mapaLocalidadCP = {};
+let _borradores     = {};
+let _sesion         = null;
+
+let _registros = [];
+let _acSelIdx = {}; // índice seleccionado por campo
+
+// Usuario activo (sincronizado con el portal)
+let _uid = 'default';
+
+// ══════════════════════════════════════════════════════════
+// API — guarda datos en el servidor (persistente entre reinicios)
+// ══════════════════════════════════════════════════════════
+async function _apiCargar() {
+  try {
+    const r = await fetch('/api/correos');
+    if (r.ok) return await r.json();
+  } catch(e) {}
+  return {};
+}
+
+function _apiGuardar(endpoint, payload) {
+  fetch('/api/correos/' + endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+}
+
+// Campos fijos
+const COD_ESTRUCTURA = '2009v002';
+const COD_PRODUCTO   = 'S0271';
+const TOTAL_BULTOS   = '01';
+const COD_ADMISION   = '2812096';
+const FIN_REGISTRO   = 'E';
+const PRUEBA_ENTREGA = '3';
+
+// ══════════════════════════════════════════════════════════
+// AÑADIR REGISTRO
+// ══════════════════════════════════════════════════════════
+function _addRegistro() {
+  const nombre    = document.getElementById('f-nombre').value.trim();
+  const empresa   = document.getElementById('f-empresa').value.trim();
+  const direccion = document.getElementById('f-direccion').value.trim();
+  const localidad = document.getElementById('f-localidad').value.trim();
+  const cp        = document.getElementById('f-cp').value.trim();
+  const referencia= document.getElementById('f-referencia').value.trim();
+  const peso      = document.getElementById('f-peso').value.trim();
+
+  if (!nombre) { _shake('f-nombre'); return; }
+  if (!direccion) { _shake('f-direccion'); return; }
+  if (!localidad) { _shake('f-localidad'); return; }
+  if (!cp) { _shake('f-cp'); return; }
+  if (!referencia) { _shake('f-referencia'); return; }
+  if (!peso) { _shake('f-peso'); return; }
+
+  const reg = { nombre, empresa, direccion, localidad, cp, referencia, peso };
+  _registros.push(reg);
+
+  // Guardar sugerencias
+  _guardarSugerencia('nombre', nombre);
+  if (empresa) _guardarSugerencia('empresa', empresa);
+  _guardarSugerencia('direccion', direccion);
+  _guardarSugerencia('localidad', localidad);
+  _guardarSugerencia('cp', cp);
+  _guardarSugerencia('referencia', referencia);
+  // Guardar mapa localidad ↔ CP
+  _mapaLocalidadCP[localidad.toLowerCase()] = cp;
+  _mapaLocalidadCP['cp_' + cp] = localidad;
+  _apiGuardar('mapa', { mapa: _mapaLocalidadCP });
+
+  _renderTabla();
+  _limpiarForm();
+  _checkAviso10();
+  _autoGuardarSesion();
+}
+
+// ══════════════════════════════════════════════════════════
+// RENDER TABLA
+// ══════════════════════════════════════════════════════════
+function _renderTabla() {
+  const tbody = document.getElementById('tbody-registros');
+  document.getElementById('num-registros').textContent = _registros.length;
+
+  if (_registros.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="10" class="empty-msg">No hay registros aún.<br>Rellena el formulario y pulsa ➕ Añadir.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = _registros.map((r, i) => `
+    <tr class="${(i+1) % 10 === 0 ? 'hoy10' : ''}">
+      <td style="font-weight:700;color:#555">${i+1}</td>
+      <td>${_esc(r.nombre)}</td>
+      <td style="color:#666">${_esc(r.empresa)}</td>
+      <td>${_esc(r.direccion)}</td>
+      <td>${_esc(r.localidad)}</td>
+      <td style="font-family:monospace">${_esc(r.cp)}</td>
+      <td style="font-size:11px">${_esc(r.referencia)}</td>
+      <td style="text-align:right">${r.peso}</td>
+      <td><button class="btn-del" onclick="_borrarReg(${i})" title="Eliminar">✕</button></td>
+    </tr>
+  `).join('');
+}
+
+function _esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function _borrarReg(i) {
+  if (!confirm(`¿Eliminar el registro ${i+1}?`)) return;
+  _registros.splice(i, 1);
+  _renderTabla();
+  _autoGuardarSesion();
+}
+
+function _borrarTodos() {
+  if (_registros.length === 0) return;
+  if (!confirm(`¿Eliminar todos los ${_registros.length} registros?`)) return;
+  _registros = [];
+  _renderTabla();
+  _autoGuardarSesion();
+}
+
+// ══════════════════════════════════════════════════════════
+// AVISO MÚLTIPLOS DE 10
+// ══════════════════════════════════════════════════════════
+function _checkAviso10() {
+  const n = _registros.length;
+  if (n > 0 && n % 10 === 0) {
+    document.getElementById('aviso10-num').textContent = n;
+    document.getElementById('aviso10-titulo').textContent = `¡${n} registros!`;
+    document.getElementById('aviso10').classList.add('visible');
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// CODIFICACIÓN WINDOWS-1252
+// El navegador usa UTF-8 internamente; para que el sistema de
+// Correos lea el fichero correctamente hay que convertir a W-1252.
+// Los caracteres españoles (á,é,ñ,ü,º,ª,¡,¿…) tienen el mismo
+// punto de código Unicode que en Windows-1252 (rango 0x00-0xFF),
+// así que basta mapear código→byte directo.
+// ══════════════════════════════════════════════════════════
+function _toW1252(str) {
+  // Tabla de equivalencias para los 27 caracteres del rango 0x80-0x9F
+  // que Windows-1252 redefine respecto a Latin-1
+  const w1252 = {
+    0x20AC:0x80, 0x201A:0x82, 0x0192:0x83, 0x201E:0x84, 0x2026:0x85,
+    0x2020:0x86, 0x2021:0x87, 0x02C6:0x88, 0x2030:0x89, 0x0160:0x8A,
+    0x2039:0x8B, 0x0152:0x8C, 0x017D:0x8E, 0x2018:0x91, 0x2019:0x92,
+    0x201C:0x93, 0x201D:0x94, 0x2022:0x95, 0x2013:0x96, 0x2014:0x97,
+    0x02DC:0x98, 0x2122:0x99, 0x0161:0x9A, 0x203A:0x9B, 0x0153:0x9C,
+    0x017E:0x9E, 0x0178:0x9F
+  };
+  const out = new Uint8Array(str.length);
+  let n = 0;
+  for (let i = 0; i < str.length; i++) {
+    const cp = str.charCodeAt(i);
+    if (cp <= 0xFF)        { out[n++] = cp; }           // Latin-1 directo (incluye á,é,ñ,ü,º...)
+    else if (w1252[cp])    { out[n++] = w1252[cp]; }    // especial W-1252
+    else                   { out[n++] = 0x3F; }          // '?' para el resto
+  }
+  return out.subarray(0, n);
+}
+
+// ══════════════════════════════════════════════════════════
+// GENERAR TXT
+// Estructura del fichero (120 columnas TAB, índices 0-based):
+//   · Primera fila  → tipo 'C'  (primer envío)
+//   · Filas medias  → tipo 'R'  (envíos intermedios)
+//   · Última fila   → tipo 'F'  (último envío)
+//   Si solo hay 1 registro: tipo 'C'
+// Columnas clave (verificadas contra XLS oficial):
+//   col[0]=tipo  col[1]=2009v002  col[2]=S0271  col[10]=01
+//   col[15]=nombre  col[19]=empresa  col[22]=dirección
+//   col[29]=localidad  col[31]=CP  col[39]=referencia
+//   col[41]=peso  col[52]=prueba_entrega  col[68]=admisión  col[119]=E
+// ══════════════════════════════════════════════════════════
+function _fila(tipo, extra) {
+  const cols = new Array(120).fill('');
+  cols[0]   = tipo;
+  cols[1]   = COD_ESTRUCTURA;
+  cols[2]   = COD_PRODUCTO;
+  cols[10]  = TOTAL_BULTOS;
+  cols[68]  = COD_ADMISION;
+  cols[119] = FIN_REGISTRO;
+  if (extra) Object.keys(extra).forEach(k => { cols[+k] = extra[k]; });
+  return cols.join('\t');
+}
+
+function _cpStr(cp) {
+  return String(cp).replace(/\.0$/, '').trim().padStart(5, '0');
+}
+
+function _tipoFila(idx, total) {
+  // Primer registro → C, último → F, intermedios → R
+  if (total === 1)          return 'C';
+  if (idx === 0)            return 'C';
+  if (idx === total - 1)    return 'F';
+  return 'R';
+}
+
+function _generarTXT() {
+  if (_registros.length === 0) {
+    alert('No hay registros para generar el archivo.');
+    return;
+  }
+
+  // Nombre del archivo: env_YYYYDDMMHHMMSS.txt
+  const ahora = new Date();
+  const yyyy  = ahora.getFullYear();
+  const dd    = String(ahora.getDate()).padStart(2,'0');
+  const mm    = String(ahora.getMonth()+1).padStart(2,'0');
+  const hh    = String(ahora.getHours()).padStart(2,'0');
+  const min   = String(ahora.getMinutes()).padStart(2,'0');
+  const ss    = String(ahora.getSeconds()).padStart(2,'0');
+  const nombreArchivo = `env_${yyyy}${dd}${mm}${hh}${min}${ss}.txt`;
+
+  // Construir una línea por registro
+  const lineas = _registros.map((r, i) =>
+    _fila(_tipoFila(i, _registros.length), {
+      15: r.nombre,      // col 15: Nombre completo (verificado vs XLS)
+      19: r.empresa,     // col 19: Empresa
+      22: r.direccion,   // col 22: Dirección
+      29: r.localidad,   // col 29: Localidad
+      31: _cpStr(r.cp),  // col 31: CP (5 dígitos)
+      39: r.referencia,  // col 39: Referencia / Nº expediente
+      41: r.peso,        // col 41: Peso
+      52: PRUEBA_ENTREGA // col 52: Prueba de entrega (3)
+    })
+  );
+
+  const contenido = lineas.join('\r\n') + '\r\n';
+
+  // Descargar codificado en Windows-1252 (igual que el XLS)
+  // El navegador siempre genera UTF-8; hay que convertir manualmente
+  const blob = new Blob([_toW1252(contenido)], { type: 'text/plain;charset=windows-1252' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = nombreArchivo;
+  a.click();
+  URL.revokeObjectURL(url);
+
+  _apiGuardar('sesion', { sesion: null });
+  const nR = Math.max(0, _registros.length - 2);
+  alert(`✅ Archivo generado: ${nombreArchivo}\n\n${_registros.length} registros\n(C: 1, R: ${nR}, F: ${_registros.length > 1 ? 1 : 0})`);
+}
+
+// ══════════════════════════════════════════════════════════
+// GUARDAR / CARGAR BORRADOR
+// ══════════════════════════════════════════════════════════
+function _autoGuardarSesion() {
+  _sesion = { registros: _registros, ts: Date.now() };
+  _apiGuardar('sesion', { sesion: _sesion });
+}
+
+function _guardarBorrador() {
+  if (_registros.length === 0) { alert('No hay registros para guardar.'); return; }
+  const nombre = prompt('Nombre para este borrador:', `borrador_${new Date().toLocaleDateString('es-ES').replace(/\//g,'-')}`);
+  if (!nombre) return;
+  _borradores[nombre] = { registros: _registros, ts: Date.now() };
+  _apiGuardar('borradores', { borradores: _borradores });
+  alert(`✅ Borrador "${nombre}" guardado con ${_registros.length} registros.`);
+}
+
+function _cargarBorrador() {
+  // Construir lista: primero la sesión autoguardada (si tiene datos), luego borradores manuales
+  const items = [];
+  if (_sesion && _sesion.registros && _sesion.registros.length > 0) {
+    items.push({ nombre: '⏱ Autoguardado', data: _sesion });
+  }
+  Object.keys(_borradores).forEach(n => {
+    items.push({ nombre: n, data: _borradores[n] });
+  });
+
+  if (items.length === 0) { alert('No hay borradores guardados.'); return; }
+
+  const lista = items.map((item, i) => {
+    const fecha = new Date(item.data.ts).toLocaleString('es-ES');
+    return `${i+1}. ${item.nombre} — ${item.data.registros.length} registros — ${fecha}`;
+  }).join('\n');
+
+  const sel = prompt(`Borradores disponibles:\n\n${lista}\n\nEscribe el número o nombre a cargar:`);
+  if (!sel) return;
+
+  let item;
+  const idx = parseInt(sel) - 1;
+  if (!isNaN(idx) && items[idx]) {
+    item = items[idx];
+  } else {
+    item = items.find(it => it.nombre === sel);
+  }
+
+  if (!item) { alert('Borrador no encontrado.'); return; }
+
+  if (_registros.length > 0 && !confirm(`¿Reemplazar los ${_registros.length} registros actuales con el borrador?`)) return;
+  _registros = item.data.registros;
+  _renderTabla();
+  _autoGuardarSesion();
+  alert(`✅ Borrador cargado: ${_registros.length} registros.`);
+}
+
+function _nuevoEnvio() {
+  if (_registros.length > 0 && !confirm('¿Comenzar un nuevo envío? Se perderán los registros no guardados como borrador.')) return;
+  _registros = [];
+  _apiGuardar('sesion', { sesion: null });
+  _renderTabla();
+  _limpiarForm();
+}
+
+// ══════════════════════════════════════════════════════════
+// LIMPIAR FORMULARIO
+// ══════════════════════════════════════════════════════════
+function _limpiarForm() {
+  ['f-nombre','f-empresa','f-direccion','f-localidad','f-cp','f-referencia','f-peso'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('f-nombre').focus();
+}
+
+// ══════════════════════════════════════════════════════════
+// SHAKE (feedback error)
+// ══════════════════════════════════════════════════════════
+function _shake(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.borderColor = '#e74c3c';
+  el.style.animation = 'none';
+  setTimeout(() => {
+    el.style.borderColor = '';
+    el.focus();
+  }, 600);
+}
+
+// ══════════════════════════════════════════════════════════
+// AUTOCOMPLETADO
+// ══════════════════════════════════════════════════════════
+function _guardarSugerencia(campo, valor) {
+  if (!valor) return;
+  if (!_sugerencias[campo]) _sugerencias[campo] = [];
+  const lista = _sugerencias[campo];
+  const idx = lista.findIndex(v => v.toLowerCase() === valor.toLowerCase());
+  if (idx !== -1) lista.splice(idx, 1);
+  lista.unshift(valor);
+  if (lista.length > 80) lista.length = 80;
+  _apiGuardar('sugerencias', { sugerencias: _sugerencias });
+}
+
+function _ac(input, campo) {
+  const val = input.value.toLowerCase().trim();
+  const listEl = document.getElementById('ac-' + campo);
+  if (!val || val.length < 1) { listEl.style.display = 'none'; return; }
+  const lista = (_sugerencias[campo] || []).filter(s => s.toLowerCase().includes(val));
+  if (lista.length === 0) { listEl.style.display = 'none'; return; }
+  _acSelIdx[campo] = -1;
+  listEl.innerHTML = lista.slice(0, 12).map((s, i) =>
+    `<div class="autocomplete-item" data-val="${_esc(s)}" onmousedown="_acSelect('${campo}','${s.replace(/'/g,"\\'")}')">
+      ${s.replace(new RegExp(val.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'), m => `<strong>${m}</strong>`)}
+    </div>`
+  ).join('');
+  listEl.style.display = 'block';
+}
+
+function _acSelect(campo, valor) {
+  const inputId = 'f-' + (campo === 'cp' ? 'cp' : campo === 'localidad' ? 'localidad' : campo);
+  const el = document.getElementById(inputId);
+  if (el) el.value = valor;
+  document.getElementById('ac-' + campo).style.display = 'none';
+  // Si selecciona localidad, sugerir CP
+  if (campo === 'localidad') _sugerirCP();
+  if (campo === 'cp') _sugerirLocalidad();
+}
+
+function _acHide(campo, delay) {
+  setTimeout(() => {
+    const el = document.getElementById('ac-' + campo);
+    if (el) el.style.display = 'none';
+  }, delay);
+}
+
+function _acKey(e, campo) {
+  const listEl = document.getElementById('ac-' + campo);
+  if (listEl.style.display === 'none') return;
+  const items = listEl.querySelectorAll('.autocomplete-item');
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    _acSelIdx[campo] = Math.min((_acSelIdx[campo]||0) + 1, items.length - 1);
+    items.forEach((it, i) => it.classList.toggle('sel', i === _acSelIdx[campo]));
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    _acSelIdx[campo] = Math.max((_acSelIdx[campo]||0) - 1, 0);
+    items.forEach((it, i) => it.classList.toggle('sel', i === _acSelIdx[campo]));
+  } else if (e.key === 'Enter' || e.key === 'Tab') {
+    const sel = listEl.querySelector('.autocomplete-item.sel');
+    if (sel) { e.preventDefault(); _acSelect(campo, sel.dataset.val); }
+    else listEl.style.display = 'none';
+  } else if (e.key === 'Escape') {
+    listEl.style.display = 'none';
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// LOCALIDAD ↔ CP
+// ══════════════════════════════════════════════════════════
+function _sugerirCP() {
+  const loc = document.getElementById('f-localidad').value.trim().toLowerCase();
+  if (!loc) return;
+  const cp = _mapaLocalidadCP[loc];
+  if (cp && !document.getElementById('f-cp').value) {
+    document.getElementById('f-cp').value = cp;
+  }
+}
+
+function _sugerirLocalidad() {
+  const cp = document.getElementById('f-cp').value.trim();
+  if (!cp) return;
+  const loc = _mapaLocalidadCP['cp_' + cp];
+  if (loc && !document.getElementById('f-localidad').value) {
+    document.getElementById('f-localidad').value = loc;
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// MODO OSCURO — recibe tema del portal vía postMessage
+// ══════════════════════════════════════════════════════════
+function _toggleTema() {
+  const oscuro = document.body.classList.toggle('oscuro');
+  const tema = oscuro ? 'oscuro' : 'claro';
+  document.getElementById('btn-tema').textContent = oscuro ? '☀️ Claro' : '🌙 Oscuro';
+  _apiGuardar('config', { config: { tema, panel_w: document.getElementById('panel-form').offsetWidth } });
+}
+
+window.addEventListener('message', function(e) {
+  if (!e.data) return;
+  if (e.data.tipo === 'tema') {
+    const oscuro = e.data.valor === 'oscuro';
+    document.body.classList.toggle('oscuro', oscuro);
+    document.getElementById('btn-tema').textContent = oscuro ? '☀️ Claro' : '🌙 Oscuro';
+    return;
+  }
+  if (e.data.tipo === 'cambioUsuario') {
+    const nuevoUid = e.data.usuario?.id || 'default';
+    if (nuevoUid === _uid) return;
+    _uid = nuevoUid;
+    // Las preferencias (tema, ancho) se recargan del servidor al cargar datos
+    _cargarDatos();
+  }
+});
+
+// Leer tema guardado — por defecto oscuro si no hay preferencia explícita
+(function() {
+  // Tema por defecto oscuro — el servidor lo sobrescribe al cargar config
+  document.body.classList.add('oscuro');
+  document.getElementById('btn-tema').textContent = '☀️ Claro';
+})();
+
+// Guardar sesión con sendBeacon al cerrar (más fiable que fetch al salir)
+window.addEventListener('beforeunload', () => {
+  if (_registros.length > 0) {
+    _sesion = { registros: _registros, ts: Date.now() };
+    navigator.sendBeacon(
+      '/api/correos/sesion',
+      new Blob([JSON.stringify({ sesion: _sesion })], { type: 'application/json' })
+    );
+  }
+});
+
+// ══════════════════════════════════════════════════════════
+// RECUPERAR SESIÓN AL CARGAR  (datos desde el servidor)
+// ══════════════════════════════════════════════════════════
+(async function _init() {
+  // Cargar todos los datos persistentes del servidor
+  const datos = await _apiCargar();
+  _sugerencias     = datos.sugerencias       || {};
+  _mapaLocalidadCP = datos.mapa_localidad_cp || {};
+  _borradores      = datos.borradores        || {};
+  _sesion          = datos.sesion            || null;
+
+  // Aplicar configuración guardada (tema y ancho del panel)
+  const cfg = datos.config || {};
+  if (cfg.tema) {
+    const esOscuro = cfg.tema === 'oscuro';
+    document.body.classList.toggle('oscuro', esOscuro);
+    document.getElementById('btn-tema').textContent = esOscuro ? '☀️ Claro' : '🌙 Oscuro';
+  }
+  if (cfg.panel_w && cfg.panel_w >= 220 && cfg.panel_w <= 900) {
+    document.getElementById('panel-form').style.width = cfg.panel_w + 'px';
+  }
+
+  // Recuperar sesión si hay un envío en progreso
+  if (_sesion && _sesion.registros && _sesion.registros.length > 0) {
+    const mins = Math.round((Date.now() - _sesion.ts) / 60000);
+    const haceStr = mins < 60 ? `hace ${mins} min` : `hace ${Math.round(mins/60)}h`;
+    if (confirm(`Hay un envío en progreso (${_sesion.registros.length} registros, ${haceStr}).\n¿Recuperarlo?`)) {
+      _registros = _sesion.registros;
+      _renderTabla();
+    } else {
+      _sesion = null;
+      _apiGuardar('sesion', { sesion: null });
+    }
+  }
+})();
+
+// ══════════════════════════════════════════════════════════
+// TIRADOR DE REDIMENSIÓN
+// ══════════════════════════════════════════════════════════
+(function() {
+  const resizer  = document.getElementById('resizer');
+  const panelForm = document.getElementById('panel-form');
+  const MIN = 220, MAX = 900;
+  let arrastrando = false, startX = 0, startW = 0;
+
+  // Ancho se restaura desde el servidor (cfg.panel_w en _cargarDatos)
+
+  resizer.addEventListener('mousedown', e => {
+    arrastrando = true;
+    startX = e.clientX;
+    startW = panelForm.offsetWidth;
+    resizer.classList.add('arrastrando');
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!arrastrando) return;
+    const nuevoAncho = Math.min(MAX, Math.max(MIN, startW + (e.clientX - startX)));
+    panelForm.style.width = nuevoAncho + 'px';
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (!arrastrando) return;
+    arrastrando = false;
+    resizer.classList.remove('arrastrando');
+    document.body.style.cursor = '';
+    document.body.style.userSelect = '';
+    const w = panelForm.offsetWidth;
+    const tema = document.body.classList.contains('oscuro') ? 'oscuro' : 'claro';
+    _apiGuardar('config', { config: { tema, panel_w: w } });
+  });
+})();
+</script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

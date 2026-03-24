@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ausencias de Plazas</title>
+<style>
+/* ── VARIABLES ─────────────────────────────────────────── */
+:root {
+    --primary:#1e3a5f; --primary2:#2a5298; --bg:#f0f4f8; --card:#ffffff;
+    --border:#dde3ec; --text:#1a2840; --muted:#6b7a94; --hover-bg:#f7f9fc;
+    --shadow:0 2px 8px rgba(0,0,0,.08); --shadow-lg:0 8px 24px rgba(0,0,0,.12);
+    --success:#38a169; --danger:#e53e3e; --warning:#d69e2e;
+    --radius:10px; --tr:.18s ease;
+}
+[data-tema="oscuro"] {
+    --primary:#4a90d9; --primary2:#5ba3e8; --bg:#0f1c2e; --card:#1a2840;
+    --border:#2a3a54; --text:#e2eaf5; --muted:#8899bb; --hover-bg:#1e2f45;
+    --shadow:0 2px 8px rgba(0,0,0,.3); --shadow-lg:0 8px 24px rgba(0,0,0,.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background var(--tr),color var(--tr)}
+
+/* ── HEADER ── */
+.app-header{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;
+    padding:0 1.5rem;display:flex;align-items:center;gap:1rem;min-height:52px;
+    position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.header-icon{font-size:1.4rem}
+.header-title{font-size:1.05rem;font-weight:700;flex:1}
+
+/* ── NAV TABS ── */
+.nav-tabs{background:var(--card);border-bottom:2px solid var(--border);display:flex;
+    gap:.25rem;padding:.5rem 1rem .4rem;position:sticky;top:52px;z-index:90;
+    box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.nav-tab{padding:.42rem .9rem;border-radius:8px;border:none;background:transparent;
+    color:var(--muted);font-size:.85rem;font-weight:600;cursor:pointer;
+    transition:all var(--tr);display:flex;align-items:center;gap:.4rem;white-space:nowrap}
+.nav-tab:hover{background:var(--hover-bg);color:var(--text)}
+.nav-tab.active{background:var(--primary);color:#fff}
+
+/* ── SECTION ── */
+.section{display:none;padding:1.2rem 1.5rem 2rem;animation:fadeIn .2s}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ── TOOLBAR ── */
+.toolbar{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:.55rem .8rem;margin-bottom:1rem;box-shadow:var(--shadow)}
+.btn{padding:.38rem .8rem;border-radius:7px;border:1.5px solid var(--border);
+    background:var(--card);color:var(--text);font-size:.82rem;font-weight:600;
+    cursor:pointer;transition:all var(--tr);display:inline-flex;align-items:center;gap:.35rem}
+.btn:hover{border-color:var(--primary);color:var(--primary)}
+.btn-fill{background:var(--primary);color:#fff;border-color:var(--primary)}
+.btn-fill:hover{background:var(--primary2);color:#fff;border-color:var(--primary2)}
+.btn-danger{background:var(--danger);color:#fff;border-color:var(--danger)}
+.btn-danger:hover{background:#c53030;color:#fff}
+.btn-sm{padding:.25rem .6rem;font-size:.78rem}
+select.filtro{padding:.35rem .6rem;border-radius:6px;border:1.5px solid var(--border);
+    background:var(--card);color:var(--text);font-size:.82rem;cursor:pointer}
+
+/* ── CARDS ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;margin-bottom:1rem}
+.card-header{padding:.7rem 1rem;border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.card-title{font-size:.9rem;font-weight:700;color:var(--primary);display:flex;align-items:center;gap:.4rem}
+.card-body{padding:.8rem 1rem}
+
+/* ── RESUMEN PLAZAS ── */
+.plazas-resumen{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.plaza-card{flex:1;min-width:200px;max-width:320px;border-radius:var(--radius);padding:.8rem 1rem;
+    border:2px solid var(--border);transition:all var(--tr)}
+.plaza-card.ok{border-color:#38a16955;background:rgba(56,161,105,.06)}
+.plaza-card.ausente{border-color:#e53e3e88;background:rgba(229,62,62,.06);animation:cardPulse 2.5s infinite}
+@keyframes cardPulse{0%,100%{box-shadow:0 0 0 0 rgba(229,62,62,.15)}50%{box-shadow:0 0 12px 3px rgba(229,62,62,.1)}}
+.plaza-card-nombre{font-weight:700;font-size:.9rem;margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem}
+.plaza-card-estado{font-size:.8rem;color:var(--muted)}
+.plaza-card.ausente .plaza-card-estado{color:var(--danger);font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
+.dot.ok{background:#38a169}
+.dot.ausente{background:#e53e3e}
+.aus-detalle{font-size:.78rem;margin-top:.25rem;padding:.3rem .5rem;border-radius:6px;background:rgba(229,62,62,.08);border-left:3px solid var(--danger)}
+.aus-detalle strong{color:var(--danger)}
+
+/* ── TABLA ── */
+.tabla-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{background:var(--primary);color:#fff;padding:.55rem .7rem;text-align:left;font-weight:600;white-space:nowrap}
+td{padding:.5rem .7rem;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:hover td{background:var(--hover-bg)}
+.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:.75rem;font-weight:600}
+.tag-activa{background:rgba(229,62,62,.12);color:var(--danger)}
+.tag-futura{background:rgba(59,130,246,.12);color:#3b82f6}
+.tag-pasada{background:rgba(107,122,148,.12);color:var(--muted)}
+.notas-cell{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acciones{display:flex;gap:.3rem}
+
+/* ── CONFIG PLAZAS ── */
+.plaza-config{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.8rem;overflow:hidden}
+.plaza-config-header{padding:.6rem .9rem;background:var(--hover-bg);display:flex;align-items:center;gap:.5rem;cursor:pointer}
+.plaza-config-header:hover{background:var(--border)}
+.plaza-config-nombre{font-weight:700;font-size:.88rem;flex:1}
+.plaza-config-body{padding:.6rem .9rem;border-top:1px solid var(--border)}
+.cargo-row{display:flex;align-items:center;gap:.5rem;padding:.3rem 0;border-bottom:1px solid rgba(0,0,0,.04)}
+.cargo-row:last-child{border-bottom:none}
+.cargo-color{width:20px;height:20px;border-radius:4px;border:1px solid var(--border);cursor:pointer}
+.cargo-nombre{flex:1;font-size:.84rem}
+input.input{padding:.35rem .6rem;border:1.5px solid var(--border);border-radius:6px;
+    background:var(--card);color:var(--text);font-size:.84rem;transition:border var(--tr)}
+input.input:focus{outline:none;border-color:var(--primary)}
+input[type="color"]{width:32px;height:28px;border:1px solid var(--border);border-radius:4px;padding:1px;cursor:pointer}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:center;justify-content:center;animation:fadeIn .15s}
+.modal{background:var(--card);border-radius:12px;width:94%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+.modal-header{padding:.8rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-size:.95rem;font-weight:700;color:var(--primary)}
+.modal-close{background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--muted);padding:4px}
+.modal-close:hover{color:var(--danger)}
+.modal-body{padding:1rem 1.1rem}
+.form-group{margin-bottom:.8rem}
+.form-group label{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:.25rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.4rem .7rem;border:1.5px solid var(--border);
+    border-radius:6px;background:var(--card);color:var(--text);font-size:.84rem}
+.form-group textarea{resize:vertical;min-height:60px}
+.form-group select{cursor:pointer}
+.modal-footer{padding:.7rem 1.1rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.5rem}
+
+/* ── EMPTY STATE ── */
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--muted)}
+.empty-icon{font-size:2.5rem;margin-bottom:.5rem}
+.empty-text{font-size:.9rem}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="app-header">
+  <span class="header-icon">🏛️</span>
+  <span class="header-title">Ausencias de Plazas</span>
+</header>
+
+<!-- ═══ NAV TABS ═══ -->
+<nav class="nav-tabs" id="nav-tabs">
+  <button class="nav-tab active" data-sec="ausencias" onclick="cambiarSeccion('ausencias')">📋 Ausencias</button>
+  <button class="nav-tab" data-sec="plazas" onclick="cambiarSeccion('plazas')">⚙️ Plazas y Cargos</button>
+  <button class="nav-tab" data-sec="historico" onclick="cambiarSeccion('historico')">📜 Historico</button>
+</nav>
+
+<!-- ═══ SECCION: AUSENCIAS ═══ -->
+<div class="section active" id="sec-ausencias">
+  <div class="toolbar">
+    <select class="filtro" id="filtro-plaza" onchange="renderAusencias()">
+      <option value="">Todas las plazas</option>
+    </select>
+    <div style="flex:1"></div>
+    <button class="btn btn-fill" onclick="abrirModalAusencia()">+ Nueva Ausencia</button>
+  </div>
+  <div id="resumen-plazas" class="plazas-resumen"></div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">📋 Ausencias activas y futuras</span>
+    </div>
+    <div class="card-body tabla-wrap" id="tabla-ausencias"></div>
+  </div>
+</div>
+
+<!-- ═══ SECCION: PLAZAS Y CARGOS ═══ -->
+<div class="section" id="sec-plazas">
+  <div class="toolbar">
+    <button class="btn btn-fill" onclick="abrirModalPlaza()">+ Nueva Plaza</button>
+  </div>
+  <div id="lista-plazas"></div>
+  <div class="card" style="margin-top:1.2rem">
+    <div class="card-header">
+      <span class="card-title">📝 Plantillas de cargos</span>
+    </div>
+    <div class="card-body" id="plantillas-cargos"></div>
+  </div>
+</div>
+
+<!-- ═══ SECCION: HISTORICO ═══ -->
+<div class="section" id="sec-historico">
+  <div class="toolbar">
+    <select class="filtro" id="filtro-hist-plaza" onchange="renderHistorico()">
+      <option value="">Todas las plazas</option>
+    </select>
+    <div style="flex:1"></div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">📜 Ausencias pasadas</span>
+    </div>
+    <div class="card-body tabla-wrap" id="tabla-historico"></div>
+  </div>
+</div>
+
+<!-- ═══ CONTAINER MODALES ═══ -->
+<div id="modal-container"></div>
+
+<script>
+'use strict';
+const API_URL = '/api/ausencias';
+let data = { plazas: [], ausencias: [], plantillasCargos: [] };
+
+// ══════════════════════════════════════
+// DATOS
+// ══════════════════════════════════════
+async function cargarDatos() {
+  try {
+    const r = await fetch(API_URL, { cache: 'no-store' });
+    if (r.ok) data = await r.json();
+  } catch(_) {}
+  if (!data.plazas) data.plazas = [];
+  if (!data.ausencias) data.ausencias = [];
+  if (!data.plantillasCargos) data.plantillasCargos = [];
+}
+
+async function guardarDatos() {
+  try {
+    await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch(_) {}
+  try { window.parent.postMessage({ tipo: 'ausenciasActualizadas' }, '*'); } catch(_) {}
+}
+
+// ══════════════════════════════════════
+// NAVEGACION
+// ══════════════════════════════════════
+function cambiarSeccion(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === 'sec-' + id));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.sec === id));
+  if (id === 'ausencias') renderAusencias();
+  if (id === 'plazas') renderPlazas();
+  if (id === 'historico') renderHistorico();
+}
+
+// ══════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════
+const hoy = () => new Date().toISOString().slice(0, 10);
+function fmtFecha(iso) {
+  if (!iso) return '';
+  const [a, m, d] = iso.split('-');
+  return `${d}/${m}/${a}`;
+}
+function nombrePlaza(id) {
+  const p = data.plazas.find(x => x.id === id);
+  return p ? p.nombre : id;
+}
+function nombreCargo(plazaId, cargoId) {
+  const p = data.plazas.find(x => x.id === plazaId);
+  if (!p) return cargoId;
+  const c = (p.cargos || []).find(x => x.id === cargoId);
+  return c ? c.nombre : cargoId;
+}
+function colorCargo(plazaId, cargoId) {
+  const p = data.plazas.find(x => x.id === plazaId);
+  if (!p) return '#6b7a94';
+  const c = (p.cargos || []).find(x => x.id === cargoId);
+  return c ? c.color : '#6b7a94';
+}
+function estadoAusencia(aus) {
+  const h = hoy();
+  if (aus.fechaFin < h) return 'pasada';
+  if (aus.fechaInicio <= h && aus.fechaFin >= h) return 'activa';
+  return 'futura';
+}
+function uid() { return 'aus-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6); }
+function esc(s) { return (s || '').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ══════════════════════════════════════
+// RENDER: AUSENCIAS
+// ══════════════════════════════════════
+function renderFiltrosPlaza() {
+  const opts = '<option value="">Todas las plazas</option>' +
+    data.plazas.sort((a,b) => (a.orden||0) - (b.orden||0))
+      .map(p => `<option value="${p.id}">${esc(p.nombre)}</option>`).join('');
+  document.getElementById('filtro-plaza').innerHTML = opts;
+  document.getElementById('filtro-hist-plaza').innerHTML = opts;
+}
+
+function renderAusencias() {
+  const h = hoy();
+  const filtro = document.getElementById('filtro-plaza').value;
+  const activas = data.ausencias.filter(a => a.fechaFin >= h && (!filtro || a.plazaId === filtro));
+  activas.sort((a, b) => a.fechaInicio.localeCompare(b.fechaInicio));
+
+  // Resumen por plaza
+  const resumen = document.getElementById('resumen-plazas');
+  const plazasShow = filtro ? data.plazas.filter(p => p.id === filtro) : data.plazas;
+  if (!plazasShow.length) {
+    resumen.innerHTML = '<div class="empty"><div class="empty-icon">🏛️</div><div class="empty-text">No hay plazas configuradas. Ve a "Plazas y Cargos" para crear una.</div></div>';
+  } else {
+    resumen.innerHTML = plazasShow.sort((a,b) => (a.orden||0) - (b.orden||0)).map(p => {
+      const ausP = data.ausencias.filter(a => a.plazaId === p.id && a.fechaInicio <= h && a.fechaFin >= h);
+      if (!ausP.length) {
+        return `<div class="plaza-card ok">
+          <div class="plaza-card-nombre"><span class="dot ok"></span> ${esc(p.nombre)}</div>
+          <div class="plaza-card-estado">Sin ausencias</div>
+        </div>`;
+      }
+      const detalles = ausP.map(a => {
+        const cn = nombreCargo(a.plazaId, a.cargoId);
+        return `<div class="aus-detalle"><strong>${esc(cn)}</strong>: ${esc(a.titular)} (hasta ${fmtFecha(a.fechaFin)})${a.notas ? ' &mdash; <em>' + esc(a.notas) + '</em>' : ''}</div>`;
+      }).join('');
+      return `<div class="plaza-card ausente">
+        <div class="plaza-card-nombre"><span class="dot ausente"></span> ${esc(p.nombre)}</div>
+        <div class="plaza-card-estado">${ausP.length} ausencia${ausP.length > 1 ? 's' : ''} activa${ausP.length > 1 ? 's' : ''}</div>
+        ${detalles}
+      </div>`;
+    }).join('');
+  }
+
+  // Tabla
+  const tabla = document.getElementById('tabla-ausencias');
+  if (!activas.length) {
+    tabla.innerHTML = '<div class="empty"><div class="empty-icon">✅</div><div class="empty-text">No hay ausencias activas ni futuras</div></div>';
+    return;
+  }
+  tabla.innerHTML = `<table>
+    <thead><tr><th>Estado</th><th>Plaza</th><th>Cargo</th><th>Titular</th><th>Desde</th><th>Hasta</th><th>Motivo</th><th>Notas</th><th>Sustituto</th><th>Acciones</th></tr></thead>
+    <tbody>${activas.map(a => {
+      const est = estadoAusencia(a);
+      const tagCls = est === 'activa' ? 'tag-activa' : 'tag-futura';
+      const tagLbl = est === 'activa' ? 'ACTIVA' : 'FUTURA';
+      return `<tr>
+        <td><span class="tag ${tagCls}">${tagLbl}</span></td>
+        <td>${esc(nombrePlaza(a.plazaId))}</td>
+        <td><span style="border-left:3px solid ${colorCargo(a.plazaId, a.cargoId)};padding-left:6px">${esc(nombreCargo(a.plazaId, a.cargoId))}</span></td>
+        <td><strong>${esc(a.titular)}</strong></td>
+        <td>${fmtFecha(a.fechaInicio)}</td>
+        <td>${fmtFecha(a.fechaFin)}</td>
+        <td>${esc(a.motivo)}</td>
+        <td class="notas-cell" title="${esc(a.notas)}">${esc(a.notas)}</td>
+        <td>${esc(a.sustituto)}</td>
+        <td class="acciones">
+          <button class="btn btn-sm" onclick="editarAusencia('${a.id}')" title="Editar">✏️</button>
+          <button class="btn btn-sm btn-danger" onclick="borrarAusencia('${a.id}')" title="Eliminar">🗑️</button>
+        </td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table>`;
+}
+
+// ══════════════════════════════════════
+// RENDER: HISTORICO
+// ══════════════════════════════════════
+function renderHistorico() {
+  const h = hoy();
+  const filtro = document.getElementById('filtro-hist-plaza').value;
+  const pasadas = data.ausencias.filter(a => a.fechaFin < h && (!filtro || a.plazaId === filtro));
+  pasadas.sort((a, b) => b.fechaFin.localeCompare(a.fechaFin));
+
+  const tabla = document.getElementById('tabla-historico');
+  if (!pasadas.length) {
+    tabla.innerHTML = '<div class="empty"><div class="empty-icon">📜</div><div class="empty-text">No hay ausencias pasadas</div></div>';
+    return;
+  }
+  tabla.innerHTML = `<table>
+    <thead><tr><th>Plaza</th><th>Cargo</th><th>Titular</th><th>Desde</th><th>Hasta</th><th>Motivo</th><th>Notas</th><th>Sustituto</th><th></th></tr></thead>
+    <tbody>${pasadas.map(a => `<tr>
+      <td>${esc(nombrePlaza(a.plazaId))}</td>
+      <td><span style="border-left:3px solid ${colorCargo(a.plazaId, a.cargoId)};padding-left:6px">${esc(nombreCargo(a.plazaId, a.cargoId))}</span></td>
+      <td>${esc(a.titular)}</td>
+      <td>${fmtFecha(a.fechaInicio)}</td>
+      <td>${fmtFecha(a.fechaFin)}</td>
+      <td>${esc(a.motivo)}</td>
+      <td class="notas-cell" title="${esc(a.notas)}">${esc(a.notas)}</td>
+      <td>${esc(a.sustituto)}</td>
+      <td><button class="btn btn-sm btn-danger" onclick="borrarAusencia('${a.id}')" title="Eliminar">🗑️</button></td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+// ══════════════════════════════════════
+// RENDER: PLAZAS Y CARGOS
+// ══════════════════════════════════════
+function renderPlazas() {
+  const container = document.getElementById('lista-plazas');
+  if (!data.plazas.length) {
+    container.innerHTML = '<div class="empty"><div class="empty-icon">⚙️</div><div class="empty-text">No hay plazas. Crea la primera con el boton de arriba.</div></div>';
+  } else {
+    container.innerHTML = data.plazas.sort((a,b) => (a.orden||0) - (b.orden||0)).map(p => {
+      const cargosHtml = (p.cargos || []).map(c => `
+        <div class="cargo-row">
+          <input type="color" value="${c.color || '#3b82f6'}" onchange="actualizarColorCargo('${p.id}','${c.id}',this.value)">
+          <span class="cargo-nombre">${esc(c.nombre)}</span>
+          <button class="btn btn-sm" onclick="editarCargo('${p.id}','${c.id}')" title="Editar">✏️</button>
+          <button class="btn btn-sm btn-danger" onclick="borrarCargo('${p.id}','${c.id}')" title="Eliminar">✕</button>
+        </div>
+      `).join('');
+      return `<div class="plaza-config">
+        <div class="plaza-config-header">
+          <span class="plaza-config-nombre">🏛️ ${esc(p.nombre)}</span>
+          <span style="font-size:.78rem;color:var(--muted)">${(p.cargos||[]).length} cargo(s)</span>
+          <button class="btn btn-sm" onclick="editarPlaza('${p.id}')" title="Editar nombre">✏️</button>
+          <button class="btn btn-sm btn-danger" onclick="borrarPlaza('${p.id}')" title="Eliminar plaza">🗑️</button>
+        </div>
+        <div class="plaza-config-body">
+          ${cargosHtml || '<div style="color:var(--muted);font-size:.82rem;padding:.3rem 0">Sin cargos definidos</div>'}
+          <button class="btn btn-sm" style="margin-top:.4rem" onclick="abrirModalCargo('${p.id}')">+ Cargo</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Plantillas
+  const pc = document.getElementById('plantillas-cargos');
+  pc.innerHTML = (data.plantillasCargos || []).map(t =>
+    `<span style="display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .6rem;border:1px solid var(--border);border-radius:12px;font-size:.8rem;margin:.2rem .2rem">
+      <span style="width:10px;height:10px;border-radius:50%;background:${t.colorDefecto}"></span> ${esc(t.nombre)}
+    </span>`
+  ).join('') + '<p style="font-size:.78rem;color:var(--muted);margin-top:.5rem">Estas plantillas se ofrecen al crear una plaza nueva para agregar cargos rapidamente.</p>';
+}
+
+// ══════════════════════════════════════
+// MODALES
+// ══════════════════════════════════════
+function cerrarModal() {
+  document.getElementById('modal-container').innerHTML = '';
+}
+
+function abrirModalAusencia(editId) {
+  const aus = editId ? data.ausencias.find(a => a.id === editId) : null;
+  const titulo = aus ? 'Editar Ausencia' : 'Nueva Ausencia';
+  const plazasOpts = data.plazas.sort((a,b) => (a.orden||0) - (b.orden||0))
+    .map(p => `<option value="${p.id}" ${aus && aus.plazaId === p.id ? 'selected' : ''}>${esc(p.nombre)}</option>`).join('');
+
+  document.getElementById('modal-container').innerHTML = `
+  <div class="modal-overlay" onclick="if(event.target===this)cerrarModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">${titulo}</span>
+        <button class="modal-close" onclick="cerrarModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Plaza</label>
+          <select id="m-plaza" onchange="actualizarCargosModal()">${plazasOpts}</select>
+        </div>
+        <div class="form-group">
+          <label>Cargo</label>
+          <select id="m-cargo"></select>
+        </div>
+        <div class="form-group">
+          <label>Titular (nombre)</label>
+          <input id="m-titular" value="${esc(aus?.titular || '')}">
+        </div>
+        <div style="display:flex;gap:.8rem">
+          <div class="form-group" style="flex:1">
+            <label>Fecha inicio</label>
+            <input type="date" id="m-inicio" value="${aus?.fechaInicio || hoy()}">
+          </div>
+          <div class="form-group" style="flex:1">
+            <label>Fecha fin</label>
+            <input type="date" id="m-fin" value="${aus?.fechaFin || ''}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Motivo</label>
+          <input id="m-motivo" value="${esc(aus?.motivo || '')}" placeholder="Baja, comision de servicio, vacaciones...">
+        </div>
+        <div class="form-group">
+          <label>Notas (visible en banner)</label>
+          <textarea id="m-notas" placeholder="Ej: No remitir a firma">${esc(aus?.notas || '')}</textarea>
+        </div>
+        <div class="form-group">
+          <label>Sustituto/a</label>
+          <input id="m-sustituto" value="${esc(aus?.sustituto || '')}" placeholder="(Opcional)">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" onclick="cerrarModal()">Cancelar</button>
+        <button class="btn btn-fill" onclick="guardarAusenciaModal('${editId || ''}')">${aus ? 'Guardar' : 'Crear'}</button>
+      </div>
+    </div>
+  </div>`;
+
+  actualizarCargosModal(aus?.cargoId);
+}
+
+function actualizarCargosModal(selectedId) {
+  const plazaId = document.getElementById('m-plaza')?.value;
+  const plaza = data.plazas.find(p => p.id === plazaId);
+  const sel = document.getElementById('m-cargo');
+  if (!sel) return;
+  sel.innerHTML = (plaza?.cargos || []).map(c =>
+    `<option value="${c.id}" ${c.id === selectedId ? 'selected' : ''}>${esc(c.nombre)}</option>`
+  ).join('');
+}
+
+function guardarAusenciaModal(editId) {
+  const plazaId = document.getElementById('m-plaza').value;
+  const cargoId = document.getElementById('m-cargo').value;
+  const titular = document.getElementById('m-titular').value.trim();
+  const inicio = document.getElementById('m-inicio').value;
+  const fin = document.getElementById('m-fin').value;
+  const motivo = document.getElementById('m-motivo').value.trim();
+  const notas = document.getElementById('m-notas').value.trim();
+  const sustituto = document.getElementById('m-sustituto').value.trim();
+
+  if (!plazaId || !cargoId || !titular || !inicio || !fin) {
+    alert('Completa al menos: Plaza, Cargo, Titular, Fecha inicio y Fecha fin.');
+    return;
+  }
+  if (fin < inicio) {
+    alert('La fecha fin no puede ser anterior a la fecha inicio.');
+    return;
+  }
+
+  if (editId) {
+    const aus = data.ausencias.find(a => a.id === editId);
+    if (aus) {
+      aus.plazaId = plazaId; aus.cargoId = cargoId; aus.titular = titular;
+      aus.fechaInicio = inicio; aus.fechaFin = fin; aus.motivo = motivo;
+      aus.notas = notas; aus.sustituto = sustituto;
+    }
+  } else {
+    data.ausencias.push({
+      id: uid(), plazaId, cargoId, titular,
+      fechaInicio: inicio, fechaFin: fin, motivo, notas, sustituto,
+      creadoEn: new Date().toISOString()
+    });
+  }
+
+  guardarDatos();
+  cerrarModal();
+  renderAusencias();
+  renderFiltrosPlaza();
+}
+
+function editarAusencia(id) { abrirModalAusencia(id); }
+
+function borrarAusencia(id) {
+  if (!confirm('Eliminar esta ausencia?')) return;
+  data.ausencias = data.ausencias.filter(a => a.id !== id);
+  guardarDatos();
+  renderAusencias();
+  renderHistorico();
+}
+
+// ══════════════════════════════════════
+// PLAZAS CRUD
+// ══════════════════════════════════════
+function abrirModalPlaza(editId) {
+  const plaza = editId ? data.plazas.find(p => p.id === editId) : null;
+  const titulo = plaza ? 'Editar Plaza' : 'Nueva Plaza';
+  const plantillasHtml = !plaza ? `
+    <div class="form-group">
+      <label>Cargos iniciales (de plantillas)</label>
+      <div id="m-plantillas">${(data.plantillasCargos || []).map((t, i) =>
+        `<label style="display:flex;align-items:center;gap:.4rem;padding:.2rem 0;font-size:.84rem;cursor:pointer">
+          <input type="checkbox" value="${i}" ${i < 2 ? 'checked' : ''}>
+          <span style="width:10px;height:10px;border-radius:50%;background:${t.colorDefecto}"></span>
+          ${esc(t.nombre)}
+        </label>`
+      ).join('')}</div>
+    </div>` : '';
+
+  document.getElementById('modal-container').innerHTML = `
+  <div class="modal-overlay" onclick="if(event.target===this)cerrarModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">${titulo}</span>
+        <button class="modal-close" onclick="cerrarModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nombre de la plaza</label>
+          <input id="m-pnombre" value="${esc(plaza?.nombre || '')}" placeholder="Ej: Plaza 1 - Civil">
+        </div>
+        ${plantillasHtml}
+      </div>
+      <div class="modal-footer">
+        <button class="btn" onclick="cerrarModal()">Cancelar</button>
+        <button class="btn btn-fill" onclick="guardarPlazaModal('${editId || ''}')">${plaza ? 'Guardar' : 'Crear'}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function guardarPlazaModal(editId) {
+  const nombre = document.getElementById('m-pnombre').value.trim();
+  if (!nombre) { alert('Escribe un nombre para la plaza.'); return; }
+
+  if (editId) {
+    const p = data.plazas.find(x => x.id === editId);
+    if (p) p.nombre = nombre;
+  } else {
+    const cargos = [];
+    const checks = document.querySelectorAll('#m-plantillas input[type=checkbox]:checked');
+    checks.forEach(ch => {
+      const t = data.plantillasCargos[parseInt(ch.value)];
+      if (t) cargos.push({ id: 'cargo-' + Date.now() + '-' + Math.random().toString(36).slice(2,5), nombre: t.nombre, color: t.colorDefecto });
+    });
+    data.plazas.push({
+      id: 'plaza-' + Date.now(),
+      nombre,
+      orden: data.plazas.length,
+      cargos
+    });
+  }
+
+  guardarDatos();
+  cerrarModal();
+  renderPlazas();
+  renderFiltrosPlaza();
+  renderAusencias();
+}
+
+function editarPlaza(id) { abrirModalPlaza(id); }
+
+function borrarPlaza(id) {
+  const p = data.plazas.find(x => x.id === id);
+  const n = p ? p.nombre : id;
+  const ausCount = data.ausencias.filter(a => a.plazaId === id).length;
+  let msg = `Eliminar la plaza "${n}"?`;
+  if (ausCount) msg += `\n\nTiene ${ausCount} ausencia(s) asociada(s) que tambien se eliminaran.`;
+  if (!confirm(msg)) return;
+  data.plazas = data.plazas.filter(x => x.id !== id);
+  data.ausencias = data.ausencias.filter(a => a.plazaId !== id);
+  guardarDatos();
+  renderPlazas();
+  renderFiltrosPlaza();
+  renderAusencias();
+}
+
+// ══════════════════════════════════════
+// CARGOS CRUD
+// ══════════════════════════════════════
+function abrirModalCargo(plazaId, editCargoId) {
+  const plaza = data.plazas.find(p => p.id === plazaId);
+  if (!plaza) return;
+  const cargo = editCargoId ? (plaza.cargos || []).find(c => c.id === editCargoId) : null;
+  const titulo = cargo ? 'Editar Cargo' : 'Nuevo Cargo';
+
+  document.getElementById('modal-container').innerHTML = `
+  <div class="modal-overlay" onclick="if(event.target===this)cerrarModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">${titulo} — ${esc(plaza.nombre)}</span>
+        <button class="modal-close" onclick="cerrarModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nombre del cargo</label>
+          <input id="m-cnombre" value="${esc(cargo?.nombre || '')}" placeholder="Ej: Magistrado/a">
+        </div>
+        <div class="form-group">
+          <label>Color</label>
+          <input type="color" id="m-ccolor" value="${cargo?.color || '#3b82f6'}">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" onclick="cerrarModal()">Cancelar</button>
+        <button class="btn btn-fill" onclick="guardarCargoModal('${plazaId}','${editCargoId || ''}')">${cargo ? 'Guardar' : 'Crear'}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function guardarCargoModal(plazaId, editCargoId) {
+  const nombre = document.getElementById('m-cnombre').value.trim();
+  const color = document.getElementById('m-ccolor').value;
+  if (!nombre) { alert('Escribe un nombre para el cargo.'); return; }
+  const plaza = data.plazas.find(p => p.id === plazaId);
+  if (!plaza) return;
+  if (!plaza.cargos) plaza.cargos = [];
+
+  if (editCargoId) {
+    const c = plaza.cargos.find(x => x.id === editCargoId);
+    if (c) { c.nombre = nombre; c.color = color; }
+  } else {
+    plaza.cargos.push({
+      id: 'cargo-' + Date.now() + '-' + Math.random().toString(36).slice(2,5),
+      nombre, color
+    });
+  }
+
+  guardarDatos();
+  cerrarModal();
+  renderPlazas();
+}
+
+function editarCargo(plazaId, cargoId) { abrirModalCargo(plazaId, cargoId); }
+
+function borrarCargo(plazaId, cargoId) {
+  if (!confirm('Eliminar este cargo?')) return;
+  const plaza = data.plazas.find(p => p.id === plazaId);
+  if (!plaza) return;
+  plaza.cargos = (plaza.cargos || []).filter(c => c.id !== cargoId);
+  guardarDatos();
+  renderPlazas();
+}
+
+function actualizarColorCargo(plazaId, cargoId, color) {
+  const plaza = data.plazas.find(p => p.id === plazaId);
+  if (!plaza) return;
+  const cargo = (plaza.cargos || []).find(c => c.id === cargoId);
+  if (cargo) { cargo.color = color; guardarDatos(); }
+}
+
+// ══════════════════════════════════════
+// TEMA (desde portal)
+// ══════════════════════════════════════
+window.addEventListener('message', e => {
+  if (!e.data) return;
+  if (e.data.tipo === 'tema') {
+    if (e.data.oscuro) document.documentElement.setAttribute('data-tema', 'oscuro');
+    else document.documentElement.removeAttribute('data-tema');
+  }
+});
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+(async () => {
+  await cargarDatos();
+  renderFiltrosPlaza();
+  renderAusencias();
+})();
+</script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "plazas": [],
+  "ausencias": [],
+  "plantillasCargos": [
+    {
+      "nombre": "Magistrado/a",
+      "colorDefecto": "#3b82f6"
+    },
+    {
+      "nombre": "Letrado/a de la Adm. de Justicia",
+      "colorDefecto": "#10b981"
+    },
+    {
+      "nombre": "Fiscal",
+      "colorDefecto": "#f59e0b"
+    },
+    {
+      "nombre": "Forense",
+      "colorDefecto": "#8b5cf6"
+    }
+  ]
+}

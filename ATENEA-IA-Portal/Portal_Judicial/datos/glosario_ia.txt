@@ -1,0 +1,187 @@
+=== PORTAL JUDICIAL — GLOSARIO PARA IA ===
+Sede: Vilagarcía de Arousa | Módulos: 14+ | Versión 2.0 (marzo 2026)
+
+MÓDULOS DISPONIBLES:
+Agenda (señalamientos), Vencimientos (plazos procesales), Vacaciones (ausencias personal),
+Guardias (turnos semanales), Auxilios Judiciales, Notifica/Turnos,
+Instrucción Penal, Control de Presos, ClipBox, Correos (envíos postales),
+Boletín Estadístico, Portal/Usuarios, Backup, Asistente IA
+
+═══════════════════════════════════════════════════
+PERSONAL — CATEGORÍAS Y CÓDIGOS
+═══════════════════════════════════════════════════
+- Gestor/Gestora de Procesos Judiciales (Gestión Procesal): códigos 601–607 | color azul 🔵
+- Tramitador/a Procesal (Tramitación): códigos 701–716 | color verde 🟢
+- Auxilio Judicial: códigos 801–806 | color amarillo 🟡
+- Apoyo al Fiscal (AF): código "AF" | estrella ★ | sin color de categoría
+
+SECCIONES: Civil | Penal | Ejecución | VG (Violencia de Género) | VD (Violencia Doméstica) | VS (Violencia Sexual) | Decanato | Registro Civil
+
+═══════════════════════════════════════════════════
+PLAZAS — TITULARES Y COMPETENCIAS
+═══════════════════════════════════════════════════
+Plaza 1: Instrucción Civil + Instrucción Penal | Titular: SOFIA LEONOR
+Plaza 2: Instrucción Civil + Instrucción Penal | Titular: PATRICIA FERNANDEZ
+Plaza 3: Instrucción Civil + Instrucción Penal + Violencia de Género | Titular: PEDRO ADRIÁN GÓMEZ
+Plaza 4: Violencia Doméstica (especializado) | Titular configurable
+Plaza 5: Violencia Sexual (especializado) | Titular configurable
+
+═══════════════════════════════════════════════════
+AGENDA — SEÑALAMIENTOS
+═══════════════════════════════════════════════════
+Campos: Plaza | LAJ (Letrado Adm. Justicia) | Fecha | Hora | Tipo de procedimiento | Número/Año | Sala | Partes | Estado
+Formato procedimiento: TIPO NÚMERO/AÑO → ej: JVB 45/2024 | PA 12/2025 | DP 33/2026
+Tipos de procedimiento habituales: JVB, PA, DP, PN, JF, EJ, ADO, JC, VG, VD, VS, RC, AR, DIL
+Salas: Sala Grande | Sala Pequeña | AJN | VC (Videoconferencia) | DECL (Declaraciones) | PENAL
+Estados de señalamiento: pendiente | celebrado | suspendido | anulado
+Funciones: edición por turnos multiusuario | estadísticas | importación/exportación CSV
+
+═══════════════════════════════════════════════════
+GUARDIAS — TURNOS SEMANALES
+═══════════════════════════════════════════════════
+Ciclo semanal: MARTES → LUNES (la semana de guardia empieza el martes)
+Servicios: Gestión (Gestión Procesal) | Tramitación (Tramitación Procesal) | Auxilio Judicial
+Rotación equilibrada automática: máximo ±1 guardia por persona en el mismo departamento
+diaOverrides: ediciones manuales día a día (respetadas en regeneración de calendarios)
+Consultas: "quién está de guardia esta semana" | "guardia de tramitación el martes" | "turnos de auxilio en marzo"
+
+═══════════════════════════════════════════════════
+VENCIMIENTOS — PLAZOS PROCESALES
+═══════════════════════════════════════════════════
+Dies a quo: día siguiente a la fecha del auto/decreto de notificación
+Plazos predefinidos: +5 | +10 | +20 | +30 | +60 días hábiles | plazo personalizable
+Agosto: configurable como mes inhábil (no computa días hábiles)
+Estados de alerta:
+  🔴 Rojo: vence en ≤7 días hábiles (urgente)
+  🟡 Amarillo: vence en 8–15 días hábiles (próximo)
+  🟢 Verde: vence en >15 días hábiles (sin urgencia)
+  ⚫ Negro: plazo vencido/expirado
+Panel: pendientes | vencen hoy | vencidos | todos | exportación JSON
+
+═══════════════════════════════════════════════════
+VACACIONES — AUSENCIAS DE PERSONAL
+═══════════════════════════════════════════════════
+Tipos de ausencia: Vacaciones | Permiso | Asuntos Propios | Incapacidad Temporal (IT) | Otro
+Base anual: 22 días + adicionales por antigüedad (configurable por funcionario)
+Restricción: los fines de semana no pueden marcarse manualmente como festivos laborales
+Exportación: CSV compatible con gestión de RRHH
+
+═══════════════════════════════════════════════════
+NOTIFICA / TURNOS
+═══════════════════════════════════════════════════
+Módulo: Notificaciones y turnos de notificadores externos
+Campos de diligencia: tipo + número/año (formato: TIPO NÚMERO/AÑO)
+Resultado: positivo (notificado) | negativo (no notificado)
+Campos adicionales: Plaza | Persona notificada | Relación jurídica | Motivo no notificación
+Turno anual de notificaciones: empieza en martes | edición manual de celdas | sincronización turnos activos
+
+═══════════════════════════════════════════════════
+AUXILIOS JUDICIALES
+═══════════════════════════════════════════════════
+Tipos: Videoconferencia | Exhorto | Otro
+Estados: Pendiente | Realizado | Cancelado
+Alertas previas configurables: 10 | 15 | 30 | 60 minutos antes
+Consultas: "auxilios pendientes de plaza 2" | "videoconferencias esta semana"
+
+═══════════════════════════════════════════════════
+CONTROL DE PRESOS (INTERNOS)
+═══════════════════════════════════════════════════
+Campos: Código BD/IPENCAT | código interno | número documento | nombre | centro penitenciario | plaza instructora | plaza sentenciadora | procedimiento | situación | fecha ingreso | días en prisión (automático)
+Centros penitenciarios habituales: Bonxe | A Lama | Teixeiro | Pereiro de Aguiar | Monterroso
+Situación procesal: Preventivo | Penado | Libertad Condicional | Tercer Grado | Extinguida
+Conteo de días: calculado automáticamente desde la fecha de ingreso
+Funciones: importación Excel | exportación | gestión por plaza
+
+═══════════════════════════════════════════════════
+CLIPBOX — FRAGMENTOS DE TEXTO JUDICIAL
+═══════════════════════════════════════════════════
+Tipos de contenido: texto | imagen | HTML
+Funciones: clips anclados (favoritos) | preferencias de formato | almacenamiento IndexedDB
+Atajos de teclado: Alt+/ (búsqueda) | Ctrl+D (anclar) | Ctrl+P (previsualizar) | F11 (pantalla completa)
+Consultas: "busca clip de auto de archivo" | "muestra mis clips de VG"
+
+═══════════════════════════════════════════════════
+CORREOS — ENVÍOS POSTALES
+═══════════════════════════════════════════════════
+Campos: destinatario | empresa | dirección | referencia/expediente | peso (páginas) | acuse de recibo
+Lotes de 10 etiquetas por impresión | exportación .TXT para impresora postal | borrador guardable/recuperable
+
+═══════════════════════════════════════════════════
+BOLETÍN ESTADÍSTICO TRIMESTRAL
+═══════════════════════════════════════════════════
+Periodos: 1T | 2T | 3T | 4T (trimestres del año judicial)
+Plazas: 1 a 5 | Secciones: Civil | Penal | VG | VD | VS
+Celdas blancas: entrada manual de datos
+Celdas verdes: cálculo automático (NO editar)
+Autoguardado: cada 30 segundos | Exportación: PDF + JSON
+
+═══════════════════════════════════════════════════
+PORTAL — USUARIOS Y ROLES
+═══════════════════════════════════════════════════
+Roles: Funcionario | Juez | Letrado de la Administración de Justicia (LAJ)
+Módulos privados por usuario (14 módulos con iconos, reordenables por arrastre)
+Superadmin: acceso total | PIN de 4 dígitos guardado en disco (nunca en navegador)
+Temas: claro (light) | oscuro (dark) | persistente por usuario
+
+═══════════════════════════════════════════════════
+BACKUP — COPIAS DE SEGURIDAD
+═══════════════════════════════════════════════════
+Tipos: ZIP completo (todos los módulos) | ZIP por usuario | ZIP por equipo/grupo | JSON individual por módulo
+Frecuencias automáticas: Desactivado | cada 1h | cada 2h | cada 4h | cada 8h | cada 12h | cada 24h
+Restauración: desde JSON (selectiva por módulo) o desde ZIP completo (restauración total con confirmación)
+
+═══════════════════════════════════════════════════
+ASISTENTE IA (GROQ)
+═══════════════════════════════════════════════════
+Modelos disponibles: llama-3.1-8b-instant | llama3-8b-8192 | llama-3.3-70b-versatile | qwen3-32b
+Privacidad estricta: solo se envían a Groq fechas, tipos de acto y plaza — NUNCA nombres completos, DNI ni expedientes completos
+API Key: almacenada solo en servidor, nunca en navegador ni en LocalStorage
+Fallback: si Groq no está disponible (sin internet, clave incorrecta, timeout) → motor de reglas local
+
+═══════════════════════════════════════════════════
+FORMATOS DE FECHA RECONOCIDOS POR EL ASISTENTE
+═══════════════════════════════════════════════════
+El asistente entiende estas formas de expresar fechas (en español):
+- "hoy", "mañana", "ayer", "pasado mañana"
+- "el lunes", "el martes", "el miércoles", "el jueves", "el viernes" → próximo día de esa semana
+- "esta semana", "la semana que viene", "próxima semana"
+- "día 3", "el día 3", "dia 3" → día 3 del mes actual (o siguiente mes si ese día ya pasó)
+- "para el día 5", "para el 5" → día 5 del mes actual
+- "3 de marzo", "15 de abril", "29 de junio de 2026" → fecha exacta con mes en español
+- "03/03", "15/04/2026" → formato DD/MM o DD/MM/YYYY
+- "este mes" → primer día del mes actual
+IMPORTANTE: Si el usuario dice "día 3" o "dia 3", el sistema busca señalamientos el día 3 del
+mes en curso (o mes siguiente si ya pasó). No es "3 señalamientos", es la FECHA día 3.
+Nunca interpretes un número como cantidad cuando el contexto es una fecha.
+
+═══════════════════════════════════════════════════
+PALABRAS CLAVE PARA CONSULTAS (VOCABULARIO ACTIVADOR)
+═══════════════════════════════════════════════════
+Oye | Busca | Lista | Añade | Nuevo/Nueva | Quién | Dime | Muéstrame | Exporta |
+Genera | Notifica | Turno | Backup | Configura | Calcula | Vacaciones | Señala |
+Prórroga | Preso | Clip | Guardia | Plazo | Vencimiento | Señalamiento | Diligencia
+
+═══════════════════════════════════════════════════
+REGLAS DE CÓMPUTO Y CONFIGURACIÓN GLOBAL
+═══════════════════════════════════════════════════
+- Semana de guardia: SIEMPRE empieza el martes y termina el lunes siguiente
+- Dies a quo (inicio de plazo): día siguiente al auto/decreto/notificación (no el mismo día)
+- Agosto: configurable como inhábil para el cómputo de plazos procesales
+- Sede por defecto: Vilagarcía de Arousa (configurable)
+- Título del portal: personalizable por el administrador
+- Colores de categorías: azul=Gestión | verde=Tramitación | amarillo=Auxilio | ★=Fiscal
+- Modo oscuro/claro: persistente por usuario, no afecta a otros usuarios
+
+═══════════════════════════════════════════════════
+EJEMPLOS DE CONSULTAS CORRECTAS
+═══════════════════════════════════════════════════
+"¿Qué señalamientos hay mañana en Plaza 3?"
+"¿Quién tiene guardia de tramitación esta semana?"
+"Lista los vencimientos que caducan esta semana"
+"¿Cuántos presos preventivos hay en la Plaza 1?"
+"Genera el boletín del primer trimestre de 2026"
+"¿Quién está de vacaciones en agosto en la sección Penal?"
+"Muéstrame los auxilios de videoconferencia pendientes de Plaza 2"
+"¿Cuántos días hábiles tiene el plazo de JVB 45/2024 Plaza 1?"
+"¿Qué turnos de notificación hay asignados esta semana?"
+"Exporta los señalamientos de Plaza 1 del mes de marzo"

@@ -1,0 +1,157 @@
+[2026-03-09 00:31:00] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-09 00:31:00] [INFO] Backup automático programado en 1h
+[2026-03-09 01:31:01] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-09 01:31:01] [INFO] Backup automático programado en 1h
+[2026-03-09 02:31:01] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-09 02:31:01] [INFO] Backup automático programado en 1h
+[2026-03-09 03:31:02] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-09 03:31:02] [INFO] Backup automático programado en 1h
+[2026-03-09 04:31:02] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-09 04:31:02] [INFO] Backup automático programado en 1h
+[2026-03-09 05:31:03] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-09 05:31:03] [INFO] Backup automático programado en 1h
+[2026-03-09 06:31:03] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-09 06:31:03] [INFO] Backup automático programado en 1h
+[2026-03-09 06:32:17] [INFO] Backup automático programado en 1h
+[2026-03-09 06:32:17] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-09 07:31:13] [INFO] Backup completo generado: auto_2026-03-09_073103.zip
+[2026-03-09 07:31:21] [INFO] Backup automático programado en 1h
+[2026-03-09 07:32:27] [INFO] Backup completo generado: auto_2026-03-09_073217.zip
+[2026-03-09 07:32:28] [INFO] Backup automático programado en 1h
+[2026-03-09 08:05:43] [INFO] Backup automático programado en 1h
+[2026-03-09 08:05:43] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-09 08:23:12] [INFO] Backup automático programado en 1h
+[2026-03-09 08:23:12] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-09 08:31:33] [INFO] Backup completo generado: auto_2026-03-09_083122.zip
+[2026-03-09 08:31:34] [INFO] Backup automático programado en 1h
+[2026-03-09 08:32:38] [INFO] Backup completo generado: auto_2026-03-09_083228.zip
+[2026-03-09 08:32:39] [INFO] Backup automático programado en 1h
+[2026-03-09 09:00:25] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 09:01:24] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 09:01:25] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 09:02:04] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 09:02:24] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 09:02:25] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 09:06:04] [INFO] Backup completo generado: auto_2026-03-09_090543.zip
+[2026-03-09 09:06:05] [INFO] Backup automático programado en 1h
+[2026-03-09 09:23:23] [INFO] Backup completo generado: auto_2026-03-09_092312.zip
+[2026-03-09 09:23:24] [INFO] Backup automático programado en 1h
+[2026-03-09 09:31:45] [INFO] Backup completo generado: auto_2026-03-09_093134.zip
+[2026-03-09 09:31:46] [INFO] Backup automático programado en 1h
+[2026-03-09 09:32:50] [INFO] Backup completo generado: auto_2026-03-09_093240.zip
+[2026-03-09 09:32:51] [INFO] Backup automático programado en 1h
+[2026-03-09 10:02:55] [INFO] Backup automático programado en 1h
+[2026-03-09 10:02:55] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-09 10:06:26] [INFO] Backup completo generado: auto_2026-03-09_100605.zip
+[2026-03-09 10:06:28] [INFO] Backup automático programado en 1h
+[2026-03-09 10:23:34] [INFO] Backup completo generado: auto_2026-03-09_102324.zip
+[2026-03-09 10:23:35] [INFO] Backup automático programado en 1h
+[2026-03-09 10:24:34] [INFO] Login superadmin OK
+[2026-03-09 10:25:12] [INFO] PIN establecido para usuario ANABELENPINTOPINTO
+[2026-03-09 10:31:58] [INFO] Backup completo generado: auto_2026-03-09_103146.zip
+[2026-03-09 10:31:59] [INFO] Backup automático programado en 1h
+[2026-03-09 10:32:06] [INFO] Login superadmin OK
+[2026-03-09 10:33:02] [INFO] Backup completo generado: auto_2026-03-09_103251.zip
+[2026-03-09 10:33:03] [INFO] Backup automático programado en 1h
+[2026-03-09 10:53:25] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 11:03:07] [INFO] Backup completo generado: auto_2026-03-09_110255.zip
+[2026-03-09 11:03:08] [INFO] Backup automático programado en 1h
+[2026-03-09 11:06:49] [INFO] Backup completo generado: auto_2026-03-09_110629.zip
+[2026-03-09 11:06:50] [INFO] Backup automático programado en 1h
+[2026-03-09 11:21:06] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 11:23:47] [INFO] Backup completo generado: auto_2026-03-09_112336.zip
+[2026-03-09 11:23:48] [INFO] Backup automático programado en 1h
+[2026-03-09 11:24:35] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia_edicion.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia_edicion.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia_edicion.json'
+[2026-03-09 11:26:19] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia_edicion.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia_edicion.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia_edicion.json'
+[2026-03-09 11:29:04] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia_edicion.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia_edicion.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia_edicion.json'
+[2026-03-09 11:30:08] [INFO] Login superadmin OK
+[2026-03-09 11:30:17] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia_edicion.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia_edicion.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia_edicion.json'
+[2026-03-09 11:30:18] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 11:32:08] [INFO] Backup completo generado: auto_2026-03-09_113159.zip
+[2026-03-09 11:32:09] [INFO] Backup automático programado en 1h
+[2026-03-09 11:33:12] [INFO] Backup completo generado: auto_2026-03-09_113303.zip
+[2026-03-09 11:33:13] [INFO] Backup automático programado en 1h
+[2026-03-09 11:33:17] [INFO] Módulo 'agenda' restaurado desde backup del cliente
+[2026-03-09 11:34:25] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 11:34:46] [INFO] Login superadmin OK
+[2026-03-09 11:35:26] [INFO] Módulo 'agenda' restaurado desde backup del cliente
+[2026-03-09 11:37:28] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia_edicion.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia_edicion.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia_edicion.json'
+[2026-03-09 12:03:20] [INFO] Backup completo generado: auto_2026-03-09_120308.zip
+[2026-03-09 12:03:21] [INFO] Backup automático programado en 1h
+[2026-03-09 12:07:12] [INFO] Backup completo generado: auto_2026-03-09_120651.zip
+[2026-03-09 12:07:13] [INFO] Backup automático programado en 1h
+[2026-03-09 12:21:25] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 12:23:59] [INFO] Backup completo generado: auto_2026-03-09_122348.zip
+[2026-03-09 12:24:00] [INFO] Backup automático programado en 1h
+[2026-03-09 12:25:26] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 12:25:56] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 12:26:36] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 12:26:56] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 12:32:20] [INFO] Backup completo generado: auto_2026-03-09_123210.zip
+[2026-03-09 12:32:21] [INFO] Backup automático programado en 1h
+[2026-03-09 12:33:23] [INFO] Backup completo generado: auto_2026-03-09_123313.zip
+[2026-03-09 12:33:24] [INFO] Backup automático programado en 1h
+[2026-03-09 13:03:33] [INFO] Backup completo generado: auto_2026-03-09_130321.zip
+[2026-03-09 13:03:34] [INFO] Backup automático programado en 1h
+[2026-03-09 13:07:34] [INFO] Backup completo generado: auto_2026-03-09_130714.zip
+[2026-03-09 13:07:35] [INFO] Backup automático programado en 1h
+[2026-03-09 13:24:11] [INFO] Backup completo generado: auto_2026-03-09_132401.zip
+[2026-03-09 13:24:12] [INFO] Backup automático programado en 1h
+[2026-03-09 13:24:25] [ERROR] Error guardando Z:\Portal_judicial_Multitribunal\datos\vilagarcia\presencia.json: [WinError 5] Acceso denegado: 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json.tmp' -> 'Z:\\Portal_judicial_Multitribunal\\datos\\vilagarcia\\presencia.json'
+[2026-03-09 13:32:32] [INFO] Backup completo generado: auto_2026-03-09_133221.zip
+[2026-03-09 13:32:32] [INFO] Backup automático programado en 1h
+[2026-03-09 13:33:34] [INFO] Backup completo generado: auto_2026-03-09_133324.zip
+[2026-03-09 13:33:35] [INFO] Backup automático programado en 1h
+[2026-03-09 13:58:00] [INFO] Backup automático programado en 1h
+[2026-03-09 13:58:00] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-09 14:03:47] [INFO] Backup completo generado: auto_2026-03-09_140335.zip
+[2026-03-09 14:03:48] [INFO] Backup automático programado en 1h
+[2026-03-09 14:12:22] [INFO] [LLM] Config guardada: proveedor=cerebras modelo=llama3.1-8b modo=combinado
+[2026-03-09 14:13:03] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 14:24:23] [INFO] Backup completo generado: auto_2026-03-09_142412.zip
+[2026-03-09 14:24:24] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 14:24:24] [INFO] Backup automático programado en 1h
+[2026-03-09 14:28:09] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 14:29:23] [INFO] Backup automático programado en 1h
+[2026-03-09 14:29:23] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-09 14:32:43] [INFO] Backup completo generado: auto_2026-03-09_143233.zip
+[2026-03-09 14:32:44] [INFO] Backup automático programado en 1h
+[2026-03-09 14:33:45] [INFO] Backup completo generado: auto_2026-03-09_143335.zip
+[2026-03-09 14:33:46] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 14:33:46] [INFO] Backup automático programado en 1h
+[2026-03-09 14:39:36] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 14:53:36] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 14:58:12] [INFO] Backup completo generado: auto_2026-03-09_145801.zip
+[2026-03-09 14:58:13] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 14:58:13] [INFO] Backup automático programado en 1h
+[2026-03-09 15:02:20] [INFO] Backup automático programado en 1h
+[2026-03-09 15:02:21] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-09 15:03:59] [INFO] Backup completo generado: auto_2026-03-09_150348.zip
+[2026-03-09 15:04:00] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 15:04:00] [INFO] Backup automático programado en 1h
+[2026-03-09 15:07:15] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 15:19:01] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 15:29:36] [INFO] Backup completo generado: auto_2026-03-09_152924.zip
+[2026-03-09 15:29:37] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 15:29:37] [INFO] Backup automático programado en 1h
+[2026-03-09 15:32:56] [INFO] Backup completo generado: auto_2026-03-09_153244.zip
+[2026-03-09 15:32:57] [INFO] Backup automático programado en 1h
+[2026-03-09 15:33:56] [INFO] Backup completo generado: auto_2026-03-09_153347.zip
+[2026-03-09 15:33:57] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 15:33:57] [INFO] Backup automático programado en 1h
+[2026-03-09 15:51:00] [INFO] Backup automático programado en 1h
+[2026-03-09 15:51:00] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-09 15:53:06] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-09 16:49:50] [INFO] Backup automático programado en 1h
+[2026-03-09 16:49:50] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-09 16:59:04] [INFO] Backup automático programado en 1h
+[2026-03-09 16:59:04] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-09 17:01:32] [INFO] Login superadmin OK
+[2026-03-09 17:01:48] [INFO] PIN establecido para usuario MARINAPIAYLONGUEIRA
+[2026-03-09 17:02:33] [INFO] PIN establecido para usuario MARINAPIAYLONGUEIRA
+[2026-03-09 17:03:24] [INFO] Login superadmin OK
+[2026-03-09 17:03:32] [INFO] PIN eliminado para usuario MARINAPIAYLONGUEIRA
+[2026-03-09 17:17:24] [INFO] Backup automático programado en 1h
+[2026-03-09 17:17:24] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-09 17:18:28] [INFO] Backup automático programado en 1h
+[2026-03-09 17:18:28] [INFO] Servidor iniciado en 127.0.0.1:5000

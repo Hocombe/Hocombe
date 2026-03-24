@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ClipBox — Judicial (v2.3.1 · darkfix + inline-edit)</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%230b1320'/%3E%3Cstop offset='100%25' style='stop-color:%231c2a47'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g1)'/%3E%3Crect x='16' y='10' width='32' height='44' rx='4' fill='%234cc38a'/%3E%3Crect x='20' y='8' width='24' height='8' rx='3' fill='%23087f5b'/%3E%3Ccircle cx='32' cy='12' r='2' fill='%23e6eaf2'/%3E%3Crect x='20' y='20' width='24' height='30' rx='2' fill='%23ffffff'/%3E%3Cpath d='M24,25 h16 M24,29 h16 M24,33 h12 M24,37 h14 M24,41 h10 M24,45 h16' stroke='%230b1320' stroke-width='1.5' stroke-linecap='round' opacity='0.3'/%3E%3Cpath d='M40,42 L44,46 L52,38' stroke='%234cc38a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"/>
+<style>
+  :root{ 
+    --bg:#0b1320; --fg:#e6eaf2; --muted:#9aa6bd; --card:#111a2e; --accent:#4cc38a; --danger:#ef5f5f; --warn:#f5a524; --border:#22314f;
+    --btn-bg:#1c2a47; --btn-fg:var(--fg); --btn-hover:#223259;
+    --sidebar-w: 440px;
+  }
+  :root.light{ --bg:#f6f8fc; --fg:#0b1320; --muted:#5a6784; --card:#ffffff; --accent:#087f5b; --danger:#d53939; --warn:#b57700; --border:#dbe2ef; --btn-bg:#e9eef8; --btn-fg:#102a43; --btn-hover:#dfe7f6; }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.35 system-ui, Segoe UI, Roboto, Arial, sans-serif}
+  body.resizing{user-select:none; cursor:col-resize}
+  header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--card);position:sticky;top:0;z-index:100}
+  header .title{display:flex;align-items:center;gap:10px;font-weight:700}
+  header .title .badge{background:var(--accent);color:#08120e;padding:2px 8px;border-radius:999px;font-size:12px}
+  header .actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;position:relative;z-index:101}
+  button, .btn{background:var(--btn-bg);border:1px solid var(--border);color:var(--btn-fg);padding:8px 10px;border-radius:8px;cursor:pointer}
+  button:hover{background:var(--btn-hover)}
+  button.primary{background:var(--accent);color:#062017;border:none}
+  button.danger{background:transparent;border-color:var(--danger);color:var(--danger)}
+  button.warn{background:transparent;border-color:var(--warn);color:var(--warn)}
+  button.ghost{background:transparent;border-color:var(--border);}
+  button:disabled{opacity:.6;cursor:not-allowed}
+  input[type="text"], input[type="number"], select, textarea{background:var(--card);border:1px solid var(--border);color:var(--fg);padding:8px 10px;border-radius:8px;min-width:180px;position:relative;z-index:auto;pointer-events:auto}
+  input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus{outline:2px solid var(--accent);outline-offset:2px;z-index:200}
+  input[type="text"]:hover, input[type="number"]:hover, select:hover, textarea:hover{border-color:var(--accent)}
+  label.switch{display:inline-flex;gap:6px;align-items:center;cursor:pointer;font-size:13px;color:var(--muted)}
+  label.switch input{accent-color:var(--accent)}
+
+  .container{display:grid;grid-template-columns:var(--sidebar-w) 6px 1fr;gap:0;min-height:calc(100vh - 56px)}
+  .sidebar{border-right:1px solid var(--border);background:var(--card);display:flex;flex-direction:column;min-width:280px;max-width:800px}
+
+  .resizer{position:relative;width:6px;cursor:col-resize;touch-action:none;z-index:5;
+    background:linear-gradient(180deg, transparent, rgba(255,255,255,.18) 40%, rgba(255,255,255,.18) 60%, transparent)}
+  .resizer::before{content:"";position:absolute;left:-8px;right:-8px;top:0;bottom:0}
+  .resizer:hover{background:linear-gradient(180deg, transparent, rgba(76,195,138,.6) 40%, rgba(76,195,138,.6) 60%, transparent)}
+
+  .toolbar{display:flex;gap:8px;padding:10px;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
+  .list{overflow:auto}
+  .item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer}
+  .item:hover{background:rgba(255,255,255,.04)}
+  .item.active{outline:2px solid var(--accent);background:rgba(76,195,138,.08)}
+  .thumb{width:46px;height:46px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:#0e172b;border:1px solid var(--border);overflow:hidden}
+  .thumb img{max-width:100%;max-height:100%;display:block}
+  .meta{flex:1 1 auto;min-width:0}
+  .meta .top{display:flex;justify-content:space-between;gap:8px}
+  .meta .title{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .meta .subtitle{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted);font-size:12px;margin-top:2px}
+  .meta .info{font-size:12px;color:var(--muted)}
+  .pin{color:var(--warn)}
+  .chip{font-size:11px;border:1px solid var(--border);padding:1px 6px;border-radius:999px;color:var(--muted)}
+  .main{display:flex;flex-direction:column}
+  .context{display:flex;gap:8px;align-items:center;padding:8px 12px;border-bottom:1px dashed var(--border);background:rgba(0,0,0,.03)}
+  .dropzone{margin:14px;border:2px dashed var(--border);border-radius:12px;min-height:100px;display:flex;align-items:center;justify-content:center;color:var(--muted);text-align:center;padding:14px}
+  .dropzone:focus{outline:2px solid var(--accent)}
+  .dropzone.focus{border-color:var(--accent);color:var(--accent)}
+  .dropzone[contenteditable="true"]{caret-color:transparent;}
+  .preview{padding:16px;overflow:auto}
+  .preview .panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
+  .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .row .grow{flex:1 1 auto}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .hint{color:var(--muted);font-size:13px}
+  .kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#0e172b;border:1px solid var(--border);border-radius:6px;padding:1px 4px}
+  .footer{padding:8px 14px;border-top:1px solid var(--border);color:var(--muted);display:flex;gap:10px;justify-content:space-between}
+  .hidden{display:none !important}
+
+  /* Darkfix for HTML preview */
+  :root:not(.light) .htmlRenderBox, 
+  :root:not(.light) .htmlRenderBox *:not(svg *){ color: var(--fg) !important; border-color: var(--border) !important; }
+  :root:not(.light) .htmlRenderBox a { color: #9cd3ff !important; }
+  :root:not(.light) .htmlRenderBox code,
+  :root:not(.light) .htmlRenderBox pre { background:#0e172b !important; color: var(--fg) !important; }
+  :root:not(.light) .htmlRenderBox table { background: transparent !important; }
+  :root:not(.light) .htmlRenderBox [style*="background:"],
+  :root:not(.light) .htmlRenderBox [style*="background-color:"]{ background: transparent !important; background-color: transparent !important; }
+
+  /* Caja de texto única con edición inline */
+  .text-box { width:100%; min-height:40px; max-height:400px; overflow-y:auto; background:var(--card); color:var(--fg); border:1px solid var(--border); border-radius:8px; padding:10px; white-space:pre-wrap; line-height:1.4; resize:vertical; }
+  .text-box.editing { background:#0e172b; outline:2px solid var(--accent); }
+  
+  /* Contenedor con tirador para textBox */
+  .textbox-container { position:relative; margin-top:10px; }
+  .textbox-resizer { width:100%; height:6px; cursor:ns-resize; background:linear-gradient(0deg, transparent, rgba(255,255,255,.12) 40%, rgba(255,255,255,.12) 60%, transparent); border-radius:3px; margin-bottom:4px; }
+  .textbox-resizer:hover { background:linear-gradient(0deg, transparent, rgba(76,195,138,.5) 40%, rgba(76,195,138,.5) 60%, transparent); }
+
+  /* Modal de ayuda */
+  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.7); backdrop-filter:blur(4px); z-index:1000; display:flex; align-items:center; justify-content:center; }
+  .modal { background:var(--card); border:1px solid var(--border); border-radius:16px; max-width:600px; max-height:80vh; overflow:auto; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+  .modal-header { padding:16px 20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  .modal-header h2 { margin:0; font-size:18px; }
+  .modal-body { padding:20px; }
+  .modal-close { background:transparent; border:none; color:var(--muted); cursor:pointer; font-size:24px; padding:0; width:32px; height:32px; border-radius:8px; }
+  .modal-close:hover { background:var(--btn-hover); color:var(--fg); }
+  .shortcut-list { display:grid; gap:12px; }
+  .shortcut-item { display:grid; grid-template-columns:140px 1fr; gap:12px; padding:10px; background:rgba(255,255,255,.02); border-radius:8px; }
+  .shortcut-keys { display:flex; gap:4px; flex-wrap:wrap; }
+
+  /* Modo enfoque */
+  body.focus-mode .sidebar { display:none; }
+  body.focus-mode .resizer { display:none; }
+  body.focus-mode .container { grid-template-columns:1fr; }
+
+  /* Drag and drop visual feedback */
+  .item.dragging { opacity:0.5; }
+  .item.drag-over { border-top:3px solid var(--accent); }
+
+  /* Botón copiado feedback */
+  button.copied { background:var(--accent) !important; color:#04110c !important; border:none !important; }
+  button.copied::after { content:' ✓'; }
+
+  /* Selección múltiple */
+  .item.selected { background:rgba(76,195,138,.15); outline:1px solid var(--accent); }
+  .selection-bar { padding:10px 12px; border-bottom:1px solid var(--border); background:rgba(76,195,138,.08); display:flex; gap:8px; align-items:center; }
+
+  /* Modo edición mejorado */
+  #metadataSection.editing input, #metadataSection.editing select { outline:2px solid var(--accent); background:#0e172b; }
+
+
+</style>
+</head>
+<body>
+<header>
+  <div class="title">
+    <span>📋 ClipBox</span>
+    <span class="badge">judicial</span>
+  </div>
+  <div class="actions">
+    <input id="search" type="text" placeholder="Buscar… (Alt+/)"/>
+    <select id="filterType" title="Tipo">
+      <option value="all">Todos</option>
+      <option value="text">Texto</option>
+      <option value="image">Imagen</option>
+      <option value="html">HTML</option>
+    </select>
+    <select id="filterPlaza" title="Plaza">
+      <option value="all">Plaza: todas</option>
+      <option value="Plaza - 1 SOFIA LEONOR">Plaza 1 — SOFIA LEONOR</option>
+      <option value="Plaza - 2 PATRICIA FERNANDEZ">Plaza 2 — PATRICIA FERNANDEZ</option>
+      <option value="Plaza - 3 PEDRO ADRIAN GÓMEZ">Plaza 3 — PEDRO ADRIAN GÓMEZ</option>
+    </select>
+    <select id="filterJuez" title="Juez/a"><option value="all">Juez/a: todos</option></select>
+    <select id="filterLetrado" title="Letrado/a"><option value="all">Letrado/a: todos</option></select>
+    <label class="switch"><input id="preferRich" type="checkbox" checked> Preferir formato (Enter)</label>
+    <label class="switch"><input id="sanitizeMode" type="checkbox" checked> Limpiar texto</label>
+    <label class="switch"><input id="upperTitle" type="checkbox" checked> Títulos en MAYÚSCULAS</label>
+    <button id="toggleTheme" onclick="_toggleTemaModulo()" title="Cambiar tema claro/oscuro">🌓</button>
+    <button id="helpBtn" title="Atajos de teclado">❓</button>
+    <button id="manualSaveBtn" class="primary" title="Guardar todo manualmente">💾 GUARDAR</button>
+    <button id="readClipboard" class="warn" title="Leer del portapapeles">📥</button>
+    <button id="exportJSON">⬇️ JSON</button>
+    <button id="importJSON">⬆️ JSON</button>
+    <button id="exportCSV">🗂️ CSV</button>
+    <button id="clearAll" class="danger">🧹 Vaciar</button>
+    <input id="filePicker" type="file" accept="application/json" class="hidden"/>
+  </div>
+</header>
+<div class="container">
+  <aside class="sidebar">
+    <div class="toolbar">
+      <button id="showAll">Todos</button>
+      <button id="showPinned">Anclados</button>
+      <button id="focusModeBtn" title="Modo enfoque (F11)">🎯</button>
+      <button id="sidebarPresetBtn" title="Alternar ancho sidebar (estrecho/medio/ancho)">↔ 440px</button>
+      <span class="hint">Items: <span id="count">0</span> • Almacenamiento aprox.: <span id="storage">0 KB</span></span>
+    </div>
+    <div id="selectionBar" class="selection-bar hidden">
+      <strong><span id="selectedCount">0</span> seleccionados</strong>
+      <button id="exportSelectedBtn" class="ghost">⬇️ Exportar selección</button>
+      <button id="clearSelectionBtn" class="ghost">✕ Deseleccionar</button>
+    </div>
+    <div id="list" class="list" role="listbox" aria-label="Historial"></div>
+  </aside>
+  <div class="resizer" id="resizer" role="separator" aria-orientation="vertical" aria-label="Redimensionar panel lateral" tabindex="0"></div>
+  <main class="main">
+    <div class="context">
+      <strong>Contexto</strong>
+      <select id="ctxPlaza">
+        <option value="">(Plaza por defecto)</option>
+        <option value="Plaza - 1 SOFIA LEONOR">Plaza 1 — SOFIA LEONOR</option>
+        <option value="Plaza - 2 PATRICIA FERNANDEZ">Plaza 2 — PATRICIA FERNANDEZ</option>
+        <option value="Plaza - 3 PEDRO ADRIAN GÓMEZ">Plaza 3 — PEDRO ADRIAN GÓMEZ</option>
+      </select>
+      <input id="ctxJuez" type="text" placeholder="Juez/a" list="juecesList"/>
+      <input id="ctxLetrado" type="text" placeholder="Letrado/a" list="letradosList"/>
+      <label class="switch"><input id="ctxAuto" type="checkbox" checked> Asignar a nuevas capturas</label>
+      <button id="ctxApplyOne">Aplicar al seleccionado</button>
+      <button id="ctxApplyFilter">Aplicar a los filtrados</button>
+    </div>
+
+    <div id="dropzone" class="dropzone" tabindex="0" contenteditable="true" aria-label="Zona de pegado">
+      <div>
+        <div><strong>Pega aquí con <span class="kbd">Ctrl</span>+<span class="kbd">V</span></strong> o suelta archivos/imágenes.</div>
+        <div class="hint">Enter = copia según preferencia • Ctrl+Enter = formato • Shift+Enter = texto plano</div>
+      </div>
+    </div>
+
+    <div id="preview" class="preview">
+      <div class="panel hidden" id="panel">
+        <div class="row" style="justify-content:space-between">
+          <div class="row">
+            <button id="copySmartBtn" class="primary" title="Enter">Copiar (preferencia)</button>
+            <button id="copyRichBtn" title="Ctrl+Enter">Copiar con formato</button>
+            <button id="copyPlainBtn" title="Shift+Enter">Copiar como texto</button>
+            <button id="toggleEditBtn" class="ghost" title="Editar en sitio">✏️ Editar</button>
+            <button id="saveEditBtn" class="primary hidden">💾 Guardar todo</button>
+            <button id="cancelEditBtn" class="hidden">↩️ Cancelar</button>
+            <button id="replaceContentBtn" class="warn" title="Reemplazar contenido desde portapapeles">🔄 Reemplazar</button>
+            <button id="pinBtn">📌 Anclar</button>
+            <button id="duplicateBtn" title="Duplicar elemento">📑 Duplicar</button>
+            <button id="deleteBtn" class="danger">Eliminar</button>
+          </div>
+          <div class="row">
+            <label class="switch"><input id="hideHtmlAlways" type="checkbox"> Ocultar HTML siempre</label>
+            <label class="switch"><input id="showHtmlRender" type="checkbox"> Ver vista HTML</label>
+            <label class="switch"><input id="showHtmlCode" type="checkbox"> Ver código HTML</label>
+            <div class="hint" id="meta"></div>
+          </div>
+        </div>
+        <div class="grid" style="margin-top:10px" id="metadataSection">
+          <div class="row">
+            <input id="titleInput" class="grow" type="text" placeholder="Título" readonly title="Haz clic para editar"/>
+            <button id="titleSuggest">Sugerir título</button>
+          </div>
+          <div class="row">
+            <div style="position:relative;display:inline-flex">
+              <select id="plazaInput" title="Plaza" disabled>
+                <option value="">(Sin plaza)</option>
+                <option value="Plaza - 1 SOFIA LEONOR">Plaza 1 — SOFIA LEONOR</option>
+                <option value="Plaza - 2 PATRICIA FERNANDEZ">Plaza 2 — PATRICIA FERNANDEZ</option>
+                <option value="Plaza - 3 PEDRO ADRIAN GÓMEZ">Plaza 3 — PEDRO ADRIAN GÓMEZ</option>
+              </select>
+              <div id="plazaClickCatcher" style="position:absolute;inset:0;cursor:pointer;z-index:5" title="Haz clic para editar"></div>
+            </div>
+            <input id="juezInput" type="text" placeholder="Juez/a (texto libre)" list="juecesList" readonly title="Haz clic para editar"/>
+            <datalist id="juecesList"></datalist>
+            <input id="letradoInput" type="text" placeholder="Letrado/a (texto libre)" list="letradosList" readonly title="Haz clic para editar"/>
+            <datalist id="letradosList"></datalist>
+            <input id="tagInput" type="text" placeholder="Etiquetas (coma)" readonly title="Haz clic para editar"/>
+          </div>
+        </div>
+        <div id="content" style="margin-top:10px"></div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="hint">Atajos: Alt+/ busca • ↑/↓ navega • Enter preferencia • Ctrl+Enter formato • Shift+Enter texto • Ctrl+D elimina • Ctrl+P ancla</div>
+      <div class="hint">Todo se guarda en tu navegador (IndexedDB).</div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal de ayuda -->
+<div id="helpModal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>⌨️ Atajos de teclado</h2>
+      <button class="modal-close" id="closeHelpModal">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="shortcut-list">
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">Alt</span> + <span class="kbd">/</span></div>
+          <div>Enfocar búsqueda</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">↑</span> / <span class="kbd">↓</span></div>
+          <div>Navegar por la lista</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">Enter</span></div>
+          <div>Copiar según preferencia (formato/texto)</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">Ctrl</span> + <span class="kbd">Enter</span></div>
+          <div>Copiar con formato</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">Shift</span> + <span class="kbd">Enter</span></div>
+          <div>Copiar como texto plano</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">Ctrl</span> + <span class="kbd">D</span></div>
+          <div>Eliminar elemento seleccionado</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">Ctrl</span> + <span class="kbd">P</span></div>
+          <div>Anclar/Desanclar elemento</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">Ctrl</span> + <span class="kbd">Click</span></div>
+          <div>Seleccionar múltiples elementos</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">F11</span></div>
+          <div>Activar/desactivar modo enfoque</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">Ctrl</span> + <span class="kbd">V</span></div>
+          <div>Pegar en la zona de pegado</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">Esc</span></div>
+          <div>Cerrar modal / Salir de modo enfoque</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">✏️</span> + <span class="kbd">💾</span></div>
+          <div>Modo edición: edita todo (contenido + metadatos)</div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-keys"><span class="kbd">🔄</span></div>
+          <div>Reemplazar solo el contenido (mantiene metadatos)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Usuario activo (sincronizado con el portal) — global para acceso desde múltiples scripts
+var _uid = 'default';
+(function(){
+  const root = document.documentElement;
+  // El tema lo controla el portal mediante postMessage — no se usa botón propio
+  const savedTheme = localStorage.getItem(_uid + '_clipbox_theme') || localStorage.getItem('clipbox_theme') || 'dark';
+  if(savedTheme==='light') root.classList.add('light');
+
+  const preferRichEl = document.getElementById('preferRich');
+  const sanitizeModeEl = document.getElementById('sanitizeMode');
+  const upperTitleEl = document.getElementById('upperTitle');
+  const hideHtmlAlwaysEl = document.getElementById('hideHtmlAlways');
+  const showHtmlRenderEl = document.getElementById('showHtmlRender');
+  const showHtmlCodeEl = document.getElementById('showHtmlCode');
+
+  // Sidebar resizer + presets
+  const resizer = document.getElementById('resizer');
+  const presetBtn = document.getElementById('sidebarPresetBtn');
+  const minW = 280, maxW = 800; const presets = [320, 440, 600];
+  function getW(){ return parseInt(getComputedStyle(root).getPropertyValue('--sidebar-w'))||440; }
+  function setW(w){ w=Math.max(minW, Math.min(maxW, Math.round(w))); root.style.setProperty('--sidebar-w', w+'px'); localStorage.setItem(_uid + '_clipbox_sidebar_w', w+'px'); presetBtn.textContent = '↔ '+w+'px'; }
+  const storedW = localStorage.getItem(_uid + '_clipbox_sidebar_w') || localStorage.getItem('clipbox_sidebar_w'); if(storedW){ root.style.setProperty('--sidebar-w', storedW); presetBtn.textContent = '↔ '+storedW.replace('px','')+'px'; }
+  presetBtn.onclick = ()=>{ const current = getW(); let idx=0, best=1e9; for(let i=0;i<presets.length;i++){ const d=Math.abs(presets[i]-current); if(d<best){best=d; idx=i;} } idx=(idx+1)%presets.length; setW(presets[idx]); };
+  let dragging=false, startX=0, startW=0, raf=false;
+  function onDown(e){ dragging=true; startX=e.clientX; startW=getW(); document.body.classList.add('resizing'); try{ resizer.setPointerCapture(e.pointerId); }catch(_){} }
+  function onMove(e){ if(!dragging) return; const dx=e.clientX - startX; const next = Math.max(minW, Math.min(maxW, startW + dx)); if(raf) return; raf=true; requestAnimationFrame(()=>{ setW(next); raf=false; }); }
+  function onUp(e){ if(!dragging) return; dragging=false; document.body.classList.remove('resizing'); try{ resizer.releasePointerCapture(e.pointerId); }catch(_){} }
+  if(window.PointerEvent){ resizer.addEventListener('pointerdown', onDown); resizer.addEventListener('pointermove', onMove); resizer.addEventListener('pointerup', onUp); }
+  else { resizer.addEventListener('mousedown', (e)=>{ dragging=true; startX=e.clientX; startW=getW(); document.body.classList.add('resizing'); e.preventDefault(); }); window.addEventListener('mousemove', (e)=>{ if(!dragging) return; const dx=e.clientX-startX; setW(startW+dx); }); window.addEventListener('mouseup', ()=>{ if(!dragging) return; dragging=false; document.body.classList.remove('resizing'); }); }
+
+  // Preferencias — guardadas en servidor (no localStorage, que el admin de red puede borrar)
+  function prefsApi(){ return 'http://localhost:' + (window.location.port || 80) + '/api/config/clipbox_prefs_' + _uid; }
+  const PREFS_DEFAULT = {
+    hideHtmlAlways: false,
+    showHtmlRender: true,   // Por defecto: Ver vista HTML MARCADO
+    showHtmlCode:   false,
+    preferRich:     true,
+    sanitize:       true,
+    upperTitle:     true
+  };
+  let _prefsGuardadoTimer = null;
+  function _guardarPrefs() {
+    clearTimeout(_prefsGuardadoTimer);
+    _prefsGuardadoTimer = setTimeout(() => {
+      fetch(prefsApi(), {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          hideHtmlAlways: hideHtmlAlwaysEl.checked,
+          showHtmlRender: showHtmlRenderEl.checked,
+          showHtmlCode:   showHtmlCodeEl.checked,
+          preferRich:     preferRichEl.checked,
+          sanitize:       sanitizeModeEl.checked,
+          upperTitle:     upperTitleEl.checked
+        })
+      }).catch(()=>{});
+    }, 400);
+  }
+  function _aplicarPrefs(p) {
+    hideHtmlAlwaysEl.checked = p.hideHtmlAlways ?? PREFS_DEFAULT.hideHtmlAlways;
+    showHtmlRenderEl.checked = p.showHtmlRender ?? PREFS_DEFAULT.showHtmlRender;
+    showHtmlCodeEl.checked   = p.showHtmlCode   ?? PREFS_DEFAULT.showHtmlCode;
+    preferRichEl.checked     = p.preferRich     ?? PREFS_DEFAULT.preferRich;
+    sanitizeModeEl.checked   = p.sanitize       ?? PREFS_DEFAULT.sanitize;
+    upperTitleEl.checked     = p.upperTitle     ?? PREFS_DEFAULT.upperTitle;
+    updateHtmlVisibility();
+  }
+  // Cargar prefs desde servidor; si falla usar defaults
+  fetch(prefsApi()).then(r => r.json()).then(d => {
+    _aplicarPrefs(d.config || PREFS_DEFAULT);
+  }).catch(() => {
+    _aplicarPrefs(PREFS_DEFAULT);
+  });
+  window._clipboxRecargarPrefs = () => fetch(prefsApi()).then(r=>r.json()).then(d=>_aplicarPrefs(d.config||PREFS_DEFAULT)).catch(()=>{});
+  hideHtmlAlwaysEl.onchange = ()=>{ _guardarPrefs(); updateHtmlVisibility(); };
+  showHtmlRenderEl.onchange = ()=>{ _guardarPrefs(); updateHtmlVisibility(); };
+  showHtmlCodeEl.onchange   = ()=>{ _guardarPrefs(); updateHtmlVisibility(); };
+  preferRichEl.onchange     = ()=>{ _guardarPrefs(); };
+  sanitizeModeEl.onchange   = ()=>{ _guardarPrefs(); };
+  upperTitleEl.onchange     = ()=>{ _guardarPrefs(); };
+
+  // IndexedDB
+  const DB_NAME = 'clipbox_db'; const STORE = 'items'; let db; 
+  function openDB(){ return new Promise((resolve, reject)=>{ const req = indexedDB.open(DB_NAME, 9); req.onupgradeneeded = (e)=>{ const db = e.target.result; if(!db.objectStoreNames.contains(STORE)){ const os = db.createObjectStore(STORE, {keyPath:'id', autoIncrement:true}); os.createIndex('by_pinned','pinned',{unique:false}); os.createIndex('by_time','ts',{unique:false}); os.createIndex('by_type','kind',{unique:false}); } }; req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error); }); }
+  const dbReady = openDB().then(r=>{ db=r; }); function ensureDBReady(){ return dbReady; }
+  function tx(mode='readonly'){ if(!db) throw new Error('DB no inicializada'); return db.transaction(STORE, mode).objectStore(STORE); }
+  const addItem=(item)=> ensureDBReady().then(()=> new Promise((res,rej)=>{ const r=tx('readwrite').add(item); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }));
+  const putItem=(item)=> ensureDBReady().then(()=> new Promise((res,rej)=>{ const r=tx('readwrite').put(item); r.onsuccess=()=>res(); r.onerror=()=>rej(r.error); }));
+  const delItem=(id)=> ensureDBReady().then(()=> new Promise((res,rej)=>{ const r=tx('readwrite').delete(id); r.onsuccess=()=>res(); r.onerror=()=>rej(r.error); }));
+  const clearAllStore=()=> ensureDBReady().then(()=> new Promise((res,rej)=>{ const r=tx('readwrite').clear(); r.onsuccess=()=>res(); r.onerror=()=>rej(r.error); }));
+  const getAll=()=> ensureDBReady().then(()=> new Promise((res,rej)=>{ const r=tx('readonly').getAll(); r.onsuccess=()=>{ const out=r.result.map(x=>({...x,title:x.title||'',plaza:x.plaza||'',juez:x.juez||'',letrado:x.letrado||''})); res(out.sort((a,b)=>b.pinned-a.pinned || b.ts-a.ts)); }; r.onerror=()=>rej(r.error); }));
+
+  // State
+  let items=[], filtered=[], activeId=null, showPinnedOnly=false; const listEl=document.getElementById('list'); const countEl=document.getElementById('count'); const storageEl=document.getElementById('storage'); const searchEl=document.getElementById('search'); const filterTypeEl=document.getElementById('filterType'); const filterPlazaEl=document.getElementById('filterPlaza'); const filterJuezEl=document.getElementById('filterJuez'); const filterLetradoEl=document.getElementById('filterLetrado');
+  const titleInput=document.getElementById('titleInput'); const plazaInput=document.getElementById('plazaInput'); const juezInput=document.getElementById('juezInput'); const letradoInput=document.getElementById('letradoInput');
+
+  function humanSize(bytes){ if(!bytes) return '0 B'; const u=['B','KB','MB','GB']; let i=0; while(bytes>=1024 && i<u.length-1){ bytes/=1024; i++; } return bytes.toFixed(bytes<10?2:0)+' '+u[i]; }
+  function tsToStr(ts){ const d=new Date(ts); return d.toLocaleString(); }
+  function stripHtml(h){ const tmp=document.createElement('div'); tmp.innerHTML=h; return tmp.textContent||tmp.innerText||''; }
+  function sanitizeText(t){ if(!t) return ''; let s=t; s=s.replace(/\u00A0/g,' '); s=s.replace(/[\t ]+/g,' '); s=s.replace(/[\u2018\u2019]/g,"'").replace(/[\u201C\u201D]/g,'"'); s=s.replace(/\r\n|\r/g,'\n'); s=s.replace(/\n{3,}/g,'\n\n'); return s.trim(); }
+  function toUpperSmart(s){ if(!s) return ''; return s.toLocaleUpperCase('es-ES'); }
+  function extractDates(s){ if(!s) return []; const re=/(\b\d{1,2}[\/\.\-]\d{1,2}[\/\.\-]\d{2,4}\b)/g; return (s.match(re)||[]); }
+  function suggestTitleFrom(it){ let base=''; if(it.kind==='image') base='IMAGEN'; else if(it.kind==='html') base=stripHtml(it.html||''); else base=it.text||''; base=sanitizeText(base); const dates=extractDates(base).slice(0,4).join(' y '); let head=base.split(/\s+/).slice(0,10).join(' '); if(dates) head+=' — FECHA(S) '+dates; return upperTitleEl.checked ? toUpperSmart(head) : head; }
+
+  function estimateStorage(){ let total=0; for(const it of items){ if(it.kind==='text'||it.kind==='html'){ total += (it.text||'').length + (it.html||'').length + (it.title||'').length; } if(it.kind==='image'&&it.blobSize){ total += it.blobSize; } } storageEl.textContent=humanSize(total); }
+  function unique(a){ return [...new Set(a.filter(Boolean))].sort(); }
+  function populateFilters(){ const jueces=unique(items.map(x=>x.juez)); const letrados=unique(items.map(x=>x.letrado)); filterJuezEl.innerHTML='<option value="all">Juez/a: todos</option>'+jueces.map(j=>`<option value="${j}">${j}</option>`).join(''); filterLetradoEl.innerHTML='<option value="all">Letrado/a: todos</option>'+letrados.map(j=>`<option value="${j}">${j}</option>`).join(''); const jl=document.getElementById('juecesList'); const ll=document.getElementById('letradosList'); if(jl) jl.innerHTML=jueces.map(j=>`<option value="${j}">`).join(''); if(ll) ll.innerHTML=letrados.map(j=>`<option value="${j}">`).join(''); }
+
+  function renderList(){ const q=(searchEl.value||'').toLowerCase(); const t=filterTypeEl.value; const pz=filterPlazaEl.value; const fj=filterJuezEl.value; const fl=filterLetradoEl.value; filtered=items.filter(x=>{ if(showPinnedOnly && !x.pinned) return false; if(t!=='all' && x.kind!==t) return false; if(pz!=='all' && x.plaza!==pz) return false; if(fj!=='all' && x.juez!==fj) return false; if(fl!=='all' && x.letrado!==fl) return false; if(!q) return true; const hay=(x.title||'')+' '+(x.text||'')+' '+(x.html||'')+' '+(x.tags||[]).join(' ')+' '+x.plaza+' '+x.juez+' '+x.letrado; return hay.toLowerCase().includes(q); }); listEl.innerHTML=''; for(const it of filtered){ const div=document.createElement('div'); div.className='item'+(it.id===activeId?' active':''); div.dataset.id=it.id; const thumb=document.createElement('div'); thumb.className='thumb'; if(it.kind==='image'){ const img=document.createElement('img'); img.alt='miniatura'; img.src=it.thumbUrl||it.blobUrl||''; thumb.appendChild(img); } else { thumb.textContent = it.kind==='html'?'🧩':'🅣'; }
+      const meta=document.createElement('div'); meta.className='meta'; const top=document.createElement('div'); top.className='top'; const title=document.createElement('div'); title.className='title'; title.textContent = it.title || (it.kind==='image'?(it.mime||'imagen'):(it.text||it.html||'')); const info=document.createElement('div'); info.className='info'; const infoPl=[it.plaza,it.juez,it.letrado].filter(Boolean).join(' • '); info.innerHTML = `${it.pinned?'<span class="pin">📌</span> ':''}${tsToStr(it.ts)} • ${it.kind}${it.blobSize?` • ${humanSize(it.blobSize)}`:''}${infoPl?` • ${infoPl}`:''}`; top.appendChild(title); top.appendChild(info); meta.appendChild(top); if(!it.title){ const sub=document.createElement('div'); sub.className='subtitle'; sub.textContent=(it.kind==='image'?'(imagen)':(it.kind==='html'?stripHtml(it.html||''):it.text||'')).replace(/\n/g,' ').slice(0,140); meta.appendChild(sub); }
+      div.appendChild(thumb); div.appendChild(meta); 
+      // Selección múltiple con Ctrl+Click
+      if(selectedIds.has(it.id)) div.classList.add('selected');
+      div.onclick=(e)=>{ 
+        if(e.ctrlKey || e.metaKey){ 
+          e.preventDefault(); 
+          if(selectedIds.has(it.id)){ 
+            selectedIds.delete(it.id); 
+            div.classList.remove('selected'); 
+          } else { 
+            selectedIds.add(it.id); 
+            div.classList.add('selected'); 
+          } 
+          updateSelectionBar(); 
+        } else { 
+          selectItem(it.id); 
+        } 
+      }; 
+      listEl.appendChild(div); }
+    countEl.textContent=items.length; estimateStorage(); 
+    // Activar drag&drop después de renderizar
+    makeDraggable();
+  }
+
+  let editing=false;
+
+  function selectItem(id){ activeId=id; renderList(); const it=items.find(x=>x.id===id); if(!it){ document.getElementById('panel').classList.add('hidden'); return;} document.getElementById('panel').classList.remove('hidden'); document.getElementById('meta').textContent = `${tsToStr(it.ts)} • ${it.kind} ${it.blobSize?`• ${humanSize(it.blobSize)}`:''}`; titleInput.value=it.title||''; plazaInput.value=it.plaza||''; juezInput.value=it.juez||''; letradoInput.value=it.letrado||''; const tagIn=document.getElementById('tagInput'); if(tagIn) tagIn.value=(it.tags||[]).join(', '); document.getElementById('copyRichBtn').disabled=(it.kind!=='html');
+    const content=document.getElementById('content'); content.innerHTML='';
+
+    const toggleEditBtn=document.getElementById('toggleEditBtn');
+    const saveEditBtn=document.getElementById('saveEditBtn');
+    const cancelEditBtn=document.getElementById('cancelEditBtn');
+    editing=false; saveEditBtn.classList.add('hidden'); cancelEditBtn.classList.add('hidden'); toggleEditBtn.classList.remove('hidden');
+
+    // Caja única de texto (para TEXT y para el texto asociado a HTML)
+    const textBox=document.createElement('div'); textBox.id='textBox'; textBox.className='text-box'; textBox.setAttribute('contenteditable','false');
+    let plain='';
+    if(it.kind==='text'){ plain=it.text||''; }
+    else if(it.kind==='html'){ const stripped=stripHtml(it.html||''); plain=(it.text && it.text.trim())?it.text:stripped; }
+    textBox.innerText = plain; // sin truncar
+    if(it.kind==='html'){
+      const renderBox=document.createElement('div'); renderBox.id='htmlRender'; renderBox.className='htmlRenderBox'; renderBox.style.border='1px dashed var(--border)'; renderBox.style.padding='8px'; renderBox.innerHTML = it.html || it.text || '';
+      content.appendChild(renderBox);
+      updateHtmlVisibility();
+    }
+    
+    // Contenedor con tirador para redimensionar textBox
+    const textBoxContainer = document.createElement('div');
+    textBoxContainer.className = 'textbox-container';
+    const resizer = document.createElement('div');
+    resizer.className = 'textbox-resizer';
+    resizer.title = 'Arrastra para ajustar altura de la caja de texto';
+    
+    // Ocultar completamente el textBox cuando hay HTML
+    if(it.kind==='html'){ 
+      textBoxContainer.style.display = 'none'; 
+    }
+    
+    textBoxContainer.appendChild(resizer);
+    textBoxContainer.appendChild(textBox);
+    content.appendChild(textBoxContainer);
+    
+    // Lógica del tirador
+    let isDragging = false;
+    let startY = 0;
+    let startHeight = 0;
+    resizer.addEventListener('mousedown', (e)=>{
+      isDragging = true;
+      startY = e.clientY;
+      startHeight = textBox.offsetHeight;
+      document.body.style.userSelect = 'none';
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove', (e)=>{
+      if(!isDragging) return;
+      const deltaY = e.clientY - startY;
+      const newHeight = Math.max(40, Math.min(800, startHeight + deltaY));
+      textBox.style.height = newHeight + 'px';
+    });
+    document.addEventListener('mouseup', ()=>{
+      if(isDragging){
+        isDragging = false;
+        document.body.style.userSelect = '';
+      }
+    });
+
+    toggleEditBtn.onclick = ()=>{ 
+      editing=true; 
+      textBox.setAttribute('contenteditable','true'); 
+      textBox.classList.add('editing'); 
+      document.getElementById('metadataSection').classList.add('editing');
+      // Habilitar campos
+      titleInput.removeAttribute('readonly');
+      plazaInput.removeAttribute('disabled');
+      document.getElementById('plazaClickCatcher').style.display = 'none';
+      juezInput.removeAttribute('readonly');
+      letradoInput.removeAttribute('readonly');
+      document.getElementById('tagInput').removeAttribute('readonly');
+      textBox.focus();
+      toggleEditBtn.classList.add('hidden'); 
+      saveEditBtn.classList.remove('hidden'); 
+      cancelEditBtn.classList.remove('hidden'); 
+      document.getElementById('replaceContentBtn').classList.add('hidden');
+    };
+    
+    cancelEditBtn.onclick = ()=>{
+      editing=false;
+      textBox.setAttribute('contenteditable','false');
+      textBox.classList.remove('editing');
+      document.getElementById('metadataSection').classList.remove('editing');
+      // Deshabilitar campos
+      titleInput.setAttribute('readonly', 'true');
+      plazaInput.setAttribute('disabled', 'true');
+      document.getElementById('plazaClickCatcher').style.display = '';
+      juezInput.setAttribute('readonly', 'true');
+      letradoInput.setAttribute('readonly', 'true');
+      document.getElementById('tagInput').setAttribute('readonly', 'true');
+      // Revertir todos los campos
+      const cur=items.find(x=>x.id===activeId); 
+      if(cur){ 
+        if(cur.kind==='text') textBox.innerText=cur.text||''; 
+        else if(cur.kind==='html'){ 
+          const stripped=stripHtml(cur.html||''); 
+          textBox.innerText=(cur.text&&cur.text.trim())?cur.text:stripped; 
+        }
+        titleInput.value=cur.title||'';
+        plazaInput.value=cur.plaza||'';
+        juezInput.value=cur.juez||'';
+        letradoInput.value=cur.letrado||'';
+        const tagIn=document.getElementById('tagInput');
+        if(tagIn) tagIn.value=(cur.tags||[]).join(', ');
+      }
+      saveEditBtn.classList.add('hidden'); 
+      cancelEditBtn.classList.add('hidden'); 
+      toggleEditBtn.classList.remove('hidden'); 
+      document.getElementById('replaceContentBtn').classList.remove('hidden');
+    };
+    
+    saveEditBtn.onclick = async ()=>{ 
+      const cur=items.find(x=>x.id===activeId); 
+      if(!cur) return; 
+      
+      // Guardar texto
+      let newText=textBox.innerText||''; 
+      if(sanitizeModeEl.checked) newText=sanitizeText(newText); 
+      cur.text=newText; 
+      
+      // Guardar metadatos
+      cur.title = (upperTitleEl.checked ? toUpperSmart(titleInput.value||'') : (titleInput.value||''));
+      cur.plaza=plazaInput.value||'';
+      cur.juez=juezInput.value||'';
+      cur.letrado=letradoInput.value||'';
+      const raw=(document.getElementById('tagInput').value||'');
+      cur.tags=raw.split(',').map(s=>s.trim()).filter(Boolean);
+      
+      await ensureDBReady(); 
+      await putItem(cur); 
+      
+      editing=false;
+      textBox.setAttribute('contenteditable','false');
+      textBox.classList.remove('editing');
+      document.getElementById('metadataSection').classList.remove('editing');
+      // Deshabilitar campos
+      titleInput.setAttribute('readonly', 'true');
+      plazaInput.setAttribute('disabled', 'true');
+      document.getElementById('plazaClickCatcher').style.display = '';
+      juezInput.setAttribute('readonly', 'true');
+      letradoInput.setAttribute('readonly', 'true');
+      document.getElementById('tagInput').setAttribute('readonly', 'true');
+      saveEditBtn.classList.add('hidden'); 
+      cancelEditBtn.classList.add('hidden'); 
+      toggleEditBtn.classList.remove('hidden'); 
+      document.getElementById('replaceContentBtn').classList.remove('hidden');
+      
+      await refresh(); 
+      selectItem(cur.id);
+      flash('Todo guardado correctamente.'); 
+    };
+  }
+
+  function updateHtmlVisibility(){
+    const rb=document.getElementById('htmlRender');
+    const hideAll = hideHtmlAlwaysEl.checked;
+    const showRender = showHtmlRenderEl.checked && !hideAll;
+    if(rb){ rb.classList.toggle('hidden', !showRender); rb.style.display = showRender? '' : 'none'; }
+  }
+
+  async function refresh(){ items = await getAll(); populateFilters(); renderList(); if(items.length && !activeId) selectItem(items[0].id); }
+
+  // Clipboard & copias (prioriza it.text para HTML si existe)
+  async function copyPlain(){ await ensureDBReady(); const it=items.find(x=>x.id===activeId); if(!it) return; try{ let text=''; if(it.kind==='image') text='(imagen)'; else if(it.kind==='html') text=(it.text&&it.text.trim())?it.text:stripHtml(it.html||''); else text=it.text||''; if(sanitizeModeEl.checked) text=sanitizeText(text); await navigator.clipboard.writeText(text); flash('Copiado como texto sin formato.'); }catch(err){ alert('No se pudo copiar como texto: '+err.message); } }
+  async function copyRich(){ await ensureDBReady(); const it=items.find(x=>x.id===activeId); if(!it) return; try{ if(it.kind==='html' && it.html && navigator.clipboard && window.ClipboardItem){ const plain = sanitizeModeEl.checked ? sanitizeText((it.text&&it.text.trim())?it.text:stripHtml(it.html||'')) : ((it.text&&it.text.trim())?it.text:stripHtml(it.html||'')); await navigator.clipboard.write([ new ClipboardItem({ 'text/html': new Blob([it.html], {type:'text/html'}), 'text/plain': new Blob([plain], {type:'text/plain'}) }) ]); flash('Copiado con formato (y texto).'); } else { await copyPlain(); } }catch(err){ alert('No se pudo copiar: '+err.message); } }
+  async function copySmart(){ if(preferRichEl.checked) return copyRich(); else return copyPlain(); }
+
+  function isEditable(el){ if(!el) return false; const t = el.tagName?.toLowerCase(); if(t==='input' || t==='textarea') return true; if(el.isContentEditable) return true; return false; }
+  async function handlePasteData(cd, event){ await ensureDBReady(); if(!cd) return false; const html = cd.getData('text/html'); if(html){ event?.preventDefault?.(); await saveHtml(html); return true; } const itemsCD = cd.items||[]; for(const it of itemsCD){ if(it.kind==='file' && it.type.startsWith('image/')){ event?.preventDefault?.(); const blob = it.getAsFile(); const url = URL.createObjectURL(blob); await saveImage(blob, it.type, url, url); return true; } } const text = cd.getData('text/plain'); if(text){ event?.preventDefault?.(); await saveText(text); return true; } return false; }
+
+  const drop = document.getElementById('dropzone');
+  window.addEventListener('keydown', (e)=>{ const key=e.key?.toLowerCase(); if((e.ctrlKey||e.metaKey)&&key==='v'&&!isEditable(document.activeElement)){ drop.focus(); } }, true);
+  drop.addEventListener('paste', async (e)=>{ await handlePasteData(e.clipboardData, e); drop.innerHTML = drop.getAttribute('data-placeholder')|| drop.innerHTML; });
+  drop.addEventListener('dragover', e=>{ e.preventDefault(); drop.classList.add('focus'); });
+  drop.addEventListener('dragleave', ()=>drop.classList.remove('focus'));
+  drop.addEventListener('drop', async e=>{ e.preventDefault(); drop.classList.remove('focus'); await ensureDBReady(); const files=e.dataTransfer.files; if(!files||!files.length) return; for(const f of files){ if(f.type.startsWith('image/')){ const blob=f; const url=URL.createObjectURL(blob); await saveImage(blob, f.type, url, url); } else { const text=await f.text().catch(()=>null); if(text) await saveText(text); } } });
+  document.addEventListener('paste', async (event)=>{ if(isEditable(document.activeElement)) return; await handlePasteData(event.clipboardData, event); });
+
+  // Guardado con contexto
+  const ctxPlaza = document.getElementById('ctxPlaza');
+  const ctxJuez = document.getElementById('ctxJuez');
+  const ctxLetrado = document.getElementById('ctxLetrado');
+  const ctxAuto = document.getElementById('ctxAuto');
+  function applyContextMeta(it){ if(!ctxAuto.checked) return it; if(ctxPlaza.value) it.plaza=ctxPlaza.value; if(ctxJuez.value) it.juez=ctxJuez.value; if(ctxLetrado.value) it.letrado=ctxLetrado.value; return it; }
+
+  async function saveText(text){ if(!text) return; await ensureDBReady(); const it=applyContextMeta({kind:'text', text, html:'', ts:Date.now(), pinned:false, tags:[], title:'', plaza:'', juez:'', letrado:''}); const id=await addItem(it); await refresh(); selectItem(id); }
+  async function saveHtml(html){ if(!html) return; await ensureDBReady(); // Guardar TEXTO SIN TRUNCAR
+    const it=applyContextMeta({kind:'html', text:stripHtml(html), html, ts:Date.now(), pinned:false, tags:[], title:'', plaza:'', juez:'', letrado:''});
+    const id=await addItem(it); await refresh(); selectItem(id); }
+  async function saveImage(blob, mime, blobUrl, thumbUrl){ await ensureDBReady(); const it=applyContextMeta({kind:'image', mime:mime||blob.type, blob, blobUrl, thumbUrl, blobSize: blob.size, ts:Date.now(), pinned:false, tags:[], title:'', plaza:'', juez:'', letrado:''}); const id=await addItem(it); await refresh(); selectItem(id); }
+
+  // Exportar / Importar JSON
+  const exportBtn = document.getElementById('exportJSON');
+  const importBtn = document.getElementById('importJSON');
+  const filePicker = document.getElementById('filePicker');
+  exportBtn.onclick = async ()=>{ await ensureDBReady(); const data = await getAll(); const payload = { version:'v2.3.1-darkfix-inline-edit', exportedAt:new Date().toISOString(), count:data.length, items:data }; const blob = new Blob([JSON.stringify(payload,null,2)], {type:'application/json'}); const ts=new Date(); const pad=n=>String(n).padStart(2,'0'); const fname=`ClipBox_Export_${ts.getFullYear()}${pad(ts.getMonth()+1)}${pad(ts.getDate())}_${pad(ts.getHours())}${pad(ts.getMinutes())}${pad(ts.getSeconds())}.json`; downloadBlob(blob,fname); flash(`Exportado ${data.length} elemento(s) a ${fname}`); };
+  importBtn.onclick = ()=> filePicker.click();
+  filePicker.onchange = async (e)=>{ const file = e.target.files && e.target.files[0]; if(!file) return; const text = await file.text().catch(()=>null); if(!text){ alert('No se pudo leer el archivo.'); return; } let payload=null; try{ payload=JSON.parse(text); }catch{ alert('JSON inválido.'); return; } if(!payload || !Array.isArray(payload.items)){ alert('Estructura JSON no reconocida (falta "items").'); return; } const doReplace = confirm('¿Reemplazar los elementos actuales por los importados?\nAceptar = Reemplazar, Cancelar = Fusionar'); await ensureDBReady(); if(doReplace){ await clearAllStore(); } for(const raw of payload.items){ const it={...raw}; delete it.id; it.title=it.title||''; it.plaza=it.plaza||''; it.juez=it.juez||''; it.letrado=it.letrado||''; it.tags=Array.isArray(it.tags)?it.tags:[]; await addItem(it); } await refresh(); // Guardar en servidor automáticamente tras importar
+    try { await _sincronizarConServidor(); flash(`Importados ${payload.items.length} elemento(s) y guardados en servidor.`); } catch(_){ flash(`Importados ${payload.items.length} elemento(s). Pulsa GUARDAR para sincronizar con el servidor.`); }
+    filePicker.value=''; };
+
+  // CSV
+  const exportCSVBtn = document.getElementById('exportCSV');
+  exportCSVBtn.onclick = async ()=>{ const data = await getAll(); const headers=['ID','Tipo','Título','Plaza','Juez','Letrado','Etiquetas','Fecha (ISO)','Tamaño']; const rows=data.map(it=>[ it.id||'', it.kind||'', (it.title||'').replace(/\"/g,'"'), it.plaza||'', it.juez||'', it.letrado||'', (it.tags||[]).join(';'), new Date(it.ts||Date.now()).toISOString(), it.blobSize||'' ]); const csv=[headers].concat(rows).map(r=>r.map(v=>`"${String(v).replace(/"/g,'"')}"`).join(',')).join('\n'); downloadBlob(new Blob([csv],{type:'text/csv'}),'ClipBox_Export.csv'); flash('CSV exportado.'); };
+
+  // Controles
+  document.getElementById('readClipboard').onclick = ()=>{ ensureDBReady().then(readFromClipboard); };
+  document.getElementById('showAll').onclick = ()=>{ showPinnedOnly=false; renderList(); };
+  document.getElementById('showPinned').onclick = ()=>{ showPinnedOnly=true; renderList(); };
+  
+  // Buscador - múltiples eventos para asegurar que funcione
+  const searchInput = document.getElementById('search');
+  let searchDebounce = null;
+  const doSearch = () => {
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(() => {
+      console.log('Buscando:', searchInput.value);
+      renderList();
+    }, 100);
+  };
+  searchInput.addEventListener('input', doSearch);
+  searchInput.addEventListener('keyup', doSearch);
+  searchInput.addEventListener('change', renderList);
+  
+  // Asegurar que el input nunca se deshabilite
+  setInterval(() => {
+    if(searchInput.disabled || searchInput.readOnly) {
+      searchInput.disabled = false;
+      searchInput.removeAttribute('readonly');
+    }
+  }, 1000);
+  
+  filterTypeEl.addEventListener('change', renderList);
+  filterPlazaEl.addEventListener('change', renderList);
+  filterJuezEl.addEventListener('change', renderList);
+  filterLetradoEl.addEventListener('change', renderList);
+
+  // Activar modo edición al hacer clic en cualquier campo de metadatos
+  function _cbMeta(e) {
+    if (!editing && activeId != null) {
+      const btn = document.getElementById('toggleEditBtn');
+      if (btn && !btn.classList.contains('hidden')) {
+        btn.click();
+        const el = e.currentTarget;
+        requestAnimationFrame(() => el.focus());
+      }
+    }
+  }
+  titleInput.addEventListener('click', _cbMeta);
+  juezInput.addEventListener('click', _cbMeta);
+  letradoInput.addEventListener('click', _cbMeta);
+  document.getElementById('tagInput').addEventListener('click', _cbMeta);
+  document.getElementById('plazaClickCatcher').addEventListener('click', function() {
+    if (!editing && activeId != null) {
+      const btn = document.getElementById('toggleEditBtn');
+      if (btn && !btn.classList.contains('hidden')) {
+        btn.click();
+        requestAnimationFrame(() => plazaInput.focus());
+      }
+    }
+  });
+
+  document.getElementById('copySmartBtn').onclick = copySmart;
+  document.getElementById('copyRichBtn').onclick = copyRich;
+  document.getElementById('copyPlainBtn').onclick = copyPlain;
+  document.getElementById('deleteBtn').onclick = async ()=>{ if(!activeId) return; if(!confirm('¿Eliminar este elemento?')) return; await delItem(activeId); activeId=null; await refresh(); };
+  document.getElementById('pinBtn').onclick = async ()=>{ const it = items.find(x=>x.id===activeId); if(!it) return; await ensureDBReady(); it.pinned = !it.pinned; await putItem(it); await refresh(); selectItem(it.id); };
+  document.getElementById('titleSuggest').onclick = ()=>{ const it=items.find(x=>x.id===activeId); if(!it) return; titleInput.value = suggestTitleFrom(it); };
+
+  document.getElementById('ctxApplyOne').onclick = async ()=>{ const it=items.find(x=>x.id===activeId); if(!it) return; await ensureDBReady(); it.plaza=ctxPlaza.value||''; it.juez=ctxJuez.value||''; it.letrado=ctxLetrado.value||''; await putItem(it); await refresh(); selectItem(it.id); };
+  document.getElementById('ctxApplyFilter').onclick = async ()=>{ if(!filtered.length){ alert('No hay elementos filtrados.'); return; } if(!confirm('Aplicar el contexto actual a todos los elementos visibles/filtrados?')) return; await ensureDBReady(); for(const it of filtered){ it.plaza=ctxPlaza.value||''; it.juez=ctxJuez.value||''; it.letrado=ctxLetrado.value||''; await putItem(it); } await refresh(); };
+
+  // ===== NUEVAS FUNCIONALIDADES =====
+  
+  // Modal de ayuda
+  const helpModal = document.getElementById('helpModal');
+  const helpBtn = document.getElementById('helpBtn');
+  const closeHelpModal = document.getElementById('closeHelpModal');
+  helpBtn.onclick = ()=>{ helpModal.classList.remove('hidden'); };
+  closeHelpModal.onclick = ()=>{ helpModal.classList.add('hidden'); };
+  helpModal.onclick = (e)=>{ if(e.target === helpModal) helpModal.classList.add('hidden'); };
+
+  // Guardado manual - Sincroniza con el servidor Flask
+  document.getElementById('manualSaveBtn').onclick = async ()=>{
+    const btn = document.getElementById('manualSaveBtn');
+    btn.disabled = true;
+    btn.textContent = '💾 Guardando...';
+    try {
+      await _sincronizarConServidor();
+      flash('💾 Guardado en servidor. Los datos están seguros.');
+      btn.textContent = '✅ GUARDADO';
+      setTimeout(()=>{ btn.textContent = '💾 GUARDAR'; btn.disabled = false; }, 2000);
+    } catch(err) {
+      alert('Error al guardar: ' + err.message);
+      btn.textContent = '💾 GUARDAR';
+      btn.disabled = false;
+    }
+  };
+
+  // ── Sincronización con servidor Flask ────────────────────
+  async function _sincronizarConServidor() {
+    const data = await getAll();
+    // Serializar: las imágenes (blob) no son JSON-safe, se omiten del servidor
+    const clips = data.map(it => {
+      const c = {...it};
+      delete c.blob; delete c.blobUrl; delete c.thumbUrl;
+      return c;
+    });
+    const r = await fetch('/api/clipbox/clips', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(clips)
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+  }
+
+  // Modo enfoque
+  const focusModeBtn = document.getElementById('focusModeBtn');
+  let focusMode = false;
+  focusModeBtn.onclick = ()=>{ focusMode = !focusMode; document.body.classList.toggle('focus-mode', focusMode); focusModeBtn.textContent = focusMode ? '🎯 Salir' : '🎯'; };
+
+  // Duplicar elemento
+  document.getElementById('duplicateBtn').onclick = async ()=>{ 
+    const it = items.find(x=>x.id===activeId); 
+    if(!it) return; 
+    await ensureDBReady(); 
+    const duplicate = {...it, id:Date.now(), title:(it.title||'')+' (copia)', ts:Date.now(), pinned:false}; 
+    await putItem(duplicate); 
+    await refresh(); 
+    selectItem(duplicate.id); 
+    flash('Elemento duplicado.'); 
+  };
+
+  // Reemplazar contenido desde portapapeles (mantiene metadatos)
+  document.getElementById('replaceContentBtn').onclick = async ()=>{
+    const it = items.find(x=>x.id===activeId);
+    if(!it) return;
+    
+    // Crear zona de pegado temporal
+    const pasteZone = document.createElement('div');
+    pasteZone.contentEditable = true;
+    pasteZone.style.cssText = 'position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:9999; padding:40px; background:var(--card); border:3px solid var(--accent); border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.7); min-width:400px; text-align:center;';
+    pasteZone.innerHTML = '<div style="font-size:18px; font-weight:bold; margin-bottom:10px;">Pega aquí el nuevo contenido</div><div style="color:var(--muted); font-size:14px;">Usa <kbd style="background:#0e172b; padding:2px 6px; border-radius:4px;">Ctrl+V</kbd> para pegar</div><div style="margin-top:20px;"><button id="cancelReplace" style="background:var(--btn-bg); border:1px solid var(--border); color:var(--btn-fg); padding:8px 16px; border-radius:8px; cursor:pointer;">Cancelar</button></div>';
+    
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,.7); backdrop-filter:blur(4px); z-index:9998;';
+    
+    document.body.appendChild(overlay);
+    document.body.appendChild(pasteZone);
+    pasteZone.focus();
+    
+    const cancelBtn = pasteZone.querySelector('#cancelReplace');
+    const cleanup = ()=>{
+      document.body.removeChild(overlay);
+      document.body.removeChild(pasteZone);
+    };
+    
+    cancelBtn.onclick = cleanup;
+    overlay.onclick = cleanup;
+    
+    pasteZone.addEventListener('paste', async (e)=>{
+      e.preventDefault();
+      cleanup();
+      
+      const cd = e.clipboardData;
+      if(!cd) {
+        alert('No se pudo leer el portapapeles.');
+        return;
+      }
+      
+      await ensureDBReady();
+      
+      // Intentar HTML primero
+      const html = cd.getData('text/html');
+      if(html){
+        it.html = html;
+        it.text = stripHtml(html);
+        it.kind = 'html';
+        await putItem(it);
+        await refresh();
+        selectItem(it.id);
+        flash('Contenido HTML reemplazado. Metadatos conservados.');
+        return;
+      }
+      
+      // Intentar imágenes
+      const items = cd.items || [];
+      for(const item of items){
+        if(item.kind === 'file' && item.type.startsWith('image/')){
+          const blob = item.getAsFile();
+          const url = URL.createObjectURL(blob);
+          it.kind = 'image';
+          it.mime = item.type;
+          it.blob = blob;
+          it.blobUrl = url;
+          it.thumbUrl = url;
+          it.blobSize = blob.size;
+          await putItem(it);
+          await refresh();
+          selectItem(it.id);
+          flash('Imagen reemplazada. Metadatos conservados.');
+          return;
+        }
+      }
+      
+      // Texto plano
+      const text = cd.getData('text/plain');
+      if(text){
+        it.text = text;
+        it.html = '';
+        it.kind = 'text';
+        await putItem(it);
+        await refresh();
+        selectItem(it.id);
+        flash('Contenido de texto reemplazado. Metadatos conservados.');
+        return;
+      }
+      
+      alert('No se encontró contenido válido en el portapapeles.');
+    });
+  };
+
+  // Selección múltiple
+  let selectedIds = new Set();
+  const selectionBar = document.getElementById('selectionBar');
+  const selectedCount = document.getElementById('selectedCount');
+  const exportSelectedBtn = document.getElementById('exportSelectedBtn');
+  const clearSelectionBtn = document.getElementById('clearSelectionBtn');
+
+  function updateSelectionBar(){
+    if(selectedIds.size > 0){ 
+      selectionBar.classList.remove('hidden'); 
+      selectedCount.textContent = selectedIds.size; 
+    } else { 
+      selectionBar.classList.add('hidden'); 
+    }
+  }
+
+  clearSelectionBtn.onclick = ()=>{ 
+    selectedIds.clear(); 
+    updateSelectionBar(); 
+    document.querySelectorAll('.item.selected').forEach(el=>el.classList.remove('selected')); 
+  };
+
+  exportSelectedBtn.onclick = async ()=>{ 
+    if(selectedIds.size === 0) return; 
+    const selected = items.filter(it=>selectedIds.has(it.id)); 
+    const data = {version:2, exportedAt:new Date().toISOString(), items:selected}; 
+    downloadBlob(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}), 'ClipBox_Seleccion_'+new Date().toISOString().slice(0,10)+'.json'); 
+    flash(`${selectedIds.size} elementos exportados.`); 
+  };
+
+  // Drag & Drop para reordenar
+  let draggedItem = null;
+  let draggedIndex = -1;
+
+  function makeDraggable(){
+    document.querySelectorAll('.item').forEach((el, idx)=>{
+      el.setAttribute('draggable', 'true');
+      
+      el.addEventListener('dragstart', (e)=>{
+        draggedItem = el;
+        draggedIndex = idx;
+        el.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      el.addEventListener('dragend', ()=>{
+        el.classList.remove('dragging');
+        document.querySelectorAll('.item').forEach(item=>item.classList.remove('drag-over'));
+      });
+
+      el.addEventListener('dragover', (e)=>{
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        el.classList.add('drag-over');
+      });
+
+      el.addEventListener('dragleave', ()=>{
+        el.classList.remove('drag-over');
+      });
+
+      el.addEventListener('drop', async (e)=>{
+        e.preventDefault();
+        el.classList.remove('drag-over');
+        
+        if(!draggedItem || draggedItem === el) return;
+        
+        const dropIndex = idx;
+        if(draggedIndex === dropIndex) return;
+
+        // Reordenar en el array filtrado
+        const [removed] = filtered.splice(draggedIndex, 1);
+        filtered.splice(dropIndex, 0, removed);
+
+        // Actualizar timestamps para mantener el orden
+        await ensureDBReady();
+        const now = Date.now();
+        for(let i=0; i<filtered.length; i++){
+          filtered[i].ts = now - (filtered.length - i) * 1000;
+          await putItem(filtered[i]);
+        }
+
+        await refresh();
+        flash('Orden actualizado.');
+      });
+    });
+  }
+
+  // Feedback visual al copiar
+  function addCopiedFeedback(btn){
+    btn.classList.add('copied');
+    setTimeout(()=>btn.classList.remove('copied'), 1200);
+  }
+
+  // Modificar funciones de copia para añadir feedback
+  const originalCopyPlain = copyPlain;
+  const originalCopyRich = copyRich;
+  const originalCopySmart = copySmart;
+
+  copyPlain = async function(){
+    await originalCopyPlain();
+    addCopiedFeedback(document.getElementById('copyPlainBtn'));
+  };
+
+  copyRich = async function(){
+    await originalCopyRich();
+    addCopiedFeedback(document.getElementById('copyRichBtn'));
+  };
+
+  copySmart = async function(){
+    await originalCopySmart();
+    addCopiedFeedback(document.getElementById('copySmartBtn'));
+  };
+
+  document.getElementById('copySmartBtn').onclick = copySmart;
+  document.getElementById('copyRichBtn').onclick = copyRich;
+  document.getElementById('copyPlainBtn').onclick = copyPlain;
+
+  // ===== FIN NUEVAS FUNCIONALIDADES =====
+
+
+  // Atajos
+  window.addEventListener('keydown', (e)=>{
+    // Cerrar modal con Esc
+    if(e.key==='Escape'){ 
+      if(!helpModal.classList.contains('hidden')){ helpModal.classList.add('hidden'); return; }
+      if(focusMode){ focusModeBtn.click(); return; }
+    }
+    // Modo enfoque con F11
+    if(e.key==='F11'){ e.preventDefault(); focusModeBtn.click(); return; }
+    if(e.altKey && e.key==='/'){ e.preventDefault(); searchEl.focus(); return; }
+    if(e.key==='ArrowDown'){ e.preventDefault(); if(!filtered.length) return; let idx=filtered.findIndex(x=>x.id===activeId); idx=(idx+1)%filtered.length; selectItem(filtered[idx].id); return; }
+    if(e.key==='ArrowUp'){ e.preventDefault(); if(!filtered.length) return; let idx=filtered.findIndex(x=>x.id===activeId); idx=(idx-1+filtered.length)%filtered.length; selectItem(filtered[idx].id); return; }
+    if(e.key==='Enter' && !e.ctrlKey && !e.shiftKey && document.activeElement!==searchEl){ e.preventDefault(); copySmart(); return; }
+    if(e.key==='Enter' && e.ctrlKey && document.activeElement!==searchEl){ e.preventDefault(); copyRich(); return; }
+    if(e.key==='Enter' && e.shiftKey && document.activeElement!==searchEl){ e.preventDefault(); copyPlain(); return; }
+    if(e.ctrlKey && (e.key==='d' || e.key==='D')){ e.preventDefault(); document.getElementById('deleteBtn').click(); }
+    if(e.ctrlKey && (e.key==='p' || e.key==='P')){ e.preventDefault(); document.getElementById('pinBtn').click(); }
+  });
+
+  // Utils
+  function downloadBlob(blob, filename){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=filename; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href), 2000); }
+  function flash(msg){ const el=document.createElement('div'); el.textContent=msg; el.style.position='fixed'; el.style.bottom='16px'; el.style.left='50%'; el.style.transform='translateX(-50%)'; el.style.background='var(--accent)'; el.style.color='#04110c'; el.style.padding='8px 12px'; el.style.borderRadius='8px'; el.style.boxShadow='0 10px 30px rgba(0,0,0,.3)'; el.style.zIndex='9999'; document.body.appendChild(el); setTimeout(()=>{ el.remove(); }, 1600); }
+
+  // Init: cargar IndexedDB local, y si está vacía restaurar desde servidor
+  ensureDBReady().then(async () => {
+    await refresh();
+    if (items.length === 0) {
+      // IndexedDB vacía (reinicio, nuevo navegador, etc.) → cargar desde servidor
+      try {
+        const r = await fetch('/api/clipbox/clips');
+        if (r.ok) {
+          const clips = await r.json();
+          if (Array.isArray(clips) && clips.length > 0) {
+            await ensureDBReady();
+            for (const raw of clips) {
+              const it = {...raw}; delete it.id;
+              it.title=it.title||''; it.plaza=it.plaza||''; it.juez=it.juez||'';
+              it.letrado=it.letrado||''; it.tags=Array.isArray(it.tags)?it.tags:[];
+              await addItem(it);
+            }
+            await refresh();
+            flash(`📂 ${clips.length} modelo(s) restaurados desde servidor.`);
+          }
+        }
+      } catch(_) {}
+    }
+  });
+})();
+</script>
+
+<!-- ▼ ClipBox: ocultar por defecto el panel HTML, pero permitir verlo bajo demanda -->
+<style>
+  .cb-hide-html .pane-html,
+  .cb-hide-html .pane-html-code,
+  .cb-hide-html .pane-html-view,
+  .cb-hide-html [data-pane="html"],
+  .cb-hide-html .html-view,
+  .cb-hide-html .html-code,
+  .cb-hide-html .clip-html,
+  .cb-hide-html .clip-html-pane {
+    display: none !important;
+  }
+</style>
+<script>
+  (function () {
+    const LS_KEY = 'cb_hide_html_always';
+    const WANT_HIDE = localStorage.getItem(LS_KEY) ?? '1';
+    const setHidden = (hide) => {
+      document.documentElement.classList.toggle('cb-hide-html', !!hide);
+    };
+    const findByLabelText = (text) => {
+      const t = text.toLowerCase().trim();
+      for (const lab of document.querySelectorAll('label')) {
+        const s = (lab.textContent || '').toLowerCase().trim();
+        if (s.startsWith(t) || s === t) {
+          const forId = lab.getAttribute('for');
+          if (forId) return document.getElementById(forId);
+          const input = lab.querySelector('input');
+          if (input) return input;
+        }
+      }
+      return null;
+    };
+    const onReady = () => {
+      setHidden(WANT_HIDE === '1');
+      const chkHideAlways =
+        findByLabelText('ocultar html siempre') ||
+        document.querySelector('[data-role="hide-html-always"], [name="hideHtmlAlways"]');
+      if (chkHideAlways) {
+        if (WANT_HIDE === '1') chkHideAlways.checked = true;
+        chkHideAlways.addEventListener('change', (e) => {
+          const hide = !!e.target.checked;
+          localStorage.setItem(LS_KEY, hide ? '1' : '0');
+          setHidden(hide);
+        });
+      }
+      const chkViewHtml =
+        findByLabelText('ver vista html') ||
+        document.querySelector('[data-action="view-html"] input, [data-action="view-html"]');
+      const chkCodeHtml =
+        findByLabelText('ver código html') ||
+        document.querySelector('[data-action="code-html"] input, [data-action="code-html"]');
+      [chkViewHtml, chkCodeHtml].forEach(el => {
+        if (!el) return;
+        const evt = (el.type === 'checkbox') ? 'change' : 'click';
+        el.addEventListener(evt, () => setHidden(false), { passive: true });
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', onReady, { once: true });
+    } else {
+      onReady();
+    }
+  })();
+</script>
+<!-- ▲ Fin del parche -->
+<script>
+// ── Botón de tema individual (ClipBox: oscuro=sin .light, claro=con .light) ──
+function _toggleTemaModulo(){
+  const root = document.documentElement;
+  const esClaro = root.classList.contains('light');
+  if(esClaro){ root.classList.remove('light'); localStorage.setItem(_uid + '_clipbox_theme','dark'); }
+  else { root.classList.add('light'); localStorage.setItem(_uid + '_clipbox_theme','light'); }
+}
+
+// Receptor búsqueda y cambio de usuario desde el portal
+window.addEventListener('message', e => {
+  if (!e.data) return;
+  if (e.data.tipo === 'cambioUsuario') {
+    const nuevoUid = e.data.usuario?.id || 'default';
+    if (nuevoUid === _uid) return;
+    const root = document.documentElement;
+    const presetBtn = document.getElementById('sidebarPresetBtn');
+    // Guardar ancho de panel del usuario anterior
+    const wActual = parseInt(getComputedStyle(root).getPropertyValue('--sidebar-w')) || 440;
+    localStorage.setItem(_uid + '_clipbox_sidebar_w', wActual + 'px');
+    // Cambiar usuario
+    _uid = nuevoUid;
+    // Restaurar ancho del nuevo usuario
+    const wGuardado = localStorage.getItem(_uid + '_clipbox_sidebar_w') || localStorage.getItem('clipbox_sidebar_w');
+    if (wGuardado) { root.style.setProperty('--sidebar-w', wGuardado); if(presetBtn) presetBtn.textContent = '↔ ' + wGuardado.replace('px','') + 'px'; }
+    // Restaurar tema del nuevo usuario
+    const temaGuardado = localStorage.getItem(_uid + '_clipbox_theme') || 'dark';
+    if (temaGuardado === 'light') root.classList.add('light');
+    else root.classList.remove('light');
+    if (window._clipboxRecargarPrefs) window._clipboxRecargarPrefs();
+    return;
+  }
+  if (e.data.tipo !== 'buscarDesdePortal') return;
+  const q = e.data.q || '';
+  const inp = document.getElementById('search');
+  if (!inp) return;
+  inp.value = q;
+  renderList();
+  inp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  inp.focus();
+});
+</script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

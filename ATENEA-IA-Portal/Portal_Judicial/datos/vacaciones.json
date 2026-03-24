@@ -1,0 +1,13 @@
+{
+  "funcionarios": [],
+  "vacaciones": [],
+  "festivos": [],
+  "minimos": {
+    "Civil": 2,
+    "Penal": 3,
+    "Ejecución": 1,
+    "Auxilio Judicial": 2,
+    "Decanato": 1,
+    "Registro Civil": 1
+  }
+}

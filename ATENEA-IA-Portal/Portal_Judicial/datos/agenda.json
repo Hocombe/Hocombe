@@ -1,0 +1,19 @@
+{
+  "senalamientos": [],
+  "guardias": [],
+  "tiposProcedimiento": [],
+  "plazas": [
+    "Plaza 1 - SOFIA LEONOR",
+    "Plaza 2 - PATRICIA FERNANDEZ",
+    "Plaza 3 - PEDRO ADRIAN GÓMEZ"
+  ],
+  "letrados": [
+    "BENITA GÁNDARA",
+    "ISABEL RODRÍGUEZ",
+    "VIOLETA REBOREDO"
+  ],
+  "instruccionesPorPlaza": {},
+  "coloresPersonalizados": {},
+  "nombreTribunal": "Tribunal de Instancia de Vilagarcía de Arousa",
+  "intervaloHuecos": 30
+}

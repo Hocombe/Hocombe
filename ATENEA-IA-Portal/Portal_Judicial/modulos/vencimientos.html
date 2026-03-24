@@ -1,0 +1,1286 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Calculadora de vencimientos procesales — Vilagarcía de Arousa</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  /* ── TEMA OSCURO (por defecto) ─────── */
+  :root{
+    --bg:#0b1020;--ink:#eaf0ff;--muted:#a7b3d1;--chip:#223058;
+    --body-bg:linear-gradient(180deg,#0b1020,#0b132b 60%);
+    --header-bg:rgba(10,16,38,.7);--header-border:#20305b;
+    --section-bg:linear-gradient(180deg,#122148,#102042);--section-border:#223466;
+    --input-bg:#0f1a35;--input-border:#2c4278;
+    --pill-bg:#0d1b3a;--pill-border:#2b4579;
+    --chip-border:#2e4277;
+    --btn-bg:linear-gradient(180deg,#2b375e,#24305a);--btn-border:#39528f;
+    --btn-ghost-border:#3c4f84;
+    --res-card-bg:#0e1c3b;--res-card-border:#2a417a;
+    --tag-bg:#0e2749;--tag-border:#214274;
+    --dropdown-bg:#0f1830;--dropdown-border:#2c4278;
+    --offOverlay:rgba(220,38,38,.54);--offBorder:rgba(220,38,38,1);
+    --list-item-bg:#0b1836;--list-item-border:#243c71;
+  }
+  /* ── TEMA CLARO ─────────────────────── */
+  [data-theme="light"]{
+    --bg:#f0f4ff;--ink:#1e2d4a;--muted:#4a6080;--chip:#dce8ff;
+    --body-bg:linear-gradient(180deg,#e8eeff,#f5f7ff 60%);
+    --header-bg:rgba(255,255,255,.9);--header-border:#c5d3f0;
+    --section-bg:linear-gradient(180deg,#ffffff,#f4f7ff);--section-border:#c5d3f0;
+    --input-bg:#ffffff;--input-border:#a8bfe0;
+    --pill-bg:#e8eeff;--pill-border:#a8bfe0;
+    --chip-border:#a8bfe0;
+    --btn-bg:linear-gradient(180deg,#5b78c9,#4361ee);--btn-border:#4361ee;
+    --btn-ghost-border:#a8bfe0;
+    --res-card-bg:#eef3ff;--res-card-border:#b8cef0;
+    --tag-bg:#e0e9ff;--tag-border:#a8bfe0;
+    --dropdown-bg:#ffffff;--dropdown-border:#a8bfe0;
+    --offOverlay:rgba(220,80,0,.15);--offBorder:rgba(220,80,0,.4);
+    --list-item-bg:#f0f5ff;--list-item-border:#c0d0f0;
+  }
+  html,body{height:100%}
+  body{margin:0;background:var(--body-bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial;transition:background .3s,color .3s}
+  header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:18px 22px;border-bottom:1px solid var(--header-border);background:var(--header-bg);position:sticky;top:0;z-index:20}
+  header h1{font-size:18px;margin:0;font-weight:700}
+  header .badges{display:flex;gap:.6rem;align-items:center}
+  /* Dropdown de ajustes desde el header */
+  #ajustes-overlay{display:none;position:fixed;inset:0;z-index:99;cursor:default}
+  #ajustes-overlay.open{display:block}
+  #ajustesDropdown{position:fixed;top:70px;right:18px;min-width:420px;max-height:82vh;overflow-y:auto;background:var(--dropdown-bg);border:1px solid var(--dropdown-border);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.35);padding:16px 18px 18px;z-index:100;display:none}
+  #ajustesDropdown.open{display:block}
+  .header-ajustes-wrap{position:relative}
+  .chip{background:var(--chip);color:var(--ink);padding:.25rem .55rem;border-radius:999px;font-size:12px;border:1px solid var(--chip-border)}
+  main{max-width:1600px;margin:24px 0;padding:0 20px 60px;display:grid;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:18px;align-items:stretch}
+  @media(max-width:1000px){main{grid-template-columns:1fr}}
+  section{background:var(--section-bg);border:1px solid var(--section-border);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.12);display:flex;flex-direction:column;max-height:90vh;transition:background .3s,border-color .3s}
+  section#calc{resize:vertical;overflow:auto;min-height:400px;grid-column:1;grid-row:1;align-self:stretch;height:100%;max-height:none;box-sizing:border-box}
+  section#avisos{resize:both;overflow:auto;min-height:400px;min-width:300px;max-width:85vw;grid-column:1;grid-row:2;align-self:stretch;height:100%;max-height:none;box-sizing:border-box}
+  section#holidays{resize:both;overflow:auto;min-height:500px;min-width:300px;max-width:90vw;grid-column:2;grid-row:1/3;align-self:stretch;height:100%;max-height:none;box-sizing:border-box}
+  section header{position:relative;background:transparent;border:0;padding:16px 18px;flex-shrink:0}
+  section header h2{margin:0;font-size:16px}
+  .content{padding:0 18px 18px;overflow:auto;flex:1}
+  label{display:block;color:var(--muted);font-size:12px;margin:.2rem 0}
+  input,select,textarea,button{font:inherit}
+  input[type=date], input[type=number], input[type=text], select, textarea{width:100%;box-sizing:border-box;background:var(--input-bg);color:var(--ink);border:1px solid var(--input-border);border-radius:10px;padding:.55rem .7rem;outline:none;transition:background .3s,color .3s,border-color .3s}
+  input[type=color]{width:44px;height:34px;padding:0;border-radius:8px}
+  input[type=range]{width:120px}
+  textarea{min-height:72px;resize:vertical}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .row4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:720px){.row,.row3,.row4{grid-template-columns:1fr}}
+  .btn{background:var(--btn-bg);color:#fff;border:1px solid var(--btn-border);border-radius:10px;padding:.6rem .8rem;cursor:pointer}
+  .btn:hover{filter:brightness(1.06)}
+  .btn.pri{background:linear-gradient(180deg,#3a0ca3,#4361ee);border-color:#5a77f7}
+  .btn.warn{background:linear-gradient(180deg,#a05700,#ff8800);border-color:#ff9f1a}
+  .btn.ghost{background:transparent;border:1px dashed var(--btn-ghost-border);color:var(--muted)}
+  .pill{display:inline-flex;gap:.5rem;align-items:center;background:#0d1b3a;border:1px solid #2b4579;border-radius:12px;padding:.2rem .5rem;font-size:12px}
+  .flex{display:flex;gap:10px;align-items:center}
+  .space{flex:1}
+  .result{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+  .res-card{background:#0e1c3b;border:1px solid #2a417a;border-radius:12px;padding:10px}
+  .res-title{color:var(--muted);font-size:12px}
+  .res-date{font-size:18px;font-weight:700}
+  .quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .pill{display:inline-flex;gap:.5rem;align-items:center;background:var(--pill-bg);border:1px solid var(--pill-border);border-radius:12px;padding:.2rem .5rem;font-size:12px}
+  .res-card{background:var(--res-card-bg);border:1px solid var(--res-card-border);border-radius:12px;padding:10px}
+  .tag{background:var(--tag-bg);border:1px solid var(--tag-border);border-radius:999px;padding:.25rem .6rem;font-size:12px;cursor:pointer}
+  .switch{display:inline-flex;gap:.5rem;align-items:center;cursor:pointer}
+  .switch input{accent-color:#4cc9f0}
+  /* Calendario */
+  .calendar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:1000px){.calendar{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:700px){.calendar{grid-template-columns:1fr}}
+  .month{border:1px solid var(--section-border);border-radius:12px;padding:8px;background:var(--input-bg)}
+  .month h4{margin:4px 6px 6px;font-size:13px;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+  .dow{color:var(--muted);font-size:11px;text-align:center;padding:4px}
+  .day{aspect-ratio:1;border-radius:10px;background:var(--input-bg);border:1px solid var(--input-border);text-align:center;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;position:relative;overflow:hidden;color:var(--ink)}
+  .day.muted{opacity:.35}
+  .day.weekend{opacity:.7}
+  /* CÍRCULO SEMITRANSPARENTE para inhábiles */
+  .day.off::before{content:'';position:absolute;inset:4px;border-radius:50%;background:var(--offOverlay);border:1px solid var(--offBorder);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+  .day.off::after{content:none}
+  .legend{display:flex;gap:10px;margin-top:8px}
+  .legend .box{width:14px;height:14px;border-radius:50%;border:1px solid var(--section-border)}
+  .box.work{background:var(--input-bg)}
+  .box.off{background:var(--offOverlay);border-color:var(--offBorder)}
+  .list{max-height:220px;overflow:auto;margin-top:8px;border-top:1px dashed var(--input-border);padding-top:8px}
+  .list .item{display:flex;gap:10px;align-items:center;justify-content:space-between;border:1px solid var(--list-item-border);background:var(--list-item-bg);border-radius:10px;padding:6px 8px;margin-bottom:6px}
+  .item small{color:var(--muted)}
+  /* Avisos */
+  table{width:100%;border-collapse:collapse}
+  th,td{border-bottom:1px dashed var(--input-border);padding:8px;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-size:12px}
+  tr.overdue{background:rgba(239,71,111,.10);border-left:3px solid #ef476f}
+  tr.today{background:rgba(255,183,3,.10);border-left:3px solid #ffb703}
+  tr.upcoming{background:rgba(76,201,240,.06)}
+  tr.done{background:rgba(16,185,129,.18);border-left:3px solid #10b981}
+  .badge{font-size:11px;border:1px solid #3a4f86;border-radius:999px;padding:.1rem .45rem;color:#b9c7ea}
+  /* Buscador de avisos */
+  .aviso-search-wrap{position:relative;margin-bottom:10px}
+  .aviso-search-wrap input{padding-left:2rem;background:#0b152e;border:1px solid #2c4278;border-radius:10px;color:#eaf0ff}
+  .aviso-search-wrap::before{content:'🔍';position:absolute;left:.5rem;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none}
+  /* Chip de urgencia */
+  .urgencia{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;border-radius:999px;padding:.15rem .5rem;white-space:nowrap}
+  .urgencia.verde {background:rgba(16,185,129,.18);color:#4ade80;border:1px solid #16a34a}
+  .urgencia.ambar {background:rgba(251,191,36,.18);color:#fbbf24;border:1px solid #d97706}
+  .urgencia.rojo  {background:rgba(239,71,111,.22);color:#f87171;border:1px solid #dc2626}
+  .urgencia.gris  {background:rgba(100,116,139,.18);color:#94a3b8;border:1px solid #475569}
+  /* Barra de progreso de urgencia */
+  .barra-urgencia{height:4px;border-radius:2px;margin-top:4px;transition:width .3s}
+  .barra-urgencia.verde{background:#4ade80}
+  .barra-urgencia.ambar{background:#fbbf24}
+  .barra-urgencia.rojo {background:#f87171}
+  /* Scrollbars personalizados */
+  *::-webkit-scrollbar{width:10px;height:10px}
+  *::-webkit-scrollbar-track{background:#0d1b35;border-radius:10px}
+  *::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#2a4578,#1e3461);border-radius:10px;border:1px solid #1a2d52}
+  *::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#3a5588,#2e4471)}
+  *{scrollbar-width:thin;scrollbar-color:#2a4578 #0d1b35}
+  footer{max-width:1600px;margin:10px auto 40px;color:#8ea2cf;padding:0 20px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+  <header>
+    <h1>Calculadora de vencimientos procesales</h1>
+    <div class="badges">
+      <span class="chip">Offline</span>
+      <span class="chip">Export/Import JSON</span>
+      <span class="chip">Hasta 2040</span>
+      <button id="btnTema" onclick="toggleTema()" style="font-size:12px;padding:.3rem .7rem;border-radius:999px;border:1px solid var(--chip-border);background:var(--chip);color:var(--ink);cursor:pointer" title="Cambiar tema claro/oscuro">🌙 Oscuro</button>
+      <div class="header-ajustes-wrap">
+        <button class="btn" id="btnToggleAjustes" onclick="toggleAjustes()" style="font-size:13px;padding:.35rem .7rem">⚙️ Ajustes</button>
+        <div id="ajustes-overlay" onclick="toggleAjustes()"></div>
+        <div id="ajustesDropdown">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <strong style="font-size:14px">⚙️ Ajustes y guardado</strong>
+            <button class="btn ghost" onclick="toggleAjustes()" style="font-size:11px;padding:.2rem .5rem">✕ Cerrar</button>
+          </div>
+          <div class="row">
+            <div>
+              <label>Sede (texto libre)</label>
+              <input id="sede" type="text" placeholder="Vilagarcía de Arousa"/>
+            </div>
+            <div class="flex" style="align-items:flex-end">
+              <button class="btn" id="btnSave">💾 Guardar</button>
+              <button class="btn ghost" id="btnReset">Reiniciar todo</button>
+            </div>
+          </div>
+          <div style="margin-top:14px">
+            <label>Plazas disponibles</label>
+            <div class="flex" style="margin-bottom:8px">
+              <input id="nuevaPlaza" type="text" placeholder="Añadir nombre de plaza..."/>
+              <button class="btn" id="btnAddPlaza">Añadir</button>
+            </div>
+            <div id="plazasList"></div>
+          </div>
+          <p style="color:#9eb0db;font-size:12px;margin:10px 0 0">Los datos se guardan en el servidor automáticamente. Puedes exportarlos/importarlos en JSON como copia de seguridad adicional.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section id="calc">
+      <header><h2>1) Calcular vencimiento</h2></header>
+      <div class="content">
+        <div class="row">
+          <div>
+            <label>Tipo de procedimiento</label>
+            <input type="text" list="tipos" id="tipo" placeholder="p.ej., DPA, EJ, DP..."/>
+            <datalist id="tipos"></datalist>
+          </div>
+          <div class="row">
+            <div>
+              <label>Número</label>
+              <input id="numero" type="text" placeholder="543"/>
+            </div>
+            <div>
+              <label>Año</label>
+              <input id="anio" type="number" min="2000" max="2040" placeholder="2025"/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Fecha de notificación</label>
+            <input id="fechaNotif" type="date"/>
+          </div>
+          <div>
+            <label>Nº días hábiles</label>
+            <input id="dias" type="number" min="0" value="5"/>
+          </div>
+        </div>
+        <div class="quick">
+          <span class="tag" data-quick="5">+5</span>
+          <span class="tag" data-quick="10">+10</span>
+          <span class="tag" data-quick="20">+20</span>
+          <span class="tag" data-quick="30">+30</span>
+          <span class="tag" data-quick="60">+60</span>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <label class="switch"><input type="checkbox" id="startNext" checked> Contar desde el día siguiente (dies a quo)</label>
+          <label class="switch"><input type="checkbox" id="august" checked> Agosto inhábil</label>
+          <label class="switch"><input type="checkbox" id="rule15" checked> Mostrar límite de presentación a las 15:00</label>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <div>
+            <label>Plaza</label>
+            <div class="flex">
+              <select id="plazaSel" style="flex:1"></select>
+              <button class="btn ghost" id="btnNuevaPlaza" title="Añadir nueva plaza">+ Plaza</button>
+            </div>
+          </div>
+          <div style="align-self:end">
+            <button class="btn pri" id="btnCalcular">Calcular</button>
+            <button class="btn" id="btnAviso" disabled>Añadir como aviso</button>
+            <button class="btn ghost" id="btnLimpiar">Limpiar</button>
+          </div>
+        </div>
+        <div class="result" id="result"></div>
+        <!-- Panel nota para aviso -->
+        <div id="avisoNotePanel" style="display:none;margin-top:10px;background:#0e1c3b;border:1px solid #2a417a;border-radius:12px;padding:12px">
+          <label style="font-size:12px;color:var(--muted);margin-bottom:6px;display:block">📝 Nota para el aviso (opcional):</label>
+          <textarea id="avisoNoteInput" placeholder="Escribe una nota para este aviso…" style="min-height:52px;margin-bottom:8px"></textarea>
+          <div class="flex">
+            <button class="btn pri" id="btnAvisoConfirmar">✅ Confirmar y añadir aviso</button>
+            <button class="btn ghost" id="btnAvisoCancelar">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="avisos">
+      <header><h2>3) Avisos</h2></header>
+      <div class="content">
+        <div class="row">
+          <div class="flex">
+            <span class="pill"><strong id="countPend">0</strong>&nbsp;pendientes</span>
+            <span class="pill"><strong id="countHoy">0</strong>&nbsp;para hoy</span>
+            <span class="pill"><strong id="countOver">0</strong>&nbsp;vencidos</span>
+          </div>
+          <div class="flex" style="justify-content:flex-end">
+            <button class="btn" onclick="imprimirAvisos()">🖨️ Imprimir</button>
+            <button class="btn" onclick="exportarExcelAvisos()">📥 Excel</button>
+            <button class="btn pri" id="btnGuardar">💾 Guardar</button>
+            <button class="btn" id="btnExport">Exportar JSON</button>
+            <label class="btn" style="cursor:pointer">Importar JSON<input id="importJson" type="file" accept="application/json" class="sr"></label>
+          </div>
+        </div>
+        <!-- Buscador -->
+        <div class="aviso-search-wrap" style="margin-top:10px">
+          <input type="text" id="buscarAviso" placeholder="Buscar por procedimiento, plaza, notas…" oninput="renderAvisos()" autocomplete="off"/>
+        </div>
+        <table id="tblAvisos">
+          <thead><tr>
+            <th>#</th><th>Procedimiento</th><th>Notif.</th><th>Plazo (días háb.)</th><th>Último día</th><th>Límite 15:00</th><th>Plaza</th><th>Notas</th><th>Urgencia</th><th>Estado</th><th>Acciones</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="holidays">
+      <header><h2>2) Días inhábiles (clic para alternar)</h2></header>
+      <div class="content">
+        <div class="row" style="align-items:end">
+          <div>
+            <label>Año</label>
+            <select id="yearSel"></select>
+          </div>
+          <div>
+            <label>Color para marcar inhábiles (círculo)</label>
+            <div class="flex">
+              <input type="color" id="offColor" value="#dc2626" title="Color del círculo"/>
+              <input type="range" id="offAlpha" min="5" max="60" value="54" title="Transparencia"/>
+              <span id="offAlphaLabel">54% opacidad</span>
+            </div>
+          </div>
+          <div class="flex" style="align-items:flex-end; justify-content:flex-end">
+            <button class="btn" id="btnAug">Marcar/Desmarcar agosto entero</button>
+            <button class="btn" id="btnHoy">Ir a hoy</button>
+            <button class="btn ghost" id="btnVaciar">Vaciar inhábiles del año</button>
+          </div>
+        </div>
+        <div class="legend">
+          <span class="flex"><span class="box work"></span>&nbsp;Hábil</span>
+          <span class="flex"><span class="box off"></span>&nbsp;Inhábil</span>
+        </div>
+        <div class="calendar" id="calendar"></div>
+        <div class="list" id="offList"></div>
+      </div>
+    </section>
+
+  </main>
+  <footer>
+    <small>© 2025 — Calculadora de vencimientos. Archivo autónomo (HTML+CSS+JS) para uso interno.</small>
+  </footer>
+
+<script>
+// --- Estado inicial ---
+const initialHolidays = {
+  "2020-01-01": "1 de enero",
+  "2020-01-06": "6 de enero",
+  "2020-03-19": "VILAGARCIA",
+  "2020-04-09": "JUEVES SANTO",
+  "2020-04-10": "VIERNES SANTO",
+  "2020-05-01": "FIESTA DEL TRABAJO",
+  "2020-06-24": "SAN JUAN",
+  "2020-10-12": "FIESTA NACIONAL DE ESPAÑA",
+  "2020-12-08": "L A INMACULADA CONCEPCIÓN",
+  "2020-12-24": "NOCHEBUENA",
+  "2020-12-25": "NATIVIDAD DEL SEÑOR",
+  "2020-12-31": "FIN DE AÑO",
+  "2021-01-01": "1 de enero",
+  "2021-01-06": "6 de enero",
+  "2021-03-19": "Caldas de reis",
+  "2021-04-01": "JUEVES SANTO",
+  "2021-04-02": "VIERNES SANTO",
+  "2021-05-17": "FIESTA DEL TRABAJO",
+  "2021-10-12": "FIESTA NACIONAL DE ESPAÑA",
+  "2021-11-01": "L A INMACULADA CONCEPCIÓN",
+  "2021-12-06": "NOCHEBUENA",
+  "2021-12-08": "NATIVIDAD DEL SEÑOR",
+  "2021-12-24": "FIN DE AÑO",
+  "2021-12-31": "FIN DE AÑO",
+  "2022-01-01": "1 de enero",
+  "2022-01-06": "6 de enero",
+  "2022-04-14": "JUEVES SANTO",
+  "2022-04-15": "VIERNES SANTO",
+  "2022-05-17": "FIESTA DEL TRABAJO",
+  "2022-05-23": "SANTA RITA",
+  "2022-06-24": "SAN JUAN",
+  "2022-07-25": "DIA APOSTOL",
+  "2022-10-12": "FIESTA NACIONAL DE ESPAÑA",
+  "2022-11-01": "L A INMACULADA CONCEPCIÓN",
+  "2022-12-06": "NUESTRA SEÑORA",
+  "2022-12-08": "CONTITUCION",
+  "2022-12-26": "",
+  "2022-12-27": "",
+  "2022-12-28": "",
+  "2022-12-29": "",
+  "2022-12-30": "",
+  "2023-01-02": "",
+  "2023-01-03": "",
+  "2023-01-04": "",
+  "2023-01-05": "",
+  "2023-01-06": "REYES",
+  "2023-04-06": "JUEVES SANTO",
+  "2023-04-07": "VIERNES SANTO",
+  "2023-05-01": "FIESTA DEL TRABAJO",
+  "2023-05-17": "FIESTA DEL TRABAJO",
+  "2023-05-22": "SANTA RITA",
+  "2023-07-25": "APOSTOL",
+  "2023-10-12": "FIESTA NACIONAL DE ESPAÑA",
+  "2023-11-01": "TODOS LOS SANTOS",
+  "2023-12-06": "CONSTITUCION",
+  "2023-12-08": "FIESTA",
+  "2023-12-25": "NAVIDAD",
+  "2023-12-26": "INHABIL",
+  "2023-12-27": "INHABIL",
+  "2023-12-28": "INHABIL",
+  "2023-12-29": "INHABIL",
+  "2024-01-01": "INHABIL",
+  "2024-01-02": "INHABIL",
+  "2024-01-03": "INHABIL",
+  "2024-01-04": "INHABIL",
+  "2024-01-05": "INHABIL",
+  "2024-04-28": "JUEVES SANTO",
+  "2024-04-29": "VIERNES SANTO",
+  "2024-05-01": "FIESTA DEL TRABAJO",
+  "2024-05-17": "FIESTA DEL TRABAJO",
+  "2024-05-22": "SANTA RITA",
+  "2024-07-25": "APOSTOL",
+  "2024-08-15": "Agosto inhábil",
+  "2024-08-16": "Agosto inhábil",
+  "2024-11-01": "",
+  "2024-12-06": "CONSTITUCION",
+  "2024-12-24": "",
+  "2024-12-25": "",
+  "2024-12-26": "",
+  "2024-12-27": "",
+  "2024-12-30": "",
+  "2024-12-31": "",
+  "2025-01-01": "AÑO NUEVO",
+  "2025-01-02": "",
+  "2025-01-03": "",
+  "2025-01-06": "DIA REYES",
+  "2025-04-17": "JUEVES SANTO",
+  "2025-04-18": "VIERNES SANTO",
+  "2025-05-01": "FIESTA DEL TRABAJO",
+  "2025-05-22": "SANTA RITA",
+  "2025-07-25": "SANTIAGO APOSTOL",
+  "2025-12-08": "",
+  "2025-12-23": "",
+  "2025-12-24": "",
+  "2025-12-25": "NAVIDAD",
+  "2025-12-26": "",
+  "2025-12-29": "",
+  "2025-12-30": "",
+  "2025-12-31": "",
+  "2026-01-01": "",
+  "2026-01-02": "",
+  "2020-08-01": "Agosto inhábil",
+  "2020-08-02": "Agosto inhábil",
+  "2020-08-03": "Agosto inhábil",
+  "2020-08-04": "Agosto inhábil",
+  "2020-08-05": "Agosto inhábil",
+  "2020-08-06": "Agosto inhábil",
+  "2020-08-07": "Agosto inhábil",
+  "2020-08-08": "Agosto inhábil",
+  "2020-08-09": "Agosto inhábil",
+  "2020-08-10": "Agosto inhábil",
+  "2020-08-11": "Agosto inhábil",
+  "2020-08-12": "Agosto inhábil",
+  "2020-08-13": "Agosto inhábil",
+  "2020-08-14": "Agosto inhábil",
+  "2020-08-15": "Agosto inhábil",
+  "2020-08-16": "Agosto inhábil",
+  "2020-08-17": "Agosto inhábil",
+  "2020-08-18": "Agosto inhábil",
+  "2020-08-19": "Agosto inhábil",
+  "2020-08-20": "Agosto inhábil",
+  "2020-08-21": "Agosto inhábil",
+  "2020-08-22": "Agosto inhábil",
+  "2020-08-23": "Agosto inhábil",
+  "2020-08-24": "Agosto inhábil",
+  "2020-08-25": "Agosto inhábil",
+  "2020-08-26": "Agosto inhábil",
+  "2020-08-27": "Agosto inhábil",
+  "2020-08-28": "Agosto inhábil",
+  "2020-08-29": "Agosto inhábil",
+  "2020-08-30": "Agosto inhábil",
+  "2020-08-31": "Agosto inhábil",
+  "2021-08-01": "Agosto inhábil",
+  "2021-08-02": "Agosto inhábil",
+  "2021-08-03": "Agosto inhábil",
+  "2021-08-04": "Agosto inhábil",
+  "2021-08-05": "Agosto inhábil",
+  "2021-08-06": "Agosto inhábil",
+  "2021-08-07": "Agosto inhábil",
+  "2021-08-08": "Agosto inhábil",
+  "2021-08-09": "Agosto inhábil",
+  "2021-08-10": "Agosto inhábil",
+  "2021-08-11": "Agosto inhábil",
+  "2021-08-12": "Agosto inhábil",
+  "2021-08-13": "Agosto inhábil",
+  "2021-08-14": "Agosto inhábil",
+  "2021-08-15": "Agosto inhábil",
+  "2021-08-16": "Agosto inhábil",
+  "2021-08-17": "Agosto inhábil",
+  "2021-08-18": "Agosto inhábil",
+  "2021-08-19": "Agosto inhábil",
+  "2021-08-20": "Agosto inhábil",
+  "2021-08-21": "Agosto inhábil",
+  "2021-08-22": "Agosto inhábil",
+  "2021-08-23": "Agosto inhábil",
+  "2021-08-24": "Agosto inhábil",
+  "2021-08-25": "Agosto inhábil",
+  "2021-08-26": "Agosto inhábil",
+  "2021-08-27": "Agosto inhábil",
+  "2021-08-28": "Agosto inhábil",
+  "2021-08-29": "Agosto inhábil",
+  "2021-08-30": "Agosto inhábil",
+  "2021-08-31": "Agosto inhábil",
+  "2022-08-01": "Agosto inhábil",
+  "2022-08-02": "Agosto inhábil",
+  "2022-08-03": "Agosto inhábil",
+  "2022-08-04": "Agosto inhábil",
+  "2022-08-05": "Agosto inhábil",
+  "2022-08-06": "Agosto inhábil",
+  "2022-08-07": "Agosto inhábil",
+  "2022-08-08": "Agosto inhábil",
+  "2022-08-09": "Agosto inhábil",
+  "2022-08-10": "Agosto inhábil",
+  "2022-08-11": "Agosto inhábil",
+  "2022-08-12": "Agosto inhábil",
+  "2022-08-13": "Agosto inhábil",
+  "2022-08-14": "Agosto inhábil",
+  "2022-08-15": "Agosto inhábil",
+  "2022-08-16": "Agosto inhábil",
+  "2022-08-17": "Agosto inhábil",
+  "2022-08-18": "Agosto inhábil",
+  "2022-08-19": "Agosto inhábil",
+  "2022-08-20": "Agosto inhábil",
+  "2022-08-21": "Agosto inhábil",
+  "2022-08-22": "Agosto inhábil",
+  "2022-08-23": "Agosto inhábil",
+  "2022-08-24": "Agosto inhábil",
+  "2022-08-25": "Agosto inhábil",
+  "2022-08-26": "Agosto inhábil",
+  "2022-08-27": "Agosto inhábil",
+  "2022-08-28": "Agosto inhábil",
+  "2022-08-29": "Agosto inhábil",
+  "2022-08-30": "Agosto inhábil",
+  "2022-08-31": "Agosto inhábil",
+  "2023-08-01": "Agosto inhábil",
+  "2023-08-02": "Agosto inhábil",
+  "2023-08-03": "Agosto inhábil",
+  "2023-08-04": "Agosto inhábil",
+  "2023-08-05": "Agosto inhábil",
+  "2023-08-06": "Agosto inhábil",
+  "2023-08-07": "Agosto inhábil",
+  "2023-08-08": "Agosto inhábil",
+  "2023-08-09": "Agosto inhábil",
+  "2023-08-10": "Agosto inhábil",
+  "2023-08-11": "Agosto inhábil",
+  "2023-08-12": "Agosto inhábil",
+  "2023-08-13": "Agosto inhábil",
+  "2023-08-14": "Agosto inhábil",
+  "2023-08-15": "Agosto inhábil",
+  "2023-08-16": "Agosto inhábil",
+  "2023-08-17": "Agosto inhábil",
+  "2023-08-18": "Agosto inhábil",
+  "2023-08-19": "Agosto inhábil",
+  "2023-08-20": "Agosto inhábil",
+  "2023-08-21": "Agosto inhábil",
+  "2023-08-22": "Agosto inhábil",
+  "2023-08-23": "Agosto inhábil",
+  "2023-08-24": "Agosto inhábil",
+  "2023-08-25": "Agosto inhábil",
+  "2023-08-26": "Agosto inhábil",
+  "2023-08-27": "Agosto inhábil",
+  "2023-08-28": "Agosto inhábil",
+  "2023-08-29": "Agosto inhábil",
+  "2023-08-30": "Agosto inhábil",
+  "2023-08-31": "Agosto inhábil",
+  "2024-08-01": "Agosto inhábil",
+  "2024-08-02": "Agosto inhábil",
+  "2024-08-03": "Agosto inhábil",
+  "2024-08-04": "Agosto inhábil",
+  "2024-08-05": "Agosto inhábil",
+  "2024-08-06": "Agosto inhábil",
+  "2024-08-07": "Agosto inhábil",
+  "2024-08-08": "Agosto inhábil",
+  "2024-08-09": "Agosto inhábil",
+  "2024-08-10": "Agosto inhábil",
+  "2024-08-11": "Agosto inhábil",
+  "2024-08-12": "Agosto inhábil",
+  "2024-08-13": "Agosto inhábil",
+  "2024-08-14": "Agosto inhábil",
+  "2024-08-17": "Agosto inhábil",
+  "2024-08-18": "Agosto inhábil",
+  "2024-08-19": "Agosto inhábil",
+  "2024-08-20": "Agosto inhábil",
+  "2024-08-21": "Agosto inhábil",
+  "2024-08-22": "Agosto inhábil",
+  "2024-08-23": "Agosto inhábil",
+  "2024-08-24": "Agosto inhábil",
+  "2024-08-25": "Agosto inhábil",
+  "2024-08-26": "Agosto inhábil",
+  "2024-08-27": "Agosto inhábil",
+  "2024-08-28": "Agosto inhábil",
+  "2024-08-29": "Agosto inhábil",
+  "2024-08-30": "Agosto inhábil",
+  "2024-08-31": "Agosto inhábil",
+  "2025-08-01": "Agosto inhábil",
+  "2025-08-02": "Agosto inhábil",
+  "2025-08-03": "Agosto inhábil",
+  "2025-08-04": "Agosto inhábil",
+  "2025-08-05": "Agosto inhábil",
+  "2025-08-06": "Agosto inhábil",
+  "2025-08-07": "Agosto inhábil",
+  "2025-08-08": "Agosto inhábil",
+  "2025-08-09": "Agosto inhábil",
+  "2025-08-10": "Agosto inhábil",
+  "2025-08-11": "Agosto inhábil",
+  "2025-08-12": "Agosto inhábil",
+  "2025-08-13": "Agosto inhábil",
+  "2025-08-14": "Agosto inhábil",
+  "2025-08-15": "Agosto inhábil",
+  "2025-08-16": "Agosto inhábil",
+  "2025-08-17": "Agosto inhábil",
+  "2025-08-18": "Agosto inhábil",
+  "2025-08-19": "Agosto inhábil",
+  "2025-08-20": "Agosto inhábil",
+  "2025-08-21": "Agosto inhábil",
+  "2025-08-22": "Agosto inhábil",
+  "2025-08-23": "Agosto inhábil",
+  "2025-08-24": "Agosto inhábil",
+  "2025-08-25": "Agosto inhábil",
+  "2025-08-26": "Agosto inhábil",
+  "2025-08-27": "Agosto inhábil",
+  "2025-08-28": "Agosto inhábil",
+  "2025-08-29": "Agosto inhábil",
+  "2025-08-30": "Agosto inhábil",
+  "2025-08-31": "Agosto inhábil"
+};
+
+const state = {
+  holidays: {...initialHolidays}, // mapa 'YYYY-MM-DD' -> etiqueta
+  augustInhabil: true,
+  fifteenRule: true,
+  startNextDay: true,
+  avisos: [],
+  tipos: ['DPA','DP','EJ','VJ','LEC','DIL','LECr','Cont','Social'],
+  plazas: [
+    'Plaza 1 — SOFÍA LEONOR',
+    'Plaza 2 — PATRICIA FERNÁNDEZ',
+    'Plaza 3 — PEDRO ADRIÁN GÓMEZ'
+  ],
+  // Color y opacidad de marcador inhábil (configurable)
+  offColor: '#dc2626',
+  offAlpha: 0.54,
+  sede: 'Vilagarcía de Arousa'
+};
+
+// Usuario activo (sincronizado con el portal)
+let _uid = 'default';
+
+// Utilidades de fecha y color
+const fmt = (d) => d.toLocaleDateString('es-ES', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+const ymd = (d) => new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())).toISOString().slice(0,10);
+const isWeekend = (d) => d.getDay()===0 || d.getDay()===6;
+const isAugust = (d) => d.getMonth()===7;
+const isOff = (d) => isWeekend(d) || (ymd(d) in state.holidays) || (state.augustInhabil && isAugust(d));
+function hexToRgb(hex){
+  const h = hex.replace('#','');
+  const bigint = parseInt(h.length===3 ? h.split('').map(x=>x+x).join('') : h, 16);
+  return {r:(bigint>>16)&255, g:(bigint>>8)&255, b:bigint&255};
+}
+function applyOffColor(){
+  const {r,g,b} = hexToRgb(state.offColor||'#ffb703');
+  const alpha = Math.min(1, Math.max(0, Number(state.offAlpha||0.22)));
+  const overlay = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  const border = `rgba(${r}, ${g}, ${b}, ${Math.min(1,alpha*1.9)})`;
+  document.documentElement.style.setProperty('--offOverlay', overlay);
+  document.documentElement.style.setProperty('--offBorder', border);
+  const pct = Math.round(alpha*100);
+  document.getElementById('offAlphaLabel').textContent = pct + '% opacidad';
+  const inputColor = document.getElementById('offColor'); if(inputColor) inputColor.value = state.offColor;
+  const inputAlpha = document.getElementById('offAlpha'); if(inputAlpha) inputAlpha.value = pct;
+}
+
+function addWorkingDays(startDate, n){
+  let d = new Date(startDate);
+  if(state.startNextDay){ d.setDate(d.getDate()+1); }
+  let added = 0;
+  while(added < n){
+    if(!isOff(d)) added++;
+    if(added===n) break;
+    d.setDate(d.getDate()+1);
+  }
+  return d;
+}
+function nextWorkingDay(d0){
+  const d = new Date(d0);
+  do { d.setDate(d.getDate()+1); } while(isOff(d));
+  return d;
+}
+function at1500(d){ const r = new Date(d); r.setHours(15,0,0,0); return r; }
+
+// --- UI helpers ---
+const el = (id)=>document.getElementById(id);
+function renderPlazaSelect(){
+  const sel = el('plazaSel'); sel.innerHTML='';
+  (state.plazas||[]).forEach(p=>{ const o=document.createElement('option'); o.value=p; o.textContent=p; sel.appendChild(o); });
+}
+function renderPlazasList(){
+  const host = el('plazasList'); host.innerHTML='';
+  (state.plazas||[]).forEach((p,i)=>{
+    const wrap = document.createElement('div'); wrap.className='item';
+    wrap.innerHTML = `<div><strong>${p}</strong></div>`;
+    const actions = document.createElement('div');
+    const b1=document.createElement('button'); b1.className='btn'; b1.textContent='Renombrar'; b1.onclick=()=>{ const np=prompt('Nuevo nombre:', p); if(np!==null && np.trim()){ state.plazas[i]=np.trim(); renderPlazaSelect(); renderPlazasList(); saveLocal(); }};
+    const b2=document.createElement('button'); b2.className='btn ghost'; b2.textContent='Eliminar'; b2.onclick=()=>{ if(!confirm('¿Eliminar plaza?')) return; state.plazas.splice(i,1); renderPlazaSelect(); renderPlazasList(); saveLocal(); };
+    actions.appendChild(b1); actions.appendChild(b2); wrap.appendChild(actions); host.appendChild(wrap);
+  });
+}
+
+// ─── TEMA CLARO / OSCURO ────────────────────────────────────────
+function toggleTema(){
+  const html = document.documentElement;
+  const isLight = html.getAttribute('data-theme') === 'light';
+  const nuevoTema = isLight ? 'dark' : 'light';
+  if(nuevoTema === 'dark'){
+    html.removeAttribute('data-theme');
+  } else {
+    html.setAttribute('data-theme', 'light');
+  }
+  _actualizarBtnTema();
+  fetch('/api/config/vencimientos_tema_' + _uid, {
+    method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({tema: nuevoTema})
+  }).catch(() => {});
+}
+function _actualizarBtnTema(){
+  const btn = document.getElementById('btnTema');
+  if(!btn) return;
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  btn.textContent = isLight ? '☀️ Claro' : '🌙 Oscuro';
+}
+async function _restaurarTema(){
+  try {
+    if(window.location.protocol === 'http:' || window.location.protocol === 'https:'){
+      const r = await fetch('/api/config/vencimientos_tema_' + _uid);
+      const d = await r.json();
+      const t = d.config?.tema;
+      if(t === 'light'){
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    }
+  } catch(_){}
+  _actualizarBtnTema();
+}
+// Recibir tema del portal
+window.addEventListener('message', e => {
+  if (!e.data || e.data.tipo !== 'tema') return;
+  // El portal usa oscuro=true para modo oscuro → vencimientos usa data-theme="light" para claro
+  if (e.data.oscuro) {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+  _actualizarBtnTema();
+});
+
+// ─── RECORDAR TAMAÑOS DE SECCIONES ──────────────────────────────
+// Los tamaños se guardan dentro de state.secSizes → se persisten en el
+// servidor vía /save_data, sobreviviendo al reinicio del servidor.
+let _restaurando = false;
+
+function _guardarTamañoSeccion(id, styleH, styleW){
+  try {
+    if(!state.secSizes) state.secSizes = {};
+    state.secSizes[id] = { h: styleH, w: styleW };
+    saveLocal(); // guarda todo el state (incluye secSizes) en el servidor
+  } catch(_){}
+}
+function _restaurarTamañoSecciones(){
+  try {
+    const sizes = state.secSizes;
+    if(!sizes) return;
+    _restaurando = true;
+    ['calc','avisos','holidays'].forEach(id => {
+      const sec = document.getElementById(id);
+      if(!sec || !sizes[id]) return;
+      const {h, w} = sizes[id];
+      if(h) sec.style.height = h;
+      if(w && id !== 'calc') sec.style.width = w;
+    });
+    setTimeout(() => { _restaurando = false; }, 800);
+  } catch(_){}
+}
+function _iniciarObservadorTamaños(){
+  ['calc','avisos','holidays'].forEach(id => {
+    const sec = document.getElementById(id);
+    if(!sec) return;
+    let _timer = null;
+    const mo = new MutationObserver(() => {
+      if(_restaurando) return;
+      clearTimeout(_timer);
+      _timer = setTimeout(() => {
+        const h = sec.style.height;
+        const w = sec.style.width;
+        if(h) _guardarTamañoSeccion(id, h, w || '');
+      }, 400);
+    });
+    mo.observe(sec, { attributes: true, attributeFilter: ['style'] });
+  });
+}
+
+// --- Inicialización ---
+(function init(){
+  // Años para calendario
+  const ys = el('yearSel');
+  const thisY = new Date().getFullYear();
+  for(let y=2018;y<=2040;y++){
+    const o=document.createElement('option'); o.value=y; o.textContent=y; if(y===thisY) o.selected=true; ys.appendChild(o);
+  }
+  // Tipos datalist
+  const dl = document.createElement('datalist'); dl.id='tipos'; document.body.appendChild(dl);
+  (state.tipos||[]).forEach(t=>{ const o=document.createElement('option'); o.value=t; dl.appendChild(o); });
+
+  // Listeners
+  document.querySelectorAll('.tag').forEach(t=>t.addEventListener('click',()=>{ el('dias').value = t.dataset.quick; }));
+  el('btnCalcular').addEventListener('click', calcular);
+  el('btnLimpiar').addEventListener('click', limpiar);
+  el('btnAviso').addEventListener('click', mostrarPanelAviso);
+  el('btnAvisoCancelar').addEventListener('click', cerrarPanelAviso);
+  el('btnAvisoConfirmar').addEventListener('click', addAvisoFromCalc);
+  el('startNext').addEventListener('change',e=>{ state.startNextDay=e.target.checked; saveLocal(); });
+  el('august').addEventListener('change',e=>{ state.augustInhabil=e.target.checked; renderCalendar(); saveLocal(); });
+  el('rule15').addEventListener('change',e=>{ state.fifteenRule=e.target.checked; saveLocal(); });
+  el('yearSel').addEventListener('change',renderCalendar);
+  el('btnAug').addEventListener('click',toggleAugust);
+  el('btnHoy').addEventListener('click',()=>{ el('yearSel').value = new Date().getFullYear(); renderCalendar(); });
+  el('btnVaciar').addEventListener('click',()=>{ const y=parseInt(el('yearSel').value); Object.keys(state.holidays).forEach(k=>{ if(k.startsWith(y+'-')) delete state.holidays[k]; }); renderCalendar(); saveLocal(); });
+  el('btnExport').addEventListener('click',exportJSON);
+  el('importJson').addEventListener('change',importJSON);
+  el('btnSave').addEventListener('click',saveLocal);
+  el('btnReset').addEventListener('click',resetAll);
+  el('btnGuardar').addEventListener('click', async ()=>{
+    const btn = el('btnGuardar');
+    btn.textContent = '💾 Guardando...';
+    btn.disabled = true;
+    await saveLocal();
+    btn.textContent = '✅ Guardado';
+    setTimeout(() => {
+      btn.textContent = '💾 Guardar';
+      btn.disabled = false;
+    }, 2000);
+  });
+  el('btnAddPlaza').addEventListener('click',()=>{
+    const name = el('nuevaPlaza').value.trim(); if(!name) return;
+    if(!state.plazas) state.plazas=[];
+    state.plazas.push(name); el('nuevaPlaza').value=''; renderPlazaSelect(); renderPlazasList(); saveLocal();
+  });
+  el('btnNuevaPlaza').addEventListener('click',()=>{
+    const name = prompt('Nombre de la nueva plaza:','Plaza 4 — ...'); if(name && name.trim()){ if(!state.plazas) state.plazas=[]; state.plazas.push(name.trim()); renderPlazaSelect(); renderPlazasList(); saveLocal(); }
+  });
+  // Color controls
+  el('offColor').addEventListener('input', (e)=>{ state.offColor = e.target.value; applyOffColor(); saveLocal(); });
+  el('offAlpha').addEventListener('input', (e)=>{ state.offAlpha = (parseInt(e.target.value)||22)/100; applyOffColor(); saveLocal(); });
+
+  // Restaurar solo el tema antes de mostrar contenido
+  _restaurarTema();
+
+  (async function() {
+    await loadLocal();
+    if(window.location.protocol === 'http:' || window.location.protocol === 'https:'){
+      setInterval(() => fetch('/ping').catch(() => {}), 10000);
+    }
+    renderPlazaSelect();
+    renderPlazasList();
+    applyOffColor();
+    el('fechaNotif').valueAsDate = new Date();
+    renderCalendar();
+    renderAvisos();
+    // Restaurar tamaños DESPUÉS de renderizar todo, en el siguiente frame del navegador
+    requestAnimationFrame(() => {
+      _restaurarTamañoSecciones();
+      // Iniciar observador con delay extra para no capturar el resize de restauración
+      setTimeout(_iniciarObservadorTamaños, 1200);
+    });
+  })();
+})();
+
+// --- Cálculo ---
+let lastCalc = null;
+function calcular(){
+  const tipo = el('tipo').value.trim();
+  const numero = el('numero').value.trim();
+  const anio = el('anio').value.trim();
+  const plaza = el('plazaSel').value.trim();
+  const n = parseInt(el('dias').value||'0');
+  const notif = el('fechaNotif').valueAsDate;
+  if(!notif || isNaN(n)) return;
+  const ultimo = addWorkingDays(notif, n);
+  const limite = state.fifteenRule ? at1500(nextWorkingDay(ultimo)) : at1500(ultimo);
+  lastCalc = {tipo,numero,anio,plaza, notif: new Date(notif), n, ultimo, limite};
+  const res = el('result');
+  res.innerHTML = '';
+  const card1 = document.createElement('div'); card1.className='res-card';
+  card1.innerHTML = `<div class='res-title'>Último día del plazo</div><div class='res-date'>${fmt(ultimo)}</div>`;
+  const card2 = document.createElement('div'); card2.className='res-card';
+  card2.innerHTML = `<div class='res-title'>Límite de presentación a las 15:00</div><div class='res-date'>${fmt(limite)} — 15:00 h</div>`;
+  res.appendChild(card1); res.appendChild(card2);
+  el('btnAviso').disabled = false;
+}
+function limpiar(){ el('result').innerHTML=''; el('btnAviso').disabled=true; lastCalc=null; cerrarPanelAviso(); }
+
+// --- Calendario de inhábiles ---
+function renderCalendar(){
+  const cal = el('calendar'); cal.innerHTML = '';
+  const year = parseInt(el('yearSel').value);
+  for(let m=0;m<12;m++){
+    const box = document.createElement('div'); box.className='month';
+    const h = document.createElement('h4'); h.textContent = new Date(year,m,1).toLocaleDateString('es-ES',{month:'long',year:'numeric'});
+    const grid = document.createElement('div'); grid.className='grid';
+    // Días de la semana
+    ['L','M','X','J','V','S','D'].forEach(d=>{ const s=document.createElement('div'); s.className='dow'; s.textContent=d; grid.appendChild(s); });
+    // primer día
+    const first = new Date(year,m,1);
+    const startIdx = (first.getDay()+6)%7; // 0=Lunes
+    for(let i=0;i<startIdx;i++){ const d=document.createElement('div'); d.className='day muted'; d.textContent=''; grid.appendChild(d); }
+    const daysInMonth = new Date(year,m+1,0).getDate();
+    for(let day=1; day<=daysInMonth; day++){
+      const d = new Date(year,m,day);
+      const cell = document.createElement('div'); cell.className='day'; cell.textContent=day;
+      if(d.getDay()===0 || d.getDay()===6) cell.classList.add('weekend');
+      const key = ymd(d);
+      if((key in state.holidays) || (state.augustInhabil && isAugust(d)) || isWeekend(d)) cell.classList.add('off');
+      cell.title = (key in state.holidays) ? (state.holidays[key]||'inhábil') : '';
+      cell.addEventListener('click',()=>{
+        if(key in state.holidays){ delete state.holidays[key]; }
+        else { state.holidays[key] = ''; }
+        renderCalendar(); saveLocal();
+      });
+      grid.appendChild(cell);
+    }
+    box.appendChild(h); box.appendChild(grid); cal.appendChild(box);
+  }
+  renderOffList(year);
+}
+
+function renderOffList(year){
+  const list = el('offList'); list.innerHTML='';
+  const entries = Object.entries(state.holidays).filter(([k])=>k.startsWith(year+'-')).sort(([a],[b])=>a.localeCompare(b));
+  if(entries.length===0){ list.innerHTML = '<small style="color:#8aa0d3">No hay días inhábiles propios marcados para este año (se mostrarán igualmente fines de semana y, si está activado, agosto).</small>'; return; }
+  entries.forEach(([d,lbl],i)=>{
+    const it = document.createElement('div'); it.className='item';
+    const left = document.createElement('div'); left.innerHTML = `<strong>${new Date(d).toLocaleDateString('es-ES')}</strong><br/><small>${lbl||'inhábil'}</small>`;
+    const right = document.createElement('div');
+    const b1 = document.createElement('button'); b1.className='btn'; b1.textContent='Editar'; b1.onclick=()=>{ const nl=prompt('Nueva etiqueta:', lbl||''); state.holidays[d]=nl||''; renderCalendar(); saveLocal(); };
+    const b2 = document.createElement('button'); b2.className='btn ghost'; b2.textContent='Quitar'; b2.onclick=()=>{ delete state.holidays[d]; renderCalendar(); saveLocal(); };
+    right.appendChild(b1); right.appendChild(b2);
+    it.appendChild(left); it.appendChild(right);
+    list.appendChild(it);
+  });
+}
+function toggleAugust(){
+  const y = parseInt(el('yearSel').value);
+  let allMarked = true;
+  for(let d=1; d<=31; d++){
+    const dt = new Date(y,7,d);
+    if(dt.getMonth()!==7) break;
+    const k = ymd(dt);
+    if(!(k in state.holidays)) { allMarked = false; break; }
+  }
+  if(allMarked){
+    for(let d=1; d<=31; d++){ const dt = new Date(y,7,d); if(dt.getMonth()!==7) break; delete state.holidays[ymd(dt)]; }
+  } else {
+    for(let d=1; d<=31; d++){ const dt = new Date(y,7,d); if(dt.getMonth()!==7) break; state.holidays[ymd(dt)] = state.holidays[ymd(dt)]||'Agosto inhábil'; }
+  }
+  renderCalendar(); saveLocal();
+}
+
+// --- Ajustes dropdown desde header ---
+function toggleAjustes(){
+  const dd = el('ajustesDropdown');
+  const ov = el('ajustes-overlay');
+  const open = dd.classList.contains('open');
+  dd.classList.toggle('open', !open);
+  if(ov) ov.classList.toggle('open', !open);
+  el('btnToggleAjustes').style.borderColor = open ? '' : '#5a77f7';
+}
+
+// --- Avisos ---
+function mostrarPanelAviso(){
+  if(!lastCalc) return;
+  el('avisoNoteInput').value = '';
+  el('avisoNotePanel').style.display = '';
+  el('avisoNoteInput').focus();
+}
+
+function cerrarPanelAviso(){
+  el('avisoNotePanel').style.display = 'none';
+}
+
+function addAvisoFromCalc(){
+  if(!lastCalc) return;
+  const nota = el('avisoNoteInput') ? el('avisoNoteInput').value.trim() : '';
+  const id = Date.now();
+  const proc = [lastCalc.tipo,lastCalc.numero&&(' '+lastCalc.numero), lastCalc.anio && ('/'+lastCalc.anio)].filter(Boolean).join('');
+  const aviso = {
+    id,
+    procedimiento: proc || '',
+    tipo:lastCalc.tipo||'', numero:lastCalc.numero||'', anio:lastCalc.anio||'',
+    notificacion: ymd(lastCalc.notif),
+    plazoDias: lastCalc.n,
+    ultimoDia: ymd(lastCalc.ultimo),
+    limite15: ymd(lastCalc.limite),
+    plaza: lastCalc.plaza || (state.plazas[0]||''),
+    notas: nota, estado:'pendiente'
+  };
+  state.avisos.push(aviso);
+  saveLocal();
+  renderAvisos();
+  cerrarPanelAviso();
+}
+
+function _urgenciaInfo(ref, hoy, estado){
+  // Devuelve {nivel:'verde'|'ambar'|'rojo'|'gris', dias, texto, pct}
+  if(estado === 'hecho') return {nivel:'gris', dias:null, texto:'✔ Hecho', pct:0};
+  const msDay = 86400000;
+  const diffMs = new Date(ref) - new Date(hoy);
+  const dias = Math.round(diffMs / msDay); // puede ser negativo
+  if(dias < 0){
+    return {nivel:'rojo', dias:Math.abs(dias), texto:`⚠ Vencido hace ${Math.abs(dias)}d`, pct:100};
+  } else if(dias === 0){
+    return {nivel:'rojo', dias:0, texto:'🔴 Vence hoy', pct:100};
+  } else if(dias <= 3){
+    return {nivel:'rojo', dias, texto:`🔴 ${dias}d`, pct:85};
+  } else if(dias <= 7){
+    return {nivel:'ambar', dias, texto:`🟡 ${dias}d`, pct:55};
+  } else if(dias <= 15){
+    return {nivel:'ambar', dias, texto:`🟡 ${dias}d`, pct:35};
+  } else {
+    return {nivel:'verde', dias, texto:`🟢 ${dias}d`, pct:15};
+  }
+}
+
+function renderAvisos(){
+  const tb = document.querySelector('#tblAvisos tbody'); tb.innerHTML='';
+  const today = ymd(new Date());
+  // Filtro de búsqueda
+  const q = (document.getElementById('buscarAviso')?.value || '').toLowerCase().trim();
+  const sorted = [...state.avisos].sort((a,b)=> (a.limite15||a.ultimoDia).localeCompare(b.limite15||b.ultimoDia));
+  let pend=0, hoy=0, over=0, rowNum=0;
+  sorted.forEach((a)=>{
+    // Filtrar por búsqueda
+    if(q){
+      const haystack = [a.procedimiento, a.plaza, a.notas, a.estado].join(' ').toLowerCase();
+      if(!haystack.includes(q)) return;
+    }
+    rowNum++;
+    const tr=document.createElement('tr');
+    const ref = a.limite15 || a.ultimoDia;
+    const urg = _urgenciaInfo(ref, today, a.estado);
+    if(a.estado!=='hecho'){
+      pend++;
+      if(ref < today){ tr.classList.add('overdue'); over++; }
+      else if(ref === today){ tr.classList.add('today'); hoy++; }
+      else tr.classList.add('upcoming');
+    } else {
+      tr.classList.add('done');
+    }
+    const barraHtml = a.estado !== 'hecho'
+      ? `<div class="barra-urgencia ${urg.nivel}" style="width:${urg.pct}%"></div>`
+      : '';
+    tr.innerHTML = `
+      <td>${rowNum}</td>
+      <td><strong>${a.procedimiento||'-'}</strong><br><small>${state.sede||''}</small></td>
+      <td>${new Date(a.notificacion).toLocaleDateString('es-ES')}</td>
+      <td>${a.plazoDias}</td>
+      <td>${new Date(a.ultimoDia).toLocaleDateString('es-ES')}</td>
+      <td>${new Date(a.limite15).toLocaleDateString('es-ES')} 15:00</td>
+      <td>${a.plaza||''}</td>
+      <td>${a.notas||''}</td>
+      <td><span class="urgencia ${urg.nivel}">${urg.texto}</span>${barraHtml}</td>
+      <td>${a.estado}</td>
+      <td>
+        <button class='btn' onclick='editarAviso(${a.id})'>Editar</button>
+        <button class='btn ghost' onclick='toggleHecho(${a.id})'>${a.estado==='hecho'?'Reabrir':'Hecho'}</button>
+        <button class='btn warn' onclick='borrarAviso(${a.id})'>Borrar</button>
+      </td>`;
+    tb.appendChild(tr);
+  });
+  el('countPend').textContent = pend;
+  el('countHoy').textContent = hoy;
+  el('countOver').textContent = over;
+}
+function findAviso(id){ return state.avisos.find(a=>a.id===id); }
+function editarAviso(id){
+  const a = findAviso(id); if(!a) return;
+  // Editor simple: plaza y notas
+  const nuevaPlaza = prompt('Plaza:', a.plaza||'')
+  if(nuevaPlaza!==null){ a.plaza = nuevaPlaza; }
+  const notas = prompt('Notas:', a.notas||'');
+  if(notas!==null){ a.notas = notas; }
+  saveLocal(); renderAvisos();
+}
+function toggleHecho(id){ const a=findAviso(id); if(!a) return; a.estado = (a.estado==='hecho'?'pendiente':'hecho'); saveLocal(); renderAvisos(); }
+function borrarAviso(id){ if(!confirm('¿Eliminar aviso?')) return; state.avisos = state.avisos.filter(x=>x.id!==id); saveLocal(); renderAvisos(); }
+
+// --- Export/Import & guardado ---
+function exportJSON(){
+  const data = { version:3, savedAt: new Date().toISOString(), state: { ...state } };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'vencimientos.json';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function importJSON(evt){
+  const f = evt.target.files && evt.target.files[0]; if(!f) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try{
+      const data = JSON.parse(reader.result);
+      if(data && data.state){ Object.assign(state, data.state); }
+      saveLocal();
+      el('sede').value = state.sede||'';
+      renderPlazaSelect(); renderPlazasList();
+      applyOffColor();
+      renderCalendar(); renderAvisos();
+      alert('Datos importados.');
+    }catch(err){ alert('JSON no válido.'); }
+  };
+  reader.readAsText(f);
+}
+// --- Imprimir / Excel avisos ---
+function imprimirAvisos(){
+  if(!state.avisos.length){ alert('No hay avisos para imprimir'); return; }
+  const today = ymd(new Date());
+  const filas = state.avisos.map(a => {
+    const urg = _urgenciaInfo(a.limite15||a.ultimoDia, today, a.estado);
+    return `<tr>
+      <td>${a.procedimiento||'-'}</td>
+      <td>${new Date(a.notificacion).toLocaleDateString('es-ES')}</td>
+      <td>${a.plazoDias}</td>
+      <td>${new Date(a.ultimoDia).toLocaleDateString('es-ES')}</td>
+      <td>${new Date(a.limite15).toLocaleDateString('es-ES')} 15:00</td>
+      <td>${a.plaza||''}</td>
+      <td>${a.notas||''}</td>
+      <td>${urg.texto}</td>
+      <td>${a.estado}</td>
+    </tr>`;
+  }).join('');
+  const w = window.open('','_blank');
+  w.document.write(`<html><head><meta charset="UTF-8"/><title>Avisos de Vencimiento</title><style>
+    body{font-family:'Segoe UI',sans-serif;padding:20px}
+    h1{color:#1e3a5f;font-size:18px;margin-bottom:12px}
+    table{width:100%;border-collapse:collapse;font-size:11px}
+    th{background:#1e3a5f;color:#fff;padding:6px 8px;text-align:left}
+    td{border:1px solid #ddd;padding:4px 6px}
+    @page{size:A4 landscape;margin:1cm}
+  </style></head><body>
+    <h1>Avisos de Vencimiento — ${new Date().toLocaleDateString('es-ES')}</h1>
+    <table><thead><tr><th>Procedimiento</th><th>Notif.</th><th>Plazo</th><th>Último día</th><th>Límite 15:00</th><th>Plaza</th><th>Notas</th><th>Urgencia</th><th>Estado</th></tr></thead>
+    <tbody>${filas}</tbody></table>
+    <script>window.onload=function(){window.print()}<\/script>
+  </body></html>`);
+  w.document.close();
+}
+
+function exportarExcelAvisos(){
+  if(!state.avisos.length){ alert('No hay avisos para exportar'); return; }
+  const today = ymd(new Date());
+  const data = state.avisos.map(a => {
+    const urg = _urgenciaInfo(a.limite15||a.ultimoDia, today, a.estado);
+    return {
+      'Procedimiento': a.procedimiento||'', 'Notificación': new Date(a.notificacion).toLocaleDateString('es-ES'),
+      'Plazo (días háb.)': a.plazoDias, 'Último día': new Date(a.ultimoDia).toLocaleDateString('es-ES'),
+      'Límite 15:00': new Date(a.limite15).toLocaleDateString('es-ES')+' 15:00',
+      'Plaza': a.plaza||'', 'Notas': a.notas||'', 'Urgencia': urg.texto, 'Estado': a.estado
+    };
+  });
+  const ws = XLSX.utils.json_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Avisos');
+  XLSX.writeFile(wb, `vencimientos_${ymd(new Date())}.xlsx`);
+}
+
+// Obtener la URL base del servidor (funciona tanto directo como dentro de iframe del portal)
+function _apiBase(){
+  try {
+    // Si estamos en un iframe, usar el origen del padre
+    if(window.top !== window) return window.top.location.origin;
+  } catch(_){}
+  return window.location.origin;
+}
+async function saveLocal(){
+  state.sede = el('sede').value || state.sede;
+  if(window.location.protocol === 'http:' || window.location.protocol === 'https:'){
+    try {
+      await fetch(_apiBase() + '/api/vencimientos?uid=' + encodeURIComponent(_uid), {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(state)
+      });
+    } catch(err) { console.error('Error guardando:', err); }
+  } else {
+    localStorage.setItem(_uid + '_vencimientosState', JSON.stringify(state));
+  }
+}
+async function loadLocal(){
+  if(window.location.protocol === 'http:' || window.location.protocol === 'https:'){
+    try{
+      const response = await fetch(_apiBase() + '/api/vencimientos?uid=' + encodeURIComponent(_uid));
+      const s = await response.json();
+      if(s){ Object.assign(state, s); }
+    }catch(e){ console.error('Error cargando:', e); }
+  } else {
+    const raw = localStorage.getItem(_uid + '_vencimientosState');
+    if(raw){ try{ const s = JSON.parse(raw); Object.assign(state, s); }catch(e){} }
+  }
+  el('sede').value = state.sede||'';
+  el('startNext').checked = !!state.startNextDay; el('august').checked = !!state.augustInhabil; el('rule15').checked = !!state.fifteenRule;
+}
+function resetAll(){
+  if(!confirm('Esto borrará datos guardados. ¿Continuar?')) return;
+  if(window.location.protocol === 'http:' || window.location.protocol === 'https:'){
+    fetch(_apiBase() + '/api/vencimientos?uid=' + encodeURIComponent(_uid), {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({})}).then(() => location.reload());
+  } else {
+    localStorage.removeItem(_uid + '_vencimientosState'); location.reload();
+  }
+}
+
+// Receptor búsqueda y cambio de usuario desde el portal
+window.addEventListener('message', async e => {
+  if (!e.data) return;
+  if (e.data.tipo === 'cambioUsuario') {
+    const nuevoUid = e.data.usuario?.id || 'default';
+    if (nuevoUid === _uid) return;
+    // Guardar estado del usuario anterior con su uid
+    await saveLocal();
+    // Cambiar al nuevo usuario
+    _uid = nuevoUid;
+    // Cargar estado del nuevo usuario
+    await loadLocal();
+    // Aplicar el color de inhábiles del nuevo usuario (carga el CSS var y los inputs)
+    applyOffColor();
+    // Restaurar tema del nuevo usuario
+    _restaurarTema();
+    // Re-renderizar todo
+    renderCalendar();
+    renderAvisos();
+    renderPlazaSelect();
+    // Restaurar tamaños de sección después de renderizar
+    requestAnimationFrame(() => { _restaurarTamañoSecciones(); });
+    return;
+  }
+  if (e.data.tipo !== 'buscarDesdePortal') return;
+  const q = e.data.q || '';
+  const inp = document.getElementById('buscarAviso');
+  if (!inp) return;
+  inp.value = q;
+  renderAvisos();
+  inp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  inp.focus();
+});
+
+</script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

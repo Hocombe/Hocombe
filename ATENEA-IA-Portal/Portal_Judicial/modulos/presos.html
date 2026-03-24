@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Presos - Tribunales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar { min-height: 100vh; }
+        .table-container { max-height: calc(100vh - 250px); overflow-y: auto; }
+        .sticky-header th {
+            position: sticky;
+            top: 0;
+            background: #f1f5f9;
+            z-index: 10;
+        }
+        .toast { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to   { transform: translateX(0);    opacity: 1; }
+        }
+        .modal-backdrop { background: rgba(0,0,0,0.5); }
+
+        /* ── MODO OSCURO ─────────────────────────────────── */
+        [data-tema="oscuro"] body              { background: #0f172a; color: #e2e8f0; }
+        [data-tema="oscuro"] aside             { background: #020617 !important; }
+        [data-tema="oscuro"] header            { background: #1e293b !important; border-color: #334155 !important; }
+        [data-tema="oscuro"] .bg-slate-50      { background: #0f172a !important; }
+        [data-tema="oscuro"] .bg-white         { background: #1e293b !important; }
+        [data-tema="oscuro"] .bg-slate-100,
+        [data-tema="oscuro"] .sticky-header th { background: #334155 !important; color: #cbd5e1; }
+        [data-tema="oscuro"] .border-slate-200,
+        [data-tema="oscuro"] .border-slate-300,
+        [data-tema="oscuro"] .border-b         { border-color: #334155 !important; }
+        [data-tema="oscuro"] .text-slate-800   { color: #e2e8f0  !important; }
+        [data-tema="oscuro"] .text-slate-700   { color: #cbd5e1  !important; }
+        [data-tema="oscuro"] .text-slate-600   { color: #94a3b8  !important; }
+        [data-tema="oscuro"] .text-slate-500   { color: #64748b  !important; }
+        [data-tema="oscuro"] .text-slate-400   { color: #475569  !important; }
+        [data-tema="oscuro"] input, [data-tema="oscuro"] select {
+            background: #0f172a !important;
+            color: #e2e8f0   !important;
+            border-color: #475569 !important;
+        }
+        [data-tema="oscuro"] tr:hover          { background: #1e293b !important; }
+        [data-tema="oscuro"] .shadow           { box-shadow: 0 1px 8px rgba(0,0,0,.6); }
+        [data-tema="oscuro"] .hover\:bg-slate-100:hover { background: #334155 !important; }
+        [data-tema="oscuro"] .hover\:bg-slate-800:hover { background: #0f172a !important; }
+        [data-tema="oscuro"] .modal-backdrop   { background: rgba(0,0,0,0.75); }
+        [data-tema="oscuro"] #toast            { background: #1e293b !important; color: #e2e8f0; }
+        [data-tema="oscuro"] label             { color: #cbd5e1 !important; }
+        [data-tema="oscuro"] .rounded-lg.shadow { background: #1e293b; }
+        [data-tema="oscuro"] [id^="loading-"]  { background: #1e293b; color: #94a3b8; }
+        [data-tema="oscuro"] #empty-state      { color: #64748b; }
+        [data-tema="oscuro"] #empty-state svg  { color: #334155 !important; }
+        [data-tema="oscuro"] #empty-state h3   { color: #94a3b8 !important; }
+        [data-tema="oscuro"] #empty-state p    { color: #64748b !important; }
+    </style>
+</head>
+<body class="bg-slate-50">
+<div class="flex min-h-screen">
+
+    <!-- ── SIDEBAR ─────────────────────────────────────────── -->
+    <aside class="sidebar w-64 bg-slate-900 text-white flex flex-col flex-shrink-0">
+        <div class="p-4 border-b border-slate-700">
+            <h1 class="text-lg font-bold flex items-center gap-2">
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                Control de Presos
+            </h1>
+            <p class="text-slate-400 text-xs mt-1">Tribunales</p>
+        </div>
+
+        <div class="p-3 border-b border-slate-700">
+            <button onclick="openModal('modal-plaza')" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded-lg flex items-center justify-center gap-2 transition text-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                </svg>
+                Nueva Plaza
+            </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-3">
+            <h2 class="text-slate-400 text-xs uppercase tracking-wider mb-2">Plazas</h2>
+            <div id="plazas-list" class="space-y-1"></div>
+        </div>
+
+        <div class="p-3 border-t border-slate-700 space-y-2">
+            <div class="text-xs text-slate-400">
+                <span id="storage-info">0</span> registros guardados
+            </div>
+            <button onclick="_toggleTema()" id="_btnTema" class="w-full text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 py-1.5 px-3 rounded-lg transition">🌙 Oscuro</button>
+        </div>
+    </aside>
+
+    <!-- ── MAIN CONTENT ────────────────────────────────────── -->
+    <main class="flex-1 flex flex-col min-w-0">
+        <!-- Header -->
+        <header class="bg-white border-b border-slate-200 p-4">
+            <div class="flex items-center justify-between gap-3 flex-wrap">
+                <div class="min-w-0">
+                    <h2 id="plaza-seleccionada" class="text-lg font-semibold text-slate-800 truncate">Seleccione una plaza</h2>
+                    <p id="plaza-info" class="text-sm text-slate-500">Cree o seleccione una plaza para comenzar</p>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                    <button onclick="openModal('modal-nuevo-preso')" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-3 rounded-lg flex items-center gap-2 transition text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                        </svg>
+                        Nuevo Preso
+                    </button>
+                    <div class="relative">
+                        <input type="text" id="busqueda" placeholder="Buscar nombre o documento…"
+                               class="pl-9 pr-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm w-52"
+                               oninput="filtrarPresos()">
+                        <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <label class="bg-green-600 hover:bg-green-700 text-white py-2 px-3 rounded-lg flex items-center gap-2 cursor-pointer transition text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                        </svg>
+                        Importar Excel
+                        <input type="file" id="excel-input" accept=".xlsx,.xls" class="hidden" onchange="importarExcel(event)">
+                    </label>
+                    <button onclick="exportarExcel()" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded-lg flex items-center gap-2 transition text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        Exportar
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="flex-1 p-4 overflow-auto">
+            <div id="empty-state" class="flex flex-col items-center justify-center h-full text-center py-16">
+                <svg class="w-20 h-20 text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                <h3 class="text-lg font-semibold text-slate-600 mb-2">No hay datos disponibles</h3>
+                <p class="text-slate-500">Seleccione una plaza o cree una nueva para comenzar</p>
+            </div>
+
+            <div id="table-container" class="hidden bg-white rounded-lg shadow">
+                <div class="table-container">
+                    <table class="min-w-full">
+                        <thead class="sticky-header">
+                            <tr class="text-left text-xs text-slate-600 uppercase tracking-wide">
+                                <th class="px-3 py-3 font-semibold">BD</th>
+                                <th class="px-3 py-3 font-semibold">IPENCAT</th>
+                                <th class="px-3 py-3 font-semibold">Cód. Interno</th>
+                                <th class="px-3 py-3 font-semibold">Documento</th>
+                                <th class="px-3 py-3 font-semibold">Nombre</th>
+                                <th class="px-3 py-3 font-semibold">Centro</th>
+                                <th class="px-3 py-3 font-semibold">Instructor</th>
+                                <th class="px-3 py-3 font-semibold">Sentenciador</th>
+                                <th class="px-3 py-3 font-semibold">Procedimiento</th>
+                                <th class="px-3 py-3 font-semibold">Situación</th>
+                                <th class="px-3 py-3 font-semibold">F. Ingreso</th>
+                                <th class="px-3 py-3 font-semibold text-center">Días</th>
+                                <th class="px-3 py-3 font-semibold text-center">Acc.</th>
+                            </tr>
+                        </thead>
+                        <tbody id="presos-table" class="text-sm divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
+                <div class="p-3 border-t border-slate-200 text-sm text-slate-600 flex justify-between items-center">
+                    <span>Total: <strong id="total-registros">0</strong> registros</span>
+                    <span id="save-status" class="text-xs text-slate-400"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ── MODAL: Nueva Plaza ──────────────────────────────────── -->
+<div id="modal-plaza" class="fixed inset-0 modal-backdrop hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+        <div class="p-4 border-b border-slate-200 flex justify-between items-center">
+            <h3 class="text-lg font-semibold">Nueva Plaza</h3>
+            <button onclick="closeModal('modal-plaza')" class="text-slate-400 hover:text-slate-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="p-4">
+            <label class="block text-sm font-medium text-slate-700 mb-2">Nombre de la Plaza</label>
+            <input type="text" id="nombre-plaza" placeholder="Ej: Juzgado de Guardia nº 1"
+                   class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   onkeydown="if(event.key==='Enter') crearPlaza()">
+            <p class="text-xs text-slate-500 mt-2">Ej: Audiencia Provincial, Juzgado de Guardia…</p>
+        </div>
+        <div class="p-4 border-t border-slate-200 flex justify-end gap-2">
+            <button onclick="closeModal('modal-plaza')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition">Cancelar</button>
+            <button onclick="crearPlaza()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Crear Plaza</button>
+        </div>
+    </div>
+</div>
+
+<!-- ── MODAL: Confirmar Eliminar Plaza ───────────────────── -->
+<div id="modal-eliminar-plaza" class="fixed inset-0 modal-backdrop hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+        <div class="p-4 border-b border-slate-200">
+            <h3 class="text-lg font-semibold text-red-600">Eliminar Plaza</h3>
+        </div>
+        <div class="p-4">
+            <p class="text-slate-600">¿Está seguro de eliminar la plaza "<strong id="plaza-a-eliminar"></strong>"? También se eliminarán todos sus presos.</p>
+        </div>
+        <div class="p-4 border-t border-slate-200 flex justify-end gap-2">
+            <button onclick="closeModal('modal-eliminar-plaza')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition">Cancelar</button>
+            <button onclick="confirmarEliminarPlaza()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ── MODAL: Nuevo Preso ─────────────────────────────────── -->
+<div id="modal-nuevo-preso" class="fixed inset-0 modal-backdrop hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+        <div class="p-4 border-b border-slate-200 flex justify-between items-center sticky top-0 bg-white z-10">
+            <h3 class="text-lg font-semibold">Nuevo Preso</h3>
+            <button onclick="closeModal('modal-nuevo-preso')" class="text-slate-400 hover:text-slate-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="p-4">
+            <form id="form-nuevo-preso" class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">BD</label>
+                    <input type="text" id="new-bd" list="list-bd" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Escribe o selecciona…">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">IPENCAT</label>
+                    <input type="text" id="new-ipencat" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="0">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Código Interno</label>
+                    <input type="text" id="new-cod-interno" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Código interno">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Documento <span class="text-red-500">*</span></label>
+                    <input type="text" id="new-documento" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="DNI/NIE" required>
+                </div>
+                <div class="col-span-2">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Nombre <span class="text-red-500">*</span></label>
+                    <input type="text" id="new-nombre" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="APELLIDOS, Nombre" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Centro Penitenciario</label>
+                    <input type="text" id="new-centro" list="list-centro" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Escribe o selecciona…">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Instructor</label>
+                    <input type="text" id="new-instructor" list="list-instructor" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Escribe o selecciona…">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Sentenciador</label>
+                    <input type="text" id="new-sentenciador" list="list-sentenciador" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Escribe o selecciona…">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Procedimiento</label>
+                    <input type="text" id="new-procedimiento" list="list-procedimiento" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Escribe o selecciona…">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Situación</label>
+                    <input type="text" id="new-situacion" list="list-situacion" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Escribe o selecciona…">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Fecha de Ingreso</label>
+                    <input type="date" id="new-f-ingreso" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Días</label>
+                    <input type="number" id="new-dias" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="0" min="0">
+                </div>
+            </form>
+        </div>
+        <div class="p-4 border-t border-slate-200 flex justify-end gap-2">
+            <button onclick="closeModal('modal-nuevo-preso')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition">Cancelar</button>
+            <button onclick="guardarNuevoPreso()" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">Guardar Preso</button>
+        </div>
+    </div>
+</div>
+
+<!-- ── MODAL: Editar Preso ────────────────────────────────── -->
+<div id="modal-editar" class="fixed inset-0 modal-backdrop hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+        <div class="p-4 border-b border-slate-200 flex justify-between items-center sticky top-0 bg-white z-10">
+            <h3 class="text-lg font-semibold">Editar Preso</h3>
+            <button onclick="closeModal('modal-editar')" class="text-slate-400 hover:text-slate-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="p-4">
+            <form id="form-editar" class="grid grid-cols-2 gap-4">
+                <input type="hidden" id="edit-id">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">BD</label>
+                    <input type="text" id="edit-bd" list="list-bd" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">IPENCAT</label>
+                    <input type="text" id="edit-ipencat" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Código Interno</label>
+                    <input type="text" id="edit-cod-interno" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Documento</label>
+                    <input type="text" id="edit-documento" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="col-span-2">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
+                    <input type="text" id="edit-nombre" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Centro Penitenciario</label>
+                    <input type="text" id="edit-centro" list="list-centro" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Instructor</label>
+                    <input type="text" id="edit-instructor" list="list-instructor" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Sentenciador</label>
+                    <input type="text" id="edit-sentenciador" list="list-sentenciador" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Procedimiento</label>
+                    <input type="text" id="edit-procedimiento" list="list-procedimiento" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Situación</label>
+                    <input type="text" id="edit-situacion" list="list-situacion" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Fecha de Ingreso</label>
+                    <input type="date" id="edit-f-ingreso" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Días</label>
+                    <input type="number" id="edit-dias" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" min="0">
+                </div>
+            </form>
+        </div>
+        <div class="p-4 border-t border-slate-200 flex justify-between">
+            <button onclick="eliminarPreso()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">🗑️ Eliminar</button>
+            <div class="flex gap-2">
+                <button onclick="closeModal('modal-editar')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition">Cancelar</button>
+                <button onclick="guardarEdicion()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Datalists autocompletado -->
+<datalist id="list-bd"></datalist>
+<datalist id="list-centro"></datalist>
+<datalist id="list-instructor"></datalist>
+<datalist id="list-sentenciador"></datalist>
+<datalist id="list-situacion"></datalist>
+<datalist id="list-procedimiento"></datalist>
+
+<!-- Toast -->
+<div id="toast" class="fixed top-4 right-4 bg-white shadow-lg rounded-lg p-4 hidden z-50 toast">
+    <div class="flex items-center gap-2">
+        <svg id="toast-icon" class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+        <p id="toast-message" class="text-sm font-medium"></p>
+    </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// ESTADO Y CONFIGURACIÓN
+// ══════════════════════════════════════════════
+let plazas = [];
+let presos = [];
+let plazaActiva = null;
+let _uid = 'default';
+
+let autocompleteData = {
+    bd: [], centro: [], instructor: [],
+    sentenciador: [], situacion: [], procedimiento: []
+};
+
+function _apiBase() {
+    if (window.self !== window.top) {
+        return window.top.location.origin;
+    }
+    return window.location.origin;
+}
+
+// ── Inicialización ─────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+    await cargarDatos();
+    await _cargarTema();
+    renderizarPlazas();
+    actualizarStorageInfo();
+});
+
+// ── Portal: mensajes entrantes ─────────────────
+window.addEventListener('message', async e => {
+    if (!e.data) return;
+
+    if (e.data.tipo === 'cambioUsuario') {
+        const nuevoUid = (e.data.usuario && e.data.usuario.id) || 'default';
+        if (nuevoUid === _uid) return;
+        _uid = nuevoUid;
+        plazaActiva = null;
+        document.getElementById('plaza-seleccionada').textContent = 'Seleccione una plaza';
+        document.getElementById('plaza-info').textContent = 'Cargando…';
+        document.getElementById('empty-state').classList.remove('hidden');
+        document.getElementById('table-container').classList.add('hidden');
+        await cargarDatos();
+        await _cargarTema();
+        renderizarPlazas();
+        actualizarStorageInfo();
+        return;
+    }
+
+    if (e.data.tipo === 'tema') {
+        document.documentElement.setAttribute('data-tema', e.data.oscuro ? 'oscuro' : 'claro');
+        _actualizarBtnTema();
+        return;
+    }
+
+    if (e.data.tipo === 'buscarDesdePortal') {
+        const q = e.data.q || '';
+        const inp = document.getElementById('busqueda');
+        if (inp) { inp.value = q; filtrarPresos(); }
+        return;
+    }
+});
+
+// ══════════════════════════════════════════════
+// PERSISTENCIA EN SERVIDOR
+// ══════════════════════════════════════════════
+async function cargarDatos() {
+    try {
+        const r = await fetch(_apiBase() + '/api/presos?uid=' + encodeURIComponent(_uid) + '&t=' + Date.now());
+        if (r.ok) {
+            const datos = await r.json();
+            plazas = datos.plazas || [];
+            presos = datos.presos || [];
+            autocompleteData = datos.autocomplete || {
+                bd:[], centro:[], instructor:[], sentenciador:[], situacion:[], procedimiento:[]
+            };
+            actualizarDatalists();
+        }
+    } catch(err) {
+        console.warn('[Presos] Error al cargar datos del servidor:', err);
+    }
+}
+
+function guardarDatos() {
+    actualizarStorageInfo();
+    const statusEl = document.getElementById('save-status');
+    if (statusEl) statusEl.textContent = '💾 Guardando…';
+    clearTimeout(guardarDatos._t);
+    guardarDatos._t = setTimeout(async () => {
+        try {
+            const r = await fetch(_apiBase() + '/api/presos?uid=' + encodeURIComponent(_uid), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ plazas, presos, autocomplete: autocompleteData })
+            });
+            if (r.ok && statusEl) {
+                statusEl.textContent = '✅ Guardado';
+                setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 2000);
+            }
+        } catch(err) {
+            console.warn('[Presos] Error al guardar datos:', err);
+            if (statusEl) statusEl.textContent = '⚠️ Error al guardar';
+        }
+    }, 600);
+}
+
+function actualizarStorageInfo() {
+    document.getElementById('storage-info').textContent = presos.length;
+}
+
+// ══════════════════════════════════════════════
+// MODO OSCURO
+// ══════════════════════════════════════════════
+function _toggleTema() {
+    const esOscuro = document.documentElement.getAttribute('data-tema') === 'oscuro';
+    document.documentElement.setAttribute('data-tema', esOscuro ? 'claro' : 'oscuro');
+    _actualizarBtnTema();
+    fetch(_apiBase() + '/api/config/presos_tema_' + _uid, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tema: esOscuro ? 'claro' : 'oscuro' })
+    }).catch(() => {});
+}
+
+function _actualizarBtnTema() {
+    const btn = document.getElementById('_btnTema');
+    if (!btn) return;
+    const esOscuro = document.documentElement.getAttribute('data-tema') === 'oscuro';
+    btn.textContent = esOscuro ? '☀️ Claro' : '🌙 Oscuro';
+}
+
+async function _cargarTema() {
+    try {
+        const r = await fetch(_apiBase() + '/api/config/presos_tema_' + _uid);
+        const d = await r.json();
+        if (d.config && d.config.tema === 'oscuro') {
+            document.documentElement.setAttribute('data-tema', 'oscuro');
+        } else {
+            document.documentElement.removeAttribute('data-tema');
+        }
+    } catch(_) {}
+    _actualizarBtnTema();
+}
+
+// ══════════════════════════════════════════════
+// AUTOCOMPLETADO
+// ══════════════════════════════════════════════
+function actualizarDatalists() {
+    document.getElementById('list-bd').innerHTML          = autocompleteData.bd.map(v=>`<option value="${v}">`).join('');
+    document.getElementById('list-centro').innerHTML      = autocompleteData.centro.map(v=>`<option value="${v}">`).join('');
+    document.getElementById('list-instructor').innerHTML  = autocompleteData.instructor.map(v=>`<option value="${v}">`).join('');
+    document.getElementById('list-sentenciador').innerHTML= autocompleteData.sentenciador.map(v=>`<option value="${v}">`).join('');
+    document.getElementById('list-situacion').innerHTML   = autocompleteData.situacion.map(v=>`<option value="${v}">`).join('');
+    document.getElementById('list-procedimiento').innerHTML = autocompleteData.procedimiento.map(v=>`<option value="${v}">`).join('');
+}
+
+function agregarValorAutocomplete(campo, valor) {
+    if (!valor || !valor.trim()) return;
+    const v = valor.trim();
+    if (!autocompleteData[campo].includes(v)) {
+        autocompleteData[campo].push(v);
+        actualizarDatalists();
+    }
+}
+
+function actualizarAutocompleteDesdePreso(preso) {
+    ['bd','centro','instructor','sentenciador','situacion','procedimiento'].forEach(c => {
+        agregarValorAutocomplete(c, preso[c]);
+    });
+}
+
+// ══════════════════════════════════════════════
+// PLAZAS
+// ══════════════════════════════════════════════
+function crearPlaza() {
+    const nombre = document.getElementById('nombre-plaza').value.trim();
+    if (!nombre) { showToast('Por favor, ingrese un nombre para la plaza', 'error'); return; }
+
+    const nuevaPlaza = {
+        id: crypto.randomUUID(),
+        nombre,
+        fecha_creacion: new Date().toISOString()
+    };
+    plazas.push(nuevaPlaza);
+    guardarDatos();
+    renderizarPlazas();
+    closeModal('modal-plaza');
+    document.getElementById('nombre-plaza').value = '';
+    showToast('Plaza creada correctamente');
+    seleccionarPlaza(nuevaPlaza.id);
+}
+
+function renderizarPlazas() {
+    const container = document.getElementById('plazas-list');
+    if (plazas.length === 0) {
+        container.innerHTML = '<p class="text-slate-500 text-xs text-center py-4">No hay plazas creadas</p>';
+        return;
+    }
+    container.innerHTML = plazas.map(plaza => `
+        <div class="group flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer transition text-sm
+                    ${plazaActiva === plaza.id ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 text-slate-200'}"
+             onclick="seleccionarPlaza('${plaza.id}')">
+            <div class="flex-1 min-w-0">
+                <p class="font-medium truncate">${plaza.nombre}</p>
+                <p class="text-xs ${plazaActiva === plaza.id ? 'text-blue-200' : 'text-slate-400'}">
+                    ${presos.filter(p=>p.plaza_id===plaza.id).length} presos
+                </p>
+            </div>
+            <button onclick="event.stopPropagation(); eliminarPlaza('${plaza.id}')"
+                    class="opacity-0 group-hover:opacity-100 p-1 hover:bg-red-600 rounded transition ml-1 flex-shrink-0" title="Eliminar plaza">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+            </button>
+        </div>
+    `).join('');
+}
+
+function seleccionarPlaza(id) {
+    plazaActiva = id;
+    const plaza = plazas.find(p => p.id === id);
+    document.getElementById('plaza-seleccionada').textContent = plaza.nombre;
+    document.getElementById('plaza-info').textContent = `${presos.filter(p=>p.plaza_id===id).length} presos registrados`;
+    renderizarPlazas();
+    renderizarPresos();
+    document.getElementById('empty-state').classList.add('hidden');
+    document.getElementById('table-container').classList.remove('hidden');
+}
+
+function eliminarPlaza(id) {
+    const plaza = plazas.find(p => p.id === id);
+    document.getElementById('plaza-a-eliminar').textContent = plaza.nombre;
+    document.getElementById('modal-eliminar-plaza').dataset.plazaId = id;
+    openModal('modal-eliminar-plaza');
+}
+
+function confirmarEliminarPlaza() {
+    const id = document.getElementById('modal-eliminar-plaza').dataset.plazaId;
+    plazas = plazas.filter(p => p.id !== id);
+    presos = presos.filter(p => p.plaza_id !== id);
+    if (plazaActiva === id) {
+        plazaActiva = null;
+        document.getElementById('plaza-seleccionada').textContent = 'Seleccione una plaza';
+        document.getElementById('plaza-info').textContent = 'Cree o seleccione una plaza para comenzar';
+        document.getElementById('empty-state').classList.remove('hidden');
+        document.getElementById('table-container').classList.add('hidden');
+    }
+    guardarDatos();
+    renderizarPlazas();
+    closeModal('modal-eliminar-plaza');
+    showToast('Plaza eliminada correctamente');
+}
+
+// ══════════════════════════════════════════════
+// PRESOS
+// ══════════════════════════════════════════════
+function guardarNuevoPreso() {
+    const documento = document.getElementById('new-documento').value.trim();
+    const nombre    = document.getElementById('new-nombre').value.trim();
+    if (!documento) { showToast('El documento es obligatorio', 'error'); return; }
+    if (!nombre)    { showToast('El nombre es obligatorio', 'error'); return; }
+    if (!plazaActiva) { showToast('Seleccione una plaza primero', 'error'); return; }
+
+    const nuevo = {
+        id:           crypto.randomUUID(),
+        plaza_id:     plazaActiva,
+        bd:           document.getElementById('new-bd').value.trim(),
+        ipencat:      document.getElementById('new-ipencat').value.trim(),
+        cod_interno:  document.getElementById('new-cod-interno').value.trim(),
+        documento,
+        nombre,
+        centro:       document.getElementById('new-centro').value.trim(),
+        instructor:   document.getElementById('new-instructor').value.trim(),
+        sentenciador: document.getElementById('new-sentenciador').value.trim(),
+        procedimiento:document.getElementById('new-procedimiento').value.trim(),
+        situacion:    document.getElementById('new-situacion').value.trim(),
+        f_ingreso:    document.getElementById('new-f-ingreso').value,
+        dias:         parseInt(document.getElementById('new-dias').value) || 0
+    };
+
+    presos.push(nuevo);
+    actualizarAutocompleteDesdePreso(nuevo);
+    guardarDatos();
+    renderizarPresos();
+    document.getElementById('form-nuevo-preso').reset();
+    closeModal('modal-nuevo-preso');
+    showToast('Preso guardado correctamente');
+    document.getElementById('plaza-info').textContent =
+        `${presos.filter(p=>p.plaza_id===plazaActiva).length} presos registrados`;
+}
+
+function renderizarPresos() {
+    if (!plazaActiva) return;
+    let lista = presos.filter(p => p.plaza_id === plazaActiva);
+    const q = document.getElementById('busqueda').value.toLowerCase().trim();
+    if (q) lista = lista.filter(p =>
+        (p.nombre || '').toLowerCase().includes(q) ||
+        (p.documento || '').toLowerCase().includes(q) ||
+        (p.centro || '').toLowerCase().includes(q)
+    );
+
+    const tbody = document.getElementById('presos-table');
+    if (lista.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="13" class="px-4 py-8 text-center text-slate-500">No hay presos registrados en esta plaza</td></tr>`;
+        document.getElementById('total-registros').textContent = '0';
+        return;
+    }
+
+    tbody.innerHTML = lista.map(p => `
+        <tr class="border-b border-slate-100 hover:bg-slate-50 transition cursor-pointer" onclick="editarPreso('${p.id}')">
+            <td class="px-3 py-2.5">${p.bd || ''}</td>
+            <td class="px-3 py-2.5">${p.ipencat || ''}</td>
+            <td class="px-3 py-2.5">${p.cod_interno || ''}</td>
+            <td class="px-3 py-2.5 font-mono text-xs">${p.documento || ''}</td>
+            <td class="px-3 py-2.5 font-medium">${p.nombre || ''}</td>
+            <td class="px-3 py-2.5">${p.centro || ''}</td>
+            <td class="px-3 py-2.5">${p.instructor || ''}</td>
+            <td class="px-3 py-2.5">${p.sentenciador || ''}</td>
+            <td class="px-3 py-2.5">${p.procedimiento || ''}</td>
+            <td class="px-3 py-2.5">
+                <span class="px-2 py-0.5 rounded-full text-xs font-medium ${getSituacionClass(p.situacion)}">
+                    ${p.situacion || ''}
+                </span>
+            </td>
+            <td class="px-3 py-2.5 text-xs">${formatearFecha(p.f_ingreso)}</td>
+            <td class="px-3 py-2.5 text-center">${p.dias || ''}</td>
+            <td class="px-3 py-2.5 text-center">
+                <button onclick="event.stopPropagation(); editarPreso('${p.id}')"
+                        class="text-blue-600 hover:text-blue-800 p-1 rounded" title="Editar">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>
+    `).join('');
+    document.getElementById('total-registros').textContent = lista.length;
+}
+
+function getSituacionClass(situacion) {
+    if (!situacion) return 'bg-gray-100 text-gray-600';
+    const s = situacion.toLowerCase();
+    if (s.includes('localizacion') || s.includes('permanente') || s.includes('prisión')) return 'bg-red-100 text-red-700';
+    if (s.includes('libertad')) return 'bg-green-100 text-green-700';
+    if (s.includes('preventivo')) return 'bg-yellow-100 text-yellow-700';
+    if (s.includes('domiciliaria')) return 'bg-orange-100 text-orange-700';
+    return 'bg-gray-100 text-gray-600';
+}
+
+function formatearFecha(fecha) {
+    if (!fecha) return '';
+    try { return new Date(fecha).toLocaleDateString('es-ES'); } catch(_) { return fecha; }
+}
+
+function filtrarPresos() { renderizarPresos(); }
+
+// ── Editar ─────────────────────────────────────
+function editarPreso(id) {
+    const p = presos.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('edit-id').value           = p.id;
+    document.getElementById('edit-bd').value           = p.bd           || '';
+    document.getElementById('edit-ipencat').value      = p.ipencat      || '';
+    document.getElementById('edit-cod-interno').value  = p.cod_interno  || '';
+    document.getElementById('edit-documento').value    = p.documento    || '';
+    document.getElementById('edit-nombre').value       = p.nombre       || '';
+    document.getElementById('edit-centro').value       = p.centro       || '';
+    document.getElementById('edit-instructor').value   = p.instructor   || '';
+    document.getElementById('edit-sentenciador').value = p.sentenciador || '';
+    document.getElementById('edit-procedimiento').value= p.procedimiento|| '';
+    document.getElementById('edit-situacion').value    = p.situacion    || '';
+    document.getElementById('edit-f-ingreso').value    = p.f_ingreso    || '';
+    document.getElementById('edit-dias').value         = p.dias         || '';
+    openModal('modal-editar');
+}
+
+function guardarEdicion() {
+    const id  = document.getElementById('edit-id').value;
+    const idx = presos.findIndex(p => p.id === id);
+    if (idx === -1) return;
+    presos[idx] = {
+        ...presos[idx],
+        bd:           document.getElementById('edit-bd').value.trim(),
+        ipencat:      document.getElementById('edit-ipencat').value.trim(),
+        cod_interno:  document.getElementById('edit-cod-interno').value.trim(),
+        documento:    document.getElementById('edit-documento').value.trim(),
+        nombre:       document.getElementById('edit-nombre').value.trim(),
+        centro:       document.getElementById('edit-centro').value.trim(),
+        instructor:   document.getElementById('edit-instructor').value.trim(),
+        sentenciador: document.getElementById('edit-sentenciador').value.trim(),
+        procedimiento:document.getElementById('edit-procedimiento').value.trim(),
+        situacion:    document.getElementById('edit-situacion').value.trim(),
+        f_ingreso:    document.getElementById('edit-f-ingreso').value,
+        dias:         parseInt(document.getElementById('edit-dias').value) || 0
+    };
+    actualizarAutocompleteDesdePreso(presos[idx]);
+    guardarDatos();
+    renderizarPresos();
+    closeModal('modal-editar');
+    showToast('Preso actualizado correctamente');
+}
+
+function eliminarPreso() {
+    const id = document.getElementById('edit-id').value;
+    if (!id) return;
+    presos = presos.filter(p => p.id !== id);
+    guardarDatos();
+    renderizarPresos();
+    closeModal('modal-editar');
+    showToast('Preso eliminado correctamente');
+    document.getElementById('plaza-info').textContent =
+        `${presos.filter(p=>p.plaza_id===plazaActiva).length} presos registrados`;
+}
+
+// ══════════════════════════════════════════════
+// IMPORTAR / EXPORTAR EXCEL
+// ══════════════════════════════════════════════
+function importarExcel(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (!plazaActiva) { showToast('Seleccione una plaza primero', 'error'); event.target.value = ''; return; }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data     = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheet    = workbook.Sheets[workbook.SheetNames[0]];
+            const rows     = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            if (rows.length < 2) { showToast('El archivo Excel está vacío', 'error'); return; }
+
+            const HEADERS = ['BD','IPENCAT','COD.INTERNO','DOCUMENTO','NOMBRE','CENTRO','INSTRUCTOR','SENTENCIADOR','PROCEDIMIENTO','SITUACIÓN','F.INGRESO','DIAS'];
+            let headerRow = 0;
+            for (let i = 0; i < Math.min(rows.length, 5); i++) {
+                const rowStr = rows[i].map(c => String(c||'').trim().toUpperCase());
+                if (HEADERS.filter(h => rowStr.some(c => c.includes(h) || h.includes(c))).length >= 4) {
+                    headerRow = i; break;
+                }
+            }
+
+            const headerVals = rows[headerRow].map(h => String(h||'').trim().toUpperCase());
+            const hMap = {};
+            HEADERS.forEach(exp => {
+                headerVals.forEach((col, idx) => {
+                    if (col.includes(exp) || exp.includes(col)) hMap[exp] = idx;
+                });
+            });
+
+            let count = 0;
+            for (let i = headerRow + 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (!row || !row.some(c => c)) continue;
+                let f_ingreso = row[hMap['F.INGRESO']] || '';
+                if (f_ingreso && typeof f_ingreso === 'number') {
+                    f_ingreso = new Date((f_ingreso - 25569) * 86400000).toISOString().split('T')[0];
+                }
+                const p = {
+                    id: crypto.randomUUID(), plaza_id: plazaActiva,
+                    bd:           String(row[hMap['BD']]           || ''),
+                    ipencat:      String(row[hMap['IPENCAT']]      || ''),
+                    cod_interno:  String(row[hMap['COD.INTERNO']]  || ''),
+                    documento:    String(row[hMap['DOCUMENTO']]    || ''),
+                    nombre:       String(row[hMap['NOMBRE']]       || ''),
+                    centro:       String(row[hMap['CENTRO']]       || ''),
+                    instructor:   String(row[hMap['INSTRUCTOR']]   || ''),
+                    sentenciador: String(row[hMap['SENTENCIADOR']] || ''),
+                    procedimiento:String(row[hMap['PROCEDIMIENTO']]|| ''),
+                    situacion:    String(row[hMap['SITUACIÓN']]    || ''),
+                    f_ingreso,
+                    dias: parseInt(row[hMap['DIAS']]) || 0
+                };
+                presos.push(p);
+                actualizarAutocompleteDesdePreso(p);
+                count++;
+            }
+            guardarDatos();
+            renderizarPresos();
+            showToast(`Se importaron ${count} presos correctamente`);
+        } catch(err) {
+            console.error(err);
+            showToast('Error al importar el archivo Excel', 'error');
+        }
+    };
+    reader.readAsArrayBuffer(file);
+    event.target.value = '';
+}
+
+function exportarExcel() {
+    if (!plazaActiva) { showToast('Seleccione una plaza primero', 'error'); return; }
+    const lista = presos.filter(p => p.plaza_id === plazaActiva);
+    if (lista.length === 0) { showToast('No hay datos para exportar', 'error'); return; }
+
+    const data = lista.map(p => ({
+        'BD': p.bd, 'IPENCAT': p.ipencat, 'COD.INTERNO': p.cod_interno,
+        'DOCUMENTO': p.documento, 'NOMBRE': p.nombre, 'CENTRO': p.centro,
+        'INSTRUCTOR': p.instructor, 'SENTENCIADOR': p.sentenciador,
+        'PROCEDIMIENTO': p.procedimiento, 'SITUACIÓN': p.situacion,
+        'F.INGRESO': p.f_ingreso, 'DIAS': p.dias
+    }));
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Presos');
+    const plaza = plazas.find(p => p.id === plazaActiva);
+    XLSX.writeFile(wb, `presos_${plaza.nombre.replace(/\s+/g,'_')}.xlsx`);
+    showToast('Archivo exportado correctamente');
+}
+
+// ══════════════════════════════════════════════
+// UTILIDADES UI
+// ══════════════════════════════════════════════
+function openModal(id)  { document.getElementById(id).classList.remove('hidden'); }
+function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    document.getElementById('toast-message').textContent = message;
+    const icon = document.getElementById('toast-icon');
+    if (type === 'error') {
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>';
+        icon.className = 'w-5 h-5 text-red-500';
+    } else {
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>';
+        icon.className = 'w-5 h-5 text-green-500';
+    }
+    toast.classList.remove('hidden');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => toast.classList.add('hidden'), 3000);
+}
+
+// Cerrar modales al hacer clic en el fondo
+document.querySelectorAll('.modal-backdrop').forEach(modal => {
+    modal.addEventListener('click', e => { if (e.target === modal) modal.classList.add('hidden'); });
+});
+</script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

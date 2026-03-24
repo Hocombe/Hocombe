@@ -1,0 +1,3260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Vacaciones - Tribunal de Instancia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .btn-header {
+            padding: 10px 20px;
+            border: 2px solid white;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-header:hover {
+            background: white;
+            color: #1e3c72;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-header.guardar {
+            background: rgba(40, 167, 69, 0.9);
+            border-color: #28a745;
+        }
+
+        .btn-header.guardar:hover {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-header.cargar {
+            background: rgba(0, 123, 255, 0.9);
+            border-color: #007bff;
+        }
+
+        .btn-header.cargar:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            border: none;
+            background: #e8ecf1;
+            color: #333;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .tab-button:hover {
+            background: #d0d7e0;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(30, 60, 114, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-bottom: 3px solid #1e3c72;
+            padding-bottom: 10px;
+        }
+
+        .card h3 {
+            color: #2a5298;
+            margin: 20px 0 15px 0;
+            font-size: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 60, 114, 0.3);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            color: #155724;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            color: #856404;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            color: #721c24;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            color: #0c5460;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .section-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #2a5298;
+        }
+
+        .section-card h4 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-ok {
+            background: #28a745;
+        }
+
+        .status-warning {
+            background: #ffc107;
+        }
+
+        .status-danger {
+            background: #dc3545;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-top: 20px;
+        }
+
+        .calendar-header {
+            background: #1e3c72;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            padding: 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            background: white;
+            transition: all 0.2s;
+            min-height: 80px;
+        }
+
+        .calendar-day:hover {
+            border-color: #2a5298;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .calendar-day.weekend {
+            background: #f0f0f0;
+        }
+
+        .calendar-day.holiday {
+            background: #ffe6e6;
+        }
+
+        .calendar-day.local-holiday {
+            background: #fff4e6;
+        }
+
+        .calendar-day.vacation {
+            background: #e6f3ff;
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.3;
+        }
+
+        .calendar-day .day-number {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .calendar-day .day-label {
+            font-size: 10px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .month-selector {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .month-selector h3 {
+            margin: 0;
+            color: #1e3c72;
+        }
+
+        .month-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-card.green {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .stat-card.orange {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .stat-card.blue {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .stat-card h4 {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .funcionario-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .funcionario-info {
+            flex: 1;
+        }
+
+        .funcionario-name {
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        .funcionario-details {
+            font-size: 13px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .timeline {
+            margin-top: 30px;
+        }
+
+        .timeline-row {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .timeline-label {
+            width: 150px;
+            font-size: 13px;
+            font-weight: 500;
+            padding-right: 15px;
+        }
+
+        .timeline-bar {
+            flex: 1;
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .timeline-vacation {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            color: white;
+            font-size: 11px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .badge-civil {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-penal {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .badge-ejecucion {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .badge-auxilio {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .badge-decanato {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .badge-registro {
+            background: #e1f5fe;
+            color: #0277bd;
+        }
+
+        .badge-auxilio-judicial {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-left {
+                width: 100%;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .tabs {
+                padding: 10px;
+            }
+
+            .tab-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .calendar {
+                gap: 2px;
+            }
+
+            .calendar-day {
+                min-height: 60px;
+                padding: 4px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .holiday-type-selector {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .holiday-type-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .holiday-type-btn.active {
+            border-color: #2a5298;
+            background: #e6f3ff;
+        }
+
+        .holiday-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+        .holiday-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .delete-icon {
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .delete-icon:hover {
+            color: #c82333;
+        }
+
+        /* Vista Anual */
+        .year-calendar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .month-container {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .month-container h4 {
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .mini-calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+        }
+
+        .mini-calendar-header {
+            background: #1e3c72;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 3px;
+        }
+
+        .mini-calendar-day {
+            aspect-ratio: 1;
+            padding: 4px;
+            border: 1px solid #e0e0e0;
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            background: white;
+            transition: all 0.2s;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mini-calendar-day:hover {
+            border-color: #2a5298;
+            transform: scale(1.1);
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .mini-calendar-day.weekend {
+            background: #f0f0f0;
+        }
+
+        .mini-calendar-day.holiday {
+            background: #ffe6e6;
+            font-weight: 600;
+        }
+
+        .mini-calendar-day.local-holiday {
+            background: #fff4e6;
+            font-weight: 600;
+        }
+
+        .mini-calendar-day.vacation {
+            background: #e6f3ff;
+        }
+
+        .mini-calendar-day.other-month {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .mini-calendar-day.other-month:hover {
+            transform: none;
+            border-color: #e0e0e0;
+            box-shadow: none;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: #1e3c72;
+        }
+
+        .modal-close {
+            font-size: 28px;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .action-btn {
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            border-color: #2a5298;
+            background: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .action-btn.selected {
+            border-color: #2a5298;
+            background: #e6f3ff;
+        }
+
+        .action-btn-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .action-btn-title {
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+
+        .action-btn-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .year-calendar {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── MODO OSCURO ─────────────────────── */
+        [data-tema="oscuro"] { color-scheme: dark; }
+        [data-tema="oscuro"] body { background: #111c2d !important; color: #c8deff !important; }
+        [data-tema="oscuro"] header {
+            background: linear-gradient(135deg, #0d1a30 0%, #1a2f52 100%) !important;
+        }
+        /* Pestañas */
+        [data-tema="oscuro"] .tabs { background: #182a44 !important; box-shadow: none !important; border-color: #2a3a54 !important; }
+        [data-tema="oscuro"] .tab-button { background: #1a2e4a !important; color: #8ab4e8 !important; }
+        [data-tema="oscuro"] .tab-button:hover { background: #1e3a6e !important; color: #c8deff !important; }
+        [data-tema="oscuro"] .tab-button.active {
+            background: linear-gradient(135deg, #1a3a6e 0%, #2a5298 100%) !important;
+            color: #fff !important;
+        }
+        /* Tarjetas */
+        [data-tema="oscuro"] .card {
+            background: #182a44 !important; color: #c8deff !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,.4) !important;
+        }
+        [data-tema="oscuro"] .card h2 { color: #a8d0ff !important; border-bottom-color: #2a4a80 !important; }
+        [data-tema="oscuro"] .card h3 { color: #8ab4e8 !important; }
+        /* Inputs */
+        [data-tema="oscuro"] input, [data-tema="oscuro"] select, [data-tema="oscuro"] textarea {
+            background: #0d1a30 !important; color: #c8deff !important; border-color: #2a4a80 !important;
+        }
+        [data-tema="oscuro"] input::placeholder { color: #4a6080 !important; }
+        [data-tema="oscuro"] label { color: #8ab4e8 !important; }
+        /* Tabla */
+        [data-tema="oscuro"] table { color: #c8deff !important; }
+        [data-tema="oscuro"] th { background: #1e3a6e !important; color: #8ab4e8 !important; border-color: #2a4a80 !important; }
+        [data-tema="oscuro"] td { background: #182a44 !important; color: #c8deff !important; border-color: #2a3a54 !important; }
+        [data-tema="oscuro"] tr:hover td { background: #1e3a6e !important; }
+        /* Textos */
+        [data-tema="oscuro"] h1, [data-tema="oscuro"] h2, [data-tema="oscuro"] h3,
+        [data-tema="oscuro"] h4, [data-tema="oscuro"] p { color: inherit; }
+        /* Modal */
+        [data-tema="oscuro"] .modal-overlay, [data-tema="oscuro"] .modal-backdrop { background: rgba(0,0,0,.8) !important; }
+        [data-tema="oscuro"] .modal-content, [data-tema="oscuro"] .modal-box {
+            background: #182a44 !important; color: #c8deff !important; border-color: #2a3a54 !important;
+        }
+        /* Funcionarios y stats */
+        [data-tema="oscuro"] .funcionario-card, [data-tema="oscuro"] .stats-card,
+        [data-tema="oscuro"] .resumen-card, [data-tema="oscuro"] .periodo-item {
+            background: #1a2e4a !important; border-color: #2a3a54 !important; color: #c8deff !important;
+        }
+        /* Calendario de vacaciones */
+        [data-tema="oscuro"] .year-calendar, [data-tema="oscuro"] .month-calendar,
+        [data-tema="oscuro"] .calendar-month { background: #182a44 !important; border-color: #2a3a54 !important; }
+        [data-tema="oscuro"] .month-header { background: #1e3a6e !important; color: #a8d0ff !important; }
+        [data-tema="oscuro"] .day-cell { background: #182a44 !important; color: #c8deff !important; border-color: #2a3a54 !important; }
+        [data-tema="oscuro"] .day-header { background: #1a2e4a !important; color: #8ab4e8 !important; }
+        /* Scrollbar */
+        [data-tema="oscuro"] *::-webkit-scrollbar-track { background: #0d1a30; }
+        [data-tema="oscuro"] *::-webkit-scrollbar-thumb { background: #2a4a80; border-radius: 4px; }
+        /* Estado por secciones */
+        [data-tema="oscuro"] .section-card {
+            background: #1a2e4a !important; border-left-color: #4a9eff !important; color: #c8deff !important;
+        }
+        [data-tema="oscuro"] .section-card h4 { color: #a8d0ff !important; }
+        [data-tema="oscuro"] .section-card p  { color: #c8deff !important; }
+        [data-tema="oscuro"] .section-card strong { color: #ffffff !important; }
+        /* Alertas del dashboard */
+        [data-tema="oscuro"] .alert-success {
+            background: #0d2e18 !important; color: #6ee48a !important; border-left-color: #28a745 !important;
+        }
+        [data-tema="oscuro"] .alert-warning {
+            background: #2e2000 !important; color: #ffd54f !important; border-left-color: #ffc107 !important;
+        }
+        [data-tema="oscuro"] .alert-danger {
+            background: #2e0d0d !important; color: #ff8a80 !important; border-left-color: #dc3545 !important;
+        }
+        [data-tema="oscuro"] .alert-info {
+            background: #082030 !important; color: #64d4e8 !important; border-left-color: #17a2b8 !important;
+        }
+        /* Funcionarios: items de lista y texto */
+        [data-tema="oscuro"] .funcionario-item {
+            background: #1a2e4a !important; border-color: #2a3a54 !important;
+        }
+        [data-tema="oscuro"] .funcionario-name   { color: #a8d0ff !important; }
+        [data-tema="oscuro"] .funcionario-details { color: #7a9cc0 !important; }
+        /* Categorías (pills con inline bg:#e8ecf1) */
+        [data-tema="oscuro"] #categoriasConfigContainer span {
+            background: #1a2e4a !important; color: #c8deff !important;
+            border: 1px solid #2a4a80 !important;
+        }
+        /* Calendario: barra del mes/año */
+        [data-tema="oscuro"] .month-selector {
+            background: #1a2e4a !important;
+        }
+        [data-tema="oscuro"] .month-selector h3 { color: #a8d0ff !important; }
+        /* Leyenda del calendario */
+        [data-tema="oscuro"] .legend  { background: #1a2e4a !important; }
+        [data-tema="oscuro"] .legend-item { color: #c8deff !important; }
+        /* Días no laborables: botones de tipo (Todos / Nacionales / Locales) */
+        [data-tema="oscuro"] .holiday-type-btn {
+            background: #1a2e4a !important; border-color: #2a4a80 !important; color: #c8deff !important;
+        }
+        [data-tema="oscuro"] .holiday-type-btn.active {
+            background: #1e3a6e !important; border-color: #4a9eff !important; color: #a8d0ff !important;
+        }
+        /* Items de la lista de festivos */
+        [data-tema="oscuro"] .holiday-item {
+            background: #1a2e4a !important; color: #c8deff !important;
+        }
+        /* Línea temporal */
+        [data-tema="oscuro"] .timeline-label { color: #c8deff !important; }
+        [data-tema="oscuro"] .timeline-bar   { background: #1a2e4a !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>📅 Gestión de Vacaciones</h1>
+                <p>Tribunal de Instancia - Control de Ausencias y Cobertura</p>
+            </div>
+            <div class="header-right">
+                <button class="btn-header cargar" onclick="document.getElementById('cargarArchivoJSONHeader').click()" title="Cargar datos desde archivo JSON">
+                    📂 Cargar
+                </button>
+                <input type="file" id="cargarArchivoJSONHeader" style="display: none;" accept=".json" onchange="cargarDatosJSON(event)">
+                <button class="btn-header guardar" onclick="guardarDatosAutomatico()" title="Guardar datos en el servidor">
+                    💾 Guardar
+                </button>
+                <button id="_btnTema" onclick="_toggleTemaModulo()" style="font-size:12px;padding:6px 14px;border-radius:999px;border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.2);color:#fff;cursor:pointer;white-space:nowrap;font-weight:600" title="Cambiar tema">☀️ Claro</button>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+            <button class="tab-button" onclick="switchTab('funcionarios')">👥 Funcionarios</button>
+            <button class="tab-button" onclick="switchTab('vacaciones')">🏖️ Registrar Vacaciones</button>
+            <button class="tab-button" onclick="switchTab('calendario')">📆 Calendario</button>
+            <button class="tab-button" onclick="switchTab('festivos')">🎉 Días No Laborables</button>
+            <button class="tab-button" onclick="switchTab('linea-temporal')">📈 Línea Temporal</button>
+            <button class="tab-button" onclick="switchTab('datos')">💾 Gestión de Datos</button>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="tab-content active">
+            <div class="card">
+                <h2>Resumen General</h2>
+                <div id="alertasContainer"></div>
+                <div class="stats-grid" id="statsGrid"></div>
+            </div>
+
+            <div class="card">
+                <h2>Estado por Secciones</h2>
+                <div class="section-grid" id="seccionesGrid"></div>
+            </div>
+        </div>
+
+        <!-- Funcionarios -->
+        <div id="funcionarios" class="tab-content">
+            <!-- Gestión de Secciones -->
+            <div class="card">
+                <h2>Secciones</h2>
+                <div id="seccionesConfigContainer"></div>
+                <div style="display:flex;gap:10px;margin-top:15px;align-items:center;flex-wrap:wrap;">
+                    <input type="text" id="nuevaSeccionInput" placeholder="Nueva sección..." style="max-width:260px;margin-bottom:0;">
+                    <input type="number" id="nuevaSeccionMin" placeholder="Mínimo" min="1" value="1" style="max-width:100px;margin-bottom:0;">
+                    <button class="btn btn-success" onclick="agregarSeccion()">➕ Añadir Sección</button>
+                </div>
+            </div>
+
+            <!-- Gestión de Categorías -->
+            <div class="card">
+                <h2>Categorías</h2>
+                <div id="categoriasConfigContainer"></div>
+                <div style="display:flex;gap:10px;margin-top:15px;align-items:center;flex-wrap:wrap;">
+                    <input type="text" id="nuevaCategoriaInput" placeholder="Nueva categoría..." style="max-width:260px;margin-bottom:0;">
+                    <button class="btn btn-success" onclick="agregarCategoria()">➕ Añadir Categoría</button>
+                </div>
+            </div>
+
+            <!-- Añadir Funcionario -->
+            <div class="card">
+                <h2>Añadir Funcionario</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombre Completo:</label>
+                        <input type="text" id="nombreFuncionario" placeholder="Ej: Juan García López">
+                    </div>
+                    <div class="form-group">
+                        <label>Sección:</label>
+                        <select id="seccionFuncionario"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Categoría:</label>
+                        <select id="categoriaFuncionario"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Días de vacaciones anuales:</label>
+                    <input type="number" id="diasVacaciones" value="22" min="22" max="30">
+                    <small style="color: #666; display: block; margin-top: 5px;">Base: 22 días + días adicionales por antigüedad</small>
+                </div>
+                <button class="btn btn-success" onclick="agregarFuncionario()">➕ Añadir Funcionario</button>
+            </div>
+
+            <div class="card">
+                <h2>Listado de Funcionarios</h2>
+                <div id="listaFuncionarios"></div>
+            </div>
+        </div>
+
+        <!-- Registrar Vacaciones -->
+        <div id="vacaciones" class="tab-content">
+            <div class="card">
+                <h2>Nuevo Registro de Ausencia</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Funcionario:</label>
+                        <select id="funcionarioVacaciones"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de Ausencia:</label>
+                        <select id="tipoAusencia">
+                            <option value="Vacaciones">Vacaciones</option>
+                            <option value="Permiso">Permiso</option>
+                            <option value="Asuntos Propios">Asuntos Propios</option>
+                            <option value="IT">Incapacidad Temporal</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Fecha de Inicio:</label>
+                        <input type="date" id="fechaInicio">
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de Fin:</label>
+                        <input type="date" id="fechaFin">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Observaciones:</label>
+                    <textarea id="observaciones" placeholder="Información adicional (opcional)"></textarea>
+                </div>
+                <div id="diasCalculados" class="alert alert-info" style="display: none;"></div>
+                <button class="btn btn-primary" onclick="registrarVacaciones()">💾 Registrar Ausencia</button>
+            </div>
+
+            <div class="card">
+                <h2>Vacaciones Registradas</h2>
+                <div id="listaVacaciones"></div>
+            </div>
+        </div>
+
+        <!-- Calendario -->
+        <div id="calendario" class="tab-content">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2 style="margin: 0;">Calendario</h2>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="mostrarVistaCalendario('mensual')" id="btnVistaMensual">Vista Mensual</button>
+                        <button class="btn btn-secondary" onclick="mostrarVistaCalendario('anual')" id="btnVistaAnual">Vista Anual</button>
+                    </div>
+                </div>
+
+                <!-- Vista Mensual -->
+                <div id="vistaMensual">
+                    <div class="month-selector">
+                        <div class="month-nav">
+                            <button class="btn btn-secondary" onclick="cambiarMes(-1)">← Anterior</button>
+                        </div>
+                        <h3 id="mesActual"></h3>
+                        <div class="month-nav">
+                            <button class="btn btn-secondary" onclick="cambiarMes(1)">Siguiente →</button>
+                            <button class="btn btn-warning" onclick="irHoy()">Hoy</button>
+                        </div>
+                    </div>
+
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #f0f0f0;"></div>
+                            <span>Fin de semana</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ffe6e6;"></div>
+                            <span>Festivo Nacional</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #fff4e6;"></div>
+                            <span>Festivo Local</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #e6f3ff;"></div>
+                            <span>Vacaciones</span>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        💡 <strong>Click en un día</strong> para marcar/desmarcar como festivo (los fines de semana no se pueden marcar)
+                    </div>
+
+                    <div class="calendar" id="calendarioMensual"></div>
+                </div>
+
+                <!-- Vista Anual -->
+                <div id="vistaAnual" style="display: none;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <button class="btn btn-secondary" onclick="cambiarYearAnual(-1)">← Año Anterior</button>
+                        <h3 style="display: inline-block; margin: 0 30px;" id="yearAnual"></h3>
+                        <button class="btn btn-secondary" onclick="cambiarYearAnual(1)">Año Siguiente →</button>
+                    </div>
+
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #f0f0f0;"></div>
+                            <span>Fin de semana</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ffe6e6;"></div>
+                            <span>Festivo Nacional</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #fff4e6;"></div>
+                            <span>Festivo Local</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #e6f3ff;"></div>
+                            <span>Vacaciones</span>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        💡 <strong>Click en un día</strong> para marcar/desmarcar como festivo (los fines de semana no se pueden marcar)
+                    </div>
+
+                    <div id="calendarioAnual" class="year-calendar"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Festivos -->
+        <div id="festivos" class="tab-content">
+            <div class="card">
+                <h2>Configurar Días No Laborables</h2>
+                
+                <div class="form-group">
+                    <label>Año:</label>
+                    <select id="yearFestivos" onchange="cargarFestivos()"></select>
+                </div>
+
+                <h3>Añadir Nuevo Día No Laborable</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Fecha:</label>
+                        <input type="date" id="fechaFestivo">
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción:</label>
+                        <input type="text" id="descripcionFestivo" placeholder="Ej: Día de Reyes">
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo:</label>
+                        <select id="tipoFestivo">
+                            <option value="nacional">Festivo Nacional</option>
+                            <option value="local">Festivo Local/Autonómico</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-success" onclick="agregarFestivo()">➕ Añadir Festivo</button>
+
+                <h3>Días No Laborables del Año <span id="yearFestivosTitle"></span></h3>
+                
+                <div class="holiday-type-selector">
+                    <button class="holiday-type-btn active" onclick="filtrarFestivos('todos')" id="btnTodos">
+                        Todos (<span id="countTodos">0</span>)
+                    </button>
+                    <button class="holiday-type-btn" onclick="filtrarFestivos('nacional')" id="btnNacional">
+                        Nacionales (<span id="countNacional">0</span>)
+                    </button>
+                    <button class="holiday-type-btn" onclick="filtrarFestivos('local')" id="btnLocal">
+                        Locales (<span id="countLocal">0</span>)
+                    </button>
+                </div>
+
+                <div class="holiday-list" id="listaFestivos"></div>
+            </div>
+        </div>
+
+        <!-- Línea Temporal -->
+        <div id="linea-temporal" class="tab-content">
+            <div class="card">
+                <h2>Línea Temporal de Vacaciones</h2>
+                <div class="form-group">
+                    <label>Filtrar por Sección:</label>
+                    <select id="filtroSeccion" onchange="actualizarLineaTemporal()">
+                        <option value="Todas">Todas las Secciones</option>
+                        <option value="Civil">Civil</option>
+                        <option value="Penal">Penal</option>
+                        <option value="Ejecución">Ejecución</option>
+                        <option value="Auxilio Judicial">Auxilio Judicial</option>
+                        <option value="Decanato">Decanato</option>
+                        <option value="Registro Civil">Registro Civil</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Mes:</label>
+                        <select id="mesLineaTemporal" onchange="actualizarLineaTemporal()"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Año:</label>
+                        <select id="yearLineaTemporal" onchange="actualizarLineaTemporal()"></select>
+                    </div>
+                </div>
+                <div class="timeline" id="lineaTemporal"></div>
+            </div>
+        </div>
+
+        <!-- Gestión de Datos -->
+        <div id="datos" class="tab-content">
+            <div class="card">
+                <h2>Gestión de Datos</h2>
+                
+                <h3>💾 Guardar y Cargar Datos</h3>
+                <div class="alert alert-info">
+                    📁 Los datos se guardan en formato JSON. Puedes especificar una ruta donde guardar/cargar automáticamente el archivo.
+                </div>
+                
+                <div class="form-group">
+                    <label>Nombre del archivo de datos:</label>
+                    <input type="text" id="nombreArchivo" value="vacaciones_tribunal.json" placeholder="vacaciones_tribunal.json">
+                    <small style="color: #666; display: block; margin-top: 5px;">El archivo se descargará en tu carpeta de Descargas</small>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="guardarDatosJSON()">💾 Guardar Datos (JSON)</button>
+                    <button class="btn btn-primary" onclick="document.getElementById('cargarArchivoJSON').click()">📂 Cargar Datos (JSON)</button>
+                    <input type="file" id="cargarArchivoJSON" style="display: none;" accept=".json" onchange="cargarDatosJSON(event)">
+                </div>
+
+                <h3 style="margin-top: 40px;">📊 Exportar Reportes</h3>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="exportarCalendarioExcel()">📊 Exportar Calendario (CSV)</button>
+                    <button class="btn btn-primary" onclick="exportarFuncionariosCSV()">👥 Exportar Funcionarios (CSV)</button>
+                </div>
+
+                <h3 style="margin-top: 40px;">🔧 Utilidades</h3>
+                <div class="alert alert-warning">
+                    ⚠️ La limpieza de datos es irreversible. Asegúrate de guardar tus datos antes de limpiar.
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-danger" onclick="limpiarDatos()">🗑️ Limpiar Todos los Datos</button>
+                    <button class="btn btn-warning" onclick="limpiarSoloVacaciones()">🏖️ Limpiar Solo Vacaciones</button>
+                    <button class="btn btn-warning" onclick="limpiarSoloFestivos()">🎉 Limpiar Solo Festivos</button>
+                </div>
+
+                <h3 style="margin-top: 40px;">ℹ️ Información del Sistema</h3>
+                <div id="infoSistema"></div>
+
+                <h3 style="margin-top: 30px;">📖 Instrucciones de Uso</h3>
+                <div class="alert alert-info">
+                    <strong>Cómo usar el guardado automático:</strong><br><br>
+                    1. <strong>Guardar:</strong> Haz click en "Guardar Datos (JSON)" para descargar el archivo a tu carpeta de Descargas.<br>
+                    2. <strong>Cargar:</strong> Haz click en "Cargar Datos (JSON)" y selecciona el archivo JSON que guardaste previamente.<br>
+                    3. <strong>Recomendación:</strong> Guarda tus datos regularmente en la misma ubicación para tener siempre un backup actualizado.<br><br>
+                    💡 <strong>Tip:</strong> Puedes guardar el archivo JSON en una carpeta compartida de red o en OneDrive/Google Drive para acceder desde cualquier ordenador del tribunal.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para marcar días -->
+    <div id="modalMarca" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Marcar Día: <span id="fechaSeleccionada"></span></h3>
+                <span class="modal-close" onclick="cerrarModal()">&times;</span>
+            </div>
+
+            <div id="infoFecha" class="alert alert-info" style="margin-bottom: 20px;"></div>
+
+            <div class="action-buttons">
+                <div class="action-btn" onclick="seleccionarAccion('festivo-nacional')">
+                    <div class="action-btn-icon">🎉</div>
+                    <div class="action-btn-title">Festivo Nacional</div>
+                    <div class="action-btn-desc">Marcar como festivo nacional</div>
+                </div>
+                <div class="action-btn" onclick="seleccionarAccion('festivo-local')">
+                    <div class="action-btn-icon">🏛️</div>
+                    <div class="action-btn-title">Festivo Local</div>
+                    <div class="action-btn-desc">Marcar como festivo autonómico</div>
+                </div>
+                <div class="action-btn" onclick="seleccionarAccion('vacaciones')">
+                    <div class="action-btn-icon">🏖️</div>
+                    <div class="action-btn-title">Vacaciones</div>
+                    <div class="action-btn-desc">Registrar vacaciones</div>
+                </div>
+                <div class="action-btn" onclick="seleccionarAccion('limpiar')">
+                    <div class="action-btn-icon">🗑️</div>
+                    <div class="action-btn-title">Limpiar</div>
+                    <div class="action-btn-desc">Eliminar marcas de este día</div>
+                </div>
+            </div>
+
+            <div id="formularioFestivo" style="display: none;">
+                <div class="form-group">
+                    <label>Descripción del festivo:</label>
+                    <input type="text" id="descripcionFestivoModal" placeholder="Ej: Día de Reyes">
+                </div>
+                <button class="btn btn-success" onclick="guardarFestivoModal()">Guardar Festivo</button>
+            </div>
+
+            <div id="formularioVacaciones" style="display: none;">
+                <div class="form-group">
+                    <label>Funcionario:</label>
+                    <select id="funcionarioVacacionesModal"></select>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Ausencia:</label>
+                    <select id="tipoAusenciaModal">
+                        <option value="Vacaciones">Vacaciones</option>
+                        <option value="Permiso">Permiso</option>
+                        <option value="Asuntos Propios">Asuntos Propios</option>
+                        <option value="IT">Incapacidad Temporal</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Es solo este día o un período?</label>
+                    <select id="tipoPeriodo" onchange="toggleFechaFin()">
+                        <option value="un-dia">Solo este día</option>
+                        <option value="periodo">Período de varios días</option>
+                    </select>
+                </div>
+                <div class="form-group" id="grupoFechaFin" style="display: none;">
+                    <label>Fecha de Fin:</label>
+                    <input type="date" id="fechaFinModal">
+                </div>
+                <div class="form-group">
+                    <label>Observaciones (opcional):</label>
+                    <textarea id="observacionesModal" placeholder="Información adicional"></textarea>
+                </div>
+                <button class="btn btn-success" onclick="guardarVacacionesModal()">Registrar Vacaciones</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar funcionario -->
+    <div id="modalEditarFuncionario" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>✏️ Editar Funcionario</h3>
+                <span class="modal-close" onclick="cerrarModalEditar()">&times;</span>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre Completo:</label>
+                <input type="text" id="editNombre" placeholder="Ej: Juan García López">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Sección:</label>
+                    <select id="editSeccion"></select>
+                </div>
+                <div class="form-group">
+                    <label>Categoría:</label>
+                    <select id="editCategoria"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Días de vacaciones anuales:</label>
+                <input type="number" id="editDiasVacaciones" min="22" max="30">
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-success" onclick="guardarEdicionFuncionario()">💾 Guardar Cambios</button>
+                <button class="btn btn-secondary" onclick="cerrarModalEditar()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Estructura de datos
+        let datos = {
+            funcionarios: [],
+            vacaciones: [],
+            festivos: [],
+            secciones: ['Civil', 'Penal', 'Ejecución', 'Auxilio Judicial', 'Decanato', 'Registro Civil'],
+            categorias: ['LAJ', 'Gestor', 'Tramitador', 'Auxilio'],
+            minimos: {
+                Civil: 2,
+                Penal: 3,
+                Ejecución: 1,
+                'Auxilio Judicial': 2,
+                'Decanato': 1,
+                'Registro Civil': 1
+            }
+        };
+
+        let mesActual = new Date().getMonth();
+        let yearActual = new Date().getFullYear();
+        let filtroFestivosActual = 'todos';
+        let fechaModalActual = null;
+        let tipoFestivoModal = null;
+        let vistaCalendarioActual = 'mensual';
+        let yearAnualActual = new Date().getFullYear();
+        let funcionarioEditandoId = null;
+
+        // Guardar datos en JSON
+        function guardarDatosJSON() {
+            const nombreArchivo = document.getElementById('nombreArchivo').value || 'vacaciones_tribunal.json';
+            
+            const dataStr = JSON.stringify(datos, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = nombreArchivo;
+            link.click();
+            URL.revokeObjectURL(url);
+            
+            mostrarNotificacion('✅ Datos guardados en: ' + nombreArchivo, 'success');
+        }
+
+        // Guardar datos rápido desde el header (usa nombre por defecto)
+        function guardarDatosJSONRapido() {
+            const nombreArchivo = 'vacaciones_tribunal.json';
+            
+            const dataStr = JSON.stringify(datos, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = nombreArchivo;
+            link.click();
+            URL.revokeObjectURL(url);
+            
+            mostrarNotificacion('✅ Datos guardados correctamente', 'success');
+        }
+
+        // Cargar datos desde JSON
+        function cargarDatosJSON(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const datosImportados = JSON.parse(e.target.result);
+                    
+                    // Validar estructura básica
+                    if (!datosImportados.funcionarios || !datosImportados.vacaciones || !datosImportados.festivos) {
+                        mostrarNotificacion('❌ Archivo JSON no válido: estructura incorrecta', 'danger');
+                        return;
+                    }
+                    
+                    if (confirm('¿Cargar estos datos? Se reemplazarán todos los datos actuales.')) {
+                        datos = datosImportados;
+
+                        // Compatibilidad con datos sin secciones/categorias dinámicas
+                        if (!datos.secciones) datos.secciones = ['Civil', 'Penal', 'Ejecución', 'Auxilio Judicial', 'Decanato', 'Registro Civil'];
+                        if (!datos.categorias) datos.categorias = ['LAJ', 'Gestor', 'Tramitador', 'Auxilio'];
+                        if (!datos.minimos) datos.minimos = {};
+
+                        mostrarNotificacion('✅ Datos cargados correctamente: ' + datos.funcionarios.length + ' funcionarios, ' + datos.vacaciones.length + ' vacaciones, ' + datos.festivos.length + ' festivos', 'success');
+
+                        // Actualizar todas las vistas
+                        renderTodosSelects();
+                        actualizarDashboard();
+                        mostrarFuncionarios();
+                        mostrarVacaciones();
+                        
+                        if (vistaCalendarioActual === 'mensual') {
+                            generarCalendario();
+                        } else {
+                            generarCalendarioAnual();
+                        }
+                    }
+                } catch (error) {
+                    mostrarNotificacion('❌ Error al cargar datos: ' + error.message, 'danger');
+                    console.error('Error detallado:', error);
+                }
+            };
+            reader.readAsText(file);
+            
+            // Resetear el input para permitir cargar el mismo archivo de nuevo
+            event.target.value = '';
+        }
+
+        // Cambiar de pestaña
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            // Actualizar contenido según la pestaña
+            if (tabName === 'dashboard') {
+                actualizarDashboard();
+            } else if (tabName === 'funcionarios') {
+                renderTodosSelects();
+                mostrarFuncionarios();
+            } else if (tabName === 'vacaciones') {
+                actualizarSelectFuncionarios();
+                mostrarVacaciones();
+            } else if (tabName === 'calendario') {
+                if (vistaCalendarioActual === 'mensual') {
+                    generarCalendario();
+                } else {
+                    generarCalendarioAnual();
+                }
+            } else if (tabName === 'festivos') {
+                inicializarFestivos();
+            } else if (tabName === 'linea-temporal') {
+                inicializarLineaTemporal();
+            } else if (tabName === 'datos') {
+                mostrarInfoSistema();
+            }
+        }
+
+        // Guardar mínimos (dinámico — lee inputs generados por renderSeccionesConfig)
+        function guardarMinimos() {
+            (datos.secciones || []).forEach(sec => {
+                const inputId = 'min_' + sec.replace(/\s+/g, '_');
+                const el = document.getElementById(inputId);
+                if (el) datos.minimos[sec] = parseInt(el.value) || 1;
+            });
+            guardarDatosAutomatico();
+            mostrarNotificacion('✅ Configuración guardada automáticamente', 'success');
+            actualizarDashboard();
+        }
+
+        // Agregar funcionario
+        function agregarFuncionario() {
+            const nombre = document.getElementById('nombreFuncionario').value.trim();
+            const seccion = document.getElementById('seccionFuncionario').value;
+            const categoria = document.getElementById('categoriaFuncionario').value;
+            const diasVacaciones = parseInt(document.getElementById('diasVacaciones').value);
+
+            if (!nombre) {
+                mostrarNotificacion('Por favor, introduce el nombre del funcionario', 'danger');
+                return;
+            }
+
+            const funcionario = {
+                id: Date.now(),
+                nombre,
+                seccion,
+                categoria,
+                diasVacaciones
+            };
+
+            datos.funcionarios.push(funcionario);
+            
+            // Limpiar formulario
+            document.getElementById('nombreFuncionario').value = '';
+            document.getElementById('diasVacaciones').value = '22';
+            
+            guardarDatosAutomatico(); mostrarNotificacion('✅ Funcionario añadido y guardado', 'success');
+            mostrarFuncionarios();
+            actualizarDashboard();
+        }
+
+        // Mostrar funcionarios
+        function mostrarFuncionarios() {
+            const container = document.getElementById('listaFuncionarios');
+            
+            if (datos.funcionarios.length === 0) {
+                container.innerHTML = '<div class="alert alert-info">No hay funcionarios registrados. Añade el primer funcionario usando el formulario superior.</div>';
+                return;
+            }
+
+            const secciones = datos.secciones || [];
+            let html = '';
+
+            secciones.forEach(seccion => {
+                const funcionariosSeccion = datos.funcionarios.filter(f => f.seccion === seccion);
+                if (funcionariosSeccion.length > 0) {
+                    html += `<h3>${seccion} (${funcionariosSeccion.length})</h3>`;
+                    funcionariosSeccion.forEach(f => {
+                        const diasConsumidos = calcularDiasConsumidos(f.id);
+                        // Normalizar nombre de clase para el badge (quitar acentos y espacios)
+                        let badgeClass = f.seccion.toLowerCase()
+                            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                            .replace(/\s+/g, '-');
+                        if (f.seccion === 'Registro Civil') {
+                            badgeClass = 'registro';
+                        } else if (f.seccion === 'Auxilio Judicial') {
+                            badgeClass = 'auxilio-judicial';
+                        }
+                        
+                        html += `
+                            <div class="funcionario-item">
+                                <div class="funcionario-info">
+                                    <div class="funcionario-name">${f.nombre}</div>
+                                    <div class="funcionario-details">
+                                        <span class="badge badge-${badgeClass}">${f.categoria}</span>
+                                        Vacaciones: ${diasConsumidos}/${f.diasVacaciones} días
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <button class="btn btn-primary btn-sm" onclick="editarFuncionario(${f.id})">✏️ Editar</button>
+                                    <button class="btn btn-danger btn-sm" onclick="eliminarFuncionario(${f.id})">🗑️ Eliminar</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Eliminar funcionario
+        function eliminarFuncionario(id) {
+            if (confirm('¿Estás seguro de que quieres eliminar este funcionario? También se eliminarán sus vacaciones registradas.')) {
+                datos.funcionarios = datos.funcionarios.filter(f => f.id !== id);
+                datos.vacaciones = datos.vacaciones.filter(v => v.funcionarioId !== id);
+                guardarDatosAutomatico(); mostrarNotificacion('✅ Funcionario eliminado y guardado', 'success');
+                mostrarFuncionarios();
+                actualizarDashboard();
+            }
+        }
+
+        // Abrir modal para editar funcionario
+        function editarFuncionario(id) {
+            const funcionario = datos.funcionarios.find(f => f.id === id);
+            if (!funcionario) {
+                mostrarNotificacion('❌ Funcionario no encontrado', 'danger');
+                return;
+            }
+
+            funcionarioEditandoId = id;
+
+            // Rellenar selects dinámicos antes de asignar valor
+            renderSelectSecciones('editSeccion', funcionario.seccion);
+            renderSelectCategorias('editCategoria', funcionario.categoria);
+
+            // Rellenar el formulario con los datos actuales
+            document.getElementById('editNombre').value = funcionario.nombre;
+            document.getElementById('editDiasVacaciones').value = funcionario.diasVacaciones;
+
+            // Mostrar el modal
+            document.getElementById('modalEditarFuncionario').classList.add('active');
+        }
+
+        // Cerrar modal de edición
+        function cerrarModalEditar() {
+            document.getElementById('modalEditarFuncionario').classList.remove('active');
+            funcionarioEditandoId = null;
+        }
+
+        // Guardar cambios del funcionario editado
+        function guardarEdicionFuncionario() {
+            if (!funcionarioEditandoId) return;
+
+            const nombre = document.getElementById('editNombre').value.trim();
+            const seccion = document.getElementById('editSeccion').value;
+            const categoria = document.getElementById('editCategoria').value;
+            const diasVacaciones = parseInt(document.getElementById('editDiasVacaciones').value);
+
+            if (!nombre) {
+                mostrarNotificacion('❌ El nombre no puede estar vacío', 'danger');
+                return;
+            }
+
+            if (diasVacaciones < 22 || diasVacaciones > 30) {
+                mostrarNotificacion('❌ Los días de vacaciones deben estar entre 22 y 30', 'danger');
+                return;
+            }
+
+            // Buscar y actualizar el funcionario
+            const funcionario = datos.funcionarios.find(f => f.id === funcionarioEditandoId);
+            if (funcionario) {
+                funcionario.nombre = nombre;
+                funcionario.seccion = seccion;
+                funcionario.categoria = categoria;
+                funcionario.diasVacaciones = diasVacaciones;
+
+                guardarDatosAutomatico(); mostrarNotificacion('✅ Funcionario actualizado y guardado', 'success');
+                cerrarModalEditar();
+                mostrarFuncionarios();
+                actualizarDashboard();
+            }
+        }
+
+        // Actualizar select de funcionarios
+        function actualizarSelectFuncionarios() {
+            const select = document.getElementById('funcionarioVacaciones');
+            select.innerHTML = '<option value="">Selecciona un funcionario</option>';
+
+            const secciones = datos.secciones || [];
+            secciones.forEach(seccion => {
+                const funcionariosSeccion = datos.funcionarios.filter(f => f.seccion === seccion);
+                if (funcionariosSeccion.length > 0) {
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = seccion;
+                    funcionariosSeccion.forEach(f => {
+                        const option = document.createElement('option');
+                        option.value = f.id;
+                        option.textContent = `${f.nombre} (${f.categoria})`;
+                        optgroup.appendChild(option);
+                    });
+                    select.appendChild(optgroup);
+                }
+            });
+        }
+
+        // Calcular días laborables
+        function calcularDiasLaborables(fechaInicio, fechaFin) {
+            const inicio = new Date(fechaInicio);
+            const fin = new Date(fechaFin);
+            let dias = 0;
+            let fecha = new Date(inicio);
+
+            while (fecha <= fin) {
+                const diaSemana = fecha.getDay();
+                const fechaStr = `${fecha.getFullYear()}-${String(fecha.getMonth()+1).padStart(2,'0')}-${String(fecha.getDate()).padStart(2,'0')}`;
+                
+                // No contar fines de semana
+                if (diaSemana !== 0 && diaSemana !== 6) {
+                    // No contar festivos
+                    const esFestivo = datos.festivos.some(f => f.fecha === fechaStr);
+                    if (!esFestivo) {
+                        dias++;
+                    }
+                }
+                
+                fecha.setDate(fecha.getDate() + 1);
+            }
+
+            return dias;
+        }
+
+        // Registrar vacaciones
+        function registrarVacaciones() {
+            const funcionarioId = parseInt(document.getElementById('funcionarioVacaciones').value);
+            const tipo = document.getElementById('tipoAusencia').value;
+            const fechaInicio = document.getElementById('fechaInicio').value;
+            const fechaFin = document.getElementById('fechaFin').value;
+            const observaciones = document.getElementById('observaciones').value.trim();
+
+            if (!funcionarioId) {
+                mostrarNotificacion('Selecciona un funcionario', 'danger');
+                return;
+            }
+
+            if (!fechaInicio || !fechaFin) {
+                mostrarNotificacion('Introduce las fechas de inicio y fin', 'danger');
+                return;
+            }
+
+            if (new Date(fechaFin) < new Date(fechaInicio)) {
+                mostrarNotificacion('La fecha de fin no puede ser anterior a la de inicio', 'danger');
+                return;
+            }
+
+            const diasLaborables = calcularDiasLaborables(fechaInicio, fechaFin);
+
+            const vacacion = {
+                id: Date.now(),
+                funcionarioId,
+                tipo,
+                fechaInicio,
+                fechaFin,
+                diasLaborables,
+                observaciones,
+                fechaRegistro: new Date().toISOString()
+            };
+
+            datos.vacaciones.push(vacacion);
+
+            // Limpiar formulario
+            document.getElementById('funcionarioVacaciones').value = '';
+            document.getElementById('fechaInicio').value = '';
+            document.getElementById('fechaFin').value = '';
+            document.getElementById('observaciones').value = '';
+            document.getElementById('diasCalculados').style.display = 'none';
+
+            mostrarNotificacion(`✅ Ausencia registrada (${diasLaborables} días laborables). Recuerda guardar los datos.`, 'success');
+            mostrarVacaciones();
+            actualizarDashboard();
+        }
+
+        // Calcular días cuando cambian las fechas
+        document.addEventListener('DOMContentLoaded', function() {
+            const fechaInicio = document.getElementById('fechaInicio');
+            const fechaFin = document.getElementById('fechaFin');
+            
+            [fechaInicio, fechaFin].forEach(input => {
+                if (input) {
+                    input.addEventListener('change', function() {
+                        const inicio = fechaInicio.value;
+                        const fin = fechaFin.value;
+                        
+                        if (inicio && fin) {
+                            if (new Date(fin) < new Date(inicio)) {
+                                document.getElementById('diasCalculados').innerHTML = '⚠️ La fecha de fin no puede ser anterior a la de inicio';
+                                document.getElementById('diasCalculados').className = 'alert alert-danger';
+                                document.getElementById('diasCalculados').style.display = 'block';
+                            } else {
+                                const dias = calcularDiasLaborables(inicio, fin);
+                                document.getElementById('diasCalculados').innerHTML = `📊 Total: ${dias} días laborables (excluyendo fines de semana y festivos)`;
+                                document.getElementById('diasCalculados').className = 'alert alert-info';
+                                document.getElementById('diasCalculados').style.display = 'block';
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        // Mostrar vacaciones
+        function mostrarVacaciones() {
+            const container = document.getElementById('listaVacaciones');
+            
+            if (datos.vacaciones.length === 0) {
+                container.innerHTML = '<div class="alert alert-info">No hay ausencias registradas.</div>';
+                return;
+            }
+
+            const vacacionesOrdenadas = [...datos.vacaciones].sort((a, b) => 
+                new Date(b.fechaInicio) - new Date(a.fechaInicio)
+            );
+
+            let html = '<table><thead><tr><th>Funcionario</th><th>Tipo</th><th>Desde</th><th>Hasta</th><th>Días</th><th>Registrado</th><th>Observaciones</th><th>Acciones</th></tr></thead><tbody>';
+
+            vacacionesOrdenadas.forEach(v => {
+                const funcionario = datos.funcionarios.find(f => f.id === v.funcionarioId);
+                if (funcionario) {
+                    html += `
+                        <tr>
+                            <td>${funcionario.nombre}<br><span class="badge badge-${funcionario.seccion.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-')}">${funcionario.seccion}</span></td>
+                            <td>${v.tipo}</td>
+                            <td>${formatearFecha(v.fechaInicio)}</td>
+                            <td>${formatearFecha(v.fechaFin)}</td>
+                            <td><strong>${v.diasLaborables}</strong></td>
+                            <td style="font-size:12px;white-space:nowrap">${v.fechaRegistro ? _fmtRegistro(v.fechaRegistro) : '-'}</td>
+                            <td>${v.observaciones || '-'}</td>
+                            <td><button class="btn btn-danger btn-sm" onclick="eliminarVacacion(${v.id})">Eliminar</button></td>
+                        </tr>
+                    `;
+                }
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        // Eliminar vacación
+        function eliminarVacacion(id) {
+            if (confirm('¿Eliminar este registro de ausencia?')) {
+                datos.vacaciones = datos.vacaciones.filter(v => v.id !== id);
+                guardarDatosAutomatico(); mostrarNotificacion('✅ Registro eliminado y guardado', 'success');
+                mostrarVacaciones();
+                actualizarDashboard();
+            }
+        }
+
+        // Calcular días consumidos por funcionario
+        function calcularDiasConsumidos(funcionarioId) {
+            return datos.vacaciones
+                .filter(v => v.funcionarioId === funcionarioId && v.tipo === 'Vacaciones')
+                .reduce((total, v) => total + v.diasLaborables, 0);
+        }
+
+        // Actualizar dashboard
+        function actualizarDashboard() {
+            // Alertas
+            const alertasContainer = document.getElementById('alertasContainer');
+            const alertas = verificarCobertura();
+            
+            if (alertas.length === 0) {
+                alertasContainer.innerHTML = '<div class="alert alert-success">✅ Todas las secciones tienen cobertura adecuada</div>';
+            } else {
+                let html = '';
+                alertas.forEach(alerta => {
+                    html += `<div class="alert alert-${alerta.nivel}">${alerta.mensaje}</div>`;
+                });
+                alertasContainer.innerHTML = html;
+            }
+
+            // Estadísticas
+            const totalFuncionarios = datos.funcionarios.length;
+            const totalVacaciones = datos.vacaciones.length;
+            const diasTotales = datos.vacaciones.reduce((sum, v) => sum + v.diasLaborables, 0);
+
+            document.getElementById('statsGrid').innerHTML = `
+                <div class="stat-card blue">
+                    <h4>Total Funcionarios</h4>
+                    <div class="stat-number">${totalFuncionarios}</div>
+                </div>
+                <div class="stat-card green">
+                    <h4>Ausencias Registradas</h4>
+                    <div class="stat-number">${totalVacaciones}</div>
+                </div>
+                <div class="stat-card orange">
+                    <h4>Días Totales</h4>
+                    <div class="stat-number">${diasTotales}</div>
+                </div>
+            `;
+
+            // Estado por secciones
+            const seccionesGrid = document.getElementById('seccionesGrid');
+            const secciones = datos.secciones || [];
+            let htmlSecciones = '';
+
+            secciones.forEach(seccion => {
+                const funcionariosSeccion = datos.funcionarios.filter(f => f.seccion === seccion);
+                const presentes = contarPresentes(seccion, new Date().toISOString().split('T')[0]);
+                const minimo = datos.minimos[seccion] || 1;
+                
+                let estado = 'ok';
+                let icono = '🟢';
+                if (presentes < minimo) {
+                    estado = 'danger';
+                    icono = '🔴';
+                } else if (presentes === minimo) {
+                    estado = 'warning';
+                    icono = '🟡';
+                }
+
+                htmlSecciones += `
+                    <div class="section-card">
+                        <h4>${icono} ${seccion}</h4>
+                        <p><strong>Total:</strong> ${funcionariosSeccion.length} funcionarios</p>
+                        <p><strong>Presentes hoy:</strong> ${presentes}</p>
+                        <p><strong>Mínimo requerido:</strong> ${minimo}</p>
+                    </div>
+                `;
+            });
+
+            seccionesGrid.innerHTML = htmlSecciones;
+        }
+
+        // Verificar cobertura
+        function verificarCobertura() {
+            const alertas = [];
+            const secciones = datos.secciones || [];
+            const hoy = new Date().toISOString().split('T')[0];
+
+            secciones.forEach(seccion => {
+                const presentes = contarPresentes(seccion, hoy);
+                const minimo = datos.minimos[seccion] || 1;
+
+                if (presentes < minimo) {
+                    alertas.push({
+                        nivel: 'danger',
+                        mensaje: `🔴 ${seccion}: Solo ${presentes} funcionario(s) presente(s), se requieren mínimo ${minimo}`
+                    });
+                } else if (presentes === minimo) {
+                    alertas.push({
+                        nivel: 'warning',
+                        mensaje: `🟡 ${seccion}: Justo en el mínimo (${minimo} funcionario(s))`
+                    });
+                }
+            });
+
+            return alertas;
+        }
+
+        // Contar funcionarios presentes en una fecha
+        function contarPresentes(seccion, fecha) {
+            const funcionariosSeccion = datos.funcionarios.filter(f => f.seccion === seccion);
+            const ausentes = datos.vacaciones.filter(v => {
+                return v.fechaInicio <= fecha && v.fechaFin >= fecha;
+            }).map(v => v.funcionarioId);
+
+            return funcionariosSeccion.filter(f => !ausentes.includes(f.id)).length;
+        }
+
+        // Generar calendario
+        function generarCalendario() {
+            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+                          'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            
+            document.getElementById('mesActual').textContent = `${meses[mesActual]} ${yearActual}`;
+
+            const primerDia = new Date(yearActual, mesActual, 1);
+            const ultimoDia = new Date(yearActual, mesActual + 1, 0);
+            const diasMes = ultimoDia.getDate();
+            let primerDiaSemana = primerDia.getDay();
+            
+            // Ajustar para que lunes sea 0 (en vez de domingo)
+            primerDiaSemana = primerDiaSemana === 0 ? 6 : primerDiaSemana - 1;
+
+            const calendario = document.getElementById('calendarioMensual');
+            let html = '';
+
+            // Encabezados - De lunes a domingo
+            const dias = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+            dias.forEach(dia => {
+                html += `<div class="calendar-header">${dia}</div>`;
+            });
+
+            // Días del mes anterior
+            for (let i = 0; i < primerDiaSemana; i++) {
+                html += '<div class="calendar-day other-month"></div>';
+            }
+
+            // Días del mes actual
+            for (let dia = 1; dia <= diasMes; dia++) {
+                const fecha = new Date(yearActual, mesActual, dia);
+                const fechaStr = `${yearActual}-${String(mesActual+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+                let diaSemana = fecha.getDay();
+                
+                // Ajustar día de la semana: lunes=0, domingo=6
+                diaSemana = diaSemana === 0 ? 6 : diaSemana - 1;
+                
+                let clases = ['calendar-day'];
+                let etiqueta = '';
+
+                // Fin de semana (sábado=5, domingo=6)
+                if (diaSemana === 5 || diaSemana === 6) {
+                    clases.push('weekend');
+                    etiqueta = 'Fin de semana';
+                }
+
+                // Festivo
+                const festivo = datos.festivos.find(f => f.fecha === fechaStr);
+                if (festivo) {
+                    if (festivo.tipo === 'nacional') {
+                        clases.push('holiday');
+                        etiqueta = festivo.descripcion;
+                    } else {
+                        clases.push('local-holiday');
+                        etiqueta = festivo.descripcion;
+                    }
+                }
+
+                // Vacaciones
+                const vacacionesDia = datos.vacaciones.filter(v => 
+                    v.fechaInicio <= fechaStr && v.fechaFin >= fechaStr
+                );
+
+                if (vacacionesDia.length > 0) {
+                    clases.push('vacation');
+                    const nombres = vacacionesDia.map(v => {
+                        const func = datos.funcionarios.find(f => f.id === v.funcionarioId);
+                        return func ? func.nombre : '';
+                    }).filter(n => n).join(', ');
+                    etiqueta = etiqueta ? `${etiqueta} | ${nombres}` : nombres;
+                }
+
+                html += `
+                    <div class="${clases.join(' ')}" title="${etiqueta}" onclick="toggleFestivoRapido('${fechaStr}', event)">
+                        <div class="day-number">${dia}</div>
+                        ${etiqueta ? `<div class="day-label">${etiqueta.substring(0, 20)}${etiqueta.length > 20 ? '...' : ''}</div>` : ''}
+                    </div>
+                `;
+            }
+
+            calendario.innerHTML = html;
+        }
+
+        // Navegación del calendario
+        function cambiarMes(direccion) {
+            mesActual += direccion;
+            if (mesActual > 11) {
+                mesActual = 0;
+                yearActual++;
+            } else if (mesActual < 0) {
+                mesActual = 11;
+                yearActual--;
+            }
+            generarCalendario();
+        }
+
+        function irHoy() {
+            mesActual = new Date().getMonth();
+            yearActual = new Date().getFullYear();
+            generarCalendario();
+        }
+
+        // Vista de calendario anual/mensual
+        function mostrarVistaCalendario(vista) {
+            vistaCalendarioActual = vista;
+            
+            if (vista === 'mensual') {
+                document.getElementById('vistaMensual').style.display = 'block';
+                document.getElementById('vistaAnual').style.display = 'none';
+                document.getElementById('btnVistaMensual').className = 'btn btn-primary';
+                document.getElementById('btnVistaAnual').className = 'btn btn-secondary';
+                generarCalendario();
+            } else {
+                document.getElementById('vistaMensual').style.display = 'none';
+                document.getElementById('vistaAnual').style.display = 'block';
+                document.getElementById('btnVistaMensual').className = 'btn btn-secondary';
+                document.getElementById('btnVistaAnual').className = 'btn btn-primary';
+                generarCalendarioAnual();
+            }
+        }
+
+        // Generar calendario anual (12 meses)
+        function generarCalendarioAnual() {
+            document.getElementById('yearAnual').textContent = yearAnualActual;
+            
+            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+                          'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            const diasSemana = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+            
+            const container = document.getElementById('calendarioAnual');
+            let html = '';
+            
+            for (let mes = 0; mes < 12; mes++) {
+                html += `<div class="month-container">`;
+                html += `<h4>${meses[mes]}</h4>`;
+                html += `<div class="mini-calendar">`;
+                
+                // Encabezados
+                diasSemana.forEach(dia => {
+                    html += `<div class="mini-calendar-header">${dia}</div>`;
+                });
+                
+                const primerDia = new Date(yearAnualActual, mes, 1);
+                const ultimoDia = new Date(yearAnualActual, mes + 1, 0);
+                const diasMes = ultimoDia.getDate();
+                let primerDiaSemana = primerDia.getDay();
+                
+                // Ajustar para que lunes sea 0
+                primerDiaSemana = primerDiaSemana === 0 ? 6 : primerDiaSemana - 1;
+                
+                // Días vacíos del mes anterior
+                for (let i = 0; i < primerDiaSemana; i++) {
+                    html += '<div class="mini-calendar-day other-month"></div>';
+                }
+                
+                // Días del mes
+                for (let dia = 1; dia <= diasMes; dia++) {
+                    const fecha = new Date(yearAnualActual, mes, dia);
+                    const fechaStr = `${yearAnualActual}-${String(mes+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+                    let diaSemana = fecha.getDay();
+                    
+                    // Ajustar día de la semana: lunes=0, domingo=6
+                    diaSemana = diaSemana === 0 ? 6 : diaSemana - 1;
+                    
+                    let clases = ['mini-calendar-day'];
+                    let titulo = '';
+                    
+                    // Fin de semana (sábado=5, domingo=6)
+                    if (diaSemana === 5 || diaSemana === 6) {
+                        clases.push('weekend');
+                    }
+                    
+                    // Festivo
+                    const festivo = datos.festivos.find(f => f.fecha === fechaStr);
+                    if (festivo) {
+                        if (festivo.tipo === 'nacional') {
+                            clases.push('holiday');
+                        } else {
+                            clases.push('local-holiday');
+                        }
+                        titulo = festivo.descripcion;
+                    }
+                    
+                    // Vacaciones
+                    const vacacionesDia = datos.vacaciones.filter(v => 
+                        v.fechaInicio <= fechaStr && v.fechaFin >= fechaStr
+                    );
+                    
+                    if (vacacionesDia.length > 0) {
+                        clases.push('vacation');
+                        const nombres = vacacionesDia.map(v => {
+                            const func = datos.funcionarios.find(f => f.id === v.funcionarioId);
+                            return func ? func.nombre : '';
+                        }).filter(n => n).join(', ');
+                        titulo = titulo ? `${titulo} | ${nombres}` : nombres;
+                    }
+                    
+                    html += `<div class="${clases.join(' ')}" title="${titulo}" onclick="toggleFestivoRapido('${fechaStr}', event)">${dia}</div>`;
+                }
+                
+                html += `</div></div>`;
+            }
+            
+            container.innerHTML = html;
+        }
+
+        function cambiarYearAnual(delta) {
+            yearAnualActual += delta;
+            generarCalendarioAnual();
+        }
+
+        // Marcar/desmarcar festivo con un solo click
+        function toggleFestivoRapido(fecha, event) {
+            // Evitar que el evento se propague
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            const fechaObj = new Date(fecha + 'T00:00:00');
+            let diaSemana = fechaObj.getDay();
+            diaSemana = diaSemana === 0 ? 6 : diaSemana - 1;
+            
+            // No permitir marcar fines de semana como festivos
+            if (diaSemana === 5 || diaSemana === 6) {
+                mostrarNotificacion('ℹ️ Los fines de semana no necesitan marcarse como festivos', 'info');
+                return;
+            }
+            
+            // Verificar si ya existe un festivo en esta fecha
+            const festivoExistente = datos.festivos.find(f => f.fecha === fecha);
+            
+            if (festivoExistente) {
+                // Si existe, eliminarlo
+                datos.festivos = datos.festivos.filter(f => f.fecha !== fecha);
+                mostrarNotificacion('🗑️ Festivo eliminado del día ' + formatearFecha(fecha), 'info');
+            } else {
+                // Si no existe, añadirlo como festivo nacional
+                datos.festivos.push({
+                    fecha: fecha,
+                    descripcion: 'Festivo',
+                    tipo: 'nacional'
+                });
+                datos.festivos.sort((a, b) => a.fecha.localeCompare(b.fecha));
+                mostrarNotificacion('✅ Día marcado como festivo: ' + formatearFecha(fecha), 'success');
+            }
+            
+            // Actualizar vista del calendario
+            if (vistaCalendarioActual === 'mensual') {
+                generarCalendario();
+            } else {
+                generarCalendarioAnual();
+            }
+        }
+
+        // Modal de marcado de días
+        function abrirModalDia(fecha) {
+            fechaModalActual = fecha;
+            const fechaObj = new Date(fecha + 'T00:00:00');
+            
+            document.getElementById('fechaSeleccionada').textContent = formatearFecha(fecha);
+            
+            // Mostrar información del día
+            let info = '';
+            const diaSemana = fechaObj.getDay();
+            
+            if (diaSemana === 0 || diaSemana === 6) {
+                info += '📅 Este día es fin de semana. ';
+            }
+            
+            const festivo = datos.festivos.find(f => f.fecha === fecha);
+            if (festivo) {
+                info += `🎉 Festivo: ${festivo.descripcion} (${festivo.tipo === 'nacional' ? 'Nacional' : 'Local'}). `;
+            }
+            
+            const vacacionesDia = datos.vacaciones.filter(v => 
+                v.fechaInicio <= fecha && v.fechaFin >= fecha
+            );
+            
+            if (vacacionesDia.length > 0) {
+                info += `🏖️ Hay ${vacacionesDia.length} persona(s) de vacaciones este día.`;
+            }
+            
+            if (!info) {
+                info = 'Día normal sin marcas especiales.';
+            }
+            
+            document.getElementById('infoFecha').innerHTML = info;
+            
+            // Resetear formularios
+            document.getElementById('formularioFestivo').style.display = 'none';
+            document.getElementById('formularioVacaciones').style.display = 'none';
+            document.querySelectorAll('.action-btn').forEach(btn => btn.classList.remove('selected'));
+            
+            // Mostrar modal
+            document.getElementById('modalMarca').classList.add('active');
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalMarca').classList.remove('active');
+            fechaModalActual = null;
+            tipoFestivoModal = null;
+        }
+
+        function seleccionarAccion(accion) {
+            // Marcar botón seleccionado
+            document.querySelectorAll('.action-btn').forEach(btn => btn.classList.remove('selected'));
+            event.target.closest('.action-btn').classList.add('selected');
+            
+            // Ocultar todos los formularios
+            document.getElementById('formularioFestivo').style.display = 'none';
+            document.getElementById('formularioVacaciones').style.display = 'none';
+            
+            if (accion === 'festivo-nacional' || accion === 'festivo-local') {
+                tipoFestivoModal = accion === 'festivo-nacional' ? 'nacional' : 'local';
+                document.getElementById('formularioFestivo').style.display = 'block';
+                document.getElementById('descripcionFestivoModal').focus();
+            } else if (accion === 'vacaciones') {
+                document.getElementById('formularioVacaciones').style.display = 'block';
+                actualizarSelectFuncionariosModal();
+                document.getElementById('fechaFinModal').value = fechaModalActual;
+            } else if (accion === 'limpiar') {
+                limpiarMarcasDia();
+            }
+        }
+
+        function guardarFestivoModal() {
+            const descripcion = document.getElementById('descripcionFestivoModal').value.trim();
+            
+            if (!descripcion) {
+                mostrarNotificacion('Introduce una descripción para el festivo', 'danger');
+                return;
+            }
+            
+            // Verificar si ya existe
+            const existe = datos.festivos.some(f => f.fecha === fechaModalActual);
+            if (existe) {
+                if (!confirm('Ya existe un festivo en esta fecha. ¿Deseas reemplazarlo?')) {
+                    return;
+                }
+                datos.festivos = datos.festivos.filter(f => f.fecha !== fechaModalActual);
+            }
+            
+            datos.festivos.push({
+                fecha: fechaModalActual,
+                descripcion: descripcion,
+                tipo: tipoFestivoModal
+            });
+            
+            datos.festivos.sort((a, b) => a.fecha.localeCompare(b.fecha));
+            
+            guardarDatosAutomatico(); mostrarNotificacion('✅ Festivo marcado y guardado', 'success');
+            cerrarModal();
+            
+            if (vistaCalendarioActual === 'mensual') {
+                generarCalendario();
+            } else {
+                generarCalendarioAnual();
+            }
+            
+            document.getElementById('descripcionFestivoModal').value = '';
+        }
+
+        function actualizarSelectFuncionariosModal() {
+            const select = document.getElementById('funcionarioVacacionesModal');
+            select.innerHTML = '<option value="">Selecciona un funcionario</option>';
+
+            const secciones = datos.secciones || [];
+            secciones.forEach(seccion => {
+                const funcionariosSeccion = datos.funcionarios.filter(f => f.seccion === seccion);
+                if (funcionariosSeccion.length > 0) {
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = seccion;
+                    funcionariosSeccion.forEach(f => {
+                        const option = document.createElement('option');
+                        option.value = f.id;
+                        option.textContent = `${f.nombre} (${f.categoria})`;
+                        optgroup.appendChild(option);
+                    });
+                    select.appendChild(optgroup);
+                }
+            });
+        }
+
+        function toggleFechaFin() {
+            const tipo = document.getElementById('tipoPeriodo').value;
+            const grupoFechaFin = document.getElementById('grupoFechaFin');
+            
+            if (tipo === 'periodo') {
+                grupoFechaFin.style.display = 'block';
+            } else {
+                grupoFechaFin.style.display = 'none';
+            }
+        }
+
+        function guardarVacacionesModal() {
+            const funcionarioId = parseInt(document.getElementById('funcionarioVacacionesModal').value);
+            const tipo = document.getElementById('tipoAusenciaModal').value;
+            const tipoPeriodo = document.getElementById('tipoPeriodo').value;
+            const observaciones = document.getElementById('observacionesModal').value.trim();
+            
+            if (!funcionarioId) {
+                mostrarNotificacion('Selecciona un funcionario', 'danger');
+                return;
+            }
+            
+            let fechaInicio = fechaModalActual;
+            let fechaFin = fechaModalActual;
+            
+            if (tipoPeriodo === 'periodo') {
+                fechaFin = document.getElementById('fechaFinModal').value;
+                
+                if (!fechaFin) {
+                    mostrarNotificacion('Introduce la fecha de fin', 'danger');
+                    return;
+                }
+                
+                if (new Date(fechaFin) < new Date(fechaInicio)) {
+                    mostrarNotificacion('La fecha de fin no puede ser anterior a la de inicio', 'danger');
+                    return;
+                }
+            }
+            
+            const diasLaborables = calcularDiasLaborables(fechaInicio, fechaFin);
+            
+            const vacacion = {
+                id: Date.now(),
+                funcionarioId,
+                tipo,
+                fechaInicio,
+                fechaFin,
+                diasLaborables,
+                observaciones,
+                fechaRegistro: new Date().toISOString()
+            };
+            
+            datos.vacaciones.push(vacacion);
+            
+            mostrarNotificacion(`✅ Vacaciones registradas (${diasLaborables} días). Recuerda guardar los datos.`, 'success');
+            cerrarModal();
+            
+            if (vistaCalendarioActual === 'mensual') {
+                generarCalendario();
+            } else {
+                generarCalendarioAnual();
+            }
+            
+            actualizarDashboard();
+            
+            // Limpiar formulario
+            document.getElementById('funcionarioVacacionesModal').value = '';
+            document.getElementById('tipoPeriodo').value = 'un-dia';
+            document.getElementById('observacionesModal').value = '';
+            toggleFechaFin();
+        }
+
+        function limpiarMarcasDia() {
+            if (!confirm(`¿Eliminar todas las marcas (festivos y vacaciones) del día ${formatearFecha(fechaModalActual)}?`)) {
+                return;
+            }
+            
+            // Eliminar festivos
+            const festivoAntes = datos.festivos.length;
+            datos.festivos = datos.festivos.filter(f => f.fecha !== fechaModalActual);
+            const festivosEliminados = festivoAntes - datos.festivos.length;
+            
+            // Eliminar vacaciones que empiecen exactamente en esta fecha
+            const vacacionesAntes = datos.vacaciones.length;
+            datos.vacaciones = datos.vacaciones.filter(v => v.fechaInicio !== fechaModalActual);
+            const vacacionesEliminadas = vacacionesAntes - datos.vacaciones.length;
+            
+            let mensaje = 'Día limpiado';
+            if (festivosEliminados > 0 || vacacionesEliminadas > 0) {
+                mensaje += ` (${festivosEliminados} festivo(s), ${vacacionesEliminadas} vacación(es) eliminada(s)). Recuerda guardar los datos.`;
+            }
+            
+            mostrarNotificacion(mensaje, 'success');
+            cerrarModal();
+            
+            if (vistaCalendarioActual === 'mensual') {
+                generarCalendario();
+            } else {
+                generarCalendarioAnual();
+            }
+            
+            actualizarDashboard();
+        }
+
+        // Cerrar modal al hacer click fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalMarca');
+            const modalEditar = document.getElementById('modalEditarFuncionario');
+            
+            if (event.target === modal) {
+                cerrarModal();
+            }
+            
+            if (event.target === modalEditar) {
+                cerrarModalEditar();
+            }
+        }
+
+        // Festivos
+        function inicializarFestivos() {
+            const selectYear = document.getElementById('yearFestivos');
+            selectYear.innerHTML = '';
+            
+            const yearMin = yearActual - 2;
+            const yearMax = yearActual + 2;
+            
+            for (let year = yearMin; year <= yearMax; year++) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                if (year === yearActual) option.selected = true;
+                selectYear.appendChild(option);
+            }
+            
+            cargarFestivos();
+        }
+
+        function agregarFestivo() {
+            const fecha = document.getElementById('fechaFestivo').value;
+            const descripcion = document.getElementById('descripcionFestivo').value.trim();
+            const tipo = document.getElementById('tipoFestivo').value;
+
+            if (!fecha || !descripcion) {
+                mostrarNotificacion('Completa todos los campos', 'danger');
+                return;
+            }
+
+            // Verificar si ya existe
+            const existe = datos.festivos.some(f => f.fecha === fecha);
+            if (existe) {
+                mostrarNotificacion('Ya existe un festivo en esa fecha', 'warning');
+                return;
+            }
+
+            datos.festivos.push({ fecha, descripcion, tipo });
+            datos.festivos.sort((a, b) => a.fecha.localeCompare(b.fecha));
+
+            document.getElementById('fechaFestivo').value = '';
+            document.getElementById('descripcionFestivo').value = '';
+            
+            guardarDatosAutomatico(); mostrarNotificacion('✅ Festivo añadido y guardado', 'success');
+            cargarFestivos();
+        }
+
+        function cargarFestivos() {
+            const year = parseInt(document.getElementById('yearFestivos').value);
+            document.getElementById('yearFestivosTitle').textContent = year;
+            
+            const festivosYear = datos.festivos.filter(f => f.fecha.startsWith(year.toString()));
+            
+            // Actualizar contadores
+            const nacionales = festivosYear.filter(f => f.tipo === 'nacional').length;
+            const locales = festivosYear.filter(f => f.tipo === 'local').length;
+            
+            document.getElementById('countTodos').textContent = festivosYear.length;
+            document.getElementById('countNacional').textContent = nacionales;
+            document.getElementById('countLocal').textContent = locales;
+            
+            mostrarFestivos(year, filtroFestivosActual);
+        }
+
+        function filtrarFestivos(tipo) {
+            filtroFestivosActual = tipo;
+            
+            document.querySelectorAll('.holiday-type-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`btn${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`).classList.add('active');
+            
+            const year = parseInt(document.getElementById('yearFestivos').value);
+            mostrarFestivos(year, tipo);
+        }
+
+        function mostrarFestivos(year, filtro) {
+            const container = document.getElementById('listaFestivos');
+            let festivosFiltrados = datos.festivos.filter(f => f.fecha.startsWith(year.toString()));
+            
+            if (filtro !== 'todos') {
+                festivosFiltrados = festivosFiltrados.filter(f => f.tipo === filtro);
+            }
+            
+            if (festivosFiltrados.length === 0) {
+                container.innerHTML = '<div class="alert alert-info">No hay festivos registrados para este filtro.</div>';
+                return;
+            }
+            
+            let html = '';
+            festivosFiltrados.forEach(f => {
+                const tipoLabel = f.tipo === 'nacional' ? 'Nacional' : 'Local/Autonómico';
+                const colorClass = f.tipo === 'nacional' ? 'holiday' : 'local-holiday';
+                
+                html += `
+                    <div class="holiday-item">
+                        <div>
+                            <strong style="color: #1e3c72;">${formatearFecha(f.fecha)}</strong>
+                            <span class="badge" style="margin-left: 10px; background: var(--${colorClass});">${tipoLabel}</span>
+                            <div style="margin-top: 5px; color: #666;">${f.descripcion}</div>
+                        </div>
+                        <span class="delete-icon" onclick="eliminarFestivo('${f.fecha}')" title="Eliminar">✖</span>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function eliminarFestivo(fecha) {
+            if (confirm('¿Eliminar este festivo?')) {
+                datos.festivos = datos.festivos.filter(f => f.fecha !== fecha);
+                guardarDatosAutomatico(); mostrarNotificacion('✅ Festivo eliminado y guardado', 'success');
+                cargarFestivos();
+            }
+        }
+
+        // Línea temporal
+        function inicializarLineaTemporal() {
+            const selectMes = document.getElementById('mesLineaTemporal');
+            const selectYear = document.getElementById('yearLineaTemporal');
+            
+            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+                          'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            
+            selectMes.innerHTML = '';
+            meses.forEach((mes, idx) => {
+                const option = document.createElement('option');
+                option.value = idx;
+                option.textContent = mes;
+                if (idx === mesActual) option.selected = true;
+                selectMes.appendChild(option);
+            });
+            
+            selectYear.innerHTML = '';
+            for (let year = yearActual - 1; year <= yearActual + 1; year++) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                if (year === yearActual) option.selected = true;
+                selectYear.appendChild(option);
+            }
+            
+            actualizarLineaTemporal();
+        }
+
+        function actualizarLineaTemporal() {
+            const seccion = document.getElementById('filtroSeccion').value;
+            const mes = parseInt(document.getElementById('mesLineaTemporal').value);
+            const year = parseInt(document.getElementById('yearLineaTemporal').value);
+            
+            let funcionariosFiltrados = datos.funcionarios;
+            if (seccion !== 'Todas') {
+                funcionariosFiltrados = funcionariosFiltrados.filter(f => f.seccion === seccion);
+            }
+            
+            const primerDia = new Date(year, mes, 1);
+            const ultimoDia = new Date(year, mes + 1, 0);
+            const diasMes = ultimoDia.getDate();
+            
+            const container = document.getElementById('lineaTemporal');
+            let html = '';
+            
+            funcionariosFiltrados.forEach(func => {
+                const vacacionesFuncionario = datos.vacaciones.filter(v => {
+                    if (v.funcionarioId !== func.id) return false;
+                    const inicio = new Date(v.fechaInicio);
+                    const fin = new Date(v.fechaFin);
+                    return (inicio.getMonth() === mes && inicio.getFullYear() === year) ||
+                           (fin.getMonth() === mes && fin.getFullYear() === year) ||
+                           (inicio < primerDia && fin > ultimoDia);
+                });
+                
+                html += `
+                    <div class="timeline-row">
+                        <div class="timeline-label">${func.nombre}</div>
+                        <div class="timeline-bar">
+                `;
+                
+                vacacionesFuncionario.forEach(v => {
+                    const inicio = new Date(v.fechaInicio);
+                    const fin = new Date(v.fechaFin);
+                    
+                    let diaInicio = 1;
+                    let diaFin = diasMes;
+                    
+                    if (inicio.getMonth() === mes && inicio.getFullYear() === year) {
+                        diaInicio = inicio.getDate();
+                    }
+                    if (fin.getMonth() === mes && fin.getFullYear() === year) {
+                        diaFin = fin.getDate();
+                    }
+                    
+                    const left = ((diaInicio - 1) / diasMes) * 100;
+                    const width = ((diaFin - diaInicio + 1) / diasMes) * 100;
+                    
+                    html += `
+                        <div class="timeline-vacation" style="left: ${left}%; width: ${width}%;" 
+                             title="${v.tipo}: ${formatearFecha(v.fechaInicio)} - ${formatearFecha(v.fechaFin)}">
+                            ${v.tipo}
+                        </div>
+                    `;
+                });
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            if (funcionariosFiltrados.length === 0) {
+                html = '<div class="alert alert-info">No hay funcionarios en esta sección.</div>';
+            }
+            
+            container.innerHTML = html;
+        }
+
+        // Exportar calendario a CSV
+        function exportarCalendarioExcel() {
+            let csv = 'Funcionario,Sección,Tipo,Fecha Inicio,Fecha Fin,Días Laborables,Observaciones\n';
+            
+            datos.vacaciones.forEach(v => {
+                const funcionario = datos.funcionarios.find(f => f.id === v.funcionarioId);
+                if (funcionario) {
+                    csv += `"${funcionario.nombre}","${funcionario.seccion}","${v.tipo}","${formatearFecha(v.fechaInicio)}","${formatearFecha(v.fechaFin)}",${v.diasLaborables},"${v.observaciones || ''}"\n`;
+                }
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `calendario_vacaciones_${new Date().toISOString().split('T')[0]}.csv`;
+            link.click();
+            URL.revokeObjectURL(url);
+            mostrarNotificacion('✅ Calendario exportado a CSV', 'success');
+        }
+
+        // Exportar funcionarios a CSV
+        function exportarFuncionariosCSV() {
+            let csv = 'Nombre,Sección,Categoría,Días Vacaciones,Días Consumidos\n';
+            
+            datos.funcionarios.forEach(f => {
+                const consumidos = calcularDiasConsumidos(f.id);
+                csv += `"${f.nombre}","${f.seccion}","${f.categoria}",${f.diasVacaciones},${consumidos}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `funcionarios_${new Date().toISOString().split('T')[0]}.csv`;
+            link.click();
+            URL.revokeObjectURL(url);
+            mostrarNotificacion('✅ Funcionarios exportados a CSV', 'success');
+        }
+
+        // Limpiar datos
+        function limpiarDatos() {
+            if (confirm('⚠️ ATENCIÓN: Esta acción eliminará TODOS los datos (funcionarios, vacaciones y festivos). ¿Estás completamente seguro?')) {
+                if (confirm('Esta es tu última oportunidad. ¿Realmente quieres continuar?')) {
+                    // Conservar secciones y categorías configuradas
+                    const seccionesActuales = datos.secciones || ['Civil', 'Penal', 'Ejecución', 'Auxilio Judicial', 'Decanato', 'Registro Civil'];
+                    const categoriasActuales = datos.categorias || ['LAJ', 'Gestor', 'Tramitador', 'Auxilio'];
+                    datos = {
+                        funcionarios: [],
+                        vacaciones: [],
+                        festivos: [],
+                        secciones: seccionesActuales,
+                        categorias: categoriasActuales,
+                        minimos: {}
+                    };
+                    mostrarNotificacion('⚠️ Todos los datos han sido eliminados. Los cambios NO se guardarán hasta que uses "Guardar Datos".', 'warning');
+                    renderTodosSelects();
+                    actualizarDashboard();
+                    mostrarFuncionarios();
+                }
+            }
+        }
+
+        // Limpiar solo vacaciones
+        function limpiarSoloVacaciones() {
+            if (confirm('¿Eliminar TODAS las vacaciones registradas? Los funcionarios y festivos se mantendrán.')) {
+                datos.vacaciones = [];
+                mostrarNotificacion('⚠️ Vacaciones eliminadas. Recuerda guardar los datos.', 'warning');
+                mostrarVacaciones();
+                actualizarDashboard();
+            }
+        }
+
+        // Limpiar solo festivos
+        function limpiarSoloFestivos() {
+            if (confirm('¿Eliminar TODOS los festivos? Los funcionarios y vacaciones se mantendrán.')) {
+                datos.festivos = [];
+                mostrarNotificacion('⚠️ Festivos eliminados. Recuerda guardar los datos.', 'warning');
+                cargarFestivos();
+                if (vistaCalendarioActual === 'mensual') {
+                    generarCalendario();
+                } else {
+                    generarCalendarioAnual();
+                }
+            }
+        }
+
+        // Mostrar información del sistema
+        function mostrarInfoSistema() {
+            const info = document.getElementById('infoSistema');
+            const tamano = new Blob([JSON.stringify(datos)]).size;
+            const tamanokB = (tamano / 1024).toFixed(2);
+            
+            info.innerHTML = `
+                <div class="alert alert-info">
+                    <strong>Funcionarios registrados:</strong> ${datos.funcionarios.length}<br>
+                    <strong>Vacaciones registradas:</strong> ${datos.vacaciones.length}<br>
+                    <strong>Festivos configurados:</strong> ${datos.festivos.length}<br>
+                    <strong>Tamaño de datos:</strong> ${tamanokB} KB<br>
+                    <strong>Última actualización:</strong> ${new Date().toLocaleString('es-ES')}
+                </div>
+            `;
+        }
+
+        // Utilidades
+        function formatearFecha(fecha) {
+            const f = new Date(fecha + 'T00:00:00');
+            return f.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+
+        function _fmtRegistro(iso) {
+            const d = new Date(iso);
+            if (isNaN(d)) return '-';
+            return d.toLocaleDateString('es-ES', { day:'2-digit', month:'2-digit', year:'numeric' })
+                 + ' ' + d.toLocaleTimeString('es-ES', { hour:'2-digit', minute:'2-digit' });
+        }
+
+        function mostrarNotificacion(mensaje, tipo) {
+            // Crear elemento de notificación temporal
+            const notif = document.createElement('div');
+            notif.className = `alert alert-${tipo}`;
+            notif.textContent = mensaje;
+            notif.style.position = 'fixed';
+            notif.style.top = '20px';
+            notif.style.right = '20px';
+            notif.style.zIndex = '10000';
+            notif.style.minWidth = '300px';
+            notif.style.animation = 'slideIn 0.3s';
+            
+            document.body.appendChild(notif);
+            
+            setTimeout(() => {
+                notif.style.animation = 'slideOut 0.3s';
+                setTimeout(() => notif.remove(), 300);
+            }, 3000);
+        }
+
+        // ── Vacaciones: datos compartidos del tribunal ──────────────────
+        // (No usa uid para datos — los datos son del tribunal, no por usuario)
+        // uid se usa SOLO para la preferencia de tema claro/oscuro por usuario
+        const _urlParams = new URLSearchParams(window.location.search);
+        const _equipo = _urlParams.get('equipo') || null;
+        let _uid = 'default';  // Solo para preferencia de tema por usuario
+
+        // Obtener URL base del servidor (funciona en iframe del portal)
+        function _apiBase() {
+            try { if (window.top !== window) return window.top.location.origin; } catch(_) {}
+            return window.location.origin;
+        }
+
+        // Construir query string para las llamadas API de datos
+        function _vacQueryString(extra) {
+            const params = new URLSearchParams();
+            if (_equipo) params.set('equipo', _equipo);
+            if (extra) Object.entries(extra).forEach(([k,v]) => params.set(k, v));
+            const qs = params.toString();
+            return qs ? '?' + qs : '';
+        }
+
+        // Inicializar aplicación
+        window.addEventListener('DOMContentLoaded', function() {
+            cargarDatosAutomatico();
+        });
+
+        // ── Listener: mensajes desde el portal ──────────────────
+        window.addEventListener('message', async function(e) {
+            if (!e.data || typeof e.data !== 'object') return;
+            // Cambio de usuario: actualizar uid para tema y recargar preferencia
+            if (e.data.tipo === 'cambioUsuario') {
+                const nuevoUid = e.data.usuario ? e.data.usuario.id : 'default';
+                _uid = nuevoUid;
+                _cargarTemaModulo();
+            }
+            // Tema desde el portal (toggle global claro/oscuro)
+            if (e.data.tipo === 'tema') {
+                if (e.data.oscuro) document.documentElement.setAttribute('data-tema', 'oscuro');
+                else document.documentElement.removeAttribute('data-tema');
+                _actualizarBtnTemaModulo();
+            }
+        });
+
+        // Cargar datos automáticamente del servidor al iniciar
+        async function cargarDatosAutomatico() {
+            try {
+                const url = _apiBase() + '/api/vacaciones' + _vacQueryString({t: Date.now()});
+                const response = await fetch(url);
+                if (response.ok) {
+                    const datosServidor = await response.json();
+                    if (datosServidor && typeof datosServidor === 'object' && !datosServidor.error) {
+                        datos = datosServidor;
+
+                        // Asegurar arrays secciones/categorias (compatibilidad con datos antiguos)
+                        if (!datos.secciones) datos.secciones = ['Civil', 'Penal', 'Ejecución', 'Auxilio Judicial', 'Decanato', 'Registro Civil'];
+                        if (!datos.categorias) datos.categorias = ['LAJ', 'Gestor', 'Tramitador', 'Auxilio'];
+
+                        console.log('✅ Datos cargados del servidor:', (datos.funcionarios || []).length, 'funcionarios');
+                    }
+                }
+            } catch (error) {
+                console.log('ℹ️ Primera ejecución o servidor no disponible');
+            }
+
+            renderTodosSelects();
+            actualizarDashboard();
+            mostrarFuncionarios();
+        }
+
+        // Guardar datos automáticamente en el servidor
+        async function guardarDatosAutomatico() {
+            try {
+                const url = _apiBase() + '/api/vacaciones' + _vacQueryString();
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datos, null, 2)
+                });
+
+                if (response.ok) {
+                    console.log('✅ Datos guardados automáticamente en el servidor');
+                    mostrarNotificacion('✅ Sus datos han sido guardados', 'success');
+                } else {
+                    mostrarNotificacion('❌ Error al guardar los datos', 'danger');
+                }
+            } catch (error) {
+                console.error('❌ Error al guardar datos:', error);
+                mostrarNotificacion('❌ Error de conexión al guardar', 'danger');
+            }
+        }
+
+        // ── Gestión dinámica de Secciones y Categorías ───────────────────
+
+        function renderSelectSecciones(selectId, valorActual) {
+            const sel = document.getElementById(selectId);
+            if (!sel) return;
+            sel.innerHTML = (datos.secciones || []).map(s =>
+                `<option value="${s}"${s === valorActual ? ' selected' : ''}>${s}</option>`
+            ).join('');
+        }
+
+        function renderSelectCategorias(selectId, valorActual) {
+            const sel = document.getElementById(selectId);
+            if (!sel) return;
+            sel.innerHTML = (datos.categorias || []).map(c =>
+                `<option value="${c}"${c === valorActual ? ' selected' : ''}>${c}</option>`
+            ).join('');
+        }
+
+        function renderSeccionesConfig() {
+            const container = document.getElementById('seccionesConfigContainer');
+            if (!container) return;
+            const secciones = datos.secciones || [];
+            if (secciones.length === 0) {
+                container.innerHTML = '<p style="color:#888;font-style:italic">No hay secciones configuradas.</p>';
+                return;
+            }
+            container.innerHTML = `
+                <table style="width:100%;border-collapse:collapse;margin-bottom:10px">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left;padding:8px 12px;background:#f0f3f8;border-radius:6px 0 0 6px">Sección</th>
+                            <th style="text-align:center;padding:8px 12px;background:#f0f3f8;width:140px">Mínimo requerido</th>
+                            <th style="text-align:center;padding:8px 12px;background:#f0f3f8;border-radius:0 6px 6px 0;width:80px">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${secciones.map(sec => {
+                            const inputId = 'min_' + sec.replace(/\s+/g, '_');
+                            const min = datos.minimos[sec] || 1;
+                            return `
+                            <tr style="border-bottom:1px solid #eee">
+                                <td style="padding:8px 12px;font-weight:500">${sec}</td>
+                                <td style="padding:8px 12px;text-align:center">
+                                    <input type="number" id="${inputId}" value="${min}" min="1"
+                                        style="width:70px;text-align:center;padding:4px 8px;border:2px solid #e0e0e0;border-radius:4px"
+                                        onchange="guardarMinimos()">
+                                </td>
+                                <td style="padding:8px 12px;text-align:center">
+                                    <button class="btn btn-danger btn-sm" onclick="eliminarSeccion('${sec.replace(/'/g,"\\'")}')">🗑️</button>
+                                </td>
+                            </tr>`;
+                        }).join('')}
+                    </tbody>
+                </table>`;
+        }
+
+        function renderCategoriasConfig() {
+            const container = document.getElementById('categoriasConfigContainer');
+            if (!container) return;
+            const categorias = datos.categorias || [];
+            if (categorias.length === 0) {
+                container.innerHTML = '<p style="color:#888;font-style:italic">No hay categorías configuradas.</p>';
+                return;
+            }
+            container.innerHTML = `
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                    ${categorias.map(cat => `
+                        <span style="display:inline-flex;align-items:center;gap:6px;background:#e8ecf1;border-radius:20px;padding:6px 14px;font-size:14px">
+                            ${cat}
+                            <button onclick="eliminarCategoria('${cat.replace(/'/g,"\\'")}'))"
+                                style="background:none;border:none;cursor:pointer;color:#dc3545;font-size:16px;line-height:1;padding:0" title="Eliminar">×</button>
+                        </span>`).join('')}
+                </div>`;
+        }
+
+        function renderTodosSelects() {
+            renderSelectSecciones('seccionFuncionario');
+            renderSelectCategorias('categoriaFuncionario');
+            renderSelectSecciones('editSeccion');
+            renderSelectCategorias('editCategoria');
+            renderSeccionesConfig();
+            renderCategoriasConfig();
+        }
+
+        function agregarSeccion() {
+            const input = document.getElementById('nuevaSeccionInput');
+            const minInput = document.getElementById('nuevaSeccionMin');
+            const nombre = input.value.trim();
+            if (!nombre) { mostrarNotificacion('❌ Escribe un nombre para la sección', 'danger'); return; }
+            if ((datos.secciones || []).includes(nombre)) { mostrarNotificacion('❌ Esa sección ya existe', 'danger'); return; }
+            if (!datos.secciones) datos.secciones = [];
+            datos.secciones.push(nombre);
+            datos.minimos[nombre] = parseInt(minInput.value) || 1;
+            input.value = '';
+            minInput.value = 1;
+            guardarDatosAutomatico();
+            renderTodosSelects();
+            actualizarDashboard();
+            mostrarNotificacion('✅ Sección añadida', 'success');
+        }
+
+        function eliminarSeccion(nombre) {
+            const enUso = datos.funcionarios.some(f => f.seccion === nombre);
+            if (enUso) {
+                mostrarNotificacion('❌ No se puede eliminar: hay funcionarios en esta sección', 'danger');
+                return;
+            }
+            if (!confirm(`¿Eliminar la sección "${nombre}"?`)) return;
+            datos.secciones = (datos.secciones || []).filter(s => s !== nombre);
+            delete datos.minimos[nombre];
+            guardarDatosAutomatico();
+            renderTodosSelects();
+            actualizarDashboard();
+            mostrarNotificacion('✅ Sección eliminada', 'success');
+        }
+
+        function agregarCategoria() {
+            const input = document.getElementById('nuevaCategoriaInput');
+            const nombre = input.value.trim();
+            if (!nombre) { mostrarNotificacion('❌ Escribe un nombre para la categoría', 'danger'); return; }
+            if ((datos.categorias || []).includes(nombre)) { mostrarNotificacion('❌ Esa categoría ya existe', 'danger'); return; }
+            if (!datos.categorias) datos.categorias = [];
+            datos.categorias.push(nombre);
+            input.value = '';
+            guardarDatosAutomatico();
+            renderTodosSelects();
+            mostrarNotificacion('✅ Categoría añadida', 'success');
+        }
+
+        function eliminarCategoria(nombre) {
+            const enUso = datos.funcionarios.some(f => f.categoria === nombre);
+            if (enUso) {
+                mostrarNotificacion('❌ No se puede eliminar: hay funcionarios con esta categoría', 'danger');
+                return;
+            }
+            if (!confirm(`¿Eliminar la categoría "${nombre}"?`)) return;
+            datos.categorias = (datos.categorias || []).filter(c => c !== nombre);
+            guardarDatosAutomatico();
+            renderTodosSelects();
+            mostrarNotificacion('✅ Categoría eliminada', 'success');
+        }
+
+        // ── Añadir estilos de animación
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(400px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ── Botón de tema individual ──────────────────────────────
+        function _toggleTemaModulo(){
+            const html = document.documentElement;
+            const esOscuro = html.getAttribute('data-tema') === 'oscuro';
+            if(esOscuro){ html.removeAttribute('data-tema'); fetch('/api/config/vacaciones_tema_'+_uid,{method:'POST',headers:{'Content-Type':'application/json'},body:'{"tema":"claro"}'}).catch(()=>{}); }
+            else { html.setAttribute('data-tema','oscuro'); fetch('/api/config/vacaciones_tema_'+_uid,{method:'POST',headers:{'Content-Type':'application/json'},body:'{"tema":"oscuro"}'}).catch(()=>{}); }
+            _actualizarBtnTemaModulo();
+        }
+        function _actualizarBtnTemaModulo(){
+            const btn = document.getElementById('_btnTema');
+            if(!btn) return;
+            const esOscuro = document.documentElement.getAttribute('data-tema') === 'oscuro';
+            btn.textContent = esOscuro ? '🌙 Oscuro' : '☀️ Claro';
+        }
+        async function _cargarTemaModulo(){ try{ const r=await fetch('/api/config/vacaciones_tema_'+_uid); const d=await r.json(); if(d.config&&d.config.tema==='oscuro'){document.documentElement.setAttribute('data-tema','oscuro');}else{document.documentElement.removeAttribute('data-tema');} }catch(_){} _actualizarBtnTemaModulo(); }
+        _cargarTemaModulo();
+    </script>
+
+<!-- ── Botón limpiar (✕) en todos los inputs de texto ── -->
+<script>
+(function(){
+  var css=document.createElement('style');
+  css.textContent=
+    '.xcl-w{position:relative;display:inline-flex;align-items:center;vertical-align:middle}'+
+    '.xcl-w>input{width:100%!important;box-sizing:border-box;padding-right:28px!important}'+
+    '.xcl-b{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;'+
+      'color:#94a3b8;cursor:pointer;padding:0 3px;display:none;z-index:5;font-size:18px;line-height:1}'+
+    '.xcl-b:hover{color:#e2e8f0}';
+  document.head.appendChild(css);
+  function initClearBtn(inp){
+    if(inp.readOnly||inp.disabled||inp.closest('.xcl-w')||inp.dataset.noClear)return;
+    var par=inp.parentNode,wrap=document.createElement('span');
+    wrap.className='xcl-w';
+    var parD=getComputedStyle(par).display;
+    if(parD.includes('flex')||parD.includes('grid')){
+      var s=getComputedStyle(inp);
+      wrap.style.flex=s.flexGrow+' '+s.flexShrink+' '+s.flexBasis;
+    } else wrap.style.width=inp.offsetWidth?inp.offsetWidth+'px':'100%';
+    par.insertBefore(wrap,inp);wrap.appendChild(inp);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='xcl-b';btn.tabIndex=-1;btn.innerHTML='&times;';
+    wrap.appendChild(btn);
+    function tog(){btn.style.display=inp.value?'block':'none'}
+    inp.addEventListener('input',tog);inp.addEventListener('change',tog);setTimeout(tog,100);
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();inp.value='';btn.style.display='none';inp.focus();
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
+  function run(){
+    document.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    new MutationObserver(function(ml){ml.forEach(function(m){m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.matches&&n.matches('input[type="text"],input[type="search"]'))initClearBtn(n);
+      if(n.querySelectorAll)n.querySelectorAll('input[type="text"],input[type="search"]').forEach(initClearBtn);
+    })})}).observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+{
+  "providencias": [
+    {
+      "id": "prov_admision_prueba",
+      "titulo": "Providencia acordando la admision de prueba",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "JVD", "MMC", "DCT", "F02"],
+      "fase": "Vista/Audiencia previa",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nPROVIDENCIA\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nDada cuenta; por presentado el anterior escrito proposicion de prueba por la parte [DEMANDANTE/DEMANDADO], unase a los autos de su razon.\n\nSe admiten las siguientes pruebas propuestas por resultar pertinentes y utiles para el esclarecimiento de los hechos:\n\n1. Interrogatorio de la parte contraria.\n2. Documental, teniendose por reproducida la aportada con los escritos.\n3. Testifical de los testigos propuestos.\n4. Pericial del perito designado.\n\nNo se admite la prueba de [PRUEBA_INADMITIDA] por resultar [impertinente/inutil/ilicita], sin perjuicio del derecho de la parte a formular protesta a efectos de recurso.\n\nLibrense los despachos oportunos para la citacion de testigos y peritos.\n\nModo de impugnacion: No cabe recurso contra la admision de prueba. Contra la inadmision, cabe recurso de reposicion en el plazo de cinco dias (art. 285 LEC), sin perjuicio de formular protesta.\n\nAsi lo acuerda y firma S.S.a. Doy fe.\n\nEL/LA JUEZ/A\n\n[JUEZ]\n\nEL/LA LETRADO/A DE LA ADMINISTRACION DE JUSTICIA\n\n[LAJ]"
+    },
+    {
+      "id": "prov_senalamiento_vista",
+      "titulo": "Providencia de senalamiento de vista o juicio",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "JVD", "JVU", "VRB", "DCT", "MMC", "F02"],
+      "fase": "Senalamiento",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nPROVIDENCIA\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nDada cuenta; estando las presentes actuaciones pendientes de senalamiento para la celebracion de [vista/juicio/audiencia previa], senalase para el proximo dia [FECHA_SENALAMIENTO] a las [HORA] horas.\n\nCitese a las partes en legal forma, haciendoles saber que deberan concurrir con los medios de prueba de que intenten valerse.\n\nAsimismo, citese a los testigos y peritos propuestos y admitidos, con apercibimiento de que, de no comparecer sin justa causa, podran ser sancionados con multa de 180 a 600 euros, y de que si no comparecen a la segunda citacion podran ser conducidos por la fuerza publica.\n\nModo de impugnacion: recurso de reposicion en el plazo de cinco dias.\n\nAsi lo acuerda y firma S.S.a. Doy fe.\n\nEL/LA JUEZ/A\n\n[JUEZ]\n\nEL/LA LETRADO/A DE LA ADMINISTRACION DE JUSTICIA\n\n[LAJ]"
+    },
+    {
+      "id": "prov_traslado_escritos",
+      "titulo": "Providencia dando traslado de escritos a la parte contraria",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "DCT", "MMC", "F02", "DPA", "POP", "SU"],
+      "fase": "Cualquier fase",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nPROVIDENCIA\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nDada cuenta del escrito presentado por la representacion procesal de [PARTE], unase a los autos de su razon y dese traslado del mismo a la parte contraria por plazo de [PLAZO] dias a los efectos oportunos.\n\nModo de impugnacion: recurso de reposicion en el plazo de cinco dias.\n\nAsi lo acuerda y firma S.S.a. Doy fe.\n\nEL/LA JUEZ/A\n\n[JUEZ]\n\nEL/LA LETRADO/A DE LA ADMINISTRACION DE JUSTICIA\n\n[LAJ]"
+    },
+    {
+      "id": "prov_requerimiento_cumplimiento",
+      "titulo": "Providencia de requerimiento para cumplimiento",
+      "procedimientos_aplicables": ["ETJ", "ENJ", "EJH", "EJ", "EFM"],
+      "fase": "Cumplimiento",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nPROVIDENCIA\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nDada cuenta; visto el estado de las presentes actuaciones, y no habiendose dado cumplimiento voluntario a lo acordado en [sentencia/auto] de fecha [FECHA_RESOLUCION], requierase a [REQUERIDO] para que en el plazo de [PLAZO] dias proceda a [OBLIGACION], con apercibimiento de que, de no verificarlo, se procedera a su cumplimiento forzoso con imposicion de las costas causadas.\n\nModo de impugnacion: recurso de reposicion en el plazo de cinco dias.\n\nAsi lo acuerda y firma S.S.a. Doy fe.\n\nEL/LA JUEZ/A\n\n[JUEZ]\n\nEL/LA LETRADO/A DE LA ADMINISTRACION DE JUSTICIA\n\n[LAJ]"
+    },
+    {
+      "id": "prov_acumulacion_autos",
+      "titulo": "Providencia sobre acumulacion de autos",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "DCT", "MMC", "ETJ", "ENJ"],
+      "fase": "Cualquier fase",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nPROVIDENCIA\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nDada cuenta de la solicitud de acumulacion de autos formulada por la parte [SOLICITANTE]; requierase al Juzgado de [TIPO_ORGANO] n. [NUM_JUZGADO_REQUERIDO] de [LOCALIDAD_REQUERIDA] para que informe sobre el [TIPO_PROC] [NUMERO_PROC_ACUMULAR] que ante el mismo se sigue, remitiendo testimonio del estado de las actuaciones.\n\nDese traslado a las demas partes personadas por plazo de cinco dias para que aleguen lo que a su derecho convenga.\n\nModo de impugnacion: recurso de reposicion en el plazo de cinco dias.\n\nAsi lo acuerda y firma S.S.a. Doy fe.\n\nEL/LA JUEZ/A\n\n[JUEZ]\n\nEL/LA LETRADO/A DE LA ADMINISTRACION DE JUSTICIA\n\n[LAJ]"
+    }
+  ],
+  "autos": [
+    {
+      "id": "auto_admision_demanda",
+      "titulo": "Auto de admision de demanda (jurisdiccion penal/especial)",
+      "procedimientos_aplicables": ["DPA", "DUD", "SU", "POP", "ITR"],
+      "fase": "Admision/Incoacion",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nAUTO\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nHECHOS\n\nPRIMERO.- En este Juzgado se ha recibido [atestado policial/denuncia/querella] por presuntos hechos constitutivos de delito de [DELITO], presuntamente cometidos por [INVESTIGADO] en fecha [FECHA_HECHOS].\n\nSEGUNDO.- De lo actuado se desprenden indicios racionales de la comision de un hecho que reviste caracteres de delito, procediendo la incoacion del correspondiente procedimiento.\n\nRAZONAMIENTOS JURIDICOS\n\nUNICO.- De conformidad con lo dispuesto en los articulos [ARTICULOS] de la Ley de Enjuiciamiento Criminal, procede la incoacion de [TIPO_PROC] al existir indicios de la comision de un delito [TIPO_DELITO] previsto y penado en el articulo [ARTICULO_CP] del Codigo Penal.\n\nPARTE DISPOSITIVA\n\nSE ACUERDA: Incoar [TIPO_PROC] [NUMERO_PROC] por un presunto delito de [DELITO].\n\nPractiquense las siguientes diligencias:\n1. Recibir declaracion al/la investigado/a [INVESTIGADO], con asistencia letrada.\n2. Recibir declaracion a los testigos.\n3. Recabar los informes periciales que resulten pertinentes.\n4. Dese cuenta al Ministerio Fiscal.\n\nNotifiquese la presente resolucion al Ministerio Fiscal y a las partes personadas.\n\nModo de impugnacion: recurso de reforma en el plazo de tres dias ante este Juzgado (art. 217 LECrim).\n\nAsi lo acuerda y firma S.S.a. Doy fe.\n\nEL/LA JUEZ/A\n\n[JUEZ]"
+    },
+    {
+      "id": "auto_sobreseimiento_provisional",
+      "titulo": "Auto de sobreseimiento provisional",
+      "procedimientos_aplicables": ["DPA", "DUD", "POP", "SU"],
+      "fase": "Fase intermedia",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nAUTO\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nHECHOS\n\nPRIMERO.- Se han seguido las presentes actuaciones por un presunto delito de [DELITO] contra [INVESTIGADO].\n\nSEGUNDO.- Practicadas las diligencias de investigacion pertinentes, el Ministerio Fiscal ha interesado el sobreseimiento provisional de las actuaciones.\n\nRAZONAMIENTOS JURIDICOS\n\nPRIMERO.- De conformidad con lo dispuesto en el articulo 641 de la Ley de Enjuiciamiento Criminal, procede el sobreseimiento provisional cuando no resulte debidamente justificada la perpetracion del delito que haya dado motivo a la formacion de la causa, o cuando resulte del sumario haberse cometido un delito y no haya motivos suficientes para acusar a determinada persona.\n\nSEGUNDO.- A la vista de las diligencias practicadas, y de conformidad con lo interesado por el Ministerio Fiscal, no resultan elementos suficientes para sostener la acusacion contra [INVESTIGADO], sin perjuicio de la reapertura de las actuaciones si se obtuvieran nuevos elementos de investigacion.\n\nPARTE DISPOSITIVA\n\nSE ACUERDA: El sobreseimiento provisional de las presentes actuaciones, de conformidad con el articulo 641.[NUMERO] de la Ley de Enjuiciamiento Criminal.\n\nAlcese cuantas medidas cautelares se hubieran adoptado contra [INVESTIGADO].\n\nArchivense provisionalmente las actuaciones.\n\nNotifiquese al Ministerio Fiscal y a las partes personadas.\n\nModo de impugnacion: recurso de apelacion en el plazo de cinco dias ante la Audiencia Provincial.\n\nAsi lo acuerda y firma S.S.a. Doy fe.\n\nEL/LA JUEZ/A\n\n[JUEZ]"
+    },
+    {
+      "id": "auto_procesamiento",
+      "titulo": "Auto de procesamiento",
+      "procedimientos_aplicables": ["SU"],
+      "fase": "Instruccion sumarial",
+      "modelo": "JUZGADO DE INSTRUCCION N. [NUM_JUZGADO] DE [LOCALIDAD]\n\nSUMARIO [NUMERO_PROC]\n\nAUTO DE PROCESAMIENTO\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nHECHOS\n\nPRIMERO.- Se sigue el presente Sumario por un presunto delito de [DELITO] contra [INVESTIGADO], mayor de edad, con DNI [DNI], nacido el [FECHA_NACIMIENTO] en [LUGAR_NACIMIENTO], con domicilio en [DOMICILIO].\n\nSEGUNDO.- De las diligencias practicadas resulta que en fecha [FECHA_HECHOS], [DESCRIPCION_HECHOS].\n\nTERCERO.- Existen indicios racionales de criminalidad contra [INVESTIGADO] que se derivan de: [INDICIOS].\n\nRAZONAMIENTOS JURIDICOS\n\nPRIMERO.- De conformidad con lo dispuesto en el articulo 384 de la Ley de Enjuiciamiento Criminal, desde que resultare del sumario algun indicio racional de criminalidad contra determinada persona, se dictara auto declarandola procesada.\n\nSEGUNDO.- Los hechos descritos son constitutivos de un presunto delito de [DELITO], previsto y penado en el articulo [ARTICULO_CP] del Codigo Penal, concurriendo indicios racionales de criminalidad contra [INVESTIGADO].\n\nPARTE DISPOSITIVA\n\nSE ACUERDA: Declarar procesado/a a [INVESTIGADO], por un presunto delito de [DELITO].\n\nSituacion personal: [PRISION PROVISIONAL / LIBERTAD PROVISIONAL con/sin fianza de [CANTIDAD] euros].\n\nRecibir declaracion indagatoria al procesado con las formalidades y garantias previstas en la ley.\n\nPongase esta resolucion en conocimiento de la Audiencia Provincial.\n\nNotifiquese al procesado, a su representacion letrada y al Ministerio Fiscal.\n\nModo de impugnacion: recurso de reforma en tres dias y/o recurso de apelacion en cinco dias.\n\nAsi lo acuerda y firma S.S.a. Doy fe.\n\nEL/LA JUEZ/A\n\n[JUEZ]"
+    },
+    {
+      "id": "auto_inhibicion",
+      "titulo": "Auto de inhibicion por falta de competencia",
+      "procedimientos_aplicables": ["JVB", "ORD", "DPA", "DUD", "POP", "SU", "LEV"],
+      "fase": "Admision",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nAUTO\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nHECHOS\n\nPRIMERO.- Se han seguido las presentes actuaciones ante este Juzgado por [MATERIA].\n\nSEGUNDO.- Examinada la competencia de este organo judicial, se aprecia que la misma no corresponde a este Juzgado sino al [ORGANO_COMPETENTE].\n\nRAZONAMIENTOS JURIDICOS\n\nUNICO.- De conformidad con lo dispuesto en los articulos [ARTICULOS_COMPETENCIA] de la [LEC/LECrim/LOPJ], la competencia para conocer del presente asunto corresponde al [ORGANO_COMPETENTE] de [LOCALIDAD_COMPETENTE], por razon de [TIPO_COMPETENCIA: territorial/objetiva/funcional], toda vez que [MOTIVACION].\n\nPARTE DISPOSITIVA\n\nSE ACUERDA: Declarar la falta de competencia [territorial/objetiva/funcional] de este Juzgado para conocer de las presentes actuaciones e inhibirse a favor del [ORGANO_COMPETENTE] de [LOCALIDAD_COMPETENTE], al que se remitiran las actuaciones.\n\nNotifiquese a las partes, haciendoles saber que contra la presente resolucion cabe recurso de [reposicion/apelacion] en el plazo de [PLAZO] dias.\n\nAsi lo acuerda y firma S.S.a. Doy fe.\n\nEL/LA JUEZ/A\n\n[JUEZ]"
+    },
+    {
+      "id": "auto_entrada_registro",
+      "titulo": "Auto de entrada y registro domiciliario",
+      "procedimientos_aplicables": ["DPA", "DUD", "SU", "POP", "JRD"],
+      "fase": "Instruccion",
+      "modelo": "JUZGADO DE INSTRUCCION N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nAUTO\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nHECHOS\n\nPRIMERO.- Se siguen las presentes actuaciones por un presunto delito de [DELITO].\n\nSEGUNDO.- Por el Ministerio Fiscal / la Policia Judicial se ha solicitado autorizacion judicial para la entrada y registro en el domicilio sito en [DOMICILIO], habitado por [MORADOR], al existir indicios fundados de que en el mismo pueden hallarse [OBJETOS/EFECTOS/INSTRUMENTOS] relacionados con los hechos investigados.\n\nTERCERO.- Los indicios que fundamentan la solicitud son los siguientes: [INDICIOS].\n\nRAZONAMIENTOS JURIDICOS\n\nPRIMERO.- El articulo 18.2 de la Constitucion Espanola garantiza la inviolabilidad del domicilio, no pudiendo realizarse entradas ni registros sin consentimiento del titular o resolucion judicial, salvo en caso de flagrante delito.\n\nSEGUNDO.- De conformidad con los articulos 545 a 572 de la Ley de Enjuiciamiento Criminal, el Juez podra decretar la entrada y registro en el domicilio de un particular cuando hubiere indicios de encontrarse alli el procesado o efectos o instrumentos del delito.\n\nTERCERO.- En el presente caso concurren indicios suficientes que justifican la restriccion del derecho fundamental a la inviolabilidad domiciliaria, al existir [MOTIVACION_PROPORCIONALIDAD].\n\nPARTE DISPOSITIVA\n\nSE ACUERDA: Autorizar la entrada y registro en el domicilio sito en [DOMICILIO], que se practicara por miembros de [CUERPO_POLICIAL].\n\nEl registro debera practicarse:\n- En presencia del interesado o, en su defecto, de un familiar mayor de edad o de dos testigos.\n- Con presencia del Letrado de la Administracion de Justicia o del funcionario que le sustituya.\n- Entre las [HORA_INICIO] y las [HORA_FIN] horas del dia [FECHA_REGISTRO].\n- Limitado a la busqueda de [OBJETOS_BUSQUEDA].\n\nLevantese acta detallada de cuanto se practique, haciendose constar los objetos intervenidos.\n\nNotifiquese al Ministerio Fiscal.\n\nEsta resolucion es firme y no cabe recurso contra la misma, sin perjuicio de la alegacion de la posible vulneracion del derecho fundamental en el momento procesal oportuno.\n\nAsi lo acuerda y firma S.S.a. Doy fe.\n\nEL/LA JUEZ/A\n\n[JUEZ]"
+    },
+    {
+      "id": "auto_medidas_cautelares",
+      "titulo": "Auto de medidas cautelares civiles",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "DCT", "MMC", "F02"],
+      "fase": "Cualquier fase",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nAUTO\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nHECHOS\n\nPRIMERO.- Por la representacion de [SOLICITANTE] se ha solicitado la adopcion de medidas cautelares consistentes en [MEDIDAS_SOLICITADAS].\n\nSEGUNDO.- Se ha celebrado la comparecencia prevista en el articulo 734 de la LEC, habiendo comparecido ambas partes.\n\nRAZONAMIENTOS JURIDICOS\n\nPRIMERO.- Conforme al articulo 728 de la LEC, procede la adopcion de medidas cautelares cuando concurra: apariencia de buen derecho (fumus boni iuris), peligro por la mora procesal (periculum in mora) y ofrecimiento de caucion suficiente.\n\nSEGUNDO.- En el caso examinado, [VALORACION_REQUISITOS].\n\nPARTE DISPOSITIVA\n\nSE ACUERDA: [Estimar/Desestimar] la solicitud de medidas cautelares y, en consecuencia, [DECISION].\n\n[En caso de estimacion:] Se fija caucion a cargo del solicitante por importe de [CANTIDAD] euros, que debera constituirse en el plazo de [PLAZO] dias.\n\nNotifiquese a las partes.\n\nModo de impugnacion: recurso de apelacion en el plazo de veinte dias, sin efecto suspensivo.\n\nAsi lo acuerda y firma S.S.a. Doy fe.\n\nEL/LA JUEZ/A\n\n[JUEZ]"
+    }
+  ],
+  "decretos": [
+    {
+      "id": "dec_admision_demanda",
+      "titulo": "Decreto de admision a tramite de la demanda",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "JVD", "JVU", "VRB", "DCT", "DMA", "MMC", "F02"],
+      "fase": "Admision",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nDECRETO\n\nLetrado/a de la Administracion de Justicia: [LAJ]\n\nEn [LOCALIDAD], a [FECHA].\n\nHECHOS\n\nPRIMERO.- Por [DEMANDANTE], representado/a por el/la Procurador/a D./Da. [PROCURADOR] y asistido/a del/la Letrado/a D./Da. [LETRADO], se ha presentado demanda de [TIPO_PROC] frente a [DEMANDADO].\n\nSEGUNDO.- Examinada la demanda, la misma reune los requisitos legalmente exigidos.\n\nRAZONAMIENTOS JURIDICOS\n\nUNICO.- De conformidad con lo dispuesto en los articulos [ARTICULOS] de la Ley de Enjuiciamiento Civil, concurriendo los presupuestos procesales necesarios, procede la admision a tramite de la demanda.\n\nPARTE DISPOSITIVA\n\nACUERDO:\n\n1. Admitir a tramite la demanda de [TIPO_PROC] interpuesta por [DEMANDANTE] frente a [DEMANDADO].\n\n2. Dar traslado de la demanda al demandado/a, con entrega de copia de la misma y de los documentos acompanados, emplazandole para que en el plazo de [PLAZO] dias comparezca en autos y conteste a la demanda, asistido de Abogado y representado por Procurador.\n\n3. Hacer saber al demandado/a que, de no comparecer, sera declarado en rebeldia y le parara el perjuicio a que hubiere lugar en Derecho.\n\nModo de impugnacion: recurso de revision en el plazo de cinco dias ante el Juez titular.\n\nEl/La Letrado/a de la Administracion de Justicia.\n\n[LAJ]"
+    },
+    {
+      "id": "dec_archivo_provisional",
+      "titulo": "Decreto de archivo provisional",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "DCT", "MMC", "F02", "ETJ", "ENJ", "MON"],
+      "fase": "Archivo",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nDECRETO\n\nLetrado/a de la Administracion de Justicia: [LAJ]\n\nEn [LOCALIDAD], a [FECHA].\n\nHECHOS\n\nPRIMERO.- En las presentes actuaciones seguidas entre [DEMANDANTE] y [DEMANDADO], se ha dictado [sentencia/auto] de fecha [FECHA_RESOLUCION].\n\nSEGUNDO.- Transcurrido el plazo legal sin que las partes hayan [solicitado la ejecucion/interpuesto recurso], procede el archivo provisional de las actuaciones.\n\nRAZONAMIENTOS JURIDICOS\n\nUNICO.- De conformidad con lo dispuesto en el articulo 179 de la Ley de Enjuiciamiento Civil, transcurrido el plazo legal y no habiendo tenido lugar ninguna actuacion procesal, procede decretar el archivo provisional de las actuaciones, sin perjuicio de su reapertura a instancia de parte.\n\nPARTE DISPOSITIVA\n\nACUERDO:\n\n1. Declarar el archivo provisional de las presentes actuaciones.\n2. Notificar la presente resolucion a las partes.\n3. Los autos quedaran en el Juzgado a disposicion de las partes.\n\nModo de impugnacion: recurso directo de revision ante el/la Juez/a en el plazo de cinco dias.\n\nEl/La Letrado/a de la Administracion de Justicia.\n\n[LAJ]"
+    },
+    {
+      "id": "dec_despacho_ejecucion",
+      "titulo": "Decreto de despacho de ejecucion",
+      "procedimientos_aplicables": ["ETJ", "ENJ", "EJH"],
+      "fase": "Despacho de ejecucion",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nDECRETO\n\nLetrado/a de la Administracion de Justicia: [LAJ]\n\nEn [LOCALIDAD], a [FECHA].\n\nHECHOS\n\nPRIMERO.- Por [EJECUTANTE], representado/a por el/la Procurador/a D./Da. [PROCURADOR], se ha presentado demanda ejecutiva frente a [EJECUTADO], en reclamacion de [CANTIDAD] euros de principal, mas [CANTIDAD_INTERESES] euros calculados provisionalmente para intereses y [CANTIDAD_COSTAS] euros para costas.\n\nSEGUNDO.- El titulo ejecutivo consiste en [TIPO_TITULO: sentencia firme / escritura publica / poliza de contrato mercantil / titulo cambiario], reuniendo los requisitos legales exigidos.\n\nRAZONAMIENTOS JURIDICOS\n\nPRIMERO.- De conformidad con lo dispuesto en los articulos 549 y siguientes de la Ley de Enjuiciamiento Civil, presentado titulo ejecutivo que reune los requisitos legales y no habiendo transcurrido el plazo de caducidad de la accion ejecutiva, procede el despacho de ejecucion.\n\nPARTE DISPOSITIVA\n\nACUERDO:\n\n1. Despachar ejecucion a instancia de [EJECUTANTE] frente a [EJECUTADO] por la cantidad de [CANTIDAD] euros de principal, mas [CANTIDAD_INTERESES] euros provisionalmente calculados para intereses y [CANTIDAD_COSTAS] euros para costas.\n\n2. Requerir de pago al/la ejecutado/a por la cantidad reclamada y, en caso de no atender el requerimiento en el acto, proceder al embargo de sus bienes en cantidad suficiente.\n\n3. Oficiar al Punto Neutro Judicial a los efectos de investigar el patrimonio del/la ejecutado/a.\n\nModo de impugnacion: recurso directo de revision ante el/la Juez/a en el plazo de cinco dias.\n\nEl/La Letrado/a de la Administracion de Justicia.\n\n[LAJ]"
+    },
+    {
+      "id": "dec_firmeza",
+      "titulo": "Decreto de firmeza de resolucion",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "JVD", "JVU", "VRB", "DCT", "DMA", "MMC", "F02", "DPA", "POP", "LEV", "LEI", "SU"],
+      "fase": "Firmeza",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nDECRETO\n\nLetrado/a de la Administracion de Justicia: [LAJ]\n\nEn [LOCALIDAD], a [FECHA].\n\nHECHOS\n\nUNICO.- En las presentes actuaciones se dicto [sentencia/auto] de fecha [FECHA_RESOLUCION], habiendose notificado a todas las partes en legal forma. Transcurrido el plazo legalmente establecido para la interposicion de recurso sin que ninguna de las partes lo haya interpuesto.\n\nRAZONAMIENTOS JURIDICOS\n\nUNICO.- De conformidad con lo dispuesto en el articulo 207 de la Ley de Enjuiciamiento Civil, la [sentencia/auto] de fecha [FECHA_RESOLUCION] ha adquirido firmeza al no haberse interpuesto recurso dentro del plazo legal.\n\nPARTE DISPOSITIVA\n\nACUERDO:\n\n1. Declarar la firmeza de la [sentencia/auto] dictada en fecha [FECHA_RESOLUCION].\n2. Llévese la resolucion al libro correspondiente.\n3. Notifiquese a las partes.\n\nModo de impugnacion: recurso directo de revision ante el/la Juez/a en el plazo de cinco dias.\n\nEl/La Letrado/a de la Administracion de Justicia.\n\n[LAJ]"
+    },
+    {
+      "id": "dec_embargo_bienes",
+      "titulo": "Decreto de embargo de bienes",
+      "procedimientos_aplicables": ["ETJ", "ENJ", "EJH", "EJ", "EFM", "COG"],
+      "fase": "Embargo",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nDECRETO\n\nLetrado/a de la Administracion de Justicia: [LAJ]\n\nEn [LOCALIDAD], a [FECHA].\n\nHECHOS\n\nPRIMERO.- En las presentes actuaciones ejecutivas seguidas a instancia de [EJECUTANTE] frente a [EJECUTADO], por importe de [CANTIDAD] euros, ha sido requerido/a de pago el/la ejecutado/a sin que haya atendido el requerimiento.\n\nSEGUNDO.- Consultado el Punto Neutro Judicial y las demas fuentes de investigacion patrimonial, resultan los siguientes bienes del/la ejecutado/a: [BIENES_LOCALIZADOS].\n\nRAZONAMIENTOS JURIDICOS\n\nUNICO.- De conformidad con lo dispuesto en los articulos 584 y siguientes de la Ley de Enjuiciamiento Civil, no habiendo atendido el ejecutado el requerimiento de pago, procede el embargo de bienes suficientes, respetando el orden establecido en el articulo 592 LEC.\n\nPARTE DISPOSITIVA\n\nACUERDO:\n\n1. Decretar el embargo de los siguientes bienes del/la ejecutado/a:\n   a) [BIEN_1]\n   b) [BIEN_2]\n   c) [BIEN_3]\n\n2. Oficiar a [ENTIDAD] para la retencion/anotacion correspondiente.\n\n3. En su caso, anotar preventivamente el embargo en el Registro de la Propiedad correspondiente.\n\nNotifiquese al/la ejecutado/a.\n\nModo de impugnacion: recurso directo de revision ante el/la Juez/a en el plazo de cinco dias.\n\nEl/La Letrado/a de la Administracion de Justicia.\n\n[LAJ]"
+    }
+  ],
+  "diligencias_ordenacion": [
+    {
+      "id": "do_firmeza",
+      "titulo": "Diligencia de ordenacion dando cuenta de firmeza",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "JVD", "DCT", "DMA", "MMC", "F02", "DPA", "POP", "LEV", "SU"],
+      "fase": "Firmeza",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nDILIGENCIA DE ORDENACION\n\nLetrado/a de la Administracion de Justicia: [LAJ]\n\nEn [LOCALIDAD], a [FECHA].\n\nDoy cuenta a S.S.a de que, notificada la [sentencia/auto] de fecha [FECHA_RESOLUCION] a todas las partes, ha transcurrido el plazo legalmente previsto para la interposicion de recurso sin que se haya formulado impugnacion alguna, por lo que procede declarar la firmeza de dicha resolucion.\n\nY para que conste y surta los efectos oportunos, extiendo la presente.\n\nEl/La Letrado/a de la Administracion de Justicia.\n\n[LAJ]"
+    },
+    {
+      "id": "do_traslado_copias",
+      "titulo": "Diligencia de ordenacion dando traslado de copias",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "DCT", "MMC", "F02", "DPA", "POP", "SU", "ETJ", "ENJ"],
+      "fase": "Cualquier fase",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nDILIGENCIA DE ORDENACION\n\nLetrado/a de la Administracion de Justicia: [LAJ]\n\nEn [LOCALIDAD], a [FECHA].\n\nPor recibido el anterior escrito presentado por la representacion procesal de [PARTE], unase a los autos de su razon y dese traslado a la parte contraria por plazo de [PLAZO] dias, entregandole copia del escrito y documentos acompanados.\n\nModo de impugnacion: recurso de reposicion ante el/la Letrado/a de la Administracion de Justicia en el plazo de cinco dias (art. 452 LEC).\n\nEl/La Letrado/a de la Administracion de Justicia.\n\n[LAJ]"
+    },
+    {
+      "id": "do_senalamiento",
+      "titulo": "Diligencia de ordenacion de senalamiento",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "JVD", "JVU", "VRB", "DCT", "MMC", "F02", "DPA", "POP", "LEV", "LEI"],
+      "fase": "Senalamiento",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nDILIGENCIA DE ORDENACION\n\nLetrado/a de la Administracion de Justicia: [LAJ]\n\nEn [LOCALIDAD], a [FECHA].\n\nEstando las presentes actuaciones en tramite de senalamiento, se senala para la celebracion de [vista/juicio oral/audiencia previa/comparecencia] el proximo dia [FECHA_SENALAMIENTO] a las [HORA] horas.\n\nCitese a las partes en legal forma, haciendoles saber que deberan comparecer con los medios de prueba de que intenten valerse.\n\nCitese igualmente a los testigos y peritos propuestos, con los apercibimientos legales.\n\n[En procedimientos penales: Citese asimismo al Ministerio Fiscal.]\n\nExpidanse los despachos correspondientes.\n\nModo de impugnacion: recurso de reposicion en el plazo de cinco dias.\n\nEl/La Letrado/a de la Administracion de Justicia.\n\n[LAJ]"
+    },
+    {
+      "id": "do_suspension_vista",
+      "titulo": "Diligencia de ordenacion de suspension de vista",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "JVD", "DCT", "MMC", "F02", "DPA", "POP", "LEV"],
+      "fase": "Vista/Juicio oral",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nDILIGENCIA DE ORDENACION\n\nLetrado/a de la Administracion de Justicia: [LAJ]\n\nEn [LOCALIDAD], a [FECHA].\n\nVista la [solicitud de suspension presentada por la parte [PARTE] / comunicacion recibida], se acuerda la suspension de la [vista/juicio oral/audiencia previa] senalada para el dia [FECHA_SENALAMIENTO] por el siguiente motivo: [MOTIVO_SUSPENSION: enfermedad justificada del Letrado/parte / incomparecencia justificada de testigo esencial / causa de fuerza mayor].\n\nSe senala nuevamente para el dia [NUEVA_FECHA] a las [HORA] horas.\n\nCitese a las partes, testigos y peritos para la nueva fecha.\n\n[En caso de suspension injustificada:] Se impone a la parte [PARTE] la multa de [CANTIDAD] euros prevista en el articulo [ARTICULO] de la [LEC/LECrim], por haber dado lugar a la suspension injustificada del acto.\n\nModo de impugnacion: recurso de reposicion en el plazo de cinco dias.\n\nEl/La Letrado/a de la Administracion de Justicia.\n\n[LAJ]"
+    },
+    {
+      "id": "do_designa_turno_oficio",
+      "titulo": "Diligencia de ordenacion interesando designa de turno de oficio",
+      "procedimientos_aplicables": ["JVB", "ORD", "JVD", "DCT", "F02", "DPA", "DUD", "LEV", "LEI", "POP", "SU", "JRD"],
+      "fase": "Admision/Incoacion",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nDILIGENCIA DE ORDENACION\n\nLetrado/a de la Administracion de Justicia: [LAJ]\n\nEn [LOCALIDAD], a [FECHA].\n\nVisto que [PARTE] carece de representacion procesal y ha manifestado carecer de medios economicos para litigar, y habiendo solicitado la designacion de Abogado y Procurador del turno de oficio, comuniquese al Ilustre Colegio de Abogados de [LOCALIDAD] y al Ilustre Colegio de Procuradores de [LOCALIDAD] para que procedan a la designacion correspondiente, con la maxima urgencia.\n\nSuspendase entretanto el plazo de [PLAZO] concedido para [ACTUACION], el cual se reanudara una vez efectuada la designacion y notificada al profesional designado.\n\nModo de impugnacion: recurso de reposicion en el plazo de cinco dias.\n\nEl/La Letrado/a de la Administracion de Justicia.\n\n[LAJ]"
+    }
+  ],
+  "sentencias": [
+    {
+      "id": "sent_conformidad_penal",
+      "titulo": "Sentencia de conformidad penal",
+      "procedimientos_aplicables": ["DUD", "DPA", "POP", "JRD"],
+      "fase": "Juicio oral",
+      "modelo": "JUZGADO DE LO PENAL N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nSENTENCIA N. [NUM_SENTENCIA]/[ANNO]\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nVistos por el/la Ilmo./Ilma. Sr./Sra. [JUEZ], Juez del Juzgado de lo Penal n. [NUM_JUZGADO] de [LOCALIDAD], los presentes autos de [TIPO_PROC] n. [NUMERO_PROC], seguidos por un delito de [DELITO], contra [ACUSADO], con DNI [DNI], nacido/a el [FECHA_NACIMIENTO] en [LUGAR_NACIMIENTO], con domicilio en [DOMICILIO], [con/sin] antecedentes penales, representado/a por el/la Procurador/a [PROCURADOR_DEFENSA] y asistido/a del/la Letrado/a [LETRADO_DEFENSA].\n\nEs parte el Ministerio Fiscal representado por el/la Ilmo./Ilma. Sr./Sra. Fiscal [FISCAL].\n\n[En su caso: Es parte la acusacion particular [ACUSACION_PARTICULAR], representada por el/la Procurador/a [PROCURADOR_AP] y asistida del/la Letrado/a [LETRADO_AP].]\n\nANTECEDENTES DE HECHO\n\nPRIMERO.- El Ministerio Fiscal, en sus conclusiones definitivas, califico los hechos como constitutivos de un delito de [DELITO] del articulo [ARTICULO_CP] del Codigo Penal, considerando autor del mismo al acusado [ACUSADO], sin la concurrencia de circunstancias modificativas de la responsabilidad criminal [o con la concurrencia de la atenuante de [ATENUANTE]], y solicito la imposicion de la pena de [PENA_SOLICITADA], asi como el pago de las costas procesales [y la indemnizacion de [CANTIDAD] euros a favor de [PERJUDICADO] en concepto de responsabilidad civil].\n\nSEGUNDO.- La defensa del acusado manifesto su conformidad con la calificacion mas grave y con la pena solicitada por la acusacion, prestando su conformidad el propio acusado tras ser informado por el Juez de las consecuencias de la misma.\n\nTERCERO.- Verificada la conformidad en los terminos previstos en el articulo [787/801] de la Ley de Enjuiciamiento Criminal, y comprobado que la pena solicitada no excede de seis anos de prision, se dicta la presente sentencia de conformidad.\n\nHECHOS PROBADOS\n\n[HECHOS_PROBADOS]\n\nFUNDAMENTOS DE DERECHO\n\nPRIMERO.- Los hechos declarados probados son legalmente constitutivos de un delito de [DELITO], previsto y penado en el articulo [ARTICULO_CP] del Codigo Penal.\n\nSEGUNDO.- Es autor del delito el acusado [ACUSADO], de conformidad con el articulo 28 del Codigo Penal.\n\nTERCERO.- [No concurren / Concurre la atenuante de [ATENUANTE] del articulo [ARTICULO_ATENUANTE] del Codigo Penal como] circunstancias modificativas de la responsabilidad criminal.\n\nCUARTO.- La pena se determina conforme a los criterios del articulo 66 del Codigo Penal, resultando proporcionada y ajustada a la conformidad alcanzada.\n\nQUINTO.- La responsabilidad civil derivada del delito se fija de conformidad con los articulos 109 y siguientes del Codigo Penal.\n\nSEXTO.- Las costas procesales se imponen al acusado conforme al articulo 123 del Codigo Penal.\n\nFALLO\n\nQue debo CONDENAR y CONDENO a [ACUSADO] como autor responsable de un delito de [DELITO] ya definido, [sin/con] la concurrencia de circunstancias modificativas, a las siguientes penas:\n\n1. [PENA_PRISION/MULTA/TBC]: [DURACION/CUANTIA].\n2. [PENA_ACCESORIA en su caso].\n3. Costas procesales.\n4. [Indemnizar a [PERJUDICADO] en la cantidad de [CANTIDAD] euros, en concepto de responsabilidad civil.]\n\n[En su caso:] Habiendo solicitado la defensa la suspension de la ejecucion de la pena de prision, estese a lo que se acuerde en ejecutoria.\n\nNotifiquese la presente resolucion a las partes, haciendoles saber que contra la misma no cabe recurso alguno al haberse dictado de conformidad (art. 787.7 LECrim), salvo que la conformidad se haya prestado de forma viciada.\n\nAsi por esta mi sentencia, de la que se unira certificacion a los autos, lo pronuncio, mando y firmo.\n\nEL/LA JUEZ/A\n\n[JUEZ]"
+    },
+    {
+      "id": "sent_estructura_civil",
+      "titulo": "Estructura de sentencia civil (plantilla)",
+      "procedimientos_aplicables": ["JVB", "ORD", "OR5", "JVD", "JVU", "VRB", "DCT", "MMC", "F02"],
+      "fase": "Sentencia",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nSENTENCIA N. [NUM_SENTENCIA]/[ANNO]\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nVistos por el/la Ilmo./Ilma. Sr./Sra. D./Da. [JUEZ], Juez/a del Juzgado de [TIPO_ORGANO] n. [NUM_JUZGADO] de [LOCALIDAD], los presentes autos de [TIPO_PROC] n. [NUMERO_PROC], seguidos a instancia de [DEMANDANTE], representado/a por el/la Procurador/a D./Da. [PROCURADOR_DEMANDANTE] y asistido/a del/la Letrado/a D./Da. [LETRADO_DEMANDANTE], contra [DEMANDADO], representado/a por el/la Procurador/a D./Da. [PROCURADOR_DEMANDADO] y asistido/a del/la Letrado/a D./Da. [LETRADO_DEMANDADO], sobre [MATERIA].\n\nANTECEDENTES DE HECHO\n\nPRIMERO.- [Resumen de la demanda y pretensiones del actor.]\n\nSEGUNDO.- [Resumen de la contestacion y pretensiones del demandado.]\n\nTERCERO.- [Desarrollo del procedimiento: audiencia previa, juicio oral, prueba practicada.]\n\nCUARTO.- En la tramitacion de este procedimiento se han observado las prescripciones legales.\n\nFUNDAMENTOS DE DERECHO\n\nPRIMERO.- [Objeto del litigio y carga de la prueba.]\n\nSEGUNDO.- [Valoracion de la prueba practicada.]\n\nTERCERO.- [Fundamentacion juridica de la decision.]\n\nCUARTO.- [Costas procesales conforme al art. 394 LEC.]\n\nFALLO\n\nQue [estimando/desestimando/estimando parcialmente] la demanda interpuesta por [DEMANDANTE] contra [DEMANDADO], debo [PRONUNCIAMIENTO PRINCIPAL].\n\n[PRONUNCIAMIENTO SOBRE COSTAS.]\n\nNotifiquese la presente resolucion a las partes, haciendoles saber que contra la misma cabe interponer recurso de apelacion en el plazo de veinte dias ante la Audiencia Provincial de [PROVINCIA].\n\nAsi por esta mi sentencia, de la que se unira testimonio a los autos, lo pronuncio, mando y firmo.\n\nEL/LA JUEZ/A\n\n[JUEZ]"
+    },
+    {
+      "id": "sent_estructura_penal",
+      "titulo": "Estructura de sentencia penal (plantilla)",
+      "procedimientos_aplicables": ["DPA", "DUD", "POP", "SU", "LEV", "LEI", "JRD"],
+      "fase": "Sentencia",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nSENTENCIA N. [NUM_SENTENCIA]/[ANNO]\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nVistos por el/la Ilmo./Ilma. Sr./Sra. D./Da. [JUEZ], los autos de [TIPO_PROC] n. [NUMERO_PROC], seguidos por un [delito/delito leve] de [DELITO], contra [ACUSADO], con DNI [DNI], nacido/a el [FECHA_NACIMIENTO], con domicilio en [DOMICILIO], representado/a por el/la Procurador/a D./Da. [PROCURADOR_DEFENSA] y asistido/a del/la Letrado/a D./Da. [LETRADO_DEFENSA].\n\nSiendo parte el Ministerio Fiscal.\n\n[En su caso: Siendo parte la acusacion particular [ACUSACION_PARTICULAR].]\n\nANTECEDENTES DE HECHO\n\nPRIMERO.- [Calificacion del Ministerio Fiscal.]\n\nSEGUNDO.- [Calificacion de la acusacion particular, en su caso.]\n\nTERCERO.- [Calificacion de la defensa.]\n\nCUARTO.- [Desarrollo del juicio oral.]\n\nHECHOS PROBADOS\n\n[HECHOS_PROBADOS]\n\nFUNDAMENTOS DE DERECHO\n\nPRIMERO.- [Calificacion juridica de los hechos.]\n\nSEGUNDO.- [Autoria y participacion.]\n\nTERCERO.- [Circunstancias modificativas.]\n\nCUARTO.- [Determinacion de la pena.]\n\nQUINTO.- [Responsabilidad civil.]\n\nSEXTO.- [Costas.]\n\nFALLO\n\nQue debo [ABSOLVER/CONDENAR] y [ABSUELVO/CONDENO] a [ACUSADO] [del delito de [DELITO] / como autor de un delito de [DELITO]], [PRONUNCIAMIENTO_PENA].\n\n[PRONUNCIAMIENTO_RESPONSABILIDAD_CIVIL.]\n\n[PRONUNCIAMIENTO_COSTAS.]\n\nNotifiquese la presente resolucion a las partes, haciendoles saber que contra la misma cabe interponer recurso de apelacion en el plazo de diez dias.\n\nAsi por esta mi sentencia, lo pronuncio, mando y firmo.\n\nEL/LA JUEZ/A\n\n[JUEZ]"
+    },
+    {
+      "id": "sent_delito_leve",
+      "titulo": "Sentencia por delito leve (estructura)",
+      "procedimientos_aplicables": ["LEV", "LEI"],
+      "fase": "Sentencia",
+      "modelo": "JUZGADO DE INSTRUCCION N. [NUM_JUZGADO] DE [LOCALIDAD]\n\nJUICIO POR DELITO LEVE [NUMERO_PROC]\n\nSENTENCIA N. [NUM_SENTENCIA]/[ANNO]\n\nJuez/a: [JUEZ]\n\nEn [LOCALIDAD], a [FECHA].\n\nVistos por el/la Sr./Sra. Juez/a del Juzgado de Instruccion n. [NUM_JUZGADO] de [LOCALIDAD], los presentes autos de Juicio por Delito Leve n. [NUMERO_PROC], sobre [DELITO_LEVE], habiendo sido partes el/la denunciante [DENUNCIANTE] y el/la denunciado/a [DENUNCIADO].\n\nANTECEDENTES DE HECHO\n\nPRIMERO.- Se ha seguido el presente juicio por delito leve en virtud de [denuncia/atestado policial] por hechos presuntamente constitutivos de un delito leve de [DELITO_LEVE].\n\nSEGUNDO.- Celebrado el juicio oral en fecha [FECHA_JUICIO], comparecieron [COMPARECIENTES], practicandose la prueba que consta en soporte audiovisual.\n\nHECHOS PROBADOS\n\n[HECHOS_PROBADOS]\n\nFUNDAMENTOS DE DERECHO\n\nPRIMERO.- Los hechos declarados probados [son/no son] constitutivos de un delito leve de [DELITO_LEVE] del articulo [ARTICULO_CP] del Codigo Penal.\n\nSEGUNDO.- [Valoracion de la prueba.]\n\nTERCERO.- [Determinacion de la pena / Absolucion.]\n\nFALLO\n\nQue debo [ABSOLVER/CONDENAR] y [ABSUELVO/CONDENO] a [DENUNCIADO] [PRONUNCIAMIENTO].\n\n[COSTAS.]\n\nNotifiquese a las partes, haciendoles saber que contra la presente resolucion cabe recurso de apelacion en el plazo de cinco dias.\n\nAsi lo pronuncio, mando y firmo.\n\nEL/LA JUEZ/A\n\n[JUEZ]"
+    }
+  ],
+  "oficios": [
+    {
+      "id": "oficio_policia",
+      "titulo": "Oficio a Fuerzas y Cuerpos de Seguridad",
+      "procedimientos_aplicables": ["DPA", "DUD", "SU", "POP", "JRD", "LEV", "LEI", "EJ"],
+      "fase": "Instruccion/Ejecucion",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nOFICIO\n\nDe: Juzgado de [TIPO_ORGANO] n. [NUM_JUZGADO] de [LOCALIDAD]\nA: [COMISARIA DE POLICIA NACIONAL / COMANDANCIA DE LA GUARDIA CIVIL / POLICIA LOCAL] de [LOCALIDAD]\nAsunto: [TIPO_PROC] [NUMERO_PROC] - [ASUNTO]\nFecha: [FECHA]\n\nIlmo./Ilma. Sr./Sra.:\n\nEn virtud de lo acordado en [auto/providencia] de fecha [FECHA_RESOLUCION], dictado/a en las actuaciones arriba referenciadas, seguidas por un presunto delito de [DELITO] contra [INVESTIGADO], ruego a V.I. se sirva:\n\n[OPCION 1 - INFORME:]\nRemitir a este Juzgado informe sobre [MATERIA_INFORME], en el plazo mas breve posible.\n\n[OPCION 2 - DILIGENCIAS:]\nPracticar las siguientes diligencias de investigacion:\n1. [DILIGENCIA_1]\n2. [DILIGENCIA_2]\nRemitiendo el resultado a este Juzgado a la mayor brevedad.\n\n[OPCION 3 - BUSCA Y CAPTURA:]\nProceder a la busca, detencion e ingreso en el centro penitenciario que corresponda de [PERSONA], con DNI [DNI], en cumplimiento de la [orden de prision/requisitoria] dictada en las presentes actuaciones.\n\n[OPCION 4 - PROTECCION:]\nAdoptar las medidas de proteccion necesarias respecto de [VICTIMA], de conformidad con la orden de proteccion acordada por auto de fecha [FECHA_OP].\n\nLo que comunico a V.I. para su conocimiento y cumplimiento.\n\nEn [LOCALIDAD], a [FECHA].\n\nEL/LA LETRADO/A DE LA ADMINISTRACION DE JUSTICIA\n\n[LAJ]"
+    },
+    {
+      "id": "oficio_registro_civil",
+      "titulo": "Oficio al Registro Civil",
+      "procedimientos_aplicables": ["DCT", "DMA", "F02", "ITR", "X58"],
+      "fase": "Post-sentencia/Firmeza",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nOFICIO\n\nDe: Juzgado de [TIPO_ORGANO] n. [NUM_JUZGADO] de [LOCALIDAD]\nA: Registro Civil de [LOCALIDAD_REGISTRO]\nAsunto: [TIPO_PROC] [NUMERO_PROC] - Inscripcion/anotacion marginal\nFecha: [FECHA]\n\nSr./Sra. Encargado/a del Registro Civil:\n\nEn virtud de lo acordado en sentencia [firme] de fecha [FECHA_SENTENCIA], dictada en los autos de [TIPO_PROC] n. [NUMERO_PROC], seguidos entre [DEMANDANTE] y [DEMANDADO], por la presente se comunica que:\n\n[OPCION DIVORCIO:]\nSe ha decretado la disolucion por divorcio del matrimonio celebrado entre D./Da. [CONYUGE_1], con DNI [DNI_1], y D./Da. [CONYUGE_2], con DNI [DNI_2], inscrito en ese Registro Civil al Tomo [TOMO], Pagina [PAGINA], Inscripcion [INSCRIPCION].\n\nA los efectos de practicar la correspondiente anotacion marginal de divorcio en la inscripcion de matrimonio.\n\n[OPCION FILIACION:]\nSe ha determinado la filiacion [paterna/materna] de [MENOR], nacido/a en [LUGAR] el [FECHA_NACIMIENTO], inscrito al Tomo [TOMO], Pagina [PAGINA], a favor de [PROGENITOR].\n\n[OPCION DEFUNCION/INCAPACIDAD:]\nSe ha acordado [la declaracion de fallecimiento / la modificacion de la capacidad] de D./Da. [PERSONA], con DNI [DNI], nacido/a en [LUGAR] el [FECHA_NACIMIENTO].\n\nSe acompana testimonio de la sentencia para su debida constancia registral.\n\nRuego acuse de recibo de la presente comunicacion.\n\nEn [LOCALIDAD], a [FECHA].\n\nEL/LA LETRADO/A DE LA ADMINISTRACION DE JUSTICIA\n\n[LAJ]"
+    },
+    {
+      "id": "oficio_forense",
+      "titulo": "Oficio al Instituto de Medicina Legal / Medico Forense",
+      "procedimientos_aplicables": ["DPA", "DUD", "SU", "POP", "JRD", "LEV", "LEI", "ITR"],
+      "fase": "Instruccion",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nOFICIO\n\nDe: Juzgado de [TIPO_ORGANO] n. [NUM_JUZGADO] de [LOCALIDAD]\nA: Instituto de Medicina Legal y Ciencias Forenses de [PROVINCIA] / Medico Forense adscrito a este Juzgado\nAsunto: [TIPO_PROC] [NUMERO_PROC] - Solicitud de informe pericial\nFecha: [FECHA]\n\nIlmo./Ilma. Sr./Sra. Director/a / Sr./Sra. Medico/a Forense:\n\nEn virtud de lo acordado en [auto/providencia] de fecha [FECHA_RESOLUCION], dictado/a en las actuaciones arriba referenciadas, seguidas por un presunto delito de [DELITO], ruego a V.I./Vd. se sirva:\n\n[OPCION 1 - LESIONES:]\nExaminar a [VICTIMA], con DNI [DNI], y emitir informe de sanidad, determinando:\n- Descripcion de las lesiones.\n- Dias de curacion e impedimento para sus ocupaciones habituales.\n- Secuelas, en su caso.\n- Tratamiento medico o quirurgico requerido.\n\n[OPCION 2 - AUTOPSIA:]\nPracticar la autopsia del cadaver de [FALLECIDO], determinando la causa de la muerte y cuantas circunstancias medico-legales resulten de interes para la investigacion.\n\n[OPCION 3 - PSIQUIATRICO:]\nExaminar a [PERSONA], con DNI [DNI], y emitir informe psiquiatrico forense, valorando:\n- Estado psiquico actual.\n- Capacidad para conocer la ilicitud del hecho y actuar conforme a esa comprension.\n- Necesidad de tratamiento o internamiento.\n- [En casos de internamiento: valoracion de la necesidad de mantenimiento del internamiento no voluntario.]\n\n[OPCION 4 - VALORACION DEL RIESGO:]\nRealizar valoracion forense del riesgo de violencia contra [VICTIMA], de conformidad con el Protocolo de valoracion forense del riesgo de violencia de genero.\n\nSe ruega la emision del informe en el plazo mas breve posible, [con caracter urgente].\n\nEn [LOCALIDAD], a [FECHA].\n\nEL/LA LETRADO/A DE LA ADMINISTRACION DE JUSTICIA\n\n[LAJ]"
+    },
+    {
+      "id": "oficio_centro_penitenciario",
+      "titulo": "Oficio a Centro Penitenciario",
+      "procedimientos_aplicables": ["EJ", "EFM", "SU", "DPA", "POP"],
+      "fase": "Ejecucion/Instruccion",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nOFICIO\n\nDe: Juzgado de [TIPO_ORGANO] n. [NUM_JUZGADO] de [LOCALIDAD]\nA: Centro Penitenciario de [CENTRO_PENITENCIARIO]\nAsunto: [TIPO_PROC] [NUMERO_PROC] - [ASUNTO]\nFecha: [FECHA]\n\nSr./Sra. Director/a del Centro Penitenciario:\n\nEn virtud de lo acordado en [auto/sentencia firme] de fecha [FECHA_RESOLUCION], dictado/a en las actuaciones arriba referenciadas, seguidas contra [CONDENADO/PRESO], con DNI [DNI], por la presente se comunica:\n\n[OPCION 1 - INGRESO:]\nQue por auto de fecha [FECHA_RESOLUCION] se ha acordado la prision provisional [comunicada/incomunicada] de [PERSONA], debiendo procederse a su ingreso en ese Centro Penitenciario, quedando a disposicion de este Juzgado.\n\n[OPCION 2 - CUMPLIMIENTO DE CONDENA:]\nQue [CONDENADO] ha sido condenado por sentencia firme de fecha [FECHA_SENTENCIA] a la pena de [PENA] de prision por un delito de [DELITO]. Se adjunta testimonio de la sentencia y liquidacion de condena, de la que resulta:\n- Fecha de inicio: [FECHA_INICIO]\n- Fecha de cumplimiento de las 3/4 partes: [FECHA_3_4]\n- Fecha de cumplimiento total: [FECHA_TOTAL]\n- Fecha de licenciamiento definitivo: [FECHA_LICENCIAMIENTO]\n\n[OPCION 3 - LIBERTAD:]\nQue por [auto/decreto] de fecha [FECHA_RESOLUCION] se ha acordado la puesta en libertad de [PERSONA], debiendo procederse a su excarcelacion inmediata, caso de no estar preso por otra causa.\n\n[OPCION 4 - CONDUCCION:]\nQue se ha senalado [declaracion/juicio oral/comparecencia] para el dia [FECHA_SENALAMIENTO] a las [HORA] horas, por lo que se ruega la conduccion del interno [PERSONA] a la sede de este Juzgado/sala de vistas para dicha fecha y hora.\n\nRuego acuse de recibo y cumplimiento de lo interesado.\n\nEn [LOCALIDAD], a [FECHA].\n\nEL/LA LETRADO/A DE LA ADMINISTRACION DE JUSTICIA\n\n[LAJ]"
+    },
+    {
+      "id": "oficio_registro_propiedad",
+      "titulo": "Oficio al Registro de la Propiedad",
+      "procedimientos_aplicables": ["ETJ", "ENJ", "EJH", "POJ", "POH", "POI", "DCT"],
+      "fase": "Embargo/Ejecucion",
+      "modelo": "JUZGADO DE [TIPO_ORGANO] N. [NUM_JUZGADO] DE [LOCALIDAD]\n\n[TIPO_PROC] [NUMERO_PROC]\n\nOFICIO\n\nDe: Juzgado de [TIPO_ORGANO] n. [NUM_JUZGADO] de [LOCALIDAD]\nA: Registro de la Propiedad n. [NUM_REGISTRO] de [LOCALIDAD_REGISTRO]\nAsunto: [TIPO_PROC] [NUMERO_PROC] - [Anotacion preventiva de embargo / Cancelacion de cargas / Inscripcion]\nFecha: [FECHA]\n\nSr./Sra. Registrador/a de la Propiedad:\n\nEn virtud de lo acordado en [decreto/auto] de fecha [FECHA_RESOLUCION], dictado/a en las actuaciones arriba referenciadas, seguidas a instancia de [EJECUTANTE] contra [EJECUTADO], ruego a Vd. se sirva:\n\n[OPCION 1 - ANOTACION DE EMBARGO:]\nPracticar anotacion preventiva de embargo sobre la siguiente finca:\n- Finca registral n. [NUM_FINCA], inscrita al Tomo [TOMO], Libro [LIBRO], Folio [FOLIO], del termino municipal de [MUNICIPIO].\n- Descripcion: [DESCRIPCION_FINCA]\n- Titularidad: Inscrita a nombre de [TITULAR]\n- Cantidad por la que se despacha ejecucion: [CANTIDAD] euros de principal, mas [CANTIDAD_INTERESES] euros para intereses y [CANTIDAD_COSTAS] euros para costas.\n\n[OPCION 2 - CANCELACION:]\nProceder a la cancelacion de las siguientes inscripciones y anotaciones:\n- [INSCRIPCIONES_A_CANCELAR]\nDe conformidad con el decreto de adjudicacion de fecha [FECHA_ADJUDICACION].\n\n[OPCION 3 - CERTIFICACION DE CARGAS:]\nExpedir certificacion de dominio y cargas de la finca registral n. [NUM_FINCA], con expresion de los titulares de cargas y derechos inscritos con posterioridad a [la hipoteca/el embargo], a los efectos de su notificacion.\n\nSe adjunta [mandamiento/testimonio] judicial.\n\nRuego acuse de recibo y comunicacion de la practica del asiento solicitado.\n\nEn [LOCALIDAD], a [FECHA].\n\nEL/LA LETRADO/A DE LA ADMINISTRACION DE JUSTICIA\n\n[LAJ]"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "fecha_actualizacion": "2026-03-24",
+    "descripcion": "Modelos y plantillas de resoluciones judiciales para ATENEA-IA",
+    "tipos_resolucion": ["providencias", "autos", "decretos", "diligencias_ordenacion", "sentencias", "oficios"],
+    "total_plantillas": 26,
+    "placeholders": {
+      "LOCALIDAD": "Localidad del organo judicial",
+      "FECHA": "Fecha de la resolucion (formato: dia de mes de anno)",
+      "JUEZ": "Nombre completo del/la Juez/Magistrado/a",
+      "LAJ": "Nombre completo del/la Letrado/a de la Administracion de Justicia",
+      "DEMANDANTE": "Nombre completo del/la demandante o ejecutante",
+      "DEMANDADO": "Nombre completo del/la demandado/a o ejecutado/a",
+      "NUMERO_PROC": "Numero de procedimiento (formato: NNN/AAAA)",
+      "TIPO_PROC": "Tipo de procedimiento",
+      "TIPO_ORGANO": "Primera Instancia / Instruccion / Penal / Primera Instancia e Instruccion",
+      "NUM_JUZGADO": "Numero del Juzgado",
+      "PROCURADOR": "Nombre del/la Procurador/a",
+      "LETRADO": "Nombre del/la Letrado/a",
+      "ACUSADO": "Nombre completo del/la acusado/a o investigado/a",
+      "INVESTIGADO": "Nombre completo del/la investigado/a",
+      "DELITO": "Tipo delictivo",
+      "ARTICULO_CP": "Articulo del Codigo Penal aplicable",
+      "CANTIDAD": "Cantidad economica",
+      "DNI": "Documento Nacional de Identidad",
+      "FISCAL": "Nombre del/la Fiscal"
+    },
+    "notas": [
+      "Los modelos deben adaptarse a las circunstancias concretas de cada caso.",
+      "Las referencias normativas deben verificarse con la legislacion vigente.",
+      "En procedimientos con menores debe intervenir el Ministerio Fiscal.",
+      "Los plazos procesales se computan conforme al art. 133 LEC y art. 201 LECrim."
+    ]
+  }
+}

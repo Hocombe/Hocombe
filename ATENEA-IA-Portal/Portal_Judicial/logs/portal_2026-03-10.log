@@ -1,0 +1,9 @@
+[2026-03-10 15:33:06] [INFO] Backup automático programado en 1h
+[2026-03-10 15:33:06] [INFO] Servidor iniciado en 127.0.0.1:5000
+[2026-03-10 15:34:21] [INFO] [LLM/Cerebras] Excepción en llama3.1-8b: The read operation timed out, probando fallback...
+[2026-03-10 15:34:22] [INFO] [LLM/Cerebras] Error en fallback qwen-3-235b-a22b-instruct-2507: {'message': 'Model qwen-3-235b-a22b-instruct-2507 does not exist or you do not have access to it.', 'type': 'not_found_error', 'param': 'model', 'code': 'model_not_found'}
+[2026-03-10 15:34:28] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-10 15:36:23] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-10 16:26:14] [INFO] Error limpiando backup dir auto_2026-03-09_140736: time data 'auto_2026-03-09_140736' does not match format '%Y-%m-%d'
+[2026-03-10 16:33:06] [INFO] [BACKUP] Fuera de ventana horaria (07:00–16:00), omitido
+[2026-03-10 16:33:06] [INFO] Backup automático programado en 1h
