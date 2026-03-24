@@ -117,11 +117,11 @@ html, body { height: 100%; font-family: 'Segoe UI', system-ui, -apple-system, sa
 .guia-result-card .pasos li::before { content: counter(paso); position: absolute; left: 0; width: 20px; height: 20px; background: #ebf4ff; color: #2b6cb0; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
 
 /* ========== Panel 4: Consulta / Dashboard ========== */
-.dash-container { max-width: 1100px; width: 100%; margin: 0 auto; }
-.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-.stat-card { background: #fff; border-radius: 12px; padding: 18px 20px; border: 1px solid #e2e8f0; text-align: center; }
-.stat-card .number { font-size: 32px; font-weight: 700; color: #2d3748; }
-.stat-card .label { font-size: 12px; color: #718096; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+.dash-container { max-width: 100%; width: 100%; margin: 0 auto; }
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.stat-card { background: #fff; border-radius: 12px; padding: 16px 12px; border: 1px solid #e2e8f0; text-align: center; min-width: 0; overflow: hidden; }
+.stat-card .number { font-size: 28px; font-weight: 700; color: #2d3748; }
+.stat-card .label { font-size: 11px; color: #718096; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .stat-card.civil .number { color: #2b6cb0; }
 .stat-card.penal .number { color: #c53030; }
 .stat-card.ejecucion .number { color: #b7791f; }
@@ -349,10 +349,10 @@ Escribe tu consulta o pulsa uno de los botones rápidos.
       <div class="panel" id="panel-dash">
         <div class="dash-container">
           <div class="stats-row" id="stats-row">
-            <div class="stat-card"><div class="number" id="stat-total">-</div><div class="label">Total Asuntos</div></div>
+            <div class="stat-card"><div class="number" id="stat-total">-</div><div class="label">Total</div></div>
             <div class="stat-card civil"><div class="number" id="stat-civil">-</div><div class="label">Civil</div></div>
             <div class="stat-card penal"><div class="number" id="stat-penal">-</div><div class="label">Penal</div></div>
-            <div class="stat-card ejecucion"><div class="number" id="stat-ejecucion">-</div><div class="label">Ejecución</div></div>
+            <div class="stat-card ejecucion"><div class="number" id="stat-ejecucion">-</div><div class="label">Ejec.</div></div>
           </div>
           <div class="dash-grid">
             <div class="dash-card">
